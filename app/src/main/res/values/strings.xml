@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Cyber Go</string>
+    <string name="splash_process">Loading…</string>
+    <string name="sub_welcome">Have a better sharing experience</string>
+    <string name="create_account">Create an account</string>
+    <string name="login">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="your_mobile_number">Your mobile phone</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="agree_term_policy">I understand and agree with the Cyber Go Privacy policy and Terms.</string>
+    <string name="terms">Terms</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="or">or</string>
+    <string name="already_have_an_account">Already have an account? Sign in</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
+    <dimen name="text_h1">32sp</dimen>
+    <dimen name="text_h2">28sp</dimen>
+    <dimen name="text_h3">24sp</dimen>
+    <dimen name="text_h4">22sp</dimen>
+    <dimen name="text_h5">18sp</dimen>
+    <dimen name="text_h6">16sp</dimen>
+    <dimen name="text_h7">14sp</dimen>
+    <dimen name="text_h8">12sp</dimen>
+    <dimen name="text_h9">10sp</dimen>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="txt_from_cyber_space">
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cyber Go</string>
+    <string name="splash_process">Đang tải…</string>
+    <string name="sub_welcome">Có trải nghiệm chia sẻ tốt hơn</string>
+    <string name="create_account">Tạo tài khoản</string>
+    <string name="login">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="name">Tên</string>
+    <string name="email">Email</string>
+    <string name="your_mobile_number">Số điện thoại</string>
+    <string name="gender">Giới tính</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="agree_term_policy">Tôi hiểu và đồng ý với Chính sách bảo mật và các Điều khoản của Cyber Go.</string>
+    <string name="terms">Điều khoản</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="or">hoặc</string>
+    <string name="already_have_an_account">Bạn đã có tài khoản? Đăng nhập</string>
+</resources>
