@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.ui.signup.SignUpActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
     private AppCompatButton btn_create_account, btn_go_to_login;

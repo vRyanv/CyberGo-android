@@ -1,35 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
-
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="orange_status_bar" parent="Base.Theme.CyberGo">
         <item name="android:statusBarColor">@color/orange</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
+    <style name="txt_title_header">
+        <item name="android:textColor">@color/dark_light_dynamic</item>
+        <item name="android:textSize">@dimen/_18ssp</item>
+        <item name="android:fontFamily">@font/sp_pro_round_medium</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="layout_header_box">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_50sdp</item>
+    </style>
     <style name="txt_from_cyber_space">
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="icon_button">
-        <item name="android:layout_width">36sp</item>
-        <item name="android:layout_height">36sp</item>
+    //layout_loading (wrapper - loading)
+    <style name="wrapper_loading_relative">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="loading_frame">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:background">@drawable/flag_transparent</item>d
+        <item name="android:clickable">true</item>d
+    </style>
+    <style name="loading_bar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="verify_phone_box">
+        <item name="android:layout_width">@dimen/_40sdp</item>
+        <item name="android:layout_height">@dimen/_38sdp</item>
+        <item name="android:layout_marginHorizontal">@dimen/_4sdp</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/_23ssp</item>
+        <item name="android:maxLength">2</item>
+        <item name="android:cursorVisible">false</item>
+    </style>
+
+    <style name="icon_button_back">
+        <item name="android:layout_width">@dimen/_28sdp</item>
+        <item name="android:layout_height">@dimen/_28sdp</item>
         <item name="android:background">@drawable/shape_icon_sub_button</item>
         <item name="android:padding">8sp</item>
         <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_marginStart">@dimen/_12sdp</item>
     </style>
 
     <style name="input">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/_50sdp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/_12sdp</item>
         <item name="android:layout_marginEnd">@dimen/_12sdp</item>
-        <item name="android:layout_marginTop">@dimen/_19sdp</item>
+        <item name="android:layout_marginTop">@dimen/_5sdp</item>
     </style>
 
     <style name="edit_text_input">
         <item name="android:textSize">@dimen/_14ssp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">@dimen/_50sdp</item>
         <item name="android:singleLine">true</item>
     </style>
 

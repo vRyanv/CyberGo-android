@@ -68,5 +68,8 @@ dependencies {
     //Rounded image View
     implementation("com.makeramen:roundedimageview:2.3.0")
 
+    //handle phone number
+    implementation("com.googlecode.libphonenumber:libphonenumber:8.13.27")
+
 }
 

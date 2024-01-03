@@ -7,6 +7,7 @@
     <color name="secondary">#A0A0A0</color>
     <color name="light_secondary">#E0DCE0</color>
     <color name="orange">#FF8201</color>
+    <color name="orange_blur">#33FF8201</color>
     <color name="orange_red">#FF0000</color>
     <color name="special_orange">#FF6347</color>
     <color name="bold_orange">#E57029</color>
@@ -25,6 +26,7 @@
     <color name="dark_green">#087043</color>
 
     <color name="dark_light_dynamic">#1C1B1F</color>
+    <color name="transparent">#00FFFFFF</color>
 
 
 <!--    Themes color -->

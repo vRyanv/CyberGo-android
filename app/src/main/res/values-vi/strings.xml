@@ -7,9 +7,9 @@
     <string name="login">Đăng nhập</string>
     <string name="sign_up">Đăng ký</string>
     <string name="sign_in">Đăng nhập</string>
-    <string name="name">Tên</string>
+    <string name="full_name">Họ và tên</string>
     <string name="email">Email</string>
-    <string name="your_mobile_number">Số điện thoại</string>
+    <string name="phone_number">Số điện thoại</string>
     <string name="gender">Giới tính</string>
     <string name="male">Nam</string>
     <string name="female">Nữ</string>
@@ -18,4 +18,25 @@
     <string name="privacy_policy">Chính sách bảo mật</string>
     <string name="or">hoặc</string>
     <string name="already_have_an_account">Bạn đã có tài khoản? Đăng nhập</string>
+    <string name="select_gender">Chọn giới tính</string>
+    <string name="other">Khác</string>
+    <string name="can_not_empty">không thể trống</string>
+    <string name="invalid_email">Email không hợp lệ</string>
+    <string name="invalid_phone_number">Số điện thoại không hợp lệ</string>
+    <string name="please_agree_to_our_privacy_policy_and_terms">Vui lòng đồng ý với chính sách và điều khoản bảo mật của chúng tôi</string>
+    <string name="phone_verification">Xác minh số điện thoại</string>
+    <string name="enter_your_otp_code">Nhập mã OTP của bạn</string>
+    <string name="did_not_receive_code">Không nhận được mã? Gửi lại</string>
+    <string name="resend_again">Gửi lại</string>
+    <string name="verify">Xác nhận</string>
+    <string name="you_have_not_received_the_otp_code_yet">Bạn chưa nhận được mã OTP?</string>
+    <string name="cancel">Hủy bỏ</string>
+    <string name="set_password">Đặt mật khẩu</string>
+    <string name="set_your_password">Đặt mật khẩu của bạn</string>
+    <string name="enter_your_password">Nhập mật khẩu của bạn</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="password">Mật khẩu</string>
+    <string name="register">Đăng ký</string>
+    <string name="forget_password">Quên mật khẩu?</string>
+    <string name="do_not_have_an_account">Không có tài khoản? Đăng ký</string>
 </resources>

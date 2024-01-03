@@ -6,9 +6,9 @@
     <string name="login">Log in</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
-    <string name="name">Name</string>
+    <string name="full_name">Full name</string>
     <string name="email">Email</string>
-    <string name="your_mobile_number">Your mobile phone</string>
+    <string name="phone_number">Phone number</string>
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
@@ -17,4 +17,25 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="or">or</string>
     <string name="already_have_an_account">Already have an account? Sign in</string>
+    <string name="select_gender">Select gender</string>
+    <string name="other">Other</string>
+    <string name="can_not_empty">can\'t empty</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_phone_number">Invalid phone number</string>
+    <string name="please_agree_to_our_privacy_policy_and_terms">Please agree to our privacy policy and terms</string>
+    <string name="phone_verification">Phone verification</string>
+    <string name="enter_your_otp_code">Enter your OTP code</string>
+    <string name="did_not_receive_code">Didn\'t receive code? Resend again</string>
+    <string name="resend_again">Resend again</string>
+    <string name="verify">Verify</string>
+    <string name="you_have_not_received_the_otp_code_yet">You haven\'t received the OTP code yet?</string>
+    <string name="cancel">Cancel</string>
+    <string name="set_password">Set password</string>
+    <string name="set_your_password">Set your password</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="do_not_have_an_account">Don’t have an account? Sign Up</string>
 </resources>
