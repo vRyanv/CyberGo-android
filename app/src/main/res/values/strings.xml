@@ -38,4 +38,7 @@
     <string name="register">Register</string>
     <string name="forget_password">Forget password?</string>
     <string name="do_not_have_an_account">Don’t have an account? Sign Up</string>
+    <string name="can_not_contain_space">can\'t contain space</string>
+    <string name="must_be_greater_than_or_equal_to_8_characters">must be greater than or equal to 8 characters</string>
+    <string name="does_not_match">does not match</string>
 </resources>

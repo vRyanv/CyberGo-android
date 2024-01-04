@@ -32,6 +32,28 @@ public class SetPasswordActivity  extends BaseActivity<ActivitySetPasswordBindin
 
     @Override
     protected void InitObserve() {
+        view_model.password.observe(this, password ->{
+            if(!password.isEmpty()){
+                binding.inputEnterPasswordRegister.setError(null);
+            }
+        });
+        view_model.password_error.observe(this, password_error->{
+            if(!password_error.isEmpty()){
+                binding.inputEnterPasswordRegister.setError(password_error);
+            }
+        });
+
+        view_model.confirm_password.observe(this, confirm_password ->{
+            if(!confirm_password.isEmpty()){
+                binding.inputConfirmPasswordRegister.setError(null);
+            }
+        });
+        view_model.confirm_password_error.observe(this, confirm_password_error->{
+            if(!confirm_password_error.isEmpty()){
+                binding.inputConfirmPasswordRegister.setError(confirm_password_error);
+            }
+        });
+
 
     }
 

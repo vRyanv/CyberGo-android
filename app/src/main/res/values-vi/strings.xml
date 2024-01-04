@@ -39,4 +39,7 @@
     <string name="register">Đăng ký</string>
     <string name="forget_password">Quên mật khẩu?</string>
     <string name="do_not_have_an_account">Không có tài khoản? Đăng ký</string>
+    <string name="can_not_contain_space">không được chứa khoảng trống</string>
+    <string name="must_be_greater_than_or_equal_to_8_characters">phải lớn hơn hoặc bằng 8 ký tự</string>
+    <string name="does_not_match">Không khớp với</string>
 </resources>
