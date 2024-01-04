@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.tech.cybercars.BuildConfig;
 import com.tech.cybercars.R;
 import com.tech.cybercars.ui.base.BaseViewModel;
 
@@ -25,6 +26,8 @@ public class SetPasswordViewModel extends BaseViewModel {
         if (ValidateData()) {
             is_success.setValue(true);
         }
+
+
         is_success.setValue(false);
         is_loading.setValue(false);
     }
@@ -49,7 +52,7 @@ public class SetPasswordViewModel extends BaseViewModel {
                 String pass_not_match = getApplication().getString(R.string.password) + " " +
                         getApplication().getString(R.string.does_not_match) + " " +
                         getApplication().getString(R.string.confirm_password);
-                password_error.setValue(pass_not_match);
+                confirm_password_error.setValue(pass_not_match);
                 is_valid = false;
             }
         }

@@ -1,11 +1,14 @@
 package com.tech.cybercars.ui.signup.password;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.tech.cybercars.BuildConfig;
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.ActivitySetPasswordBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
@@ -36,6 +39,7 @@ public class SetPasswordActivity  extends BaseActivity<ActivitySetPasswordBindin
             if(!password.isEmpty()){
                 binding.inputEnterPasswordRegister.setError(null);
             }
+            Toast.makeText(this,  BuildConfig.BASE_URL, Toast.LENGTH_SHORT).show();
         });
         view_model.password_error.observe(this, password_error->{
             if(!password_error.isEmpty()){

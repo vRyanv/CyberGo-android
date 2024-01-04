@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.ui.signin.SignInActivity;
 import com.tech.cybercars.ui.signup.SignUpActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class WelcomeActivity extends AppCompatActivity {
         });
 
         btn_go_to_login.setOnClickListener(view -> {
-            startActivity(new Intent(this, test.class));
+            startActivity(new Intent(this, SignInActivity.class));
         });
     }
 

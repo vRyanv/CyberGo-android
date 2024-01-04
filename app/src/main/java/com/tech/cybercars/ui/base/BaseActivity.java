@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModel;
 
+import com.tech.cybercars.BuildConfig;
+
+
 public abstract class BaseActivity<BINDING extends ViewDataBinding, VM extends ViewModel> extends AppCompatActivity{
     protected VM view_model;
     protected BINDING binding;

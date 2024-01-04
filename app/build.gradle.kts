@@ -1,3 +1,11 @@
+import java.util.*
+
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").reader())
+}
+val baseUrl = properties["base_url"]
+
+
 plugins {
     id("com.android.application")
 }
@@ -16,7 +24,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
+        }
         release {
+            buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -27,6 +39,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         dataBinding = true
         viewBinding = true
     }

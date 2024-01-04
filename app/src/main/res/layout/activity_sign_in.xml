@@ -98,10 +98,11 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_sign_up"
                     android:layout_width="match_parent"
+                    android:onClick="@{()->view_model.LoginHandle()}"
                     android:layout_height="@dimen/_39sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_19sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:background="@drawable/shape_btn_primary"
                     android:text="@string/sign_in"
                     android:textAllCaps="false"
