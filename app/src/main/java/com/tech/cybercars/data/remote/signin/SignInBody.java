@@ -1,14 +1,14 @@
-package com.tech.cybercars.data.remote.login;
+package com.tech.cybercars.data.remote.signin;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginBody {
+public class SignInBody {
     @SerializedName("email")
     private String email;
     @SerializedName("password")
     private String password;
 
-    public LoginBody(String email, String password) {
+    public SignInBody(String email, String password) {
         this.email = email;
         this.password = password;
     }

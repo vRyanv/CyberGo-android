@@ -1,5 +1,6 @@
 package com.tech.cybercars.ui.signup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.res.ResourcesCompat;
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -23,11 +25,11 @@ import android.widget.Toast;
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.ActivitySignUpBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
+import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.signup.verification.PhoneVerificationActivity;
 
 
-public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpViewModel>{
-    private AlertDialog.Builder gender_dialog_builder;
+public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpViewModel> {
     private AlertDialog gender_dialog;
     private String[] gender_choices;
 
@@ -40,7 +42,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
     @Override
     public ActivitySignUpBinding InitBinding(ViewModel view_model) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
-        binding.setSignUpViewModel((SignUpViewModel) view_model);
+        binding.setViewModel((SignUpViewModel) view_model);
         return binding;
     }
 
@@ -62,7 +64,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
         // country picker
         binding.countryCodePickerSignUp.registerCarrierNumberEditText(binding.inputPhoneSignUp);
 
-        if (!view_model.country_name_code.getValue().equals("")) {
+        if (view_model.country_name_code.getValue() != null) {
             binding.countryCodePickerSignUp.setCountryForNameCode(view_model.country_name_code.getValue());
         } else {
             view_model.country_name_code.setValue(binding.countryCodePickerSignUp.getSelectedCountryNameCode());
@@ -85,36 +87,32 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
 
     @Override
     public void InitObserve() {
-        view_model.is_login_success.observe(this, is_login_success -> {
-
-        });
-
-        view_model.full_name.observe(this, full_name -> {
+        view_model.getFullNameLive().observe(this, full_name -> {
             if (!full_name.equals("")) {
                 view_model.full_name_error.setValue(null);
             }
         });
-        view_model.full_name_error.observe(this, full_name_error_string -> {
+        view_model.getFullNameErrorLive().observe(this, full_name_error_string -> {
             binding.inputFullNameSignUp.setError(full_name_error_string);
         });
 
-        view_model.email.observe(this, email -> {
-            if (!email.equals("")) {
+        view_model.getEmailLive().observe(this, email -> {
+            if (email != null && !email.equals("")) {
                 view_model.email_error.setValue(null);
             }
         });
-        view_model.email_error.observe(this, email_error_string -> {
+        view_model.getEmailErrorLive().observe(this, email_error_string -> {
             binding.inputEmailSignUp.setError(email_error_string);
         });
 
 
-        view_model.phone_number.observe(this, phone_number -> {
+        view_model.getPhoneNumberLive().observe(this, phone_number -> {
             if (!phone_number.equals("")) {
-                view_model.phone_number_error.setValue("");
+                view_model.phone_number_error.setValue(null);
             }
         });
-        view_model.phone_number_error.observe(this, phone_error_string -> {
-            if (!phone_error_string.equals("")) {
+        view_model.getPhoneNumberErrorLive().observe(this, phone_error_string -> {
+            if (phone_error_string != null) {
                 binding.txtPhoneErrorSignUp.setText(phone_error_string);
                 StateListDrawable drawable = (StateListDrawable) binding.phoneNumberWrapper.getBackground();
                 GradientDrawable gradientDrawable = (GradientDrawable) drawable.getCurrent();
@@ -127,38 +125,105 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
             }
         });
 
-        view_model.gender.observe(this, gender_string -> {
-            binding.inputGenderSignUp.getEditText().setText(gender_string);
-            view_model.gender_error.setValue(null);
+        view_model.getGenderLive().observe(this, gender_string -> {
+            if (gender_string != null) {
+                binding.inputGenderSignUp.getEditText().setText(gender_string);
+                view_model.gender_error.setValue(null);
+            }
         });
-        view_model.gender_error.observe(this, gender_error_string -> {
+        view_model.getGenderErrorLive().observe(this, gender_error_string -> {
             binding.inputGenderSignUp.setError(gender_error_string);
         });
 
-        view_model.agree_term_policy.observe(this, agree_term_policy -> {
-            if (agree_term_policy) {
-                {
-                    view_model.agree_term_policy_error.setValue("");
-                }
+        view_model.getPasswordLive().observe(this, pass -> {
+            if (pass != null && !pass.equals("")) {
+                binding.inputPasswordSignUp.setError(null);
             }
         });
-        view_model.agree_term_policy_error.observe(this, agree_term_policy_error_string -> {
-            if (!agree_term_policy_error_string.equals("")) {
-                {
-                    Toast.makeText(this, agree_term_policy_error_string, Toast.LENGTH_LONG).show();
-                }
+        view_model.getPasswordErrorLive().observe(this, pass_error -> {
+            binding.inputPasswordSignUp.setError(pass_error);
+        });
+
+        view_model.getConfirmPasswordLive().observe(this, confirm_pass -> {
+            if (confirm_pass != null && !confirm_pass.equals("")) {
+                binding.inputConfirmPasswordSignUp.setError(null);
+            }
+        });
+        view_model.getConfirmPasswordErrorLive().observe(this, confirm_pass_error -> {
+            binding.inputConfirmPasswordSignUp.setError(confirm_pass_error);
+        });
+
+        view_model.getAgreeTermPolicyLive().observe(this, agree_term_policy -> {
+            if (agree_term_policy != null && agree_term_policy) {
+                view_model.agree_term_policy_error.setValue(null);
+            }
+        });
+        view_model.getAgreeTermPolicyErrorLive().observe(this, agree_term_policy_error_string -> {
+            if (agree_term_policy_error_string != null) {
+                Toast.makeText(this, agree_term_policy_error_string, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        view_model.getIsSuccessLive().observe(this, is_success -> {
+            if (is_success != null && is_success) {
+                NotificationDialog.Builder(this)
+                        .SetIcon(R.drawable.ic_success)
+                        .SetTitle(getResources().getString(R.string.sign_up_success))
+                        .SetSubtitle(getResources().getString(R.string.we_have_sent_the_account_activation_code_to_your_email))
+                        .SetTextMainButton(getResources().getString(R.string.next))
+                        .SetOnMainButtonClicked(this::StartVerifyAccountActivity).show();
+            }
+        });
+
+        view_model.getIsVerifyAccountLive().observe(this, is_verify_account -> {
+            if (is_verify_account != null && is_verify_account) {
+                NotificationDialog.Builder(this)
+                        .SetIcon(R.drawable.ic_send_mail)
+                        .SetTitle(getResources().getString(R.string.account_already_exist))
+                        .SetSubtitle(getResources().getString(R.string.we_found_an_account_that_was_previously_registered_but_not_activated_please_check_your_email_to_activate_the_account))
+                        .SetTextMainButton(getResources().getString(R.string.next))
+                        .SetOnMainButtonClicked(this::StartVerifyAccountActivity).show();
+            }
+        });
+
+        view_model.getErrorCallServerLive().observe(this, error_call_server -> {
+            if (error_call_server != null) {
+                SignUpErrorDialog(error_call_server);
             }
         });
     }
 
     @Override
     public void InitCommon() {
-        InitDialog();
+        InitAlertDialog();
     }
 
-    private void InitDialog() {
+    @Override
+    protected void OnBackPress() {
+        finish();
+    }
+
+    private void StartVerifyAccountActivity(Dialog dialog){
+        Intent phone_verity_activity = new Intent(this, PhoneVerificationActivity.class);
+        phone_verity_activity.putExtra("email", view_model.getEmailLive().getValue());
+        startActivity(phone_verity_activity);
+        dialog.dismiss();
+    }
+
+    private void SignUpErrorDialog(String error_call_server) {
+        new AlertDialog.Builder(this)
+                .setCancelable(false)
+                .setTitle(getResources().getString(R.string.app_name))
+                .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_notify_app))
+                .setMessage(error_call_server)
+                .setNegativeButton(R.string.try_again, (dialog, which_button) -> {
+                    Toast.makeText(this, "resend click", Toast.LENGTH_SHORT).show();
+                }).show();
+    }
+
+    private void InitAlertDialog() {
         gender_choices = getResources().getStringArray(R.array.gender_items);
-        gender_dialog_builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder gender_dialog_builder = new AlertDialog.Builder(this);
         gender_dialog_builder
                 .setTitle(getResources().getString(R.string.select_gender))
                 .setItems(gender_choices, (dialog, which) -> {
@@ -166,6 +231,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
                     dialog.dismiss();
                 });
         gender_dialog = gender_dialog_builder.create();
+
     }
 
 
@@ -186,6 +252,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
             public void onClick(@NonNull View widget) {
                 Toast.makeText(SignUpActivity.this, "text_term clicked", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void updateDrawState(TextPaint ds) {
                 ds.setUnderlineText(false);
@@ -215,6 +282,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
             public void onClick(@NonNull View widget) {
                 Toast.makeText(SignUpActivity.this, "text_policy clicked", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void updateDrawState(TextPaint ds) {
                 ds.setUnderlineText(false);
@@ -251,6 +319,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
             public void onClick(@NonNull View widget) {
                 Toast.makeText(SignUpActivity.this, "text_term clicked", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void updateDrawState(TextPaint ds) {
                 ds.setUnderlineText(false);
@@ -270,4 +339,6 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
 
         return sign_in_spannable;
     }
+
+
 }

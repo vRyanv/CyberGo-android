@@ -1,34 +1,40 @@
 package com.tech.cybercars.ui.signup.verification;
 
+
+import static android.view.KeyEvent.KEYCODE_FORWARD_DEL;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
-import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
-import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.activities.test;
 import com.tech.cybercars.databinding.ActivityPhoneVerificationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
-import com.tech.cybercars.ui.signup.password.SetPasswordActivity;
+import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.utils.KeyBoardUtil;
 
-public class PhoneVerificationActivity extends BaseActivity<ActivityPhoneVerificationBinding, PhoneVerificationViewModel> {
+public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.databinding.ActivityPhoneVerificationBinding, PhoneVerificationViewModel> {
 
     @NonNull
     @Override
@@ -48,87 +54,93 @@ public class PhoneVerificationActivity extends BaseActivity<ActivityPhoneVerific
         binding.txtResendAgainPhoneVerification.setText(SetUpSendAgainTextClickable());
         binding.txtResendAgainPhoneVerification.setMovementMethod(LinkMovementMethod.getInstance());
 
-        binding.inputOtpNumber1Verification.addTextChangedListener(TextChangeListener(view_model.otp_1));
-        binding.inputOtpNumber2Verification.addTextChangedListener(TextChangeListener(view_model.otp_2));
-        binding.inputOtpNumber3Verification.addTextChangedListener(TextChangeListener(view_model.otp_3));
-        binding.inputOtpNumber4Verification.addTextChangedListener(TextChangeListener(view_model.otp_4));
-        binding.inputOtpNumber5Verification.addTextChangedListener(TextChangeListener(view_model.otp_5));
     }
 
     @Override
     protected void InitObserve() {
         view_model.is_loading.observe(this, is_loading -> {
-            if(is_loading){
+            if(is_loading != null && is_loading){
                 KeyBoardUtil.HideKeyBoard(this);
             }
         });
-        view_model.otp_1.observe(this, number_str -> {
-            SwitchOTPCodeBox(number_str, binding.inputOtpNumber1Verification, binding.inputOtpNumber2Verification);
+
+        view_model.getOtp1Live().observe(this, number_str -> {
+            SwitchOTPCodeBox(number_str, binding.inputOtpNumber2Verification);
         });
-        view_model.otp_2.observe(this, number_str -> {
-            SwitchOTPCodeBox(number_str, binding.inputOtpNumber1Verification, binding.inputOtpNumber3Verification);
+        view_model.getOtp2Live().observe(this, number_str -> {
+            SwitchOTPCodeBox(number_str, binding.inputOtpNumber3Verification);
         });
-        view_model.otp_3.observe(this, number_str -> {
-            SwitchOTPCodeBox(number_str, binding.inputOtpNumber2Verification, binding.inputOtpNumber4Verification);
+        view_model.getOtp3Live().observe(this, number_str -> {
+            SwitchOTPCodeBox(number_str, binding.inputOtpNumber4Verification);
         });
-        view_model.otp_4.observe(this, number_str -> {
-            SwitchOTPCodeBox(number_str, binding.inputOtpNumber3Verification, binding.inputOtpNumber5Verification);
+        view_model.getOtp4Live().observe(this, number_str -> {
+            SwitchOTPCodeBox(number_str, binding.inputOtpNumber5Verification);
         });
-        view_model.otp_5.observe(this, number_str -> {
-            SwitchOTPCodeBox5(number_str, binding.inputOtpNumber4Verification, binding.inputOtpNumber5Verification);
+        view_model.getOtp5Live().observe(this, number_str -> {
+            SwitchOTPCodeBox5(number_str, binding.inputOtpNumber5Verification);
         });
 
-        view_model.is_success.observe(this, is_success -> {
-            if(is_success){
-                startActivity(new Intent(this, SetPasswordActivity.class));
+        view_model.getErrorOtpCodeLive().observe(this, error_otp_code -> {
+            if(error_otp_code != null && !error_otp_code.equals("")){
+                NotificationDialog.Builder(this)
+                        .SetIcon(R.drawable.ic_warning)
+                        .SetTitleVisibility(View.GONE)
+                        .SetSubtitle(error_otp_code)
+                        .SetTextMainButton(getResources().getString(R.string.close))
+                        .SetOnMainButtonClicked(Dialog::dismiss).show();
             }
         });
-    }
 
-    private TextWatcher TextChangeListener(MutableLiveData<String> otp){
-        return new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+        view_model.getIsSuccessLive().observe(this, is_success -> {
+            if(is_success != null && is_success){
+                Intent home_intent = new Intent(this, test.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(home_intent);
+                finish();
             }
+        });
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() > 1){
-                    otp.setValue(String.valueOf(s.charAt(1)));
+        view_model.getErrorCallServerLive().observe(this, error_call_server -> {
+            if(error_call_server != null && !error_call_server.equals("")){
+                    NotificationDialog.Builder(this)
+                            .SetIcon(R.drawable.ic_error)
+                            .SetTitle(getResources().getString(R.string.something_went_wrong))
+                            .SetSubtitle(error_call_server)
+                            .SetTextMainButton(getResources().getString(R.string.close))
+                            .SetOnMainButtonClicked(Dialog::dismiss).show();
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
+            });
     }
 
-    private void SwitchOTPCodeBox(String number_str, EditText previous_input_otp, EditText next_input_otp){
+
+    private void SwitchOTPCodeBox(String number_str, EditText next_input_otp){
         if(!number_str.equals("")){
             next_input_otp.requestFocus();
             next_input_otp.setSelection(next_input_otp.getText().length());
-        } else {
-            previous_input_otp.requestFocus();
-            previous_input_otp.setSelection(previous_input_otp.getText().length());
         }
     }
 
-    private void SwitchOTPCodeBox5(String number_str, EditText previous_input_otp, EditText input_otp_5){
+    private void SwitchOTPCodeBox5(String number_str, EditText input_otp_5){
         if(!number_str.equals("")){
             input_otp_5.clearFocus();
-        } else {
-            previous_input_otp.requestFocus();
-            previous_input_otp.setSelection(previous_input_otp.getText().length());
+        }
+    }
+
+    private void SwitchOTPCodePrevious(int key_code, LiveData<String> otp, EditText input_previous){
+        if(key_code == KEYCODE_FORWARD_DEL && otp != null && otp.getValue().equals("")){
+            input_previous.requestFocus();
         }
     }
 
 
     @Override
     protected void InitCommon() {
+        String email = getIntent().getStringExtra("email");
+        view_model.setEmail(email);
+    }
 
+    @Override
+    protected void OnBackPress() {
+        finish();
     }
 
     private Spannable SetUpSendAgainTextClickable() {
@@ -171,7 +183,7 @@ public class PhoneVerificationActivity extends BaseActivity<ActivityPhoneVerific
         new AlertDialog.Builder(this)
                 .setCancelable(false)
                 .setTitle(getResources().getString(R.string.app_name))
-                .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_app))
+                .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_notify_app))
                 .setMessage(getResources().getString(R.string.you_have_not_received_the_otp_code_yet))
                 .setNegativeButton(R.string.resend_again, (dialog, which_button)->{
                     Toast.makeText(this, "resend click", Toast.LENGTH_SHORT).show();

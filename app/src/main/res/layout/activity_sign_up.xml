@@ -4,7 +4,7 @@
     <data>
          <import type="android.view.View"/>
          <variable
-            name="sign_up_view_model"
+            name="view_model"
             type="com.tech.cybercars.ui.signup.SignUpViewModel" />
     </data>
     <RelativeLayout
@@ -20,7 +20,7 @@
             android:animateLayoutChanges="true"
             android:background="@drawable/flag_transparent"
             android:clickable="true"
-            android:visibility="@{sign_up_view_model.is_loading ? View.VISIBLE : View.GONE }">
+            android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE }">
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:indeterminateTintMode="src_atop"
@@ -83,7 +83,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/edit_text_input"
                         android:hint="@string/full_name"
-                        android:text="@={sign_up_view_model.full_name}" />
+                        android:text="@={view_model.full_name}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -94,13 +94,13 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/input_full_name_sign_up">
-
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/edit_text_input"
                         android:hint="@string/email"
                         android:inputType="text"
-                        android:text="@={sign_up_view_model.email}" />
+                        android:text="@={view_model.email}" />
                 </com.google.android.material.textfield.TextInputLayout>
+
 
                 <LinearLayout
                     android:id="@+id/phone_number_wrapper"
@@ -138,7 +138,7 @@
                         android:hint="@string/phone_number"
                         android:inputType="number"
                         android:paddingStart="@dimen/_15sdp"
-                        android:text="@={sign_up_view_model.phone_number}" />
+                        android:text="@={view_model.phone_number}" />
 
                 </LinearLayout>
                 <TextView
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_9ssp"
                     android:textColor="#BA1A1A"
-                    android:text="@{sign_up_view_model.phone_number_error}"
+                    android:text="@{view_model.phone_number_error}"
                     android:layout_marginStart="@dimen/_25sdp"
                     android:layout_marginTop="@dimen/_4sdp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -170,9 +170,43 @@
                         android:focusable="false"
                         android:hint="@string/gender"
                         android:inputType="none"
-                        android:text="@{sign_up_view_model.gender}" />
+                        android:text="@{view_model.gender}" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_password_sign_up"
+                    style="@style/input"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/input_gender_sign_up"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:hint="@string/password"
+                        android:text="@={view_model.password}"
+                        android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_confirm_password_sign_up"
+                    style="@style/input"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/input_password_sign_up"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:hint="@string/confirm_password"
+                        android:text="@={view_model.confirm_password}"
+                        android:inputType="textPassword"/>
+                </com.google.android.material.textfield.TextInputLayout>
                 <CheckBox
                     android:id="@+id/cb_term_policy"
                     android:layout_width="@dimen/_30sdp"
@@ -182,24 +216,26 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:textSize="@dimen/_10ssp"
                     android:paddingStart="@dimen/_15sdp"
-                    android:checked="@={sign_up_view_model.agree_term_policy}"
+                    android:checked="@={view_model.agree_term_policy}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/input_gender_sign_up" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_confirm_password_sign_up" />
 
                 <TextView
                     android:id="@+id/txt_agree_term_policy"
                     android:layout_width="@dimen/_250sdp"
-                    android:textColorHighlight="@color/transparent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:text="@string/agree_term_policy"
+                    android:textColorHighlight="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cb_term_policy"
-                    app:layout_constraintTop_toBottomOf="@+id/input_gender_sign_up" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_confirm_password_sign_up" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_sign_up"
-                    android:onClick="@{()->sign_up_view_model.handleLogin()}"
+                    android:onClick="@{()->view_model.SignUpHandle()}"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_39sdp"
                     android:layout_marginStart="@dimen/_12sdp"

@@ -20,8 +20,8 @@ public class PhoneUtil {
      * phone_number_base => 37446592 |
      * country_code => VN |
      * output => "0374463592"
-     * @param phone_number_base
-     * @param country_code
+     * @param phone_number_base (37446592)
+     * @param country_code (VN)
      * @return a phone number national
      */
     public String formatToPhoneNational(String phone_number_base, String country_code){
@@ -42,6 +42,42 @@ public class PhoneUtil {
             return phone_national;
         } else {
             return "";
+        }
+    }
+
+    /**
+     *
+     * @param phone_number_base (37446592)
+     * @param country_code (VN)
+     * @return true if phone is valid and false if phone is invalid
+     */
+    public boolean IsValidPhoneNumber(String phone_number_base, String country_code){
+        try {
+            Phonenumber.PhoneNumber phone_number_format = PhoneNumberUtil.getInstance().parse(phone_number_base, country_code);
+            return PhoneNumberUtil.getInstance().isValidNumber(phone_number_format);
+        } catch (NumberParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     *
+     * @param phone_number_base nation phone (374463592)
+     * @param country_code (VN)
+     * @return a prefix of phone number (84)
+     */
+    public int GetPrefixOfPhoneNumber(String phone_number_base, String country_code){
+        PhoneNumberUtil phone_number_util = PhoneNumberUtil.getInstance();
+        Phonenumber.PhoneNumber phone_number_format;
+        String phone_national = "";
+        boolean is_valid_phone = false;
+        try {
+            phone_number_format = phone_number_util.parse(phone_number_base, country_code);
+            return phone_number_format.getCountryCode();
+        } catch (NumberParseException e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 }

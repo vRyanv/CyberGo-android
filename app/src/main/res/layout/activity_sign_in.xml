@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_enter_password_register"
+                    android:id="@+id/input_email_sign_in"
                     style="@style/input"
                     app:errorEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -64,24 +64,25 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/edit_text_input"
+                        android:text="@={view_model.email}"
                         android:hint="@string/email" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_confirm_password_register"
+                    android:id="@+id/input_password_sign_in"
                     style="@style/input"
                     app:errorEnabled="true"
+                    app:errorIconDrawable="@null"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/input_enter_password_register"
+                    app:layout_constraintTop_toBottomOf="@+id/input_email_sign_in"
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/edit_text_input"
+                        android:text="@={view_model.password}"
                         android:hint="@string/password"
                         android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -94,11 +95,11 @@
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:text="@string/forget_password"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/input_confirm_password_register" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_password_sign_in" />
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_sign_up"
                     android:layout_width="match_parent"
-                    android:onClick="@{()->view_model.LoginHandle()}"
+                    android:onClick="@{()->view_model.SignInHandle()}"
                     android:layout_height="@dimen/_39sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
