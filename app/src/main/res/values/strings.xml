@@ -58,4 +58,9 @@
     <string name="email_has_been_used">Email has been used</string>
     <string name="phone_number_has_been_used">Phone number has been used</string>
     <string name="and">and</string>
+    <string name="home">Home</string>
+    <string name="setting">Setting</string>
+    <string name="chat">Chat</string>
+    <string name="activity">Activity</string>
+    <string name="map">Map</string>
 </resources>

@@ -3,6 +3,7 @@
     <color name="dark">#1C1B1F</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_blur_80">#CCFFFFFF</color>
     <color name="always_white">#FFFFFFFF</color>
     <color name="secondary">#A0A0A0</color>
     <color name="light_secondary">#E0DCE0</color>
@@ -91,4 +92,5 @@
     <color name="md_theme_dark_surfaceTint">#FFB786</color>
     <color name="md_theme_dark_outlineVariant">#52443B</color>
     <color name="md_theme_dark_scrim">#000000</color>
+    <color name="white_blur">#80FFFFFF</color>
 </resources>

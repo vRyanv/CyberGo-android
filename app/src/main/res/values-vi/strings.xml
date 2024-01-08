@@ -59,4 +59,9 @@
     <string name="email_has_been_used">Email đã được sử dụng</string>
     <string name="phone_number_has_been_used">Số điện thoại đã được sử dụng</string>
     <string name="and">và</string>
+    <string name="home">Trang chủ</string>
+    <string name="setting">Cài đặt</string>
+    <string name="chat">Trò chuyện</string>
+    <string name="activity">Hoạt động</string>
+    <string name="map">Bản đồ</string>
 </resources>

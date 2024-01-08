@@ -39,9 +39,9 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
     }
 
     @Override
-    protected ActivitySignInBinding InitBinding(ViewModel view_model) {
+    protected ActivitySignInBinding InitBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in);
-        binding.setViewModel((SignInViewModel) view_model);
+        binding.setViewModel(view_model);
         return binding;
     }
 

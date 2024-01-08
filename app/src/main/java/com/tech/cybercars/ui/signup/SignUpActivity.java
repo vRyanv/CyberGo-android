@@ -1,11 +1,9 @@
 package com.tech.cybercars.ui.signup;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
@@ -40,9 +38,9 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
     }
 
     @Override
-    public ActivitySignUpBinding InitBinding(ViewModel view_model) {
+    public ActivitySignUpBinding InitBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
-        binding.setViewModel((SignUpViewModel) view_model);
+        binding.setViewModel(view_model);
         return binding;
     }
 

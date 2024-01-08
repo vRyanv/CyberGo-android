@@ -18,7 +18,7 @@ public abstract class BaseActivity<BINDING extends ViewDataBinding, VM extends V
     @NonNull
     protected abstract VM InitViewModel();
 
-    protected abstract BINDING InitBinding(ViewModel view_model);
+    protected abstract BINDING InitBinding();
 
     protected abstract void InitView();
 
@@ -30,7 +30,7 @@ public abstract class BaseActivity<BINDING extends ViewDataBinding, VM extends V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         view_model = InitViewModel();
-        binding = InitBinding(view_model);
+        binding = InitBinding();
         binding.setLifecycleOwner(this);
         InitView();
         InitObserve();

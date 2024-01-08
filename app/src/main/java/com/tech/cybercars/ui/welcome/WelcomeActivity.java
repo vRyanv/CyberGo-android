@@ -1,4 +1,4 @@
-package com.tech.cybercars.activities;
+package com.tech.cybercars.ui.welcome;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;

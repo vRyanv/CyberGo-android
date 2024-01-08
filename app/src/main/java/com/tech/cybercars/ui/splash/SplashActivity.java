@@ -1,4 +1,4 @@
-package com.tech.cybercars.activities;
+package com.tech.cybercars.ui.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,12 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.ui.welcome.WelcomeActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
         Animator animator = AnimatorInflater.loadAnimator(this, R.animator.rotate_core);
         animator.setTarget(findViewById(R.id.img_logo_plash_screen_core));
         animator.start();

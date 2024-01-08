@@ -14,9 +14,6 @@ public abstract class BaseViewModel extends AndroidViewModel {
     public LiveData<Boolean> getIsSuccessLive(){return is_success;}
     public MutableLiveData<String> error_call_server = new MutableLiveData<>();
     public LiveData<String> getErrorCallServerLive(){return error_call_server;}
-    public BaseViewModel(@NonNull Application application) {
-        super(application);
-    }
     protected void ResetBaseViewModel(){
         is_loading.setValue(false);
         is_success.setValue(false);
@@ -28,4 +25,8 @@ public abstract class BaseViewModel extends AndroidViewModel {
         error_call_server.postValue(null);
     }
     public abstract void ResetViewModel();
+
+    public BaseViewModel(@NonNull Application application) {
+        super(application);
+    }
 }
