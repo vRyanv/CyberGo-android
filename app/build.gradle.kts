@@ -89,5 +89,8 @@ dependencies {
     //handle phone number
     implementation("com.googlecode.libphonenumber:libphonenumber:8.13.27")
 
+    //mapbox
+    implementation("com.mapbox.mapboxsdk:mapbox-android-sdk:9.7.0")
+    implementation("com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0")
 }
 

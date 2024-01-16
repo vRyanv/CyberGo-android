@@ -8,34 +8,44 @@
             name="view_model"
             type="com.tech.cybercars.ui.main.MainViewModel" />
     </data>
-
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container_fragment_main"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_main" />
-<com.google.android.material.bottomnavigation.BottomNavigationView
-    android:id="@+id/bottom_nav_main"
-    style="@style/custom_main_bottom_nav"
-    android:layout_gravity="bottom"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_46sdp"
-    android:background="@color/orange"
-    app:itemTextAppearanceActive="@font/sp_pro_round_black_semibold"
-    app:itemIconSize="@dimen/_15sdp"
-    app:itemIconTint="@drawable/shape_icon_menu"
-    app:itemTextColor="@color/white_blur_80"
-    app:itemActiveIndicatorStyle="@color/light_red"
-    app:labelVisibilityMode="selected"
-    app:menu="@menu/menu_main"/>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/container_fragment_main"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navGraph="@navigation/nav_main" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_46sdp">
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_nav_main"
+                style="@style/custom_main_bottom_nav"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/orange"
+                app:itemTextAppearanceActive="@font/sp_pro_round_black_semibold"
+                app:itemIconSize="@dimen/_15sdp"
+                app:itemIconTint="@drawable/shape_icon_menu"
+                app:itemTextColor="@color/white_blur_80"
+                app:itemActiveIndicatorStyle="@color/light_red"
+                app:labelVisibilityMode="selected"
+                app:menu="@menu/menu_main"/>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+
 </layout>

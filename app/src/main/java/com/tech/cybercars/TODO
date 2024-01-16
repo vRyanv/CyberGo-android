@@ -1,3 +1,35 @@
-1. register: done
+1. register: @done
 2. verify: |BUG| nhập code bị lặp số trong 1 box
-3. login:
+3. login: @done
+4. map: cần tối ưu animation khi mới vào để giảm lag
+    4.1 permission location: @done
+    4.2 focus current location: @done
+    4.3 tracking: @done
+    4.4 change state button when move or idle: @done
+    4.5 Basic pulsing location: done
+    4.6 mark point:
+        4.6.1: bottom sheet for picker controller
+        4.6.1 cho mark lần lượt 2 điểm
+        4.6.2 zoom tổng thể đoạn đường
+        4.6.3tìm kiếm tài xế khớp với đường đi theo bán kính bao nhiêu km!
+
+
+
+
+
+
+
+
+
+
+
+
+Sử dụng LatLngBounds để hiển thị khu vực trên bản đồ
+mapbox_map.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 1));
+
+
+                // Tạo LatLngBounds từ các giá trị tính toán được
+//                LatLngBounds latLngBounds = new LatLngBounds.Builder()
+//                        .include(new LatLng(minLat, minLng))
+//                        .include(new LatLng(maxLat, maxLng))
+//                        .build();

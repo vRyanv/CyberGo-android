@@ -34,6 +34,11 @@ public class SettingFragment extends BaseFragment<FragmentSettingBinding, Settin
     }
 
     @Override
+    protected void InitFirst() {
+
+    }
+
+    @Override
     protected void InitView() {
 
     }

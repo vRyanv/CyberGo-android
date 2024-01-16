@@ -26,6 +26,11 @@ public class ShareFragment extends BaseFragment<FragmentShareBinding, ShareViewM
     }
 
     @Override
+    protected void InitFirst() {
+
+    }
+
+    @Override
     protected void InitView() {
 
     }

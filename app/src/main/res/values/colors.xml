@@ -28,11 +28,12 @@
 
     <color name="dark_light_dynamic">#1C1B1F</color>
     <color name="transparent">#00FFFFFF</color>
-
+    <color name="lavender">#8692f7</color>
 
 <!--    Themes color -->
     <color name="seed">#FF8201</color>
-    <color name="md_theme_light_primary">#954A00</color>
+<!--    <color name="md_theme_light_primary">#954A00</color>-->
+    <color name="md_theme_light_primary">#FF8201</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
     <color name="md_theme_light_primaryContainer">#FFDCC6</color>
     <color name="md_theme_light_onPrimaryContainer">#311400</color>

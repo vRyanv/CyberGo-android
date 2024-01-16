@@ -64,4 +64,8 @@
     <string name="chat">Trò chuyện</string>
     <string name="activity">Hoạt động</string>
     <string name="map">Bản đồ</string>
+    <string name="car">Ô hơi</string>
+    <string name="motorbike">Xe máy</string>
+    <string name="truck">Xe tải</string>
+    <string name="all">Tất cả</string>
 </resources>

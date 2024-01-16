@@ -19,7 +19,6 @@ import com.tech.cybercars.ui.base.BaseFragment;
 
 public class MessageFragment extends BaseFragment<FragmentMessageBinding, MessageViewModel> {
 
-
     @NonNull
     @Override
     protected MessageViewModel InitViewModel() {
@@ -31,6 +30,11 @@ public class MessageFragment extends BaseFragment<FragmentMessageBinding, Messag
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_message, container, false);
         binding.setViewModel(view_model);
         return binding;
+    }
+
+    @Override
+    protected void InitFirst() {
+
     }
 
     @Override

@@ -22,14 +22,18 @@ public abstract class BaseFragment<BINDING extends ViewDataBinding, VM extends V
 
     protected abstract BINDING InitBinding(LayoutInflater inflater, ViewGroup container);
 
+    protected abstract void InitFirst();
     protected abstract void InitView();
 
     protected abstract void InitObserve();
 
     protected abstract void InitCommon();
+    protected Bundle savedInstanceState;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        this.savedInstanceState = savedInstanceState;
+        InitFirst();
         view_model = InitViewModel();
         binding = InitBinding(inflater, container);
         binding.setLifecycleOwner(this);
