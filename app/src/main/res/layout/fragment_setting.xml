@@ -5,13 +5,13 @@
     <data>
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.setting.SettingViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.setting.SettingViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.setting.SettingFragment">
+        tools:context=".ui.main.fragment.setting.SettingFragment">
 
         <TextView
             android:layout_width="match_parent"

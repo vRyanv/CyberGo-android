@@ -68,4 +68,23 @@
     <string name="motorbike">Motorbike</string>
     <string name="truck">Truck</string>
     <string name="all">All</string>
+    <string name="go" translatable="false">Go</string>
+    <string name="find_transport">Find transport</string>
+    <string name="share_my_transport">Share my transport</string>
+    <string name="select_transport">Select transport</string>
+    <string name="the_type_of_transportation_you_want_to_share">The type of transportation you want to share</string>
+    <string name="choose_location">Choose location</string>
+    <string name="starting_point">Starting point</string>
+    <string name="destination">Destination</string>
+    <string name="select_the_starting_point_on_the_map">Select the starting point on the map</string>
+    <string name="select_destination_on_the_map">Select destination on the map</string>
+    <string name="looking_for_your_location">Looking for your location</string>
+    <string name="enable_gps">Enable GPS</string>
+    <string name="this_helps_us_determine_your_exact_location">This helps us determine your exact location</string>
+    <string name="allow_location_access">Allow location access</string>
+    <string name="select">Select</string>
+    <string name="we_couldnt_find_an_address_that_matches_your_selection">We couldn\'t find an address that matches your selection</string>
+    <string name="address_not_found">Address not found</string>
+    <string name="no_suitable_route_was_found">No suitable route was found</string>
+    <string name="route_not_found">Route not found</string>
 </resources>

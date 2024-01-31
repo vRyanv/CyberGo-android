@@ -3,6 +3,9 @@
     <color name="always_white">#FFFFFFFF</color>
     <color name="orange">#FF8201</color>
     <color name="black">#FFFFFFFF</color>
+    <color name="white">@color/md_theme_light_onSurface</color>
 
-    <color name="dark_light_dynamic">#FFFBFF</color>
+    <color name="dark_light_dynamic">#1C1B1F</color>
+    <color name="white_dark_reverse">#FFFFFF</color>
+    <color name="always_black">#000000</color>
 </resources>

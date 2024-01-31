@@ -1,20 +1,15 @@
 package com.tech.cybercars.ui.signup.verification;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.StatusCode;
-import com.tech.cybercars.constant.Tag;
-import com.tech.cybercars.data.remote.api.RetrofitResponse;
 import com.tech.cybercars.data.remote.verification.VerificationBody;
 import com.tech.cybercars.data.remote.verification.VerificationResponse;
-import com.tech.cybercars.data.remote.verification.VerificationService;
 import com.tech.cybercars.data.repositories.UserRepository;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;

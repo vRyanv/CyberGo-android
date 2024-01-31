@@ -10,14 +10,21 @@
             type="Boolean" />
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.home.HomeViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.home.HomeViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_anchor="@+id/constraintLayout4"
+            app:layout_anchorGravity="center"
+            mapbox:mapbox_cameraTargetLat="40.73581"
+            mapbox:mapbox_cameraTargetLng="-73.99155"
+            mapbox:mapbox_cameraZoom="11"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
@@ -86,22 +93,24 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 app:endIconDrawable="@drawable/ic_selection"
                 app:endIconMode="custom"
-                android:enabled="true"
                 app:endIconScaleType="centerInside"
-                app:endIconTintMode="src_atop"
+                app:endIconTint="@null"
+                app:endIconTintMode="multiply"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_toggle_bottom_sheet"
                 app:startIconDrawable="@drawable/ic_placeholder_red"
                 app:startIconScaleType="centerInside"
-                app:startIconTintMode="src_atop">
+                app:startIconTint="@null"
+                app:startIconTintMode="multiply">
+
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/edit_text_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="From"
-                    android:focusable="false"
                     android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="From"
                     android:paddingStart="@dimen/_35sdp"
                     android:paddingEnd="@dimen/_30sdp"
                     android:text="  "
@@ -120,12 +129,15 @@
                 app:layout_constraintTop_toBottomOf="@id/input_from_map"
                 app:startIconDrawable="@drawable/ic_placeholder_green"
                 app:startIconScaleType="centerInside"
+                app:startIconTint="@null"
                 app:startIconTintMode="multiply">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/edit_text_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:cursorVisible="false"
                     android:hint="To"
                     android:paddingStart="@dimen/_35sdp"
                     android:paddingEnd="@dimen/_30sdp"
@@ -208,8 +220,8 @@
                         app:layout_constraintTop_toBottomOf="@id/img_truck_type" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout style="@style/wrapper_transport_type">
-
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/wrapper_transport_type">
                     <ImageView
                         android:id="@+id/img_all_type"
                         style="@style/transport_type"
@@ -228,16 +240,5 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.mapbox.mapboxsdk.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_anchor="@+id/constraintLayout4"
-            app:layout_anchorGravity="center"
-            mapbox:mapbox_cameraTargetLat="40.73581"
-            mapbox:mapbox_cameraTargetLng="-73.99155"
-            mapbox:mapbox_cameraZoom="11">
-
-        </com.mapbox.mapboxsdk.maps.MapView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -5,13 +5,13 @@
     <data>
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.share.ShareViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.activity.ActivityViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.share.ShareFragment">
+        tools:context=".ui.main.fragment.activity.ActivityFragment">
 
         <TextView
             android:layout_width="match_parent"

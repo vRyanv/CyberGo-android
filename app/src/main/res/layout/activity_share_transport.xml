@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="is_show_btn_choose_on_map"
+            type="Boolean" />
+        <variable
+            name="is_activated_place_picker"
+            type="Boolean" />
+        <variable
+            name="is_getting_location"
+            type="Boolean" />
+        <variable
+            name="is_expand_bottom_sheet"
+            type="Boolean" />
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.go.share_transport.ShareTransportViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            style="@style/loading_frame"
+            android:background="#B3000000"
+            android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone}">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/orange"
+                android:indeterminateTintMode="src_atop" />
+        </FrameLayout>
+        <FrameLayout
+            style="@style/loading_frame"
+            android:background="#B3000000"
+            android:visibility="@{is_getting_location ? View.VISIBLE : View.GONE, default=gone}">
+            <ImageView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:src="@drawable/ic_choose_map"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_75sdp"
+                />
+            <TextView
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/sp_pro_round_black_semibold"
+                android:text="@string/looking_for_your_location"/>
+        </FrameLayout>
+
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/map_share_transport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_anchor="@+id/constraintLayout4"
+            app:layout_anchorGravity="center">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_time_and_transport_container"
+                android:paddingVertical="@dimen/_6sdp"
+                android:visibility="@{is_activated_place_picker ? View.GONE : View.VISIBLE, default=visible}">
+
+                <ImageButton
+                    android:id="@+id/btn_out_share_transport"
+                    style="@style/icon_button_back"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_transport_type_to_share"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:src="@drawable/ic_clock"
+                        android:visibility="@{view_model.route_time != null ? View.VISIBLE : View.GONE, default=gone}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@{view_model.route_time}"
+                        android:visibility="@{view_model.route_time != null ? View.VISIBLE : View.GONE, default=gone}" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:contentDescription="TODO"
+                        android:src="@drawable/ic_route_distance"
+                        android:visibility="@{view_model.route_distance != null ? View.VISIBLE : View.GONE, default=gone}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@{view_model.route_distance}"
+                        android:visibility="@{view_model.route_distance != null ? View.VISIBLE : View.GONE, default=gone}" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_transport_type_to_share"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/ic_truck"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_next_step_share"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_next_step_share"
+                    style="@style/btn_primary"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/next"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/btn_cancel_pick_action"
+                android:layout_gravity="top|end"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                style="@style/icon_button_back"
+                app:srcCompat="@drawable/ic_close_cross"
+                android:visibility="@{is_activated_place_picker ? View.VISIBLE : View.GONE, default=gone}"/>
+            <ImageView
+                android:id="@+id/icon_location_picker"
+                android:visibility="@{is_activated_place_picker ? View.VISIBLE : View.GONE, default=gone}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/ic_placeholder_red"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_pick_location_share_transport"
+                android:visibility="@{is_activated_place_picker ? View.VISIBLE : View.GONE, default=gone}"
+                style="@style/btn_primary"
+                android:text="@string/select"
+                android:layout_gravity="bottom"/>
+        </com.mapbox.mapboxsdk.maps.MapView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_focus_current_location"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_200sdp"
+                android:backgroundTint="@color/skin"
+                android:clickable="true"
+                android:src="@drawable/ic_not_focus_location"
+                app:fabCustomSize="@dimen/_40sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:maxImageSize="@dimen/_20sdp"
+                mapbox:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/bs_location_picker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@{is_expand_bottom_sheet ? @drawable/shape_white : @drawable/shape_choose_location_bottom_sheet_collapsed, default=`@drawable/shape_choose_location_bottom_sheet_collapsed`}"
+            android:clickable="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                style="@style/layout_header_box">
+                <TextView
+                    style="@style/txt_title_header"
+                    android:text="@string/choose_location"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <ImageButton
+                    android:id="@+id/btn_close_bottom_sheet"
+                    style="@style/icon_button_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_arrow" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_from_map"
+                    style="@style/input_location"
+                    android:layout_marginTop="@dimen/_0dp"
+                    app:endIconMode="clear_text"
+                    app:endIconScaleType="centerInside"
+                    app:endIconTintMode="multiply"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/ic_placeholder_red"
+                    app:startIconScaleType="centerInside"
+                    app:startIconTint="@null"
+                    app:startIconTintMode="multiply">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/starting_point"
+                        android:imeOptions="actionSearch"
+                        android:paddingStart="@dimen/_35sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="@{view_model.start_point_address}"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_to_map"
+                    style="@style/input_location"
+                    app:endIconMode="clear_text"
+                    app:endIconScaleType="centerInside"
+                    app:endIconTintMode="multiply"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/input_from_map"
+                    app:startIconDrawable="@drawable/ic_placeholder_green"
+                    app:startIconScaleType="centerInside"
+                    app:startIconTint="@null"
+                    app:startIconTintMode="multiply">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:imeOptions="actionSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/destination"
+                        android:paddingStart="@dimen/_35sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="@{view_model.destination_address}"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_choose_location_on_map"
+                android:visibility="@{is_show_btn_choose_on_map ? View.VISIBLE : View.GONE, default=gone}"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_20sdp">
+                <ImageView
+                    android:scaleType="fitCenter"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:rotation="90"
+                    android:src="@drawable/ic_selection"/>
+                <TextView
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/sp_pro_round_regular"
+                    android:id="@+id/txt_choose_location_on_map"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/select_destination_on_the_map"/>
+            </LinearLayout>
+            <com.tech.cybercars.ui.component.search_address_result_view.SearchAddressResultView
+                android:id="@+id/search_address_result_view_share_transport"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

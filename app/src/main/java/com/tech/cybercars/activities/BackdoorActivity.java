@@ -3,11 +3,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
-import com.mapbox.mapboxsdk.maps.Style;
 import com.tech.cybercars.R;
 import com.tech.cybercars.ui.main.MainActivity;
+import com.tech.cybercars.ui.main.fragment.go.SelectTransportActivity;
+import com.tech.cybercars.ui.main.fragment.go.share_transport.ShareTransportActivity;
 import com.tech.cybercars.ui.splash.SplashActivity;
 
 public class BackdoorActivity extends AppCompatActivity {
@@ -37,5 +37,16 @@ public class BackdoorActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         });
 
+        findViewById(R.id.btn_select_location_bd).setOnClickListener(view -> {
+            startActivity(new Intent(this, ShareTransportActivity.class));
+        });
+
+        findViewById(R.id.btn_choose_transport_to_share).setOnClickListener(view -> {
+            startActivity(new Intent(this, SelectTransportActivity.class));
+        });
+
+        findViewById(R.id.btn_search_map_bd).setOnClickListener(view -> {
+            startActivity(new Intent(this, SearchMapActivity.class));
+        });
     }
 }

@@ -64,8 +64,26 @@
     <string name="chat">Trò chuyện</string>
     <string name="activity">Hoạt động</string>
     <string name="map">Bản đồ</string>
-    <string name="car">Ô hơi</string>
+    <string name="car">Ô tô</string>
     <string name="motorbike">Xe máy</string>
     <string name="truck">Xe tải</string>
     <string name="all">Tất cả</string>
+    <string name="find_transport">Tìm kiếm phương tiện</string>
+    <string name="share_my_transport">Chia sẻ phương tiện của tôi</string>
+    <string name="select_transport">Chọn phương tiện</string>
+    <string name="the_type_of_transportation_you_want_to_share">Loại phương tiện giao thông bạn muốn chia sẻ</string>
+    <string name="choose_location">Chọn vị trí</string>
+    <string name="starting_point">Điểm xuất phát</string>
+    <string name="destination">Điểm đến</string>
+    <string name="select_the_starting_point_on_the_map">Chọn điểm xuất phát trên bản đồ</string>
+    <string name="select_destination_on_the_map">Chọn điểm đến trên bản đồ</string>
+    <string name="looking_for_your_location">Đang tìm vị trí của bạn</string>
+    <string name="enable_gps">Kích hoạt GPS</string>
+    <string name="this_helps_us_determine_your_exact_location">Điều này giúp chúng tôi xác định chính xác địa điểm của bạn</string>
+    <string name="allow_location_access">Cho phép truy cập vị trí</string>
+    <string name="select">Chọn</string>
+    <string name="we_couldnt_find_an_address_that_matches_your_selection">"Chúng tôi không thể tìm thấy địa chỉ phù hợp với lựa chọn của bạn"</string>
+    <string name="address_not_found">Không tìm thấy địa chỉ</string>
+    <string name="no_suitable_route_was_found">không tìm thấy tuyến đường nào phù hợp</string>
+    <string name="route_not_found">Không tìm thấy tuyến đường</string>
 </resources>

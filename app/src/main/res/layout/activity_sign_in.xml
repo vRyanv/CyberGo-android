@@ -14,7 +14,6 @@
         style="@style/wrapper_loading_relative">
 
         <FrameLayout
-            android:id="@+id/loading_phone_verification"
             style="@style/loading_frame"
             android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone}">
 

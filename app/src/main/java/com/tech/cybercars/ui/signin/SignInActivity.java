@@ -46,6 +46,11 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
     }
 
     @Override
+    protected void InitFirst() {
+
+    }
+
+    @Override
     protected void InitView() {
         binding.txtAlreadyAccount.setText(SetUpSignUpTextClickable());
         binding.txtAlreadyAccount.setMovementMethod(LinkMovementMethod.getInstance());

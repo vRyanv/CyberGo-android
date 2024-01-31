@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,6 +18,24 @@
         android:theme="@style/Theme.CyberGo"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.SearchMapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.fragment.go.SelectTransportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.fragment.go.share_transport.ShareTransportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.fragment.go.find_transport.FindTransportActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".ui.main.MyService"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".activities.BackdoorActivity"
             android:exported="true">

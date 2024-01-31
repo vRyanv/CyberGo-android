@@ -45,6 +45,11 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
     }
 
     @Override
+    protected void InitFirst() {
+
+    }
+
+    @Override
     public void InitView() {
         // check box terms and policy
         binding.txtAgreeTermPolicy.setText(SetUpCheckBoxOfTermsAndPolicyClickable());

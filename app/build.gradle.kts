@@ -92,5 +92,6 @@ dependencies {
     //mapbox
     implementation("com.mapbox.mapboxsdk:mapbox-android-sdk:9.7.0")
     implementation("com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0")
+    implementation("com.mapbox.mapboxsdk:mapbox-sdk-services:5.5.0")
 }
 

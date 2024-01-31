@@ -5,13 +5,13 @@
     <data>
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.message.MessageViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.message.MessageViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.message.MessageFragment">
+        tools:context=".ui.main.fragment.message.MessageFragment">
 
         <TextView
             android:layout_width="match_parent"

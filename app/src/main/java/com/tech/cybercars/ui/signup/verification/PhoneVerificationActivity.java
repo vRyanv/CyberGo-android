@@ -50,6 +50,11 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
     }
 
     @Override
+    protected void InitFirst() {
+
+    }
+
+    @Override
     protected void InitView() {
         binding.txtResendAgainPhoneVerification.setText(SetUpSendAgainTextClickable());
         binding.txtResendAgainPhoneVerification.setMovementMethod(LinkMovementMethod.getInstance());
