@@ -27,6 +27,17 @@ public class MapboxNavigationService {
                 .origin(origin)
                 .destination(destination)
                 .overview(DirectionsCriteria.OVERVIEW_FULL)
+                .profile(directions_criteria_profile)
+                .accessToken(token)
+                .build();
+        map_direction_request.enqueueCall(callback);
+    }
+
+    public void GetSnackRoute(Point origin, Point destination, String directions_criteria_profile, String token, Callback<DirectionsResponse> callback) {
+        MapboxDirections map_direction_request = MapboxDirections.builder()
+                .origin(origin)
+                .destination(destination)
+                .overview(DirectionsCriteria.OVERVIEW_FULL)
                 .geometries(GEOMETRY_POLYLINE)
                 .profile(directions_criteria_profile)
                 .alternatives(true)

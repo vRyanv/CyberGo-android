@@ -1,4 +1,4 @@
-package com.tech.cybercars.ui.main.fragment.go.find_transport;
+package com.tech.cybercars.ui.main.fragment.go.find_trip;
 
 import androidx.lifecycle.ViewModel;
 

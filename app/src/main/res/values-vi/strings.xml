@@ -73,7 +73,7 @@
     <string name="select_transport">Chọn phương tiện</string>
     <string name="the_type_of_transportation_you_want_to_share">Loại phương tiện giao thông bạn muốn chia sẻ</string>
     <string name="choose_location">Chọn vị trí</string>
-    <string name="starting_point">Điểm xuất phát</string>
+    <string name="origin">Điểm xuất phát</string>
     <string name="destination">Điểm đến</string>
     <string name="select_the_starting_point_on_the_map">Chọn điểm xuất phát trên bản đồ</string>
     <string name="select_destination_on_the_map">Chọn điểm đến trên bản đồ</string>
@@ -86,4 +86,8 @@
     <string name="address_not_found">Không tìm thấy địa chỉ</string>
     <string name="no_suitable_route_was_found">không tìm thấy tuyến đường nào phù hợp</string>
     <string name="route_not_found">Không tìm thấy tuyến đường</string>
+    <string name="share_trip">Chia sẻ chuyến đi</string>
+    <string name="share">Chia sẻ</string>
+    <string name="start_date">Ngày khởi hành</string>
+    <string name="start_time">Thời gian khởi hành</string>
 </resources>

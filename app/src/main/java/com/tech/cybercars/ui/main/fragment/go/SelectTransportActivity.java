@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.TransportType;
 import com.tech.cybercars.databinding.ActivitySelectTransportBinding;
-import com.tech.cybercars.ui.main.fragment.go.share_transport.ShareTransportActivity;
+import com.tech.cybercars.ui.main.fragment.go.share_trip.ShareTripActivity;
 
 public class SelectTransportActivity extends AppCompatActivity {
     ActivitySelectTransportBinding binding;
@@ -35,6 +35,6 @@ public class SelectTransportActivity extends AppCompatActivity {
         binding.typeMotoSelect.setBackgroundResource(R.drawable.shape_transport_type);
         selection.setBackgroundResource(R.drawable.shape_transport_type_selected);
 
-        startActivity(new Intent(this, ShareTransportActivity.class).putExtra(TransportType.class.getSimpleName(), transport_type));
+        startActivity(new Intent(this, ShareTripActivity.class).putExtra(TransportType.class.getSimpleName(), transport_type));
     }
 }

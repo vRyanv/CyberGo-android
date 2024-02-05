@@ -56,16 +56,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_go_to_login"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_39sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:layout_marginBottom="@dimen/_14sdp"
-        android:background="@drawable/shape_btn_outline"
         android:text="@string/login"
-        android:textAllCaps="false"
-        android:textColor="@drawable/color_text_state"
-        android:textSize="@dimen/_14ssp"
+        style="@style/btn_primary_outline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -1,4 +1,4 @@
-package com.tech.cybercars.ui.main.fragment.go.share_transport;
+package com.tech.cybercars.ui.main.fragment.go.share_trip;
 
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
@@ -14,12 +14,14 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -51,16 +53,17 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.PickLocation;
+import com.tech.cybercars.constant.ThemeMode;
 import com.tech.cybercars.constant.TransportType;
-import com.tech.cybercars.databinding.ActivityShareTransportBinding;
+import com.tech.cybercars.databinding.ActivityShareTripBinding;
 import com.tech.cybercars.services.location.LocationService;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
-import com.tech.cybercars.services.mapbox.MapboxNavigationService;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+import com.tech.cybercars.ui.main.fragment.go.add_share_trip_information.AddShareTripInformationActivity;
 import com.tech.cybercars.utils.KeyBoardUtil;
 
-public class ShareTransportActivity extends BaseActivity<ActivityShareTransportBinding, ShareTransportViewModel> {
+public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, ShareTripViewModel> {
     private BottomSheetBehavior<LinearLayout> bottom_sheet_behavior;
     private final String START_POINT_GEO_JSON_SOURCE_LAYER_ID = "start-point-source";
     private final String DESTINATION_GEO_JSON_SOURCE_LAYER_ID = "destination-source";
@@ -71,19 +74,20 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
     private Runnable search_debounce_runnable;
     @NonNull
     @Override
-    protected ShareTransportViewModel InitViewModel() {
-        return new ViewModelProvider(this).get(ShareTransportViewModel.class);
+    protected ShareTripViewModel InitViewModel() {
+        return new ViewModelProvider(this).get(ShareTripViewModel.class);
     }
 
     @Override
-    protected ActivityShareTransportBinding InitBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_share_transport);
+    protected ActivityShareTripBinding InitBinding() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_share_trip);
         binding.setViewModel(view_model);
         return binding;
     }
 
     @Override
     protected void InitFirst() {
+
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
     }
 
@@ -93,13 +97,13 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
         InitSearchAddressResultView();
         InitBottomSheet();
         InitInputLocation();
+        InitOptionNext();
 
-
-        binding.btnFocusCurrentLocation.setOnClickListener(view -> {
+        binding.btnFocusCurrentLocationShareTrip.setOnClickListener(view -> {
             StartTracking();
         });
 
-        binding.btnPickLocationShareTransport.setOnClickListener(view -> {
+        binding.btnPickLocationShareTrip.setOnClickListener(view -> {
             FindAddress();
         });
 
@@ -107,10 +111,9 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
             DonePickLocationAction();
         });
 
-        binding.btnOutShareTransport.setOnClickListener(view->{
+        binding.btnOutShareTransport.setOnClickListener(view -> {
             OnBackPress();
         });
-
     }
 
     @Override
@@ -120,8 +123,8 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
                 double lat;
                 double lng;
                 if (pick_location == PickLocation.PICK_START_POINT) {
-                    lat = view_model.start_point_reverse.lat;
-                    lng = view_model.start_point_reverse.lng;
+                    lat = view_model.origin_reverse.lat;
+                    lng = view_model.origin_reverse.lng;
                 } else {
                     lat = view_model.destination_reverse.lat;
                     lng = view_model.destination_reverse.lng;
@@ -146,14 +149,11 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
         view_model.current_route.observe(this, current_route -> {
             if (current_route != null) {
                 DrawRoute(current_route.geometry());
-                binding.btnNextStepShare.setVisibility(View.VISIBLE);
-            } else {
-                binding.btnNextStepShare.setVisibility(View.GONE);
             }
         });
 
-        view_model.transport_type.observe(this, transport_type->{
-            if(transport_type != null){
+        view_model.transport_type.observe(this, transport_type -> {
+            if (transport_type != null) {
                 switch (transport_type) {
                     case TransportType.CAR:
                         binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_car);
@@ -169,19 +169,19 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
         });
 
         view_model.search_address_result.observe(this, search_address_result -> {
-            if(search_address_result != null){
-                if(search_address_result.size() == 0){
-                    binding.searchAddressResultViewShareTransport.GetSearchAddressResultList().clear();
-                    binding.searchAddressResultViewShareTransport.setVisibility(View.GONE);
+            if (search_address_result != null) {
+                if (search_address_result.size() == 0) {
+                    binding.viewSearchAddressResultViewShareTrip.GetSearchAddressResultList().clear();
+                    binding.viewSearchAddressResultViewShareTrip.setVisibility(View.GONE);
                 } else {
-                    binding.searchAddressResultViewShareTransport.setVisibility(View.VISIBLE);
-                    binding.searchAddressResultViewShareTransport.GetSearchAddressResultList().clear();
-                    binding.searchAddressResultViewShareTransport.GetSearchAddressResultList().addAll(search_address_result);
-                    binding.searchAddressResultViewShareTransport.NotifyDataSetChanged();
+                    binding.viewSearchAddressResultViewShareTrip.setVisibility(View.VISIBLE);
+                    binding.viewSearchAddressResultViewShareTrip.GetSearchAddressResultList().clear();
+                    binding.viewSearchAddressResultViewShareTrip.GetSearchAddressResultList().addAll(search_address_result);
+                    binding.viewSearchAddressResultViewShareTrip.NotifyDataSetChanged();
                 }
             } else {
-                binding.searchAddressResultViewShareTransport.GetSearchAddressResultList().clear();
-                binding.searchAddressResultViewShareTransport.setVisibility(View.GONE);
+                binding.viewSearchAddressResultViewShareTrip.GetSearchAddressResultList().clear();
+                binding.viewSearchAddressResultViewShareTrip.setVisibility(View.GONE);
             }
         });
 
@@ -193,6 +193,7 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
         binding.setIsGettingLocation(false);
         binding.setIsActivatedPlacePicker(false);
         binding.setIsExpandBottomSheet(false);
+        binding.setIsShowOptionNextStep(false);
 
         String transport_type = getIntent().getStringExtra(TransportType.class.getSimpleName());
         view_model.transport_type.setValue(transport_type);
@@ -203,14 +204,27 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
         finish();
     }
 
-    private void InitSearchAddressResultView(){
-        binding.searchAddressResultViewShareTransport.setVisibility(View.GONE);
-        binding.searchAddressResultViewShareTransport.SetOnItemClick(reverse_geocoding -> {
+    private void InitOptionNext() {
+        binding.btnNextStepShareTrip.setOnClickListener(view -> {
+            Intent add_transport_information_activity = new Intent(this, AddShareTripInformationActivity.class);
+            startActivity(add_transport_information_activity);
+        });
+
+        binding.btnCancelNextStepShareTrip.setOnClickListener(view -> {
+            binding.setIsShowOptionNextStep(false);
+            binding.bsLocationPicker.setVisibility(View.VISIBLE);
+        });
+    }
+
+    private void InitSearchAddressResultView() {
+        binding.viewSearchAddressResultViewShareTrip.setVisibility(View.GONE);
+        binding.viewSearchAddressResultViewShareTrip.SetOnItemClick(reverse_geocoding -> {
+            binding.setIsShowOverlay(true);
             Point point = Point.fromLngLat(reverse_geocoding.lng, reverse_geocoding.lat);
             MarkLocationOnMap(point);
-            if(pick_location == PickLocation.PICK_START_POINT){
-                view_model.start_point_reverse = reverse_geocoding;
-                view_model.start_point_address.setValue(reverse_geocoding.display_name);
+            if (pick_location == PickLocation.PICK_START_POINT) {
+                view_model.origin_reverse = reverse_geocoding;
+                view_model.origin_address.setValue(reverse_geocoding.display_name);
             } else {
                 view_model.destination_reverse = reverse_geocoding;
                 view_model.destination_address.setValue(reverse_geocoding.display_name);
@@ -234,8 +248,8 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
             );
         });
 
-        binding.searchAddressResultViewShareTransport.SetOnScroll((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if(oldScrollY != 0){
+        binding.viewSearchAddressResultViewShareTrip.SetOnScroll((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (oldScrollY != 0) {
                 KeyBoardUtil.HideKeyBoard(this);
             }
         });
@@ -247,29 +261,48 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
             GeoJsonSource route_source = style.getSourceAs(ROUTE_GEO_JSON_SOURCE_LAYER_ID);
             assert route_source != null;
             route_source.setGeoJson(LineString.fromPolyline(geometry, PRECISION_6));
+            binding.bsLocationPicker.setVisibility(View.GONE);
             MakeBoundingBox();
         });
     }
 
-    private void MakeBoundingBox(){
-        double minLatitude = Math.min(view_model.start_point_reverse.boundingbox[0], view_model.destination_reverse.boundingbox[0]);
-        double minLongitude = Math.min(view_model.start_point_reverse.boundingbox[2], view_model.destination_reverse.boundingbox[2]);
-        double maxLatitude = Math.max(view_model.start_point_reverse.boundingbox[1], view_model.destination_reverse.boundingbox[1]);
-        double maxLongitude = Math.max(view_model.start_point_reverse.boundingbox[3], view_model.destination_reverse.boundingbox[3]);
+    private void MakeBoundingBox() {
+        binding.setIsShowOverlay(true);
+//        double minLatitude = Math.min(view_model.origin_reverse.boundingbox[0], view_model.destination_reverse.boundingbox[0]);
+//        double minLongitude = Math.min(view_model.origin_reverse.boundingbox[2], view_model.destination_reverse.boundingbox[2]);
+//        double maxLatitude = Math.max(view_model.origin_reverse.boundingbox[1], view_model.destination_reverse.boundingbox[1]);
+//        double maxLongitude = Math.max(view_model.origin_reverse.boundingbox[3], view_model.destination_reverse.boundingbox[3]);
         LatLngBounds latLngBounds = new LatLngBounds.Builder()
-                .include(new LatLng(minLatitude,minLongitude))
-                .include(new LatLng(maxLatitude, maxLongitude))
+                .include(new LatLng(view_model.destination_reverse.boundingbox[1], view_model.destination_reverse.boundingbox[3]))
+                .include(new LatLng(view_model.destination_reverse.boundingbox[0], view_model.destination_reverse.boundingbox[2]))
+                .include(new LatLng(view_model.origin_reverse.boundingbox[1], view_model.origin_reverse.boundingbox[3]))
+                .include(new LatLng(view_model.origin_reverse.boundingbox[0], view_model.origin_reverse.boundingbox[2]))
                 .build();
+//        LatLngBounds latLngBounds = new LatLngBounds.Builder()
+//                .include(new LatLng(maxLatitude, maxLongitude))
+//                .include(new LatLng(minLatitude, minLongitude))
+//                .build();
 
         mapbox_service.GetMapBoxMap().easeCamera(CameraUpdateFactory.newLatLngBounds(
-                latLngBounds,
-                -1,
-                45,
-                100),
-                3000);
+                        latLngBounds,
+                        -1,
+                        45,50),
+                3000, new MapboxMap.CancelableCallback() {
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        binding.setIsShowOverlay(false);
+                        binding.setIsShowOptionNextStep(true);
+                    }
+                });
     }
 
     private void ShowErrorGetRoute(String error_get_route) {
+        binding.setIsShowOverlay(false);
         NotificationDialog.Builder(this)
                 .SetIcon(R.drawable.ic_warning)
                 .SetTitle(getResources().getString(R.string.route_not_found))
@@ -315,8 +348,10 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
     }
 
     private void GetNavigation() {
-        if (view_model.start_point_reverse != null && view_model.destination_reverse != null) {
+        if (view_model.origin_reverse != null && view_model.destination_reverse != null) {
             view_model.HandleGetRoute(DirectionsCriteria.PROFILE_DRIVING);
+        } else {
+            binding.setIsShowOverlay(false);
         }
     }
 
@@ -328,6 +363,7 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
                 .SetTextMainButton(getResources().getString(R.string.try_again))
                 .SetOnMainButtonClicked(Dialog::dismiss).show();
     }
+
     private void InitInputLocation() {
         binding.inputFromMap.getEditText().addTextChangedListener(location_text_watcher);
         binding.inputFromMap.getEditText().setOnEditorActionListener((v, actionId, event) -> {
@@ -373,16 +409,16 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            search_debounce_handler.removeCallbacks(search_debounce_runnable);
-            search_debounce_runnable = () -> {
-                if(!s.toString().isEmpty() && bottom_sheet_behavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+            if (!s.toString().isEmpty() && bottom_sheet_behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                search_debounce_handler.removeCallbacks(search_debounce_runnable);
+                search_debounce_runnable = () -> {
                     view_model.HandleSearchAddress(s.toString());
-                } else {
-                    binding.searchAddressResultViewShareTransport.GetSearchAddressResultList().clear();
-                    binding.searchAddressResultViewShareTransport.setVisibility(View.GONE);
-                }
-            };
-            search_debounce_handler.postDelayed(search_debounce_runnable, 1200);
+                };
+                search_debounce_handler.postDelayed(search_debounce_runnable, 1000);
+            } else {
+                binding.viewSearchAddressResultViewShareTrip.GetSearchAddressResultList().clear();
+                binding.viewSearchAddressResultViewShareTrip.setVisibility(View.GONE);
+            }
         }
 
         @Override
@@ -393,7 +429,7 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
 
     private void ExpandBottomSheet(String txt_choose_location) {
         bottom_sheet_behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        binding.searchAddressResultViewShareTransport.setVisibility(View.VISIBLE);
+        binding.viewSearchAddressResultViewShareTrip.setVisibility(View.VISIBLE);
         binding.btnCloseBottomSheet.setVisibility(View.VISIBLE);
         binding.txtChooseLocationOnMap.setText(txt_choose_location);
         binding.setIsExpandBottomSheet(true);
@@ -426,7 +462,7 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
 
     private void CollapsedBottomSheet() {
         KeyBoardUtil.HideKeyBoard(this);
-        binding.searchAddressResultViewShareTransport.setVisibility(View.GONE);
+        binding.viewSearchAddressResultViewShareTrip.setVisibility(View.GONE);
         bottom_sheet_behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         binding.inputToMap.getEditText().clearFocus();
         binding.inputFromMap.getEditText().clearFocus();
@@ -436,11 +472,18 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
     }
 
     private void InitMapBox() {
+        String map_style = "";
+        if(getResources().getString(R.string.theme_mode).equals(ThemeMode.DARK)){
+            map_style = Style.DARK;
+        } else {
+            map_style = Style.LIGHT;
+        }
+
         binding.mapShareTransport.onCreate(savedInstanceState);
         mapbox_service = new MapboxMapService(
                 this,
                 binding.mapShareTransport,
-                Style.MAPBOX_STREETS,
+                map_style,
                 style -> {
                     mapbox_service.GetMapBoxMap().getUiSettings().setCompassEnabled(false);
                     mapbox_service.GetMapBoxMap().getUiSettings().setLogoEnabled(false);
@@ -449,7 +492,7 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
                     StartMapBoxService();
                     mapbox_service.SetOnCameraStartListener((reason) -> {
                         if (reason == MapboxMap.OnCameraMoveStartedListener.REASON_API_GESTURE) {
-                            binding.btnFocusCurrentLocation.setImageResource(R.drawable.ic_not_focus_location);
+                            binding.btnFocusCurrentLocationShareTrip.setImageResource(R.drawable.ic_not_focus_location);
                             bottom_sheet_behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         }
                     });
@@ -510,7 +553,7 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
                     @Override
                     public void onFinish() {
                         StartTracking();
-                        binding.btnFocusCurrentLocation.setImageResource(R.drawable.ic_focus_my_location);
+                        binding.btnFocusCurrentLocationShareTrip.setImageResource(R.drawable.ic_focus_my_location);
                     }
                 });
             } else {
@@ -563,9 +606,10 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
                 binding.setIsGettingLocation(false);
                 locationService.Stop();
             }
+
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(ShareTransportActivity.this, "WaitingGPS onFailure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShareTripActivity.this, "WaitingGPS onFailure", Toast.LENGTH_SHORT).show();
             }
         };
         locationService.SetCallback(callback).Start();
@@ -590,7 +634,7 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
                     mapbox_service.StartTrackingMode(null);
                 }
 
-                binding.btnFocusCurrentLocation.setImageResource(R.drawable.ic_focus_my_location);
+                binding.btnFocusCurrentLocationShareTrip.setImageResource(R.drawable.ic_focus_my_location);
             } else {
                 OpenLocationSetting();
             }
@@ -640,5 +684,4 @@ public class ShareTransportActivity extends BaseActivity<ActivityShareTransportB
         super.onSaveInstanceState(outState);
         binding.mapShareTransport.onSaveInstanceState(outState);
     }
-
 }

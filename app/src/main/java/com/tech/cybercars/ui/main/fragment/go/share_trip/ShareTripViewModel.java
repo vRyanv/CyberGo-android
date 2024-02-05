@@ -1,52 +1,42 @@
-package com.tech.cybercars.ui.main.fragment.go.share_transport;
+package com.tech.cybercars.ui.main.fragment.go.share_trip;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mapbox.api.directions.v5.DirectionsCriteria;
-import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
-import com.mapbox.api.geocoding.v5.models.CarmenFeature;
-import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.StatusCode;
-import com.tech.cybercars.data.remote.api.ResFailCallback;
-import com.tech.cybercars.data.remote.api.ResSuccessCallback;
 import com.tech.cybercars.data.remote.base.CallServerStatus;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 import com.tech.cybercars.data.repositories.MapRepository;
 import com.tech.cybercars.services.mapbox.MapboxNavigationService;
-import com.tech.cybercars.services.mapbox.MapboxSearchService;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.Helper;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import timber.log.Timber;
 
-public class ShareTransportViewModel extends BaseViewModel {
+public class ShareTripViewModel extends BaseViewModel {
     public final MutableLiveData<Boolean> is_success_reverse_geocoding = new MutableLiveData<>();
     public final MutableLiveData<String> transport_type = new MutableLiveData<>();
     public final MutableLiveData<String> route_time = new MutableLiveData<>();
     public final MutableLiveData<String> route_distance = new MutableLiveData<>();
-    public final MutableLiveData<String> start_point_address = new MutableLiveData<>();
-    public MutableLiveData<String> destination_address = new MutableLiveData<>();
-    public MutableLiveData<String> error_get_route = new MutableLiveData<>();
-    public MutableLiveData<DirectionsRoute> current_route = new MutableLiveData<>();
-    public MutableLiveData<List<ReverseGeocodingResponse>> search_address_result = new MutableLiveData<>();
-    public ReverseGeocodingResponse start_point_reverse;
+    public final MutableLiveData<String> origin_address = new MutableLiveData<>();
+    public final MutableLiveData<String> destination_address = new MutableLiveData<>();
+    public final MutableLiveData<String> error_get_route = new MutableLiveData<>();
+    public final MutableLiveData<DirectionsRoute> current_route = new MutableLiveData<>();
+    public final MutableLiveData<List<ReverseGeocodingResponse>> search_address_result = new MutableLiveData<>();
+    public ReverseGeocodingResponse origin_reverse;
     public ReverseGeocodingResponse destination_reverse;
     private final MapRepository map_repository = MapRepository.GetInstance();
     private int pick_location;
@@ -75,7 +65,7 @@ public class ShareTransportViewModel extends BaseViewModel {
     };
 
     public void HandleGetRoute(String directions_criteria_profile) {
-        Point origin = Point.fromLngLat(start_point_reverse.lng, start_point_reverse.lat);
+        Point origin = Point.fromLngLat(origin_reverse.lng, origin_reverse.lat);
         Point destination = Point.fromLngLat(destination_reverse.lng, destination_reverse.lat);
         new MapboxNavigationService().GetRoute(
                 origin,
@@ -138,8 +128,8 @@ public class ShareTransportViewModel extends BaseViewModel {
             assert response.body() != null;
             if (response.body().getCode() == StatusCode.OK) {
                 if (pick_location == PickLocation.PICK_START_POINT) {
-                    start_point_address.postValue(response.body().display_name);
-                    start_point_reverse = response.body();
+                    origin_address.postValue(response.body().display_name);
+                    origin_reverse = response.body();
                 } else {
                     destination_address.postValue(response.body().display_name);
                     destination_reverse = response.body();
@@ -159,7 +149,7 @@ public class ShareTransportViewModel extends BaseViewModel {
         }
     };
 
-    public ShareTransportViewModel(@NonNull Application application) {
+    public ShareTripViewModel(@NonNull Application application) {
         super(application);
     }
 

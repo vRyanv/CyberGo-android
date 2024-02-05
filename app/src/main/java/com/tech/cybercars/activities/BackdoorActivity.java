@@ -7,7 +7,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.tech.cybercars.R;
 import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.main.fragment.go.SelectTransportActivity;
-import com.tech.cybercars.ui.main.fragment.go.share_transport.ShareTransportActivity;
+import com.tech.cybercars.ui.main.fragment.go.share_trip.ShareTripActivity;
 import com.tech.cybercars.ui.splash.SplashActivity;
 
 public class BackdoorActivity extends AppCompatActivity {
@@ -38,7 +38,7 @@ public class BackdoorActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_select_location_bd).setOnClickListener(view -> {
-            startActivity(new Intent(this, ShareTransportActivity.class));
+            startActivity(new Intent(this, ShareTripActivity.class));
         });
 
         findViewById(R.id.btn_choose_transport_to_share).setOnClickListener(view -> {

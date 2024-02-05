@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.FragmentGoBinding;
-import com.tech.cybercars.ui.main.fragment.go.find_transport.FindTransportActivity;
+import com.tech.cybercars.ui.main.fragment.go.find_trip.FindTransportActivity;
 
 public class GoFragment extends Fragment {
     private FragmentGoBinding binding;

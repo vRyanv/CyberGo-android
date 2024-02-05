@@ -10,7 +10,7 @@
             type="Boolean" />
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.fragment.go.find_transport.FindTransportViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.go.find_trip.FindTransportViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

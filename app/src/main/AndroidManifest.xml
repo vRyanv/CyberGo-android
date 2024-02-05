@@ -19,16 +19,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.fragment.go.add_share_trip_information.AddShareTripInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SearchMapActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.fragment.go.SelectTransportActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.go.share_transport.ShareTransportActivity"
+            android:name=".ui.main.fragment.go.share_trip.ShareTripActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.go.find_transport.FindTransportActivity"
+            android:name=".ui.main.fragment.go.find_trip.FindTransportActivity"
             android:exported="false" />
 
         <service
