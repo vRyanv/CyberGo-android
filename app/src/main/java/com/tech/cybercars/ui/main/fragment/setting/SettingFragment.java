@@ -5,16 +5,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import androidx.annotation.NonNull;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.FragmentSettingBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.main.fragment.setting.driver_register.DriverRegistration;
 
 public class SettingFragment extends BaseFragment<FragmentSettingBinding, SettingViewModel> {
-
-
     @NonNull
     @Override
     protected SettingViewModel InitViewModel() {
@@ -35,7 +35,9 @@ public class SettingFragment extends BaseFragment<FragmentSettingBinding, Settin
 
     @Override
     protected void InitView() {
-
+        binding.btnOpenRegisterAsDriver.setOnClickListener(view -> {
+            startActivity(new Intent(this.getActivity(), DriverRegistration.class));
+        });
     }
 
     @Override

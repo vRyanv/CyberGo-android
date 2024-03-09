@@ -1,3 +1,7 @@
+text title = 18ssp
+text normal = 14ssp
+
+
 1. register: @done
 2. verify: |BUG| nhập code bị lặp số trong 1 box
 3. login: @done
@@ -13,11 +17,24 @@
         4.6.2 bounding box: @done ### bị lệch tầm nhìn
     4.7 search location: @done
     4.8 next button and cancel button: @done
-5. review share transport information: ### view paper adapter ko hoat dong
+
+    $$$$$$$$$$$$$$$$$$$$$$$$
+5. register transport:
+     tab 1 thông tin chung
+            3. hồ sơ lý lịch
+            4. ảnh tài xế
+            5. CCCD: mặt trước sau
+     tab 2 giấy phép xe
+                 1. giấy tờ phương tiện: mặt trước mặt sau
+                 1. bằng lái: mặt trước sau
+     tab 3 hình ảnh xe
+                  1. 4 mặt của xe
+
+6. review share transport information: ### view paper adapter ko hoat dong
     5.1 view location information
     5.2 add more information (img, field..)
     5.3 push share transport to server
-6. select your transport ### sưả lại select transport khi share
+7. select your transport ### sưả lại select transport khi share
     6.1 select available transport or add new transport
 
 

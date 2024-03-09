@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.fragment.setting.driver_register.DriverRegistration"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.fragment.go.add_share_trip_information.AddShareTripInformationActivity"
             android:exported="false" />
         <activity
