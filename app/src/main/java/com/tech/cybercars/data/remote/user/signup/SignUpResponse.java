@@ -1,4 +1,4 @@
-package com.tech.cybercars.data.remote.signup;
+package com.tech.cybercars.data.remote.user.signup;
 
 import com.google.gson.annotations.SerializedName;
 import com.tech.cybercars.data.remote.base.BaseResponse;

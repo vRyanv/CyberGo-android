@@ -19,6 +19,10 @@ public abstract class BaseActivity<BINDING extends ViewDataBinding, VM extends V
     protected abstract VM InitViewModel();
 
     protected abstract BINDING InitBinding();
+
+    /**
+     * start before init View
+     */
     protected abstract void InitFirst();
 
     protected abstract void InitView();

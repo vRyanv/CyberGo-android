@@ -95,4 +95,20 @@
     <string name="my_transport">Phương tiện của tôi</string>
     <string name="register_as_a_driver">Đăng ký làm tài xế</string>
     <string name="driving_license">Giấy phép lái xe</string>
+    <string name="identity_number">Số định danh</string>
+    <string name="front_id_card">Mặt trước thẻ định danh</string>
+    <string name="back_id_card">Mặt sau thẻ định danh</string>
+    <string name="curriculum_vitae">Sơ yếu lý lịch</string>
+    <string name="driver_avatar">Ảnh tài xế</string>
+    <string name="front_driving_license">Mặt trước giấy phép lái xe</string>
+    <string name="back_driving_license">Mặt sau giấy phép lái xe</string>
+    <string name="front_transport">Mặt trước của xe</string>
+    <string name="back_transport">Mặt sau của xe</string>
+    <string name="right_side_transport">Bên phải của xe</string>
+    <string name="left_side_transport">Bên trái của xe</string>
+    <string name="license_plates">Biển số xe</string>
+    <string name="please_enter_all_fields_including_text_and_images">Vui lòng nhập tất cả các trường bao gồm văn bản và hình ảnh</string>
+    <string name="missing_some_information">Thiếu một số thông tin</string>
+    <string name="the_information_has_been_sent_we_will_review_and_respond_later">Thông tin đã được gửi, chúng tôi sẽ xem xét và phản hồi lại sau</string>
+    <string name="go_back">Quay lại</string>
 </resources>

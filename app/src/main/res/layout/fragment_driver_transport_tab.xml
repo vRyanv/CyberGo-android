@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.fragment.setting.driver_register.fragment.DriverTransportTabFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.setting.driver_register.DriverRegistrationViewModel" />
+    </data>
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/my_transport" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_license_plates"
+                style="@style/input"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text_input"
+                    android:text="@={view_model.license_plates}"
+                    android:hint="@string/license_plates" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/label_front_driver_transport"
+                style="@style/form_label"
+                android:text="@string/front_transport"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_license_plates" />
+
+            <ImageView
+                android:id="@+id/img_front_transport"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginHorizontal="@dimen/padding_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/shape_btn_outline"
+                android:scaleType="centerInside"
+                android:src="@drawable/thumb_id_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_front_driver_transport" />
+
+            <TextView
+                android:id="@+id/label_back_driver_transport"
+                style="@style/form_label"
+                android:text="@string/back_transport"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_front_transport" />
+
+            <ImageView
+                android:id="@+id/img_back_transport"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginHorizontal="@dimen/padding_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/shape_btn_outline"
+                android:scaleType="centerInside"
+                android:src="@drawable/thumb_id_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_back_driver_transport" />
+
+            <TextView
+                android:id="@+id/label_right_transport"
+                style="@style/form_label"
+                android:text="@string/right_side_transport"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_back_transport" />
+
+            <ImageView
+                android:id="@+id/img_right_transport"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginHorizontal="@dimen/padding_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/shape_btn_outline"
+                android:scaleType="centerInside"
+                android:src="@drawable/thumb_id_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_right_transport" />
+
+            <TextView
+                android:id="@+id/label_left_transport"
+                style="@style/form_label"
+                android:text="@string/left_side_transport"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_right_transport" />
+
+            <ImageView
+                android:id="@+id/img_left_transport"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginHorizontal="@dimen/padding_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/shape_btn_outline"
+                android:scaleType="centerInside"
+                android:src="@drawable/thumb_id_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_left_transport" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class SharedPreferencesUtil {
     private final static String SHARE_PREFERENCE_KEY = "session";
@@ -26,6 +27,7 @@ public class SharedPreferencesUtil {
         SharedPreferences.Editor editor = session.edit();
         editor.putString(USER_TOKEN_KEY, token);
         editor.apply();
+        Log.d("khang", token);
     }
 
     public static String GetUserToken(Context context){

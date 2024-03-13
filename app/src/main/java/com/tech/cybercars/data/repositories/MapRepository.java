@@ -1,20 +1,14 @@
 package com.tech.cybercars.data.repositories;
 
-import com.mapbox.api.directions.v5.DirectionsCriteria;
-import com.mapbox.api.directions.v5.MapboxDirections;
-import com.mapbox.api.directions.v5.models.DirectionsResponse;
-import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.tech.cybercars.data.remote.api.ResFailCallback;
-import com.tech.cybercars.data.remote.api.ResSuccessCallback;
-import com.tech.cybercars.data.remote.api.RetrofitRequest;
-import com.tech.cybercars.data.remote.api.RetrofitResponse;
+import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
+import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
+import com.tech.cybercars.data.remote.retrofit.RetrofitRequest;
+import com.tech.cybercars.data.remote.retrofit.RetrofitResponse;
 import com.tech.cybercars.data.remote.map.MapServiceRetrofit;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 
 import java.util.List;
-
-import retrofit2.Callback;
 
 public class MapRepository {
     private MapServiceRetrofit map_service_retrofit;

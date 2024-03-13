@@ -27,6 +27,7 @@ import com.tech.cybercars.activities.test;
 import com.tech.cybercars.databinding.ActivitySignInBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.signup.SignUpActivity;
 import com.tech.cybercars.ui.signup.SignUpViewModel;
 import com.tech.cybercars.ui.signup.verification.PhoneVerificationActivity;
@@ -116,7 +117,7 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
 
         view_model.getIsSuccessLive().observe(this, is_success -> {
             if (is_success != null && is_success) {
-                Intent home_intent = new Intent(this, test.class);
+                Intent home_intent = new Intent(this, MainActivity.class);
                 home_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(home_intent);
                 finish();

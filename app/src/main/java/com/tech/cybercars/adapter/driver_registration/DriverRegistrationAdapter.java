@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.tech.cybercars.ui.main.fragment.setting.driver_register.DriverRegistrationViewModel;
 import com.tech.cybercars.ui.main.fragment.setting.driver_register.fragment.DriverInfomationTabFragment;
 import com.tech.cybercars.ui.main.fragment.setting.driver_register.fragment.DriverTransportTabFragment;
 import com.tech.cybercars.ui.main.fragment.setting.driver_register.fragment.DrivingLicenseTabFragment;

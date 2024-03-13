@@ -1,4 +1,4 @@
-package com.tech.cybercars.data.remote.api;
+package com.tech.cybercars.data.remote.retrofit;
 
 import retrofit2.Response;
 

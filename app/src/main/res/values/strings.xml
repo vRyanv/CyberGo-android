@@ -99,4 +99,20 @@
     <string name="driving_license">Driving license</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="identity_number">Identity number</string>
+    <string name="front_id_card">Front of ID card</string>
+    <string name="back_id_card">Back of ID card</string>
+    <string name="curriculum_vitae">Curriculum vitae</string>
+    <string name="driver_avatar">Driver avatar</string>
+    <string name="front_driving_license">Front of driving license</string>
+    <string name="back_driving_license">Back of driving license</string>
+    <string name="front_transport">Front of transport</string>
+    <string name="back_transport">Back of transport</string>
+    <string name="right_side_transport">Right side of transport</string>
+    <string name="left_side_transport">Left side of transport</string>
+    <string name="license_plates">License plates</string>
+    <string name="please_enter_all_fields_including_text_and_images">Please enter all fields including text and images</string>
+    <string name="missing_some_information">Missing some information</string>
+    <string name="the_information_has_been_sent_we_will_review_and_respond_later">The information has been sent, we will review and respond later</string>
+    <string name="go_back">Go back</string>
 </resources>

@@ -8,12 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.StatusCode;
-import com.tech.cybercars.data.models.User;
-import com.tech.cybercars.data.remote.api.ResFailCallback;
-import com.tech.cybercars.data.remote.api.ResSuccessCallback;
-import com.tech.cybercars.data.remote.signin.SignInBody;
-import com.tech.cybercars.data.remote.signin.SignInResponse;
-import com.tech.cybercars.data.remote.signup.SignUpResponse;
+import com.tech.cybercars.data.remote.user.signin.SignInBody;
+import com.tech.cybercars.data.remote.user.signin.SignInResponse;
 import com.tech.cybercars.data.repositories.UserRepository;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;

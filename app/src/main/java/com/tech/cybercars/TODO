@@ -18,16 +18,15 @@ text normal = 14ssp
     4.7 search location: @done
     4.8 next button and cancel button: @done
 
-    $$$$$$$$$$$$$$$$$$$$$$$$
-5. register transport:
-     tab 1 thông tin chung
+5. register transport: @done
+     tab 1 thông tin chung: @done
             3. hồ sơ lý lịch
             4. ảnh tài xế
             5. CCCD: mặt trước sau
-     tab 2 giấy phép xe
+     tab 2 giấy phép xe: @done
                  1. giấy tờ phương tiện: mặt trước mặt sau
                  1. bằng lái: mặt trước sau
-     tab 3 hình ảnh xe
+     tab 3 hình ảnh xe: @done
                   1. 4 mặt của xe
 
 6. review share transport information: ### view paper adapter ko hoat dong
@@ -41,8 +40,22 @@ text normal = 14ssp
 dùng symbollayer icón trong lab để lựa chọn tài xế
 4.6.3 tìm kiếm tài xế khớp với đường đi theo bán kính bao nhiêu km!
 
-
-
+password field
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_password_sign_in"
+                style="@style/input"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_identity_card"
+                app:passwordToggleEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text_input"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
 

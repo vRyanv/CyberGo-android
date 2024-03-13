@@ -1,4 +1,4 @@
-package com.tech.cybercars.data.remote.verification;
+package com.tech.cybercars.data.remote.user.verification;
 
 import com.google.gson.annotations.SerializedName;
 import com.tech.cybercars.data.remote.base.BaseResponse;

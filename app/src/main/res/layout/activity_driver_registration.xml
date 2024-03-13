@@ -91,6 +91,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 style="@style/btn_primary"
+                android:id="@+id/btn_register_as_driver"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:text="@string/register" />
         </LinearLayout>

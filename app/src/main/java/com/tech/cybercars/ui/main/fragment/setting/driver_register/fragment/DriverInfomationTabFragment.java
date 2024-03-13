@@ -1,66 +1,155 @@
 package com.tech.cybercars.ui.main.fragment.setting.driver_register.fragment;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.FieldName;
+import com.tech.cybercars.databinding.FragmentDriverInfomationTabBinding;
+import com.tech.cybercars.databinding.FragmentGoBinding;
+import com.tech.cybercars.ui.main.fragment.go.SelectTransportActivity;
+import com.tech.cybercars.ui.main.fragment.go.find_trip.FindTransportActivity;
+import com.tech.cybercars.ui.main.fragment.setting.driver_register.DriverRegistrationViewModel;
+import com.tech.cybercars.utils.FileUtil;
+import com.tech.cybercars.utils.RealPathUtil;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DriverInfomationTabFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.io.File;
+import java.io.InputStream;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
 public class DriverInfomationTabFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentDriverInfomationTabBinding binding;
+    private DriverRegistrationViewModel view_model;
+    private final String PICK_BACK_ID_CARD = "PICK_BACK_ID_CARD";
+    private final String PICK_FRONT_ID_CARD = "PICK_FRONT_ID_CARD";
+    private final String PICK_DRIVER_AVATAR = "PICK_DRIVER_AVATAR";
+    private final String PICK_CURRICULUM_VITAE = "PICK_CURRICULUM_VITAE";
+    private String current_pick_img_action;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private void InitView() {
 
-    public DriverInfomationTabFragment() {
-        // Required empty public constructor
+        binding.imgFrontIdCard.setOnClickListener(view -> {
+            Intent take_photo = new Intent(Intent.ACTION_PICK);
+            take_photo.setType("image/*");
+            current_pick_img_action = PICK_FRONT_ID_CARD;
+            if (take_photo.resolveActivity(requireActivity().getPackageManager()) != null) {
+                take_img_launcher.launch(take_photo);
+            }
+        });
+
+        binding.imgBackIdCard.setOnClickListener(view -> {
+            Intent take_photo = new Intent(Intent.ACTION_PICK);
+            take_photo.setType("image/*");
+            current_pick_img_action = PICK_BACK_ID_CARD;
+            if (take_photo.resolveActivity(requireActivity().getPackageManager()) != null) {
+                take_img_launcher.launch(take_photo);
+            }
+        });
+
+        binding.imgDriverAvatar.setOnClickListener(view -> {
+            Intent take_photo = new Intent(Intent.ACTION_PICK);
+            take_photo.setType("image/*");
+            current_pick_img_action = PICK_DRIVER_AVATAR;
+            if (take_photo.resolveActivity(requireActivity().getPackageManager()) != null) {
+                take_img_launcher.launch(take_photo);
+            }
+        });
+
+        binding.imgCurriculumVitae.setOnClickListener(view -> {
+            Intent take_photo = new Intent(Intent.ACTION_PICK);
+            take_photo.setType("image/*");
+            current_pick_img_action = PICK_CURRICULUM_VITAE;
+            if (take_photo.resolveActivity(requireActivity().getPackageManager()) != null) {
+                take_img_launcher.launch(take_photo);
+            }
+        });
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DriverInfomationTabFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DriverInfomationTabFragment newInstance(String param1, String param2) {
-        DriverInfomationTabFragment fragment = new DriverInfomationTabFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private ActivityResultLauncher take_img_launcher;
+
+    private void RegisterActivityResult() {
+        take_img_launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        Uri img_uri = data.getData();
+                        if (img_uri != null) {
+                            try {
+                                Bitmap img_bitmap = FileUtil.CreateBitMapFromUri(requireContext(), img_uri);
+                                BindImgToUI(img_uri, img_bitmap);
+                            } catch (Exception e) {
+                                Toast.makeText(requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+        );
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    private void BindImgToUI(Uri img_uri, Bitmap img_bitmap){
+
+        switch (current_pick_img_action) {
+            case PICK_FRONT_ID_CARD:
+                view_model.front_id_card_uri = img_uri;
+                binding.imgFrontIdCard.setImageBitmap(img_bitmap);
+                binding.imgFrontIdCard.setScaleType(ImageView.ScaleType.FIT_XY);
+                break;
+            case PICK_BACK_ID_CARD:
+                view_model.back_id_card_uri = img_uri;
+                binding.imgBackIdCard.setImageBitmap(img_bitmap);
+                binding.imgBackIdCard.setScaleType(ImageView.ScaleType.FIT_XY);
+                break;
+            case PICK_DRIVER_AVATAR:
+                view_model.driver_avatar_uri = img_uri;
+                binding.imgDriverAvatar.setImageBitmap(img_bitmap);
+                binding.imgDriverAvatar.setScaleType(ImageView.ScaleType.FIT_XY);
+                break;
+            case PICK_CURRICULUM_VITAE:
+                view_model.curriculum_vitae_uri = img_uri;
+                binding.imgCurriculumVitae.setImageBitmap(img_bitmap);
+                binding.imgCurriculumVitae.setScaleType(ImageView.ScaleType.FIT_XY);
+                break;
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_driver_infomation_tab, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_driver_infomation_tab, container, false);
+        view_model = new ViewModelProvider(requireActivity()).get(DriverRegistrationViewModel.class);
+        binding.setViewModel(view_model);
+        InitView();
+        RegisterActivityResult();
+        return binding.getRoot();
     }
 }

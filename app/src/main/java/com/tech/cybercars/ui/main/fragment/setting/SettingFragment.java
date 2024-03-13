@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.FragmentSettingBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
-import com.tech.cybercars.ui.main.fragment.setting.driver_register.DriverRegistration;
+import com.tech.cybercars.ui.main.fragment.setting.driver_register.DriverRegistrationActivity;
 
 public class SettingFragment extends BaseFragment<FragmentSettingBinding, SettingViewModel> {
     @NonNull
@@ -36,7 +36,7 @@ public class SettingFragment extends BaseFragment<FragmentSettingBinding, Settin
     @Override
     protected void InitView() {
         binding.btnOpenRegisterAsDriver.setOnClickListener(view -> {
-            startActivity(new Intent(this.getActivity(), DriverRegistration.class));
+            startActivity(new Intent(this.getActivity(), DriverRegistrationActivity.class));
         });
     }
 
