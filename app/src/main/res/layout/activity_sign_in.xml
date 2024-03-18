@@ -96,9 +96,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/input_password_sign_in" />
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_sign_up"
+                    android:id="@+id/btn_sign_in"
                     android:layout_width="match_parent"
-                    android:onClick="@{()->view_model.SignInHandle()}"
                     android:layout_height="@dimen/_39sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
@@ -126,7 +125,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_sign_up">
+                    app:layout_constraintTop_toBottomOf="@+id/btn_sign_in">
 
                     <View
                         android:id="@+id/divider"

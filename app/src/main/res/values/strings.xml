@@ -115,4 +115,6 @@
     <string name="missing_some_information">Missing some information</string>
     <string name="the_information_has_been_sent_we_will_review_and_respond_later">The information has been sent, we will review and respond later</string>
     <string name="go_back">Go back</string>
+    <string name="profile">Profile</string>
+    <string name="view_id_card">View ID card</string>
 </resources>

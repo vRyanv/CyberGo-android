@@ -111,4 +111,6 @@
     <string name="missing_some_information">Thiếu một số thông tin</string>
     <string name="the_information_has_been_sent_we_will_review_and_respond_later">Thông tin đã được gửi, chúng tôi sẽ xem xét và phản hồi lại sau</string>
     <string name="go_back">Quay lại</string>
+    <string name="profile">Hồ sơ</string>
+    <string name="view_id_card">Xem CCCD</string>
 </resources>

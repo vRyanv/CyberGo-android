@@ -19,15 +19,16 @@ text normal = 14ssp
     4.8 next button and cancel button: @done
 
 5. register transport: @done
-     tab 1 thông tin chung: @done
+     tab 1 giấy phép xe: @done
+                 1. giấy tờ phương tiện: mặt trước mặt sau
+                 1. bằng lái: mặt trước sau
+     tab 2 hình ảnh xe: @done
+                 1. 4 mặt của xe
+6. profile:
+ thông tin chung: @done
             3. hồ sơ lý lịch
             4. ảnh tài xế
             5. CCCD: mặt trước sau
-     tab 2 giấy phép xe: @done
-                 1. giấy tờ phương tiện: mặt trước mặt sau
-                 1. bằng lái: mặt trước sau
-     tab 3 hình ảnh xe: @done
-                  1. 4 mặt của xe
 
 6. review share transport information: ### view paper adapter ko hoat dong
     5.1 view location information

@@ -12,6 +12,7 @@ import com.tech.cybercars.data.remote.user.signin.SignInBody;
 import com.tech.cybercars.data.remote.user.signin.SignInResponse;
 import com.tech.cybercars.data.repositories.UserRepository;
 import com.tech.cybercars.ui.base.BaseViewModel;
+import com.tech.cybercars.utils.KeyBoardUtil;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import retrofit2.Response;
@@ -67,6 +68,7 @@ public class SignInViewModel extends BaseViewModel {
 
     public void SignInHandle() {
         is_loading.setValue(true);
+
         if (ValidateData()) {
             SignInRemote(new SignInBody(email.getValue(), password.getValue()));
         } else {

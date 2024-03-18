@@ -31,6 +31,7 @@ import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.signup.SignUpActivity;
 import com.tech.cybercars.ui.signup.SignUpViewModel;
 import com.tech.cybercars.ui.signup.verification.PhoneVerificationActivity;
+import com.tech.cybercars.utils.KeyBoardUtil;
 
 public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInViewModel> {
     @NonNull
@@ -55,6 +56,10 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
     protected void InitView() {
         binding.txtAlreadyAccount.setText(SetUpSignUpTextClickable());
         binding.txtAlreadyAccount.setMovementMethod(LinkMovementMethod.getInstance());
+        binding.btnSignIn.setOnClickListener(view -> {
+            KeyBoardUtil.HideKeyBoard(this);
+            view_model.SignInHandle();
+        });
     }
 
     @Override
