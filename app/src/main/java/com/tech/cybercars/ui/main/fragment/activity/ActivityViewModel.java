@@ -10,9 +10,4 @@ public class ActivityViewModel extends BaseViewModel {
     public ActivityViewModel(@NonNull Application application) {
         super(application);
     }
-
-    @Override
-    public void ResetViewModel() {
-
-    }
 }

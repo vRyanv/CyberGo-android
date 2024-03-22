@@ -1,5 +1,8 @@
 package com.tech.cybercars.activities;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,9 +13,11 @@ import com.tech.cybercars.ui.main.fragment.go.SelectTransportActivity;
 import com.tech.cybercars.ui.main.fragment.go.add_share_trip_information.AddShareTripInformationActivity;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.ShareTripActivity;
 import com.tech.cybercars.ui.splash.SplashActivity;
+import com.tech.cybercars.utils.PermissionUtil;
 
 public class BackdoorActivity extends AppCompatActivity {
     MapView mapView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +30,6 @@ public class BackdoorActivity extends AppCompatActivity {
 //        mapView.getMapAsync(mapboxMap -> mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
 //
 //        }));
-
-
-
 
 
         findViewById(R.id.btn_go_splash_bd).setOnClickListener(view -> {

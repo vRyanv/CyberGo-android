@@ -11,9 +11,4 @@ public class MessageViewModel extends BaseViewModel {
     public MessageViewModel(@NonNull Application application) {
         super(application);
     }
-
-    @Override
-    public void ResetViewModel() {
-
-    }
 }

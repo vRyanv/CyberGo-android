@@ -65,16 +65,14 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    //Picasso - loading and catching download from internet
-    implementation("com.squareup.picasso:picasso:2.71828")
-
     //lifecycle extension
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
-    //room and RxJava support
-    implementation("androidx.room:room-runtime:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-rxjava2:2.6.1")
+    //room database and RxJava support
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-rxjava2:$room_version")
 
     //RxJava
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
@@ -93,5 +91,21 @@ dependencies {
     implementation("com.mapbox.mapboxsdk:mapbox-android-sdk:9.7.0")
     implementation("com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0")
     implementation("com.mapbox.mapboxsdk:mapbox-sdk-services:5.5.0")
+
+    //load load img online
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    //gif
+    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
+
+    //pull-to-refresh
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    //skeleton loading
+    implementation("com.facebook.shimmer:shimmer:0.1.0@aar")
+
+    //request permission
+    implementation("io.github.ParkSangGwon:tedpermission-normal:3.3.0")
+
 }
 

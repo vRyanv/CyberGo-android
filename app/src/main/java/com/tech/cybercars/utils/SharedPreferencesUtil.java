@@ -6,32 +6,30 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.tech.cybercars.constant.FieldName;
+
 public class SharedPreferencesUtil {
-    private final static String SHARE_PREFERENCE_KEY = "session";
-    private final static String IS_REMEMBER_KEY = "is_remember";
-    private final static String USER_TOKEN_KEY = "user_token";
-    public static void SetRememberLogin(Context context, boolean is_remember){
+    private final static String SHARE_PREFERENCE_KEY = "SESSION";
+    public final static String IS_REMEMBER_KEY = "IS_REMEMBER_KEY";
+    public final static String USER_TOKEN_KEY = "USER_TOKEN_KEY";
+    public static void SetString(Context context, String key, String value){
         SharedPreferences session = context.getSharedPreferences(SHARE_PREFERENCE_KEY, MODE_PRIVATE);
         SharedPreferences.Editor editor = session.edit();
-        editor.putBoolean(IS_REMEMBER_KEY, is_remember);
+        editor.putString(key, value);
         editor.apply();
     }
-
-    public static boolean GetRememberLogin(Context context){
+    public static String GetString(Context context, String key){
         SharedPreferences session  = context.getSharedPreferences(SHARE_PREFERENCE_KEY, MODE_PRIVATE);
-        return session.getBoolean(IS_REMEMBER_KEY, false);
+        return session.getString(key, "");
     }
-
-    public static void SetUserToken(Context context, String token){
+    public static void SetBoolean(Context context, String key, boolean value){
         SharedPreferences session = context.getSharedPreferences(SHARE_PREFERENCE_KEY, MODE_PRIVATE);
         SharedPreferences.Editor editor = session.edit();
-        editor.putString(USER_TOKEN_KEY, token);
+        editor.putBoolean(key, value);
         editor.apply();
-        Log.d("khang", token);
     }
-
-    public static String GetUserToken(Context context){
+    public static boolean GetBoolean(Context context, String key){
         SharedPreferences session  = context.getSharedPreferences(SHARE_PREFERENCE_KEY, MODE_PRIVATE);
-        return session.getString(USER_TOKEN_KEY, "");
+        return session.getBoolean(key, false);
     }
 }

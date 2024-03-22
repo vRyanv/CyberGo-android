@@ -8,7 +8,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="phone_verification_vm"
+            name="view_model"
             type="com.tech.cybercars.ui.signup.verification.PhoneVerificationViewModel" />
     </data>
 
@@ -16,21 +16,9 @@
         android:id="@+id/wrapper_loading_phone_verification"
         style="@style/wrapper_loading_relative">
 
-        <FrameLayout
-            android:id="@+id/loading_phone_verification"
-            style="@style/loading_frame"
-            android:visibility="@{phone_verification_vm.is_loading ? View.VISIBLE : View.GONE, default=gone}">
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/orange"
-                android:indeterminateTintMode="src_atop" />
-        </FrameLayout>
+        <include
+            layout="@layout/partial_loading_primary"
+            app:show="@{view_model.is_loading}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,32 +77,32 @@
                     <EditText
                         android:id="@+id/input_otp_number_1_verification"
                         style="@style/verify_phone_box"
-                        android:background="@{phone_verification_vm.otp_1.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
-                        android:text="@={phone_verification_vm.otp_1}" />
+                        android:background="@{view_model.otp_1.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_1}" />
 
                     <EditText
                         android:id="@+id/input_otp_number_2_verification"
                         style="@style/verify_phone_box"
-                        android:background="@{phone_verification_vm.otp_2.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
-                        android:text="@={phone_verification_vm.otp_2}" />
+                        android:background="@{view_model.otp_2.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_2}" />
 
                     <EditText
                         android:id="@+id/input_otp_number_3_verification"
                         style="@style/verify_phone_box"
-                        android:background="@{phone_verification_vm.otp_3.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
-                        android:text="@={phone_verification_vm.otp_3}" />
+                        android:background="@{view_model.otp_3.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_3}" />
 
                     <EditText
                         android:id="@+id/input_otp_number_4_verification"
                         style="@style/verify_phone_box"
-                        android:background="@{phone_verification_vm.otp_4.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
-                        android:text="@={phone_verification_vm.otp_4}" />
+                        android:background="@{view_model.otp_4.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_4}" />
 
                     <EditText
                         android:id="@+id/input_otp_number_5_verification"
                         style="@style/verify_phone_box"
-                        android:background="@{phone_verification_vm.otp_5.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
-                        android:text="@={phone_verification_vm.otp_5}" />
+                        android:background="@{view_model.otp_5.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_5}" />
                 </LinearLayout>
 
                 <TextView
@@ -134,7 +122,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_phone_verification"
                     style="@style/btn_primary"
-                    android:onClick="@{() -> phone_verification_vm.VerifyHandle()}"
+                    android:onClick="@{() -> view_model.VerifyHandle()}"
                     android:text="@string/verify"
                     android:layout_marginBottom="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_12sdp"

@@ -2,12 +2,14 @@ package com.tech.cybercars.ui.signup;
 
 import android.app.Application;
 import android.content.res.Resources;
+import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.DelayTime;
 import com.tech.cybercars.constant.Gender;
 import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.data.remote.user.signup.SignUpBody;
@@ -67,15 +69,27 @@ public class SignUpViewModel extends BaseViewModel {
     public LiveData<String> getGenderErrorLive() {
         return gender_error;
     }
+
     public MutableLiveData<String> password = new MutableLiveData<>();
-    public LiveData<String> getPasswordLive(){return password;}
+
+    public LiveData<String> getPasswordLive() {
+        return password;
+    }
+
     public MutableLiveData<String> password_error = new MutableLiveData<>();
+
     public LiveData<String> getPasswordErrorLive() {
         return password_error;
     }
+
     public MutableLiveData<String> confirm_password = new MutableLiveData<>();
-    public LiveData<String> getConfirmPasswordLive(){return confirm_password;}
+
+    public LiveData<String> getConfirmPasswordLive() {
+        return confirm_password;
+    }
+
     public MutableLiveData<String> confirm_password_error = new MutableLiveData<>();
+
     public LiveData<String> getConfirmPasswordErrorLive() {
         return confirm_password_error;
     }
@@ -115,24 +129,10 @@ public class SignUpViewModel extends BaseViewModel {
         agree_term_policy.setValue(true);
     }
 
-    @Override
-    public void ResetViewModel() {
-        full_name.setValue(null);
-        full_name_error.setValue(null);
-        email.setValue(null);
-        email_error.setValue(null);
-        phone_number.setValue(null);
-        phone_number_error.setValue(null);
-        gender.setValue(null);
-        gender_error.setValue(null);
-        agree_term_policy.setValue(null);
-        agree_term_policy_error.setValue(null);
-        this.ResetBaseViewModel();
-    }
-
     public void SignUpHandle() {
-        is_loading.setValue(true);
         if (ValidateUserData()) {
+            is_loading.setValue(true);
+
             int gender_int = Gender.OTHER;
             if (gender.getValue().equals(getApplication().getString(R.string.female))) {
                 gender_int = Gender.MALE;
@@ -153,9 +153,8 @@ public class SignUpViewModel extends BaseViewModel {
                     password.getValue(),
                     confirm_password.getValue()
             );
+
             SignUpRemote(sign_up_body);
-        } else {
-            is_loading.setValue(false);
         }
     }
 
@@ -168,22 +167,25 @@ public class SignUpViewModel extends BaseViewModel {
     }
 
     private void CallSignUpSuccess(Response<SignUpResponse> sign_up_response) {
-        is_loading.postValue(false);
-        if (sign_up_response.body().getCode() == StatusCode.CREATED) {
-            is_success.postValue(true);
-        } else if (sign_up_response.body().getCode() == StatusCode.VERIFY) {
-            is_verify_account.postValue(true);
-        } else if (sign_up_response.body().getCode() == StatusCode.BAD_REQUEST) {
-            if(sign_up_response.body().isIs_email_used()){
-                email_error.postValue(getApplication().getString(R.string.email_has_been_used));
+
+        new Handler().postDelayed(() -> {
+            if (sign_up_response.body().getCode() == StatusCode.CREATED) {
+                is_success.postValue(true);
+            } else if (sign_up_response.body().getCode() == StatusCode.VERIFY) {
+                is_verify_account.postValue(true);
+            } else if (sign_up_response.body().getCode() == StatusCode.BAD_REQUEST) {
+                if (sign_up_response.body().isIs_email_used()) {
+                    email_error.postValue(getApplication().getString(R.string.email_has_been_used));
+                }
+                if (sign_up_response.body().isIs_phone_used()) {
+                    phone_number_error.postValue(getApplication().getString(R.string.phone_number_has_been_used));
+                }
+                if (!sign_up_response.body().isIs_phone_used() && !sign_up_response.body().isIs_email_used()) {
+                    error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+                }
             }
-            if(sign_up_response.body().isIs_phone_used()){
-                phone_number_error.postValue(getApplication().getString(R.string.phone_number_has_been_used));
-            }
-            if(!sign_up_response.body().isIs_phone_used() && !sign_up_response.body().isIs_email_used()){
-                error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
-            }
-        }
+            is_loading.postValue(false);
+        }, DelayTime.CALL_API);
     }
 
     private void CallSignUpFail(Throwable error) {
@@ -229,7 +231,7 @@ public class SignUpViewModel extends BaseViewModel {
             gender_error.setValue(error_mess);
         }
 
-        if(password.getValue() == null || password.getValue().equals("")){
+        if (password.getValue() == null || password.getValue().equals("")) {
             error_mess = res.getString(R.string.password) + " " + res.getString(R.string.can_not_empty);
             is_valid_info = false;
             password_error.setValue(error_mess);
@@ -244,12 +246,12 @@ public class SignUpViewModel extends BaseViewModel {
         }
 
 
-        if(confirm_password.getValue() == null || confirm_password.getValue().equals("")){
+        if (confirm_password.getValue() == null || confirm_password.getValue().equals("")) {
             error_mess = res.getString(R.string.confirm_password) + " " + res.getString(R.string.can_not_empty);
             is_valid_info = false;
             confirm_password_error.setValue(error_mess);
-        } else if(password.getValue() != null && !password.getValue().equals(confirm_password.getValue())){
-            error_mess =  res.getString(R.string.password) + " " + res.getString(R.string.and) + " " + res.getString(R.string.confirm_password) + " " + res.getString(R.string.does_not_match);
+        } else if (password.getValue() != null && !password.getValue().equals(confirm_password.getValue())) {
+            error_mess = res.getString(R.string.password) + " " + res.getString(R.string.and) + " " + res.getString(R.string.confirm_password) + " " + res.getString(R.string.does_not_match);
             is_valid_info = false;
             confirm_password_error.setValue(error_mess);
         }

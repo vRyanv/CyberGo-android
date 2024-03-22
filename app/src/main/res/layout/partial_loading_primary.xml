@@ -10,15 +10,10 @@
 
     <FrameLayout
         style="@style/loading_frame"
-        android:visibility="@{show ? View.VISIBLE : View.GONE, default=gone}"
-        android:background="#B3000000">
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/orange"
-            android:indeterminateTintMode="src_atop" />
+        android:visibility="@{show ? View.VISIBLE : View.GONE, default=gone}">
+        <pl.droidsonroids.gif.GifImageView
+            style="@style/loading_animation"
+            android:src="@drawable/loading"
+            />
     </FrameLayout>
 </layout>

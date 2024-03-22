@@ -2,21 +2,22 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!--    profile -->
     <style name="text_label_profile" >
+        <item name="android:textSize">@dimen/_14ssp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/sp_pro_round_black_semibold</item>
     </style>
     <style name="layout_label_profile" >
-        <item name="android:layout_marginTop">@dimen/_5sdp</item>
+        <item name="android:layout_marginTop">@dimen/_10sdp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
     </style>
     <style name="icon_label_profile" >
-        <item name="android:layout_width">@dimen/_15sdp</item>
-        <item name="android:layout_height">@dimen/_15sdp</item>
-        <item name="android:layout_marginRight">@dimen/_5sdp</item>
+        <item name="android:layout_width">@dimen/_20sdp</item>
+        <item name="android:layout_height">@dimen/_20sdp</item>
+        <item name="android:layout_marginRight">@dimen/_10sdp</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
@@ -132,10 +133,10 @@
         <item name="android:background">@drawable/flag_transparent</item>d
         <item name="android:clickable">true</item>d
     </style>
-    <style name="loading_bar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:gravity">center</item>
+    <style name="loading_animation">
+        <item name="android:layout_width">@dimen/_100sdp</item>
+        <item name="android:layout_height">@dimen/_100sdp</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="verify_phone_box">

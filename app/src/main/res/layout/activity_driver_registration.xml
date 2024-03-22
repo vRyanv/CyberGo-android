@@ -17,26 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
-        <FrameLayout
-            android:id="@+id/progressBarHolder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            android:background="@drawable/flag_transparent"
-            android:clickable="true"
-            android:elevation="10dp"
-            android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone }">
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/orange"
-                android:indeterminateTintMode="src_atop" />
-        </FrameLayout>
+        <include
+            layout="@layout/partial_loading_primary"
+            app:show="@{view_model.is_loading}" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,7 +45,7 @@
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/my_information" />
+                        android:text="@string/vehicle_registration_certificate" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
@@ -72,7 +55,7 @@
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/my_transport" />
+                        android:text="@string/vehicle" />
                 </com.google.android.material.tabs.TabLayout>
 
                 <androidx.viewpager2.widget.ViewPager2

@@ -12,9 +12,4 @@ public class HomeViewModel extends BaseViewModel {
     public HomeViewModel(@NonNull Application application) {
         super(application);
     }
-
-    @Override
-    public void ResetViewModel() {
-
-    }
 }

@@ -12,21 +12,9 @@
     <RelativeLayout
         android:id="@+id/wrapper_loading_phone_verification"
         style="@style/wrapper_loading_relative">
-
-        <FrameLayout
-            style="@style/loading_frame"
-            android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone}">
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/orange"
-                android:indeterminateTintMode="src_atop" />
-        </FrameLayout>
+        <include
+            layout="@layout/partial_loading_primary"
+            app:show="@{view_model.is_loading}" />
 
         <LinearLayout
             android:layout_width="match_parent"

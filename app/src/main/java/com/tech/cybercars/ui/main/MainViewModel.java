@@ -11,8 +11,4 @@ public class MainViewModel extends BaseViewModel {
         super(application);
     }
 
-    @Override
-    public void ResetViewModel() {
-
-    }
 }

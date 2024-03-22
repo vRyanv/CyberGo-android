@@ -153,8 +153,4 @@ public class ShareTripViewModel extends BaseViewModel {
         super(application);
     }
 
-    @Override
-    public void ResetViewModel() {
-
-    }
 }

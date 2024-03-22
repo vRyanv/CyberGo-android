@@ -1,6 +1,7 @@
 package com.tech.cybercars.data.remote.retrofit;
 
 import com.tech.cybercars.BuildConfig;
+import com.tech.cybercars.constant.URL;
 
 import java.io.IOException;
 
@@ -25,7 +26,7 @@ public class RetrofitRequest {
             OkHttpClient.Builder ok_client_builder = new OkHttpClient.Builder().addInterceptor(interceptor);
 
             retrofit_client = new Retrofit.Builder()
-                    .baseUrl(BuildConfig.BASE_URL)
+                    .baseUrl(URL.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(ok_client_builder.build())
                     .build();

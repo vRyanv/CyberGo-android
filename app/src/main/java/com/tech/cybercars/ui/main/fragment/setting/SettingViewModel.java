@@ -11,9 +11,4 @@ public class SettingViewModel extends BaseViewModel {
     public SettingViewModel(@NonNull Application application) {
         super(application);
     }
-
-    @Override
-    public void ResetViewModel() {
-
-    }
 }

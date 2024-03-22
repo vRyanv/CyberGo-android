@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.setting.profile.edit_phone.update_phone_verification.UpdatePhoneVerificationViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/wrapper_loading_phone_verification"
+        style="@style/wrapper_loading_relative">
+
+        <include
+            layout="@layout/partial_loading_primary"
+            app:show="@{view_model.is_loading}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                style="@style/layout_header_box">
+
+                <TextView
+                    style="@style/txt_title_header"
+                    android:text="@string/phone_verification"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <ImageButton
+                    android:id="@+id/btn_out_screen"
+                    style="@style/icon_button_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_arrow" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:text="@string/enter_your_otp_code"
+                    android:textColor="@color/secondary"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+                    <EditText
+                        android:id="@+id/input_otp_number_1_verification"
+                        style="@style/verify_phone_box"
+                        android:background="@{view_model.otp_1.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_1}" />
+
+                    <EditText
+                        android:id="@+id/input_otp_number_2_verification"
+                        style="@style/verify_phone_box"
+                        android:background="@{view_model.otp_2.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_2}" />
+
+                    <EditText
+                        android:id="@+id/input_otp_number_3_verification"
+                        style="@style/verify_phone_box"
+                        android:background="@{view_model.otp_3.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_3}" />
+
+                    <EditText
+                        android:id="@+id/input_otp_number_4_verification"
+                        style="@style/verify_phone_box"
+                        android:background="@{view_model.otp_4.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_4}" />
+
+                    <EditText
+                        android:id="@+id/input_otp_number_5_verification"
+                        style="@style/verify_phone_box"
+                        android:background="@{view_model.otp_5.length() > 0 ? @drawable/shape_verify_box_activated_status : @drawable/shape_verify_box, default=@drawable/shape_verify_box}"
+                        android:text="@={view_model.otp_5}" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_resend_again_phone_verification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:fontFamily="@font/sp_pro_round_regular"
+                    android:text="@string/did_not_receive_code"
+                    android:textColorHighlight="@color/transparent"
+                    android:textSize="@dimen/_15ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_phone_verification"
+                    style="@style/btn_primary"
+                    android:text="@string/verify"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

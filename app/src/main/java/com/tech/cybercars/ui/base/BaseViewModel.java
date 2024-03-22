@@ -19,12 +19,6 @@ public abstract class BaseViewModel extends AndroidViewModel {
         is_success.setValue(false);
         error_call_server.setValue(null);
     }
-    protected void ResetPostBaseViewModel(){
-        is_loading.postValue(false);
-        is_success.postValue(false);
-        error_call_server.postValue(null);
-    }
-    public abstract void ResetViewModel();
 
     public BaseViewModel(@NonNull Application application) {
         super(application);

@@ -20,10 +20,12 @@ import com.tech.cybercars.databinding.ActivityDriverRegistrationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.signup.verification.PhoneVerificationActivity;
+import com.tech.cybercars.utils.PermissionUtil;
 
 import java.io.IOException;
 
 public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegistrationBinding, DriverRegistrationViewModel> {
+    private final PermissionUtil permission_util = new PermissionUtil();
     @NonNull
     @Override
     protected DriverRegistrationViewModel InitViewModel() {
@@ -39,17 +41,19 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
 
     @Override
     protected void InitFirst() {
+        permission_util.SetPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE})
+                .SetPermissionListener(this,
+                        () -> {
 
+                        },
+                        denied_permissions -> {
+                            finish();
+                        })
+                .Start();
     }
 
     @Override
     protected void InitView() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    123);
-        }
         binding.btnRegisterAsDriver.setOnClickListener(view -> {
             try {
                 view_model.DriverRegistrationHandle();
@@ -83,6 +87,8 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
 
     @Override
     protected void InitCommon() {
+
+
         DriverRegistrationAdapter driver_registration_adapter = new DriverRegistrationAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.paperDriverRegistration.setAdapter(driver_registration_adapter);
         String tab_name[] = new String[]{

@@ -45,7 +45,7 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
     @Override
     public ActivityPhoneVerificationBinding InitBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_phone_verification);
-        binding.setPhoneVerificationVm(view_model);
+        binding.setViewModel(view_model);
         return binding;
     }
 

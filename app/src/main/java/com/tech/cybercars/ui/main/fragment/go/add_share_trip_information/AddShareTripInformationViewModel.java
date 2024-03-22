@@ -16,9 +16,4 @@ public class AddShareTripInformationViewModel extends BaseViewModel {
         super(application);
 
     }
-
-    @Override
-    public void ResetViewModel() {
-
-    }
 }

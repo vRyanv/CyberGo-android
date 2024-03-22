@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.DelayTime;
 import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.data.remote.user.driver.DriverRegistrationResponse;
@@ -42,9 +44,9 @@ public class DriverRegistrationViewModel extends BaseViewModel {
     public MutableLiveData<String> license_plates = new MutableLiveData<>();
     public MutableLiveData<String> id_number = new MutableLiveData<>();
     public MutableLiveData<Boolean> is_lost_image_error = new MutableLiveData<>();
-    public Uri front_id_card_uri, back_id_card_uri, driver_avatar_uri, curriculum_vitae_uri;
+    public Uri front_vehicle_registration_certificate_uri, back_vehicle_registration_certificate_uri;
     public Uri front_driving_license_uri, back_driving_license_uri;
-    public Uri front_transport_uri, back_transport_uri, right_transport_uri, left_transport_uri;
+    public Uri front_vehicle_uri, back_vehicle_uri, right_vehicle_uri, left_vehicle_uri;
     private final UserRepository user_repository = UserRepository.GetInstance();
 
     public DriverRegistrationViewModel(@NonNull Application application) {
@@ -53,16 +55,14 @@ public class DriverRegistrationViewModel extends BaseViewModel {
 
     public void DriverRegistrationHandle() throws IOException {
         Uri[] uri_arr = new Uri[]{
-                front_id_card_uri,
-                back_id_card_uri,
-                driver_avatar_uri,
-                curriculum_vitae_uri,
+                front_vehicle_registration_certificate_uri,
+                back_vehicle_registration_certificate_uri,
                 front_driving_license_uri,
                 back_driving_license_uri,
-                front_transport_uri,
-                back_transport_uri,
-                right_transport_uri,
-                left_transport_uri
+                front_vehicle_uri,
+                back_vehicle_uri,
+                right_vehicle_uri,
+                left_vehicle_uri
         };
 
         for (Uri uri : uri_arr) {
@@ -73,10 +73,8 @@ public class DriverRegistrationViewModel extends BaseViewModel {
         }
 
         String[] field_arr = new String[]{
-                FieldName.FRONT_ID_CARD,
-                FieldName.BACK_ID_CARD,
-                FieldName.DRIVER_AVATAR,
-                FieldName.CURRICULUM_VITAE,
+                FieldName.FRONT_VEHICLE_REGISTRATION_CERTIFICATE,
+                FieldName.BACK_VEHICLE_REGISTRATION_CERTIFICATE,
                 FieldName.FRONT_DRIVING_LICENSE,
                 FieldName.BACK_DRIVING_LICENSE,
                 FieldName.FRONT_TRANSPORT,
@@ -87,8 +85,8 @@ public class DriverRegistrationViewModel extends BaseViewModel {
 
         is_loading.postValue(true);
         List<MultipartBody.Part> driver_images_body = new ArrayList<>();
-        RequestBody id_number_body = RequestBody.create(MultipartBody.FORM, id_number.getValue());
         RequestBody license_plates_body = RequestBody.create(MultipartBody.FORM, license_plates.getValue());
+
         for (int i = 0; i < uri_arr.length; i++) {
             File file = new File(RealPathUtil.getRealPath(getApplication(), uri_arr[i]));
             String mime_type = "image/" + FileUtil.GetFileExtension(file.getName());
@@ -96,10 +94,9 @@ public class DriverRegistrationViewModel extends BaseViewModel {
             driver_images_body.add(MultipartBody.Part.createFormData(field_arr[i], file.getName(), request_body));
         }
 
-        String user_token = SharedPreferencesUtil.GetUserToken(getApplication());
+        String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
         user_repository.CreateDriverRegistration(
                 user_token,
-                id_number_body,
                 license_plates_body,
                 driver_images_body,
                 this::CallCreateDriverRegistrationSuccess,
@@ -108,22 +105,23 @@ public class DriverRegistrationViewModel extends BaseViewModel {
     }
 
     private void CallCreateDriverRegistrationSuccess(Response<DriverRegistrationResponse> response) {
-        is_loading.postValue(false);
-        if (response.body().getCode() == StatusCode.CREATED) {
-            is_success.postValue(true);
-        } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
-            error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
-        }
+        new Handler().postDelayed(()->{
+            if(!response.isSuccessful() || response.body() == null){
+                error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+                return;
+            }
+            if (response.body().getCode() == StatusCode.CREATED) {
+                is_success.postValue(true);
+            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+                error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+            }
+
+            is_loading.postValue(false);
+        }, DelayTime.CALL_API);
     }
 
     private void CallCreateDriverRegistrationFailed(Throwable error) {
         is_loading.postValue(false);
         error_call_server.postValue(getApplication().getString(R.string.can_not_connect_to_server));
-    }
-
-
-    @Override
-    public void ResetViewModel() {
-
     }
 }

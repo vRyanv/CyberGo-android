@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.DelayTime;
 import com.tech.cybercars.ui.welcome.WelcomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -24,6 +25,6 @@ public class SplashActivity extends AppCompatActivity {
         animator.setTarget(findViewById(R.id.container_logo_splash));
         animator.start();
 
-        new Handler().postDelayed(()->{startActivity(new Intent(this, WelcomeActivity.class));}, 2000);
+        new Handler().postDelayed(()->{startActivity(new Intent(this, WelcomeActivity.class));}, DelayTime.SPLASH_SCREEN);
     }
 }
