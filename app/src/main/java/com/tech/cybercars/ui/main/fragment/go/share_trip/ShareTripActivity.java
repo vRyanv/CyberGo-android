@@ -14,14 +14,12 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -54,7 +52,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.ThemeMode;
-import com.tech.cybercars.constant.TransportType;
+import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.databinding.ActivityShareTripBinding;
 import com.tech.cybercars.services.location.LocationService;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
@@ -155,13 +153,13 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
         view_model.transport_type.observe(this, transport_type -> {
             if (transport_type != null) {
                 switch (transport_type) {
-                    case TransportType.CAR:
+                    case VehicleType.CAR:
                         binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_car);
                         break;
-                    case TransportType.MOTO:
+                    case VehicleType.MOTO:
                         binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_motorcycle);
                         break;
-                    case TransportType.TRUCK:
+                    case VehicleType.TRUCK:
                         binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_truck);
                         break;
                 }
@@ -195,7 +193,7 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
         binding.setIsExpandBottomSheet(false);
         binding.setIsShowOptionNextStep(false);
 
-        String transport_type = getIntent().getStringExtra(TransportType.class.getSimpleName());
+        String transport_type = getIntent().getStringExtra(VehicleType.class.getSimpleName());
         view_model.transport_type.setValue(transport_type);
     }
 

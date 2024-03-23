@@ -91,7 +91,7 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
 
         DriverRegistrationAdapter driver_registration_adapter = new DriverRegistrationAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.paperDriverRegistration.setAdapter(driver_registration_adapter);
-        String tab_name[] = new String[]{
+        String[] tab_name = new String[]{
                 getString(R.string.my_information),
                 getString(R.string.driving_license),
                 getString(R.string.my_transport)};

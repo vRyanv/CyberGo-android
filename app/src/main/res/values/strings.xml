@@ -130,4 +130,6 @@
     <string name="back_of_vehicle_registration_certificate">Back of vehicle registration certificate</string>
     <string name="permission_mess">If you reject permission,you can not use this service. Please turn on permissions at [Setting] > [Permission]</string>
     <string name="success_send_driver_registration_mess">You have successfully submitted your registration information, we will review and respond via email</string>
+    <string name="vehicle_type">Vehicle type</string>
+    <string name="select_vehicle_type">Select vehicle type</string>
 </resources>

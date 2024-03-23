@@ -50,6 +50,7 @@ public interface UserServiceRetrofit {
     @POST(URL.DRIVER_REGISTRATION)
     Call<DriverRegistrationResponse> DriverRegistrationRequest(
             @Header("authorization") String user_token,
+            @Part(FieldName.VEHICLE_TYPE) RequestBody vehicle_type_body,
             @Part(FieldName.LICENSE_PLATES) RequestBody license_plates_body,
             @Part List<MultipartBody.Part> driver_images_body
     );

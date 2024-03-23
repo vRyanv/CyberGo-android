@@ -66,6 +66,8 @@ public class ProfileViewModel extends BaseViewModel {
         new Handler().postDelayed(() -> {
             if(!response.isSuccessful()){
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+                is_loading.postValue(false);
+                return;
             }
             if (response.body().getCode() == StatusCode.OK) {
                 user_profile = new User( response.body().id, response.body().role, response.body().email,

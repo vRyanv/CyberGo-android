@@ -10,17 +10,34 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_vehicle_type"
+                style="@style/input"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:focusable="false"
+                app:errorIconDrawable="@null"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text_input"
+                    android:enabled="true"
+                    android:focusable="false"
+                    android:hint="@string/vehicle_type"
+                    android:inputType="none"
+                    android:text="@={view_model.vehicle_type}" />
+            </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:id="@+id/label_front_id_card"
                 android:layout_width="match_parent"
                 android:layout_marginHorizontal="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_vehicle_type"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/form_label"
@@ -68,7 +85,7 @@
                 android:id="@+id/label_back_id_card"
                 android:layout_width="match_parent"
                 android:layout_marginHorizontal="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/img_front_certificate"
                 android:orientation="horizontal">

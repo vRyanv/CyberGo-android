@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.tech.cybercars.R;
-import com.tech.cybercars.constant.TransportType;
+import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.databinding.ActivitySelectTransportBinding;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.ShareTripActivity;
 
@@ -24,9 +24,9 @@ public class SelectTransportActivity extends AppCompatActivity {
     }
 
     private void InitView() {
-        binding.typeCarSelect.setOnClickListener(view -> ActiveSelection(binding.typeCarSelect, TransportType.CAR));
-        binding.typeMotoSelect.setOnClickListener(view ->  ActiveSelection(binding.typeMotoSelect, TransportType.MOTO));
-        binding.typeTruckSelect.setOnClickListener(view -> ActiveSelection(binding.typeTruckSelect, TransportType.TRUCK));
+        binding.typeCarSelect.setOnClickListener(view -> ActiveSelection(binding.typeCarSelect, VehicleType.CAR));
+        binding.typeMotoSelect.setOnClickListener(view ->  ActiveSelection(binding.typeMotoSelect, VehicleType.MOTO));
+        binding.typeTruckSelect.setOnClickListener(view -> ActiveSelection(binding.typeTruckSelect, VehicleType.TRUCK));
     }
 
     private void ActiveSelection(ConstraintLayout selection, String transport_type) {
@@ -35,6 +35,6 @@ public class SelectTransportActivity extends AppCompatActivity {
         binding.typeMotoSelect.setBackgroundResource(R.drawable.shape_transport_type);
         selection.setBackgroundResource(R.drawable.shape_transport_type_selected);
 
-        startActivity(new Intent(this, ShareTripActivity.class).putExtra(TransportType.class.getSimpleName(), transport_type));
+        startActivity(new Intent(this, ShareTripActivity.class).putExtra(VehicleType.class.getSimpleName(), transport_type));
     }
 }

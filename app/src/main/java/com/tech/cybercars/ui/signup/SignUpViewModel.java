@@ -166,21 +166,27 @@ public class SignUpViewModel extends BaseViewModel {
         );
     }
 
-    private void CallSignUpSuccess(Response<SignUpResponse> sign_up_response) {
+    private void CallSignUpSuccess(Response<SignUpResponse> response) {
 
         new Handler().postDelayed(() -> {
-            if (sign_up_response.body().getCode() == StatusCode.CREATED) {
+            if(!response.isSuccessful() || response.body() == null){
+                error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+                is_loading.postValue(false);
+                return;
+            }
+
+            if (response.body().getCode() == StatusCode.CREATED) {
                 is_success.postValue(true);
-            } else if (sign_up_response.body().getCode() == StatusCode.VERIFY) {
+            } else if (response.body().getCode() == StatusCode.VERIFY) {
                 is_verify_account.postValue(true);
-            } else if (sign_up_response.body().getCode() == StatusCode.BAD_REQUEST) {
-                if (sign_up_response.body().isIs_email_used()) {
+            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+                if (response.body().isIs_email_used()) {
                     email_error.postValue(getApplication().getString(R.string.email_has_been_used));
                 }
-                if (sign_up_response.body().isIs_phone_used()) {
+                if (response.body().isIs_phone_used()) {
                     phone_number_error.postValue(getApplication().getString(R.string.phone_number_has_been_used));
                 }
-                if (!sign_up_response.body().isIs_phone_used() && !sign_up_response.body().isIs_email_used()) {
+                if (!response.body().isIs_phone_used() && !response.body().isIs_email_used()) {
                     error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
                 }
             }

@@ -15,6 +15,7 @@ public class FieldName {
     public final static String AVATAR = "avatar";
     public final static String ID_NUMBER = "id_number";
 
+    public final static String VEHICLE_TYPE = "vehicle_type";
     public final static String FRONT_VEHICLE_REGISTRATION_CERTIFICATE = "front_vehicle_registration_certificate";
     public final static String BACK_VEHICLE_REGISTRATION_CERTIFICATE = "back_vehicle_registration_certificate";
 
@@ -22,8 +23,8 @@ public class FieldName {
     public final static String BACK_DRIVING_LICENSE = "back_driving_license";
 
     public final static String LICENSE_PLATES = "license_plates";
-    public final static String FRONT_TRANSPORT = "front_transport";
-    public final static String BACK_TRANSPORT = "back_transport";
-    public final static String RIGHT_TRANSPORT = "right_transport";
-    public final static String LEFT_TRANSPORT = "left_transport";
+    public final static String FRONT_VEHICLE = "front_vehicle";
+    public final static String BACK_VEHICLE = "back_vehicle";
+    public final static String RIGHT_VEHICLE = "right_vehicle";
+    public final static String LEFT_VEHICLE = "left_vehicle";
 }

@@ -3,6 +3,7 @@ package com.tech.cybercars.constant;
 public class URL {
     //HOST
     public static final String AVATAR_RES_PATH = "/assets/media/avatar/";
+    public static final String DRIVER_REGISTRATION_RES_PATH = "/assets/media/driver-registration/";
     public static final String ID_CARD_RES_PATH = "/assets/media/id-card/";
     public static final String BASE_URL = "http://192.168.2.6:2108";
 

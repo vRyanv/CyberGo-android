@@ -126,4 +126,6 @@
     <string name="back_of_vehicle_registration_certificate">Mặt sau giấy chứng nhận đăng ký xe</string>
     <string name="permission_mess">Nếu bạn từ chối quyền, bạn không thể sử dụng dịch vụ này. Vui lòng bật quyền tại [Cài đặt] > [Quyền]</string>
     <string name="success_send_driver_registration_mess">Bạn đã gửi thông tin đăng ký thành công, chúng tôi sẽ xem xét và phản hồi lại qua email</string>
+    <string name="vehicle_type">Loại xe</string>
+    <string name="select_vehicle_type">Chọn loại xe</string>
 </resources>

@@ -79,8 +79,8 @@ public class UserRepository {
         );
     }
 
-    public void CreateDriverRegistration(String user_token, RequestBody license_plates_body, List<MultipartBody.Part> driver_images_body, ResSuccessCallback<DriverRegistrationResponse> success_callback, ResFailCallback fail_callback) {
-        user_service.DriverRegistrationRequest(user_token,license_plates_body,driver_images_body).enqueue(
+    public void CreateDriverRegistration(String user_token, RequestBody vehicle_type_body, RequestBody license_plates_body, List<MultipartBody.Part> driver_images_body, ResSuccessCallback<DriverRegistrationResponse> success_callback, ResFailCallback fail_callback) {
+        user_service.DriverRegistrationRequest(user_token, vehicle_type_body, license_plates_body,driver_images_body).enqueue(
                 new RetrofitResponse<DriverRegistrationResponse>().GetResponse(success_callback, fail_callback)
         );
     }

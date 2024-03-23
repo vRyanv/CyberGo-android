@@ -41,6 +41,7 @@ import retrofit2.Response;
 import timber.log.Timber;
 
 public class DriverRegistrationViewModel extends BaseViewModel {
+    public MutableLiveData<String> vehicle_type = new MutableLiveData<>();
     public MutableLiveData<String> license_plates = new MutableLiveData<>();
     public MutableLiveData<String> id_number = new MutableLiveData<>();
     public MutableLiveData<Boolean> is_lost_image_error = new MutableLiveData<>();
@@ -54,6 +55,7 @@ public class DriverRegistrationViewModel extends BaseViewModel {
     }
 
     public void DriverRegistrationHandle() throws IOException {
+        boolean is_error = false;
         Uri[] uri_arr = new Uri[]{
                 front_vehicle_registration_certificate_uri,
                 back_vehicle_registration_certificate_uri,
@@ -67,36 +69,51 @@ public class DriverRegistrationViewModel extends BaseViewModel {
 
         for (Uri uri : uri_arr) {
             if (uri == null) {
-                is_lost_image_error.setValue(true);
-                return;
+                is_error = true;
+                break;
             }
         }
 
-        String[] field_arr = new String[]{
+        if(vehicle_type.getValue() == null || vehicle_type.getValue().equals("")){
+            is_error = true;
+        }
+
+        if(license_plates.getValue() == null || license_plates.getValue().equals("")){
+            is_error = true;
+        }
+
+        if(is_error){
+            is_lost_image_error.setValue(true);
+            return;
+        }
+
+        String[] img_field_arr = new String[]{
                 FieldName.FRONT_VEHICLE_REGISTRATION_CERTIFICATE,
                 FieldName.BACK_VEHICLE_REGISTRATION_CERTIFICATE,
                 FieldName.FRONT_DRIVING_LICENSE,
                 FieldName.BACK_DRIVING_LICENSE,
-                FieldName.FRONT_TRANSPORT,
-                FieldName.BACK_TRANSPORT,
-                FieldName.RIGHT_TRANSPORT,
-                FieldName.LEFT_TRANSPORT,
+                FieldName.FRONT_VEHICLE,
+                FieldName.BACK_VEHICLE,
+                FieldName.RIGHT_VEHICLE,
+                FieldName.LEFT_VEHICLE,
         };
 
         is_loading.postValue(true);
-        List<MultipartBody.Part> driver_images_body = new ArrayList<>();
         RequestBody license_plates_body = RequestBody.create(MultipartBody.FORM, license_plates.getValue());
+        RequestBody vehicle_type_body = RequestBody.create(MultipartBody.FORM, vehicle_type.getValue());
 
+        List<MultipartBody.Part> driver_images_body = new ArrayList<>();
         for (int i = 0; i < uri_arr.length; i++) {
             File file = new File(RealPathUtil.getRealPath(getApplication(), uri_arr[i]));
             String mime_type = "image/" + FileUtil.GetFileExtension(file.getName());
             RequestBody request_body = RequestBody.create(MediaType.parse(mime_type), file);
-            driver_images_body.add(MultipartBody.Part.createFormData(field_arr[i], file.getName(), request_body));
+            driver_images_body.add(MultipartBody.Part.createFormData(img_field_arr[i], file.getName(), request_body));
         }
 
         String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
         user_repository.CreateDriverRegistration(
                 user_token,
+                vehicle_type_body,
                 license_plates_body,
                 driver_images_body,
                 this::CallCreateDriverRegistrationSuccess,
@@ -108,6 +125,7 @@ public class DriverRegistrationViewModel extends BaseViewModel {
         new Handler().postDelayed(()->{
             if(!response.isSuccessful() || response.body() == null){
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+                is_loading.postValue(false);
                 return;
             }
             if (response.body().getCode() == StatusCode.CREATED) {

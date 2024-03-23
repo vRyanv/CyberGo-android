@@ -99,6 +99,7 @@ public class EditProfileViewModel extends BaseViewModel {
         new Handler().postDelayed(() -> {
             if(!response.isSuccessful()){
                 error_call_server.postValue(getApplication().getString(R.string.something_went_wrong));
+                is_loading.postValue(false);
                 return;
             }
             if (response.body().getCode() == StatusCode.UPDATED) {

@@ -103,6 +103,11 @@ public class SignInViewModel extends BaseViewModel {
 
     private void CallLoginSuccess(Response<SignInResponse> response) {
         new Handler().postDelayed(() -> {
+            if(!response.isSuccessful() || response.body() == null){
+                error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+                is_loading.postValue(false);
+                return;
+            }
             if (response.body().getCode() == StatusCode.OK) {
                 String token = response.body().token;
                 SharedPreferencesUtil.SetString(
