@@ -64,7 +64,7 @@ public class ProfileViewModel extends BaseViewModel {
 
     private void CallProfileInfoSuccess(Response<ProfileResponse> response) {
         new Handler().postDelayed(() -> {
-            if(!response.isSuccessful()){
+            if(!response.isSuccessful() || response.body() == null){
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
                 is_loading.postValue(false);
                 return;
@@ -86,7 +86,7 @@ public class ProfileViewModel extends BaseViewModel {
                 executor_service.shutdown();
 
                 BindData(user_profile);
-            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+            } else if (response.body().getCode() == StatusCode.NOT_FOUND) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
             is_loading.postValue(false);

@@ -8,9 +8,18 @@ val baseUrl = properties["base_url"]
 
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
+    signingConfigs {
+        create("cyber_go_config") {
+            storeFile = file("D:\\TOPUP\\final-project\\main-project\\code\\android\\key-store\\cyber_go_key_store.jks")
+            storePassword = "Kt21082002"
+            keyAlias = "CyberGo"
+            keyPassword = "Kt21082002"
+        }
+    }
     namespace = "com.tech.cybercars"
     compileSdk = 34
 
@@ -31,6 +40,7 @@ android {
             buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("cyber_go_config")
         }
     }
     compileOptions {
@@ -57,6 +67,10 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation("com.google.firebase:firebase-messaging")
 
     //country picker
     implementation("com.hbb20:ccp:2.7.3")

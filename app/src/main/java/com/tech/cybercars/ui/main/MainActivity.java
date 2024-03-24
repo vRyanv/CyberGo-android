@@ -10,6 +10,9 @@ import com.tech.cybercars.adapter.app.AppFragmentAdapter;
 import com.tech.cybercars.databinding.ActivityMainBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> {
 
     @NonNull
@@ -63,6 +66,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         AppFragmentAdapter app_fm_adapter = new AppFragmentAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.pagerMain.setAdapter(app_fm_adapter);
         binding.pagerMain.setUserInputEnabled(false);
+        view_model.HandleUpdateFirebaseToken();
     }
 
     @Override

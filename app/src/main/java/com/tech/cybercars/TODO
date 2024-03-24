@@ -1,7 +1,6 @@
 text title = 18ssp
 text normal = 14ssp
 
-
 1. register: @done
 2. verify: |BUG| nhập code bị lặp số trong 1 box
 3. login: @done
@@ -28,8 +27,9 @@ text normal = 14ssp
     update ID card: @done
     update phone number: #### wait
 
-
-
+7. socket and notification
+    7.1 notification
+    7.2 socket
 
 
 6. review share transport information: ### view paper adapter ko hoat dong
@@ -39,6 +39,14 @@ text normal = 14ssp
 7. select your transport ### sưả lại select transport khi share
     6.1 select available transport or add new transport
 
+
+
+1. run background service cho socket;
+2. use EventBus để push socket event
+3. notification:
+    -> nếu socket online thì push tới socket
+        -> nếu app mở thì push notify lên UI ko thì push lên notify stack
+    -> socket offline thì query firebase push notify
 
 dùng symbollayer icón trong lab để lựa chọn tài xế
 4.6.3 tìm kiếm tài xế khớp với đường đi theo bán kính bao nhiêu km!

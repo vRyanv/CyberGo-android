@@ -5,6 +5,7 @@ import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.user.driver.DriverRegistrationResponse;
+import com.tech.cybercars.data.remote.user.fcm.UpdateFCMBody;
 import com.tech.cybercars.data.remote.user.profile.ProfileResponse;
 import com.tech.cybercars.data.remote.user.profile.UpdateIdCardResponse;
 import com.tech.cybercars.data.remote.user.profile.UpdateProfileResponse;
@@ -29,6 +30,12 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 
 public interface UserServiceRetrofit {
+    @PUT(URL.UPDATE_FIREBASE_TOKEN)
+    Call<BaseResponse> UpdateFirebaseTokenRequest(
+            @Header("authorization") String user_token,
+            @Body UpdateFCMBody update_firebase_token_body
+    );
+
     @Multipart
     @PUT(URL.UPDATE_ID_CARD)
     Call<UpdateIdCardResponse> UpdateIdCardRequest(

@@ -12,6 +12,7 @@ public class SharedPreferencesUtil {
     private final static String SHARE_PREFERENCE_KEY = "SESSION";
     public final static String IS_REMEMBER_KEY = "IS_REMEMBER_KEY";
     public final static String USER_TOKEN_KEY = "USER_TOKEN_KEY";
+    public final static String IS_FIREBASE_TOKEN_UPDATED = "is_firebase_token_updated";
     public static void SetString(Context context, String key, String value){
         SharedPreferences session = context.getSharedPreferences(SHARE_PREFERENCE_KEY, MODE_PRIVATE);
         SharedPreferences.Editor editor = session.edit();

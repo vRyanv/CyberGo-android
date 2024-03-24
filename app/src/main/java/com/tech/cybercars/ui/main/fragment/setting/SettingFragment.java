@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import androidx.annotation.NonNull;
 
+import android.Manifest;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -21,9 +22,12 @@ import com.tech.cybercars.databinding.FragmentSettingBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.setting.driver_register.DriverRegistrationActivity;
 import com.tech.cybercars.ui.main.fragment.setting.profile.ProfileActivity;
+import com.tech.cybercars.ui.main.fragment.setting.profile.edit_id_card.EditIdentityCardActivity;
+import com.tech.cybercars.utils.PermissionUtil;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 public class SettingFragment extends BaseFragment<FragmentSettingBinding, SettingViewModel> {
+    private final PermissionUtil permission_util = new PermissionUtil();
     @NonNull
     @Override
     protected SettingViewModel InitViewModel() {
@@ -45,7 +49,15 @@ public class SettingFragment extends BaseFragment<FragmentSettingBinding, Settin
     @Override
     protected void InitView() {
         binding.btnOpenRegisterAsDriver.setOnClickListener(view -> {
-            startActivity(new Intent(this.getActivity(), DriverRegistrationActivity.class));
+            permission_util.SetPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE})
+            .SetPermissionListener(requireContext(),
+                    () -> {
+                        startActivity(new Intent(this.getActivity(), DriverRegistrationActivity.class));
+                    },
+                    denied_permissions -> {
+                    })
+                    .Start();
+
         });
 
         binding.btnOpenProfile.setOnClickListener(view->{

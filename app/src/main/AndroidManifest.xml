@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <!-- net work -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <!-- location   -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -11,6 +13,8 @@
     <!-- high location   -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -21,6 +25,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
+        android:name=".CyberGoApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -32,6 +37,14 @@
         android:theme="@style/Theme.CyberGo"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <service
+            android:name=".services.fcm.CyberGoNotification"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".ui.main.fragment.setting.profile.edit_phone.update_phone_verification.UpdatePhoneVerificationActivity"
             android:exported="false" />
@@ -66,11 +79,6 @@
         <activity
             android:name=".ui.main.fragment.go.find_trip.FindTransportActivity"
             android:exported="false" />
-
-        <service
-            android:name=".ui.main.MyService"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity
             android:name=".activities.BackdoorActivity"

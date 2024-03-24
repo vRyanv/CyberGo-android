@@ -1,4 +1,3 @@
-
 pluginManagement {
     repositories {
         google()
@@ -23,4 +22,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "CyberGo"
 include(":app")
+
  

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -27,13 +28,14 @@ import com.tech.cybercars.ui.main.fragment.setting.profile.edit_phone.EditPhoneA
 import com.tech.cybercars.ui.main.fragment.setting.profile.edit_profile.EditProfileActivity;
 import com.tech.cybercars.ui.main.fragment.setting.profile.edit_id_card.EditIdentityCardActivity;
 import com.tech.cybercars.utils.FileUtil;
+import com.tech.cybercars.utils.PermissionUtil;
 
 import java.io.FileNotFoundException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ProfileActivity extends BaseActivity<ActivityProfileBinding, ProfileViewModel> {
-
+    private final PermissionUtil permission_util = new PermissionUtil();
     @NonNull
     @Override
     protected ProfileViewModel InitViewModel() {
@@ -62,9 +64,16 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
         });
 
         binding.btnOpenViewIdCard.setOnClickListener(view -> {
-            Intent view_id_card_intent = new Intent(this, EditIdentityCardActivity.class);
-            view_id_card_intent.putExtra(FieldName.USER, view_model.user_profile);
-            edit_id_card_launcher.launch(view_id_card_intent);
+            permission_util.SetPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE})
+                    .SetPermissionListener(this,
+                            () -> {
+                                Intent view_id_card_intent = new Intent(this, EditIdentityCardActivity.class);
+                                view_id_card_intent.putExtra(FieldName.USER, view_model.user_profile);
+                                edit_id_card_launcher.launch(view_id_card_intent);
+                            },
+                            denied_permissions -> {
+                            })
+                    .Start();
         });
 
         binding.btnOutScreen.setOnClickListener(view -> {

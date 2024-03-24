@@ -5,6 +5,7 @@ import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
 import com.tech.cybercars.data.remote.retrofit.RetrofitRequest;
 import com.tech.cybercars.data.remote.retrofit.RetrofitResponse;
 import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
+import com.tech.cybercars.data.remote.user.fcm.UpdateFCMBody;
 import com.tech.cybercars.data.remote.user.profile.ProfileResponse;
 import com.tech.cybercars.data.remote.user.profile.UpdateIdCardResponse;
 import com.tech.cybercars.data.remote.user.profile.UpdateProfileResponse;
@@ -35,6 +36,11 @@ public class UserRepository {
 
     private UserRepository() {
         user_service = RetrofitRequest.getInstance().create(UserServiceRetrofit.class);
+    }
+
+    public void UpdateFirebaseToken(String user_token, UpdateFCMBody update_firebase_token_body, ResSuccessCallback<BaseResponse> success_callback, ResFailCallback fail_callback){
+        user_service.UpdateFirebaseTokenRequest(user_token, update_firebase_token_body)
+                .enqueue(new RetrofitResponse<BaseResponse>().GetResponse(success_callback, fail_callback));
     }
 
     public void UpdateIdCard(String user_token,

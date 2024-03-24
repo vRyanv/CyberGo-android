@@ -24,4 +24,6 @@ public class URL {
     public static final String UPDATE_ID_CARD = "/user/profile/update-id-card";
     public static final String UPDATE_PHONE_NUMBER_CARD = "/user/profile/update-phone-number";
 
+    //firebase token
+    public static final String UPDATE_FIREBASE_TOKEN = "/security/firebase-token";
 }

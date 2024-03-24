@@ -4,9 +4,11 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -25,7 +27,8 @@ import com.tech.cybercars.utils.PermissionUtil;
 import java.io.IOException;
 
 public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegistrationBinding, DriverRegistrationViewModel> {
-    private final PermissionUtil permission_util = new PermissionUtil();
+
+
     @NonNull
     @Override
     protected DriverRegistrationViewModel InitViewModel() {
@@ -41,15 +44,7 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
 
     @Override
     protected void InitFirst() {
-        permission_util.SetPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE})
-                .SetPermissionListener(this,
-                        () -> {
 
-                        },
-                        denied_permissions -> {
-                            finish();
-                        })
-                .Start();
     }
 
     @Override
@@ -66,19 +61,19 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
     @Override
     protected void InitObserve() {
         view_model.is_lost_image_error.observe(this, is_img_error -> {
-            if(is_img_error){
+            if (is_img_error) {
                 ShowErrorImgDialog();
             }
         });
 
         view_model.error_call_server.observe(this, error_call_server -> {
-            if(error_call_server != null){
+            if (error_call_server != null) {
                 ShowCallServerError(error_call_server);
             }
         });
 
         view_model.is_success.observe(this, is_success -> {
-            if(is_success){
+            if (is_success) {
                 ShowSuccessRegistration();
             }
         });
@@ -107,7 +102,7 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
         this.finish();
     }
 
-    private void ShowErrorImgDialog(){
+    private void ShowErrorImgDialog() {
         NotificationDialog.Builder(this)
                 .SetIcon(R.drawable.ic_warning)
                 .SetTitle(getResources().getString(R.string.missing_some_information))
@@ -116,7 +111,7 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
                 .SetOnMainButtonClicked(Dialog::dismiss).show();
     }
 
-    private void ShowCallServerError(String error_call_server){
+    private void ShowCallServerError(String error_call_server) {
         NotificationDialog.Builder(this)
                 .SetIcon(R.drawable.ic_error)
                 .SetTitle(getResources().getString(R.string.something_went_wrong))
@@ -125,12 +120,14 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
                 .SetOnMainButtonClicked(Dialog::dismiss).show();
     }
 
-    private void ShowSuccessRegistration(){
+    private void ShowSuccessRegistration() {
         NotificationDialog.Builder(this)
                 .SetIcon(R.drawable.ic_success)
                 .SetTitle(getResources().getString(R.string.sign_up_success))
                 .SetSubtitle(getResources().getString(R.string.the_information_has_been_sent_we_will_review_and_respond_later))
                 .SetTextMainButton(getResources().getString(R.string.go_back))
-                .SetOnMainButtonClicked(dialog->{ finish(); }).show();
+                .SetOnMainButtonClicked(dialog -> {
+                    finish();
+                }).show();
     }
 }

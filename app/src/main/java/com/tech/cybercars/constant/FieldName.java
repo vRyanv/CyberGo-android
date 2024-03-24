@@ -1,6 +1,13 @@
 package com.tech.cybercars.constant;
 
 public class FieldName {
+    //notification
+    public final static String TYPE = "type";
+    public final static String TITLE = "title";
+
+
+
+    //user
     public final static String USER = "user";
     public final static String USER_ID = "user_id";
     public final static String EMAIL = "email";
