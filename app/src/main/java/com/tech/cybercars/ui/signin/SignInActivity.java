@@ -23,13 +23,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.tech.cybercars.R;
-import com.tech.cybercars.activities.test;
 import com.tech.cybercars.databinding.ActivitySignInBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.signup.SignUpActivity;
-import com.tech.cybercars.ui.signup.SignUpViewModel;
 import com.tech.cybercars.ui.signup.verification.PhoneVerificationActivity;
 import com.tech.cybercars.utils.KeyBoardUtil;
 

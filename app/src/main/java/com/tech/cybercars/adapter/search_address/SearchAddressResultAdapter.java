@@ -14,7 +14,7 @@ import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResp
 import java.util.List;
 
 public class SearchAddressResultAdapter extends RecyclerView.Adapter<SearchAddressResultViewHolder> {
-    private List<ReverseGeocodingResponse> search_address_result;
+    private final List<ReverseGeocodingResponse> search_address_result;
     private SearchAddressResultCallback callback;
 
     public SearchAddressResultAdapter(List<ReverseGeocodingResponse> search_address_result) {

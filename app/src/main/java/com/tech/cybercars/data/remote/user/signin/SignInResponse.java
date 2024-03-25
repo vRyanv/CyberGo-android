@@ -8,4 +8,5 @@ public class SignInResponse extends BaseResponse {
     public String user_id;
     public String avatar;
     public String full_name;
+    public String phone_number;
 }

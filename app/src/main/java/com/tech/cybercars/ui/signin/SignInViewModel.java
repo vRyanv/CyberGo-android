@@ -136,6 +136,13 @@ public class SignInViewModel extends BaseViewModel {
                         FieldName.FULL_NAME,
                         full_name
                 );
+
+                String phone_number = response.body().phone_number;
+                SharedPreferencesUtil.SetString(
+                        getApplication(),
+                        FieldName.PHONE_NUMBER,
+                        phone_number
+                );
                 is_success.postValue(true);
             } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));

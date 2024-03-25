@@ -10,7 +10,7 @@
 
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.fragment.setting.driver_register.DriverRegistrationViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.account.driver_register.DriverRegistrationViewModel" />
     </data>
     <RelativeLayout
         android:id="@+id/loadingPanel"

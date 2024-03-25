@@ -17,15 +17,25 @@ text normal = 14ssp
     4.7 search location: @done
     4.8 next button and cancel button: @done
 
-5. register transport: ## post api
+5. register transport: @done
      tab 1. vehicle registration certificate: @done
      tab 2. driving license: @done
      tab 3. vehicle: @done
 
-6. profile:
+6. profile: ####
     update profile: @done
     update ID card: @done
     update phone number: #### wait
+
+7. push notification when admin accept driver register:
+    7.1 by socket:
+    7.2 by firebase:
+
+
+7. notification activity:
+
+
+7. header tool bar on main activity:
 
 7. socket and notification
     7.1 notification
@@ -41,8 +51,8 @@ text normal = 14ssp
 
 
 
-1. run background service cho socket;
-2. use EventBus để push socket event
+1. run background service cho socket: @done
+2. use EventBus để push socket event: @done
 3. notification:
     -> nếu socket online thì push tới socket
         -> nếu app mở thì push notify lên UI ko thì push lên notify stack

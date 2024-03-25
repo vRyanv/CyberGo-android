@@ -8,8 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.tech.cybercars.ui.main.fragment.activity.ActivityFragment;
 import com.tech.cybercars.ui.main.fragment.go.GoFragment;
-import com.tech.cybercars.ui.main.fragment.message.MessageFragment;
-import com.tech.cybercars.ui.main.fragment.setting.SettingFragment;
+import com.tech.cybercars.ui.main.fragment.account.AccountFragment;
 
 public class AppFragmentAdapter extends FragmentStateAdapter {
     public AppFragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
@@ -25,9 +24,7 @@ public class AppFragmentAdapter extends FragmentStateAdapter {
             case 1:
                 return new ActivityFragment();
             case 2:
-                return new MessageFragment();
-            case 3:
-                return new SettingFragment();
+                return new AccountFragment();
             default:
                 return new GoFragment();
         }
@@ -35,6 +32,6 @@ public class AppFragmentAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 3;
     }
 }

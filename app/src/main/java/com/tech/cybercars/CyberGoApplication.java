@@ -62,11 +62,11 @@ public class CyberGoApplication extends Application {
                 Tag.NORMAL_CHANEL_ID,
                 NotificationManager.IMPORTANCE_DEFAULT
         );
+        Uri sound_uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notification);
         AudioAttributes attributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                 .build();
-        Uri audio_uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        normal_channel.setSound(audio_uri, attributes);
+        normal_channel.setSound(sound_uri, attributes);
         NotificationManager notification_manager = getSystemService(NotificationManager.class);
         notification_manager.createNotificationChannel(normal_channel);
     }
@@ -78,11 +78,11 @@ public class CyberGoApplication extends Application {
                 Tag.MESSAGE_CHANEL_ID,
                 NotificationManager.IMPORTANCE_DEFAULT
         );
+        Uri sound_uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.message);
         AudioAttributes attributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                 .build();
-        Uri audio_uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        message_channel.setSound(audio_uri, attributes);
+        message_channel.setSound(sound_uri, attributes);
         NotificationManager notification_manager = getSystemService(NotificationManager.class);
         notification_manager.createNotificationChannel(message_channel);
     }

@@ -128,4 +128,6 @@
     <string name="success_send_driver_registration_mess">Bạn đã gửi thông tin đăng ký thành công, chúng tôi sẽ xem xét và phản hồi lại qua email</string>
     <string name="vehicle_type">Loại xe</string>
     <string name="select_vehicle_type">Chọn loại xe</string>
+    <string name="account">Tài khoản</string>
+    <string name="notification">Thông báo</string>
 </resources>

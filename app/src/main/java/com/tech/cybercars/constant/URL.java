@@ -7,6 +7,9 @@ public class URL {
     public static final String ID_CARD_RES_PATH = "/assets/media/id-card/";
     public static final String BASE_URL = "http://192.168.2.6:2108";
 
+    //notification
+    public static final String NOTIFICATIONS = "/user/notification";
+
     //Security
     public static final String SIGN_IN = "/security/sign-in";
     public static final String SIGN_UP = "/security/sign-up";

@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_16sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp">
+
+        <TextView
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_avatar"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_gravity="top"
+            android:background="@color/gray"
+            app:riv_corner_radius="30dip"
+            app:riv_mutate_background="true"
+            app:riv_oval="true"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <LinearLayout
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:textSize="@dimen/_14ssp"
+                android:background="@color/gray"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp"/>
+            <TextView
+                android:fontFamily="@font/sp_pro_round_regular"
+                android:id="@+id/txt_content"
+                android:background="@color/gray"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"/>
+         </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

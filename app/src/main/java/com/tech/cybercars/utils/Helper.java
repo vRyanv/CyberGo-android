@@ -16,4 +16,8 @@ public class Helper {
     public static Double ConvertMeterToKiloMeter(Double meter){
        return meter/1000;
     }
+
+    public static String PadStart(int number, int length) {
+        return String.format("%0" + length + "d", number);
+    }
 }

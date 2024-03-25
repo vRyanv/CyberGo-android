@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/logo_white_full"
+            android:title="@string/go" />
+
+        <item android:id="@+id/nav_go1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/logo_white_full"
+            android:title="@string/go" />
+        <item android:id="@+id/nav_go2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/logo_white_full"
+            android:title="@string/go" />
+
+        <item android:id="@+id/nav_go3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/logo_white_full"
+            android:title="@string/go" />
+
+        <item android:id="@+id/nav_go4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/logo_white_full"
+            android:title="@string/go" />
+    </group>
+
+    <item android:title="" >
+        <menu>
+            <item android:id="@+id/nav_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/logo_white_full"
+                android:title="@string/go"
+                />
+        </menu>
+    </item>
+</menu>

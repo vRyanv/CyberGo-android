@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- net work -->
+    <!-- service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- net work -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
-    <!-- location   -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <!-- high location   -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- high location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
@@ -37,6 +30,20 @@
         android:theme="@style/Theme.CyberGo"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.main.chat.ChatActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity"/>
+        <activity
+            android:name=".ui.main.chat.message.MessageActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.chat.ChatActivity"/>
+        <activity
+            android:name=".ui.main.notification.NotificationActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity" />
+
+        <service android:name=".services.socket.SocketService" />
         <service
             android:name=".services.fcm.CyberGoNotification"
             android:exported="false">
@@ -46,23 +53,23 @@
         </service>
 
         <activity
-            android:name=".ui.main.fragment.setting.profile.edit_phone.update_phone_verification.UpdatePhoneVerificationActivity"
+            android:name=".ui.main.fragment.account.profile.edit_phone.update_phone_verification.UpdatePhoneVerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.setting.profile.edit_phone.EditPhoneActivity"
+            android:name=".ui.main.fragment.account.profile.edit_phone.EditPhoneActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.main.fragment.setting.profile.edit_profile.EditProfileActivity"
+            android:name=".ui.main.fragment.account.profile.edit_profile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.setting.profile.edit_id_card.EditIdentityCardActivity"
+            android:name=".ui.main.fragment.account.profile.edit_id_card.EditIdentityCardActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.setting.profile.ProfileActivity"
+            android:name=".ui.main.fragment.account.profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.setting.driver_register.DriverRegistrationActivity"
+            android:name=".ui.main.fragment.account.driver_register.DriverRegistrationActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.fragment.go.add_share_trip_information.AddShareTripInformationActivity"
@@ -79,7 +86,6 @@
         <activity
             android:name=".ui.main.fragment.go.find_trip.FindTransportActivity"
             android:exported="false" />
-
         <activity
             android:name=".activities.BackdoorActivity"
             android:exported="true">
@@ -99,9 +105,6 @@
             android:name=".ui.signup.verification.PhoneVerificationActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activities.test"
-            android:exported="false" />
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="false" />

@@ -28,7 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tech.cybercars.R;
-import com.tech.cybercars.activities.test;
 import com.tech.cybercars.databinding.ActivityPhoneVerificationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
@@ -98,8 +97,6 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
 
         view_model.getIsSuccessLive().observe(this, is_success -> {
             if(is_success != null && is_success){
-                Intent home_intent = new Intent(this, test.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(home_intent);
                 finish();
             }
         });

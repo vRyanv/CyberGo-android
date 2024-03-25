@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.fragment.setting.profile.edit_id_card.EditIdentityCardViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.account.profile.edit_id_card.EditIdentityCardViewModel" />
     </data>
 
     <RelativeLayout

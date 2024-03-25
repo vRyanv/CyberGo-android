@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +27,8 @@ import retrofit2.Response;
 import timber.log.Timber;
 
 public class MainViewModel extends BaseViewModel {
+    public MutableLiveData<Boolean> has_notification = new MutableLiveData<>();
+    public MutableLiveData<Boolean> has_message = new MutableLiveData<>();
     private final UserRepository user_repo;
 
     public MainViewModel(@NonNull Application application) {
