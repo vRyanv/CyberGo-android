@@ -1,14 +1,10 @@
 package com.tech.cybercars.data.remote.retrofit;
 
-import com.tech.cybercars.BuildConfig;
 import com.tech.cybercars.constant.URL;
-
-import java.io.IOException;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

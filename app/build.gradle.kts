@@ -121,5 +121,16 @@ dependencies {
     //request permission
     implementation("io.github.ParkSangGwon:tedpermission-normal:3.3.0")
 
+    //socket IO
+    implementation ("io.socket:socket.io-client:2.0.0") {
+        exclude(group = "org.json", module = "json")
+    }
+
+    //event bus
+    implementation("org.greenrobot:eventbus:3.3.1")
+
+    //gson
+    implementation("com.google.code.gson:gson:2.10.1")
+
 }
 
