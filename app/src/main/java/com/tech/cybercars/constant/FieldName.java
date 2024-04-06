@@ -4,6 +4,9 @@ public class FieldName {
     //notification
     public final static String TYPE = "type";
     public final static String TITLE = "title";
+    public final static String ID = "id";
+    public final static String DATETIME = "datetime";
+    public final static String CONTENT = "content";
 
 
 
@@ -22,6 +25,9 @@ public class FieldName {
     public final static String AVATAR = "avatar";
     public final static String ID_NUMBER = "id_number";
 
+    //vehicle
+    public final static String VEHICLE = "vehicle";
+    public final static String VEHICLE_NAME = "vehicle_name";
     public final static String VEHICLE_TYPE = "vehicle_type";
     public final static String FRONT_VEHICLE_REGISTRATION_CERTIFICATE = "front_vehicle_registration_certificate";
     public final static String BACK_VEHICLE_REGISTRATION_CERTIFICATE = "back_vehicle_registration_certificate";

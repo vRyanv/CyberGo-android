@@ -13,7 +13,7 @@
 
         <TextView
             style="@style/txt_title_header"
-            android:text="@string/select_transport"
+            android:text="@string/select_vehicle_type"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

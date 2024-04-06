@@ -47,7 +47,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dip"
                 android:id="@+id/img_front_driving_license_card"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
@@ -97,7 +98,8 @@
                         app:srcCompat="@drawable/ic_img_upload" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dip"
                 android:id="@+id/img_back_driving_license_card"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"

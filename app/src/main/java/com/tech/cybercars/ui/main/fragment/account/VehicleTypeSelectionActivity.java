@@ -1,23 +1,24 @@
-package com.tech.cybercars.ui.main.fragment.go;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+package com.tech.cybercars.ui.main.fragment.account;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.tech.cybercars.R;
-import com.tech.cybercars.constant.VehicleType;
-import com.tech.cybercars.databinding.ActivitySelectTransportBinding;
-import com.tech.cybercars.ui.main.fragment.go.share_trip.ShareTripActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class SelectTransportActivity extends AppCompatActivity {
-    ActivitySelectTransportBinding binding;
+import com.tech.cybercars.R;
+import com.tech.cybercars.constant.FieldName;
+import com.tech.cybercars.constant.VehicleType;
+import com.tech.cybercars.databinding.ActivitySelectVehicleTypeBinding;
+import com.tech.cybercars.ui.main.fragment.account.driver_register.DriverRegistrationActivity;
+
+public class VehicleTypeSelectionActivity extends AppCompatActivity {
+    ActivitySelectVehicleTypeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySelectTransportBinding.inflate(getLayoutInflater());
+        binding = ActivitySelectVehicleTypeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         InitView();
@@ -35,6 +36,7 @@ public class SelectTransportActivity extends AppCompatActivity {
         binding.typeMotoSelect.setBackgroundResource(R.drawable.shape_transport_type);
         selection.setBackgroundResource(R.drawable.shape_transport_type_selected);
 
-        startActivity(new Intent(this, ShareTripActivity.class).putExtra(VehicleType.class.getSimpleName(), transport_type));
+        startActivity(new Intent(this, DriverRegistrationActivity.class).putExtra(FieldName.VEHICLE_TYPE, transport_type));
+        finish();
     }
 }

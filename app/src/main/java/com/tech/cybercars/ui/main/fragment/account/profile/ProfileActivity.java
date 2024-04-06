@@ -1,30 +1,28 @@
 package com.tech.cybercars.ui.main.fragment.account.profile;
 
+import android.Manifest;
+import android.app.Dialog;
+import android.content.Intent;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.Manifest;
-import android.app.Dialog;
-import android.content.Intent;
-import android.os.Handler;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.ActivityResult;
-import com.tech.cybercars.constant.DelayTime;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.models.User;
-import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.databinding.ActivityProfileBinding;
+import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+import com.tech.cybercars.ui.main.fragment.account.profile.edit_id_card.EditIdentityCardActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_phone.EditPhoneActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_profile.EditProfileActivity;
-import com.tech.cybercars.ui.main.fragment.account.profile.edit_id_card.EditIdentityCardActivity;
 import com.tech.cybercars.utils.PermissionUtil;
 
 import java.io.FileNotFoundException;

@@ -29,6 +29,7 @@
                 android:id="@+id/rcv_notification"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                tools:listitem="@layout/item_notification"
                 tools:layout_editor_absoluteX="1dp"
                 tools:layout_editor_absoluteY="1dp" />
             <com.facebook.shimmer.ShimmerFrameLayout

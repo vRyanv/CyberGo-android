@@ -6,9 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.tech.cybercars.ui.main.fragment.account.AccountFragment;
 import com.tech.cybercars.ui.main.fragment.activity.ActivityFragment;
 import com.tech.cybercars.ui.main.fragment.go.GoFragment;
-import com.tech.cybercars.ui.main.fragment.account.AccountFragment;
 
 public class AppFragmentAdapter extends FragmentStateAdapter {
     public AppFragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {

@@ -12,8 +12,6 @@ import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.data.local.AppDBContext;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.data.remote.notification.NotificationResponse;
-import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
-import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
 import com.tech.cybercars.data.repositories.NotificationRepository;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;

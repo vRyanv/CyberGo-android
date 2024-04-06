@@ -27,7 +27,7 @@ import io.socket.emitter.Emitter;
 
 public class SocketService extends Service {
     private Socket socket;
-
+    public static boolean is_running = false;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -38,6 +38,7 @@ public class SocketService extends Service {
     public void onCreate() {
         super.onCreate();
         InitSocketIO();
+        is_running = true;
     }
 
     private void InitSocketIO() {
@@ -64,8 +65,6 @@ public class SocketService extends Service {
         }
         Log.i(Tag.CYBER_DEBUG, "Socket Service: Started");
     }
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -74,13 +73,15 @@ public class SocketService extends Service {
         socket.off(SocketEvent.CONNECT, OnConnectEvent);
         socket.off(SocketEvent.DISCONNECT, OnDisconnectEvent);
         socket.off(SocketEvent.NOTIFICATION, OnNotificationEvent);
-
+        is_running = false;
         Log.e(Tag.CYBER_DEBUG, "Socket Service: Stoped");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+         super.onStartCommand(intent, flags, startId);
+        Log.e(Tag.CYBER_DEBUG, "onStartCommand");
+        return START_STICKY;
     }
 
     private void SocketListener() {
@@ -101,7 +102,6 @@ public class SocketService extends Service {
     };
 
     private final Emitter.Listener OnConnectEvent = args -> {
-        socket.emit(SocketEvent.NOTIFICATION, "hello");
         Log.e(Tag.CYBER_DEBUG, "Socket id::" + socket.id());
     };
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -13,23 +13,50 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp">
+            <LinearLayout
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:id="@+id/wrapper_vehicle_type"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    style="@style/form_label"
+                    android:layout_margin="0dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:text="@string/vehicle_type"
+                    app:layout_constraintBottom_toTopOf="@+id/img_front_id_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <ImageButton
+                    android:id="@+id/img_vehicle_type"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:background="@drawable/shape_icon_sub_button"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_car" />
+            </LinearLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_vehicle_type"
                 style="@style/input"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:focusable="false"
                 app:errorIconDrawable="@null"
-                app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/wrapper_vehicle_type">
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/edit_text_input"
-                    android:enabled="true"
-                    android:focusable="false"
-                    android:hint="@string/vehicle_type"
+                    android:hint="@string/vehicle_name"
                     android:inputType="none"
-                    android:text="@={view_model.vehicle_type}" />
+                    android:text="@={view_model.vehicle_name}" />
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:id="@+id/label_front_id_card"
@@ -68,7 +95,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dip"
                 android:id="@+id/img_front_certificate"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
@@ -118,7 +146,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dip"
                 android:id="@+id/img_back_certificate"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"

@@ -1,18 +1,7 @@
 package com.tech.cybercars.ui.signin;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
@@ -20,7 +9,11 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.ActivitySignInBinding;

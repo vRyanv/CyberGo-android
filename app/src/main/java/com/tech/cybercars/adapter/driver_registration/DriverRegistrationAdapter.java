@@ -6,9 +6,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.RegistrationCertificateTabFragment;
-import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.VehicleTabFragment;
 import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.DrivingLicenseTabFragment;
+import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.VehicleRegistrationCertificateTabFragment;
+import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.VehicleTabFragment;
+import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fragments.DrivingLicenseDetaiTablFragment;
+import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fragments.VehicleDetailTabFragment;
+import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fragments.VehicleRegistrationCertificateDetailTabFragment;
 
 public class DriverRegistrationAdapter extends FragmentStateAdapter {
     public DriverRegistrationAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
@@ -20,13 +23,11 @@ public class DriverRegistrationAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new RegistrationCertificateTabFragment();
+                return new VehicleRegistrationCertificateTabFragment();
             case 1:
                 return new DrivingLicenseTabFragment();
-            case 2:
-                return new VehicleTabFragment();
             default:
-                return new RegistrationCertificateTabFragment();
+                return new VehicleTabFragment();
         }
     }
 

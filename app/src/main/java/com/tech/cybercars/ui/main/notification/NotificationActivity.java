@@ -1,17 +1,12 @@
 package com.tech.cybercars.ui.main.notification;
 
+import android.app.Dialog;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.app.Dialog;
-import android.os.Bundle;
-import android.view.View;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.notification.NotificationAdapter;
@@ -19,7 +14,6 @@ import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.databinding.ActivityNotificationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
-import com.tech.cybercars.ui.main.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

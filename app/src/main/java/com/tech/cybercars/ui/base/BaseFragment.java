@@ -7,12 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
-
-import com.tech.cybercars.R;
 
 public abstract class BaseFragment<BINDING extends ViewDataBinding, VM extends ViewModel> extends Fragment {
     protected VM view_model;

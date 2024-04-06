@@ -1,8 +1,5 @@
 package com.tech.cybercars.utils;
 
-import android.annotation.SuppressLint;
-import android.location.Location;
-
 import java.util.Locale;
 
 public class Helper {

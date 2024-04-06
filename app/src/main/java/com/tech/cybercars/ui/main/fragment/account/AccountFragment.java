@@ -1,16 +1,15 @@
 package com.tech.cybercars.ui.main.fragment.account;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
-import androidx.annotation.NonNull;
-
 import android.Manifest;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
@@ -19,7 +18,9 @@ import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.databinding.FragmentAccountBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.account.driver_register.DriverRegistrationActivity;
+import com.tech.cybercars.ui.main.fragment.account.my_vehicle.MyVehicleActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
+import com.tech.cybercars.ui.main.fragment.go.vehicle_selection.VehicleSelectionActivity;
 import com.tech.cybercars.utils.PermissionUtil;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
@@ -50,7 +51,7 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
             permission_util.SetPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE})
                     .SetPermissionListener(requireContext(),
                             () -> {
-                                startActivity(new Intent(this.getActivity(), DriverRegistrationActivity.class));
+                                startActivity(new Intent(this.getActivity(), VehicleTypeSelectionActivity.class));
                             },
                             denied_permissions -> {
                             })
@@ -60,6 +61,10 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
 
         binding.btnOpenProfile.setOnClickListener(view -> {
             profile_result_launcher.launch(new Intent(this.getActivity(), ProfileActivity.class));
+        });
+
+        binding.btnOpenMyVehicle.setOnClickListener(view -> {
+            startActivity(new Intent(this.getActivity(), MyVehicleActivity.class));
         });
     }
 

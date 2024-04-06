@@ -3,7 +3,6 @@ package com.tech.cybercars.ui.main.fragment.home;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
 
 import com.tech.cybercars.ui.base.BaseViewModel;
 

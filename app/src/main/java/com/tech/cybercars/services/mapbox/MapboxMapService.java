@@ -6,11 +6,6 @@ import android.location.Location;
 
 import com.mapbox.android.core.location.LocationEngineRequest;
 import com.mapbox.android.core.permissions.PermissionsManager;
-import com.mapbox.api.directions.v5.DirectionsCriteria;
-import com.mapbox.api.directions.v5.MapboxDirections;
-import com.mapbox.api.directions.v5.models.DirectionsResponse;
-import com.mapbox.api.geocoding.v5.MapboxGeocoding;
-import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -23,9 +18,6 @@ import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.Style;
-
-import retrofit2.Callback;
 
 public class MapboxMapService {
     private final Context context;

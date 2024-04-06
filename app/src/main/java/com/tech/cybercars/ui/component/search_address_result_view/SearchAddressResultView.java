@@ -2,7 +2,6 @@ package com.tech.cybercars.ui.component.search_address_result_view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -11,8 +10,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mapbox.api.geocoding.v5.models.CarmenFeature;
-import com.mapbox.mapboxsdk.plugins.places.autocomplete.ui.ResultItemDecoration;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.search_address.SearchAddressResultAdapter;
 import com.tech.cybercars.adapter.search_address.SearchAddressResultCallback;

@@ -3,13 +3,10 @@ package com.tech.cybercars.ui.base;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModel;
-
-import com.tech.cybercars.BuildConfig;
 
 
 public abstract class BaseActivity<BINDING extends ViewDataBinding, VM extends ViewModel> extends AppCompatActivity{

@@ -31,36 +31,42 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
+
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_avatar"
-            android:src="@drawable/avatar"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_width="@dimen/_50sdp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_gravity="top"
             android:background="@color/gray"
+            android:src="@drawable/avatar"
+            app:layout_constraintStart_toStartOf="parent"
             app:riv_corner_radius="30dip"
             app:riv_mutate_background="true"
-            app:riv_oval="true"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:riv_oval="true" />
+
         <LinearLayout
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
-                android:textSize="@dimen/_14ssp"
                 android:id="@+id/txt_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:text="title"/>
+                android:text="title"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
             <TextView
-                android:textSize="@dimen/_12ssp"
-                android:fontFamily="@font/sp_pro_round_regular"
                 android:id="@+id/txt_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="content content content content content content content content content content content content content content content content content content content content content content content content content content content content v contentcontent content vv content"/>
+                android:fontFamily="@font/sp_pro_round_regular"
+                android:text="content"
+                android:justificationMode="inter_word"
+                android:textSize="@dimen/_12ssp" />
         </LinearLayout>
     </LinearLayout>
 

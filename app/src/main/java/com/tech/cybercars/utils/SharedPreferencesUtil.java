@@ -4,9 +4,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
-import com.tech.cybercars.constant.FieldName;
 
 public class SharedPreferencesUtil {
     private final static String SHARE_PREFERENCE_KEY = "SESSION";

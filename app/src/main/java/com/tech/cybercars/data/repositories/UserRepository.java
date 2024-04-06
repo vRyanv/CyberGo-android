@@ -2,9 +2,11 @@ package com.tech.cybercars.data.repositories;
 
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
+import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
 import com.tech.cybercars.data.remote.retrofit.RetrofitRequest;
 import com.tech.cybercars.data.remote.retrofit.RetrofitResponse;
-import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
+import com.tech.cybercars.data.remote.user.UserServiceRetrofit;
+import com.tech.cybercars.data.remote.user.driver.DriverRegistrationResponse;
 import com.tech.cybercars.data.remote.user.fcm.UpdateFCMBody;
 import com.tech.cybercars.data.remote.user.profile.ProfileResponse;
 import com.tech.cybercars.data.remote.user.profile.UpdateIdCardResponse;
@@ -13,8 +15,6 @@ import com.tech.cybercars.data.remote.user.signin.SignInBody;
 import com.tech.cybercars.data.remote.user.signin.SignInResponse;
 import com.tech.cybercars.data.remote.user.signup.SignUpBody;
 import com.tech.cybercars.data.remote.user.signup.SignUpResponse;
-import com.tech.cybercars.data.remote.user.UserServiceRetrofit;
-import com.tech.cybercars.data.remote.user.driver.DriverRegistrationResponse;
 import com.tech.cybercars.data.remote.user.verification.VerificationBody;
 import com.tech.cybercars.data.remote.user.verification.VerificationResponse;
 
@@ -85,8 +85,8 @@ public class UserRepository {
         );
     }
 
-    public void CreateDriverRegistration(String user_token, RequestBody vehicle_type_body, RequestBody license_plates_body, List<MultipartBody.Part> driver_images_body, ResSuccessCallback<DriverRegistrationResponse> success_callback, ResFailCallback fail_callback) {
-        user_service.DriverRegistrationRequest(user_token, vehicle_type_body, license_plates_body,driver_images_body).enqueue(
+    public void CreateDriverRegistration(String user_token, RequestBody vehicle_name_body, RequestBody vehicle_type_body, RequestBody license_plates_body, List<MultipartBody.Part> driver_images_body, ResSuccessCallback<DriverRegistrationResponse> success_callback, ResFailCallback fail_callback) {
+        user_service.DriverRegistrationRequest(user_token, vehicle_name_body, vehicle_type_body, license_plates_body, driver_images_body).enqueue(
                 new RetrofitResponse<DriverRegistrationResponse>().GetResponse(success_callback, fail_callback)
         );
     }

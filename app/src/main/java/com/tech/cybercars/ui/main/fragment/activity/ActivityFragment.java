@@ -1,10 +1,11 @@
 package com.tech.cybercars.ui.main.fragment.activity;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.FragmentShareBinding;

@@ -1,6 +1,5 @@
 package com.tech.cybercars.data.remote.user.signin;
 
-import com.google.gson.annotations.SerializedName;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 
 public class SignInResponse extends BaseResponse {

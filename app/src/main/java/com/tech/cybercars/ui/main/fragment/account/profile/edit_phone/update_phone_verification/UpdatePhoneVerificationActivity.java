@@ -1,10 +1,10 @@
 package com.tech.cybercars.ui.main.fragment.account.profile.edit_phone.update_phone_verification;
 
+import android.widget.EditText;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.widget.EditText;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.ActivityUpdatePhoneVerificationBinding;

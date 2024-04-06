@@ -1,10 +1,10 @@
 package com.tech.cybercars.ui.welcome;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.ui.signin.SignInActivity;

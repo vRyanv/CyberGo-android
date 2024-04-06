@@ -1,12 +1,12 @@
 package com.tech.cybercars.ui.splash;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;

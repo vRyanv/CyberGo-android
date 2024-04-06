@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- service -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- net work -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- location -->
@@ -31,13 +32,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.fragment.account.my_vehicle.vehicle_detail.VehicleDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.fragment.account.my_vehicle.MyVehicleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.fragment.go.vehicle_selection.VehicleSelectionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.chat.ChatActivity"
             android:exported="false"
-            android:parentActivityName=".ui.main.MainActivity"/>
+            android:parentActivityName=".ui.main.MainActivity" />
         <activity
             android:name=".ui.main.chat.message.MessageActivity"
             android:exported="false"
-            android:parentActivityName=".ui.main.chat.ChatActivity"/>
+            android:parentActivityName=".ui.main.chat.ChatActivity" />
         <activity
             android:name=".ui.main.notification.NotificationActivity"
             android:exported="false"
@@ -78,7 +88,7 @@
             android:name=".activities.SearchMapActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.go.SelectTransportActivity"
+            android:name=".ui.main.fragment.account.VehicleTypeSelectionActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.fragment.go.share_trip.ShareTripActivity"

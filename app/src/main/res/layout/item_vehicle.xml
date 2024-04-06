@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_15sdp">
+
+    <ImageView
+        android:id="@+id/img_vehicle_type"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="1dp"
+        android:src="@drawable/ic_motorcycle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_vehicle_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginBottom="0dp"
+        android:text="vehicle name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_vehicle_type"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:layout_constraintEnd_toStartOf="@id/img_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:background="@color/green"
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:textColor="@color/always_white"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_2sdp"
+            android:text="ACCEPTED" />
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/img_arrow"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:scaleType="center"
+        android:src="@drawable/ic_right_arrow_choose_location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

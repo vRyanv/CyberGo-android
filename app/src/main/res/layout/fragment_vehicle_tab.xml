@@ -68,7 +68,8 @@
                         app:srcCompat="@drawable/ic_img_upload" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dip"
                 android:id="@+id/img_front_transport"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
@@ -120,7 +121,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dip"
                 android:id="@+id/img_back_transport"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
@@ -171,7 +173,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dip"
                 android:id="@+id/img_right_transport"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
@@ -222,7 +225,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dip"
                 android:id="@+id/img_left_transport"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"

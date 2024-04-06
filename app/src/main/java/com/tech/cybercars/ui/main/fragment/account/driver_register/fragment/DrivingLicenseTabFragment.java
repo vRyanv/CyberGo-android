@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -11,12 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.FragmentDrivingLicenseTabBinding;
@@ -71,12 +70,12 @@ public class DrivingLicenseTabFragment extends Fragment {
     private void BindImgToUI(Uri img_uri, Bitmap img_bitmap) {
         switch (current_pick_img_action) {
             case PICK_FRONT_DRIVING_LICENSE:
-                view_model.front_driving_license_uri = img_uri;
+                view_model.front_driving_licence_uri = img_uri;
                 binding.imgFrontDrivingLicenseCard.setImageBitmap(img_bitmap);
                 binding.imgFrontDrivingLicenseCard.setScaleType(ImageView.ScaleType.FIT_XY);
                 break;
             case PICK_BACK_DRIVING_LICENSE:
-                view_model.back_driving_license_uri = img_uri;
+                view_model.back_driving_licence_uri = img_uri;
                 binding.imgBackDrivingLicenseCard.setImageBitmap(img_bitmap);
                 binding.imgBackDrivingLicenseCard.setScaleType(ImageView.ScaleType.FIT_XY);
                 break;

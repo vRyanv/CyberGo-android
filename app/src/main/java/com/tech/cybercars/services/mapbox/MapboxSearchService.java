@@ -1,13 +1,5 @@
 package com.tech.cybercars.services.mapbox;
 
-import com.mapbox.api.geocoding.v5.MapboxGeocoding;
-import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
-import com.mapbox.geojson.Point;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class MapboxSearchService {
 
 }

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.tech.cybercars.R;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 

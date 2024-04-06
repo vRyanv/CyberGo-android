@@ -1,12 +1,11 @@
 package com.tech.cybercars.ui.main.fragment.go.add_share_trip_information.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.tech.cybercars.R;
 

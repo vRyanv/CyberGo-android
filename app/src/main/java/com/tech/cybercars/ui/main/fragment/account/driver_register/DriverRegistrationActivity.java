@@ -9,9 +9,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.driver_registration.DriverRegistrationAdapter;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.databinding.ActivityDriverRegistrationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+import com.tech.cybercars.utils.KeyBoardUtil;
 
 import java.io.IOException;
 
@@ -39,6 +41,7 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
     @Override
     protected void InitView() {
         binding.btnRegisterAsDriver.setOnClickListener(view -> {
+            KeyBoardUtil.HideKeyBoard(this);
             try {
                 view_model.DriverRegistrationHandle();
             } catch (IOException e) {
@@ -71,19 +74,18 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
 
     @Override
     protected void InitCommon() {
-
-
         DriverRegistrationAdapter driver_registration_adapter = new DriverRegistrationAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.paperDriverRegistration.setAdapter(driver_registration_adapter);
         String[] tab_name = new String[]{
-                getString(R.string.my_information),
+                getString(R.string.vehicle_registration_certificate),
                 getString(R.string.driving_license),
-                getString(R.string.my_transport)};
+                getString(R.string.my_vehicle)};
         new TabLayoutMediator(binding.tabShareTripInfo, binding.paperDriverRegistration, (tab, position) -> {
             tab.setText(tab_name[position]);
         }).attach();
 
-
+        String vehicle_type = getIntent().getStringExtra(FieldName.VEHICLE_TYPE);
+        view_model.vehicle_type.setValue(vehicle_type);
     }
 
     @Override

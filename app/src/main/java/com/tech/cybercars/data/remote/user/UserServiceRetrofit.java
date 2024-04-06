@@ -30,6 +30,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 
 public interface UserServiceRetrofit {
+
     @PUT(URL.UPDATE_FIREBASE_TOKEN)
     Call<BaseResponse> UpdateFirebaseTokenRequest(
             @Header("authorization") String user_token,
@@ -57,6 +58,7 @@ public interface UserServiceRetrofit {
     @POST(URL.DRIVER_REGISTRATION)
     Call<DriverRegistrationResponse> DriverRegistrationRequest(
             @Header("authorization") String user_token,
+            @Part(FieldName.VEHICLE_NAME) RequestBody vehicle_name_body,
             @Part(FieldName.VEHICLE_TYPE) RequestBody vehicle_type_body,
             @Part(FieldName.LICENSE_PLATES) RequestBody license_plates_body,
             @Part List<MultipartBody.Part> driver_images_body

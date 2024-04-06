@@ -1,10 +1,10 @@
 package com.tech.cybercars.ui.main.fragment.account.profile.edit_phone;
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.FieldName;

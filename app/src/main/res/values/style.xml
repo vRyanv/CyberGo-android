@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    account -->
+    <style name="nav_item_account">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_45sdp</item>
+        <item name="android:layout_marginTop">@dimen/_10sdp</item>
+        <item name="android:background">@drawable/shape_btn_outline</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
     <!--    profile -->
-    <style name="text_label_profile" >
+    <style name="text_label_profile">
         <item name="android:textSize">@dimen/_14ssp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/sp_pro_round_black_semibold</item>
     </style>
-    <style name="layout_label_profile" >
+
+    <style name="layout_label_profile">
         <item name="android:layout_marginTop">@dimen/_10sdp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
     </style>
-    <style name="icon_label_profile" >
+
+    <style name="icon_label_profile">
         <item name="android:layout_width">@dimen/_20sdp</item>
         <item name="android:layout_height">@dimen/_20sdp</item>
         <item name="android:layout_marginRight">@dimen/_10sdp</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="form_label" >
+    <style name="form_label">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/_12ssp</item>
@@ -37,11 +48,13 @@
         <item name="android:layout_height">@dimen/_120sdp</item>
         <item name="android:background">@drawable/shape_transport_type</item>
     </style>
+
     <style name="transport_type_choose">
         <item name="android:layout_width">@dimen/_74sdp</item>
         <item name="android:layout_height">@dimen/_74sdp</item>
         <item name="android:scaleType">fitXY</item>
     </style>
+
     <style name="text_transport_type_choose">
         <item name="android:layout_marginTop">@dimen/_5sdp</item>
         <item name="android:layout_width">wrap_content</item>
@@ -70,11 +83,13 @@
         <item name="android:layout_height">@dimen/_63sdp</item>
         <item name="android:background">@drawable/shape_transport_type</item>
     </style>
+
     <style name="transport_type">
         <item name="android:layout_width">@dimen/_30sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
         <item name="android:scaleType">centerInside</item>
     </style>
+
     <style name="text_transport_type">
         <item name="android:layout_marginTop">@dimen/_2sdp</item>
         <item name="android:layout_width">wrap_content</item>
@@ -94,6 +109,7 @@
         <item name="android:enabled">true</item>
     </style>
     //remember!
+
     <style name="BottomDialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
@@ -111,20 +127,24 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="layout_header_box">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/_50sdp</item>
     </style>
+
     <style name="txt_from_cyber_space">
         <item name="android:textColor">@color/white</item>
     </style>
 
     //layout_loading (wrapper - loading)
+
     <style name="wrapper_loading_relative">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
     </style>
+
     <style name="loading_frame">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -133,6 +153,7 @@
         <item name="android:background">@drawable/flag_transparent</item>d
         <item name="android:clickable">true</item>d
     </style>
+
     <style name="loading_animation">
         <item name="android:layout_width">@dimen/_100sdp</item>
         <item name="android:layout_height">@dimen/_100sdp</item>

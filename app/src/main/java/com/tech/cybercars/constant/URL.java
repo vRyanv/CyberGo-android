@@ -5,7 +5,11 @@ public class URL {
     public static final String AVATAR_RES_PATH = "/assets/media/avatar/";
     public static final String DRIVER_REGISTRATION_RES_PATH = "/assets/media/driver-registration/";
     public static final String ID_CARD_RES_PATH = "/assets/media/id-card/";
-    public static final String BASE_URL = "http://192.168.2.6:2108";
+    public static final String BASE_URL = "http://192.168.4.7:2108";
+
+    //vehicle
+    public static final String VEHICLE_ACCEPTED_LIST = "/user/vehicle/accepted-list";
+    public static final String VEHICLE_LIST = "/user/vehicle/list";
 
     //notification
     public static final String NOTIFICATIONS = "/user/notification";

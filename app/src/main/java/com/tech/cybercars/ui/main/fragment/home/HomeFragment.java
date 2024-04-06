@@ -1,16 +1,7 @@
 package com.tech.cybercars.ui.main.fragment.home;
 
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -24,6 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.mapbox.api.geocoding.v5.models.CarmenContext;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
@@ -35,7 +33,6 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
-
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker;
 import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;

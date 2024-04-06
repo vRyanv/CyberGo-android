@@ -25,10 +25,10 @@
     <color name="green">#0E9F5B</color>
     <color name="light_green">#A8CB17</color>
     <color name="dark_green">#087043</color>
+    <color name="lavender">#5863FD</color>
 
     <color name="dark_light_dynamic">#FFFBFF</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="lavender">#8692f7</color>
     <color name="white_dark_reverse">#000000</color>
     <color name="always_black">#000000</color>
     <color name="orange_blur_80">#4DFF8201</color>

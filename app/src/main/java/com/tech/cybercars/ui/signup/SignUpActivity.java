@@ -1,11 +1,5 @@
 package com.tech.cybercars.ui.signup;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -19,6 +13,12 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.ActivitySignUpBinding;

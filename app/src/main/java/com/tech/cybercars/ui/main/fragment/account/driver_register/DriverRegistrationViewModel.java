@@ -9,8 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
-import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.constant.FieldName;
+import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.data.remote.user.driver.DriverRegistrationResponse;
 import com.tech.cybercars.data.repositories.UserRepository;
 import com.tech.cybercars.ui.base.BaseViewModel;
@@ -30,11 +30,12 @@ import retrofit2.Response;
 
 public class DriverRegistrationViewModel extends BaseViewModel {
     public MutableLiveData<String> vehicle_type = new MutableLiveData<>();
+    public MutableLiveData<String> vehicle_name = new MutableLiveData<>();
     public MutableLiveData<String> license_plates = new MutableLiveData<>();
     public MutableLiveData<String> id_number = new MutableLiveData<>();
     public MutableLiveData<Boolean> is_lost_image_error = new MutableLiveData<>();
     public Uri front_vehicle_registration_certificate_uri, back_vehicle_registration_certificate_uri;
-    public Uri front_driving_license_uri, back_driving_license_uri;
+    public Uri front_driving_licence_uri, back_driving_licence_uri;
     public Uri front_vehicle_uri, back_vehicle_uri, right_vehicle_uri, left_vehicle_uri;
     private final UserRepository user_repository = UserRepository.GetInstance();
 
@@ -47,8 +48,8 @@ public class DriverRegistrationViewModel extends BaseViewModel {
         Uri[] uri_arr = new Uri[]{
                 front_vehicle_registration_certificate_uri,
                 back_vehicle_registration_certificate_uri,
-                front_driving_license_uri,
-                back_driving_license_uri,
+                front_driving_licence_uri,
+                back_driving_licence_uri,
                 front_vehicle_uri,
                 back_vehicle_uri,
                 right_vehicle_uri,
@@ -62,7 +63,7 @@ public class DriverRegistrationViewModel extends BaseViewModel {
             }
         }
 
-        if(vehicle_type.getValue() == null || vehicle_type.getValue().equals("")){
+        if(vehicle_name.getValue() == null || vehicle_name.getValue().equals("")){
             is_error = true;
         }
 
@@ -88,6 +89,7 @@ public class DriverRegistrationViewModel extends BaseViewModel {
 
         is_loading.postValue(true);
         RequestBody license_plates_body = RequestBody.create(MultipartBody.FORM, license_plates.getValue());
+        RequestBody vehicle_name_body = RequestBody.create(MultipartBody.FORM, vehicle_name.getValue());
         RequestBody vehicle_type_body = RequestBody.create(MultipartBody.FORM, vehicle_type.getValue());
 
         List<MultipartBody.Part> driver_images_body = new ArrayList<>();
@@ -101,6 +103,7 @@ public class DriverRegistrationViewModel extends BaseViewModel {
         String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
         user_repository.CreateDriverRegistration(
                 user_token,
+                vehicle_name_body,
                 vehicle_type_body,
                 license_plates_body,
                 driver_images_body,

@@ -71,8 +71,7 @@
     <string name="go" translatable="false">Go</string>
     <string name="find_transport">Find transport</string>
     <string name="share_my_transport">Share my transport</string>
-    <string name="select_transport">Select transport</string>
-    <string name="the_type_of_transportation_you_want_to_share">The type of transportation you want to share</string>
+    <string name="the_type_of_transportation_you_want_to_share">The type of vehicle you want to share</string>
     <string name="choose_location">Choose location</string>
     <string name="origin">Origin</string>
     <string name="destination">Destination</string>
@@ -94,7 +93,7 @@
     <string name="theme_mode" translatable="false">light</string>
     <string name="location">Location</string>
     <string name="my_information">My information</string>
-    <string name="my_transport">My transport</string>
+    <string name="my_vehicle">My vehicle</string>
     <string name="register_as_a_driver">Register as a driver</string>
     <string name="driving_license">Driving license</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -134,4 +133,8 @@
     <string name="select_vehicle_type">Select vehicle type</string>
     <string name="account">Account</string>
     <string name="notification">Notification</string>
+    <string name="vehicle_name">Vehicle name</string>
+    <string name="select_your_vehicle">Select your vehicle</string>
+    <string name="vehicle_detail">Vehicle detail</string>
+    <string name="reason_for_rejection">Reason for rejection</string>
 </resources>

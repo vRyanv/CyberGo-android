@@ -1,7 +1,6 @@
 package com.tech.cybercars.data.remote.map.reverse_geocoding;
 
 import com.google.gson.annotations.SerializedName;
-import com.mapbox.geojson.Geometry;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 
 public class ReverseGeocodingResponse extends BaseResponse {

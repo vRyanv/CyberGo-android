@@ -1,12 +1,12 @@
 package com.tech.cybercars.data.repositories;
 
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.tech.cybercars.data.remote.map.MapServiceRetrofit;
+import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
 import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
 import com.tech.cybercars.data.remote.retrofit.RetrofitRequest;
 import com.tech.cybercars.data.remote.retrofit.RetrofitResponse;
-import com.tech.cybercars.data.remote.map.MapServiceRetrofit;
-import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 
 import java.util.List;
 

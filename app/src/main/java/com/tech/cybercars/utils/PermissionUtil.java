@@ -1,12 +1,10 @@
 package com.tech.cybercars.utils;
 
+import android.content.Context;
+
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 import com.tech.cybercars.R;
-
-import android.Manifest;
-import android.content.Context;
-import android.widget.Toast;
 
 import java.util.List;
 

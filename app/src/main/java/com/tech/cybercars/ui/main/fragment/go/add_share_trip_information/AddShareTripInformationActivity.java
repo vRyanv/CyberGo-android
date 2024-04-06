@@ -1,14 +1,11 @@
 package com.tech.cybercars.ui.main.fragment.go.add_share_trip_information;
 
-import android.widget.TableLayout;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.app.AppFragmentAdapter;
 import com.tech.cybercars.adapter.share_trip_information.ShareTripInformationAdapter;
 import com.tech.cybercars.databinding.ActivityAddShareTripInformationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
@@ -52,7 +49,7 @@ public class AddShareTripInformationActivity extends BaseActivity<ActivityAddSha
         String tab_name[] = new String[]{
                 getString(R.string.location),
                 getString(R.string.my_information),
-                getString(R.string.my_transport)};
+                getString(R.string.my_vehicle)};
         new TabLayoutMediator(binding.tabShareTripInfo, binding.paperShareTripInformation, (tab, position) -> {
             tab.setText(tab_name[position]);
         }).attach();

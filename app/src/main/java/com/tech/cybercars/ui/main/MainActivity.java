@@ -2,6 +2,7 @@ package com.tech.cybercars.ui.main;
 
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.app.AppFragmentAdapter;
 import com.tech.cybercars.constant.FieldName;
+import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.databinding.ActivityMainBinding;
@@ -58,8 +60,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 binding.pagerMain.setCurrentItem(0, false);
             } else if (R.id.activity_fragment_item == selected_item) {
                 binding.pagerMain.setCurrentItem(1, false);
-            } else if (R.id.chat_fragment_item == selected_item) {
-                binding.pagerMain.setCurrentItem(2, false);
             } else if (R.id.setting_fragment_item == selected_item) {
                 binding.pagerMain.setCurrentItem(3, false);
             }
@@ -99,8 +99,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         binding.pagerMain.setAdapter(app_fm_adapter);
         binding.pagerMain.setUserInputEnabled(false);
         view_model.HandleUpdateFirebaseToken();
-        Intent socket_intent = new Intent(this, SocketService.class);
-        startService(socket_intent);
     }
 
     @Override
@@ -118,11 +116,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     public void OnNotificationEvent(Notification notification){
         NotificationService.PushNormal(
                 getApplicationContext(),
+                notification.avatar,
                 notification.title,
-                notification.datetime.toString()
+                notification.content
         );
         view_model.has_notification.setValue(true);
     }
+
 
     private void InitHeaderDrawer() {
         View view = binding.navDrawerView.getHeaderView(0);

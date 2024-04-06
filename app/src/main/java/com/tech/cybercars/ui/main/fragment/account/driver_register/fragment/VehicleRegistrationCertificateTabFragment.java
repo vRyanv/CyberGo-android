@@ -1,20 +1,18 @@
 package com.tech.cybercars.ui.main.fragment.account.driver_register.fragment;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.VehicleType;
@@ -23,13 +21,10 @@ import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.account.driver_register.DriverRegistrationViewModel;
 import com.tech.cybercars.utils.FileUtil;
 
-public class RegistrationCertificateTabFragment extends BaseFragment<FragmentVehicleRegistrationCertificateTabBinding, DriverRegistrationViewModel> {
+public class VehicleRegistrationCertificateTabFragment extends BaseFragment<FragmentVehicleRegistrationCertificateTabBinding, DriverRegistrationViewModel> {
     private final String PICK_BACK_CERTIFICATE = "PICK_BACK_CERTIFICATE";
     private final String PICK_FRONT_CERTIFICATE = "PICK_FRONT_CERTIFICATE";
     private String current_pick_img_action;
-    private String[] vehicle_type_choices;
-    private AlertDialog vehicle_type_dialog;
-
     @NonNull
     @Override
     protected DriverRegistrationViewModel InitViewModel() {
@@ -50,13 +45,6 @@ public class RegistrationCertificateTabFragment extends BaseFragment<FragmentVeh
 
     @Override
     protected void InitView() {
-        InitAlertVehicleTypeDialog();
-
-        //vehicle type selection
-        binding.inputVehicleType.getEditText().setOnClickListener(view -> {
-            vehicle_type_dialog.show();
-        });
-
         binding.btnUploadFrontCertificate.setOnClickListener(view -> {
             Intent take_photo = new Intent(Intent.ACTION_PICK);
             take_photo.setType("image/*");
@@ -74,9 +62,19 @@ public class RegistrationCertificateTabFragment extends BaseFragment<FragmentVeh
 
     @Override
     protected void InitObserve() {
-//        view_model.vehicle_type.observe(this, vehicle_type -> {
-//                binding.inputVehicleType.getEditText().setText(vehicle_type);
-//        });
+        view_model.vehicle_type.observe(this, vehicle_type -> {
+            switch (vehicle_type) {
+                case VehicleType.CAR:
+                    binding.imgVehicleType.setImageResource(R.drawable.ic_car);
+                    break;
+                case VehicleType.MOTO:
+                    binding.imgVehicleType.setImageResource(R.drawable.ic_motorcycle);
+                    break;
+                case VehicleType.TRUCK:
+                    binding.imgVehicleType.setImageResource(R.drawable.ic_truck);
+                    break;
+            }
+        });
     }
 
     @Override
@@ -115,17 +113,5 @@ public class RegistrationCertificateTabFragment extends BaseFragment<FragmentVeh
                 binding.imgBackCertificate.setScaleType(ImageView.ScaleType.FIT_XY);
                 break;
         }
-    }
-
-    private void InitAlertVehicleTypeDialog() {
-        vehicle_type_choices = new String[]{VehicleType.CAR, VehicleType.MOTO, VehicleType.TRUCK};
-        AlertDialog.Builder gender_dialog_builder = new AlertDialog.Builder(requireContext());
-        gender_dialog_builder
-                .setTitle(getResources().getString(R.string.select_vehicle_type))
-                .setItems(vehicle_type_choices, (dialog, which) -> {
-                    view_model.vehicle_type.setValue(vehicle_type_choices[which]);
-                    dialog.dismiss();
-                });
-        vehicle_type_dialog = gender_dialog_builder.create();
     }
 }

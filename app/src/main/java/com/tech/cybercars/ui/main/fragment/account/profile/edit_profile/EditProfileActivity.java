@@ -1,11 +1,5 @@
 package com.tech.cybercars.ui.main.fragment.account.profile.edit_profile;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,6 +8,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;

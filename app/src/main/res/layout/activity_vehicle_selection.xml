@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.go.vehicle_selection.VehicleSelectionViewModel" />
+    </data>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/header_primary"
+            layout="@layout/header_primary"
+            app:title="@{@string/select_your_vehicle}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:id="@+id/rcv_vehicle"
+            android:visibility="@{view_model.is_loading ? View.GONE : View.VISIBLE}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_vehicle"
+            android:layout_weight="1">
+        </androidx.recyclerview.widget.RecyclerView>
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:id="@+id/skeleton_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone}">
+            <include layout="@layout/skeleton_vehicle"/>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

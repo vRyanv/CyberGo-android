@@ -3,29 +3,24 @@ package com.tech.cybercars.ui.signup.verification;
 
 import static android.view.KeyEvent.KEYCODE_FORWARD_DEL;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.ActivityPhoneVerificationBinding;

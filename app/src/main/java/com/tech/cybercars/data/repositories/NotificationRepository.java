@@ -1,14 +1,11 @@
 package com.tech.cybercars.data.repositories;
 
-import com.tech.cybercars.data.remote.base.BaseResponse;
-import com.tech.cybercars.data.remote.map.MapServiceRetrofit;
 import com.tech.cybercars.data.remote.notification.NotificationResponse;
 import com.tech.cybercars.data.remote.notification.NotificationServiceRetrofit;
 import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
 import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
 import com.tech.cybercars.data.remote.retrofit.RetrofitRequest;
 import com.tech.cybercars.data.remote.retrofit.RetrofitResponse;
-import com.tech.cybercars.data.remote.user.UserServiceRetrofit;
 
 public class NotificationRepository {
     private NotificationServiceRetrofit notification_service;

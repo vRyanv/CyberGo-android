@@ -11,28 +11,9 @@
             type="com.tech.cybercars.ui.main.fragment.account.AccountViewModel" />
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            style="@style/layout_header_box">
-            <TextView
-                style="@style/txt_title_header"
-                android:text="@string/setting"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/padding_horizontal">
 
@@ -100,21 +81,29 @@
                 android:background="?android:attr/listDivider" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_open_register_as_driver"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/shape_btn_outline"
+                style="@style/nav_item_account"
                 android:text="@string/register_as_a_driver"
-                android:textAlignment="textStart"
                 android:textColor="@drawable/color_text_state_outline_button"
+                android:id="@+id/btn_open_register_as_driver"
                 app:backgroundTint="@null"
                 app:backgroundTintMode="multiply"
                 app:icon="@drawable/steering_wheel"
+                app:iconPadding="@dimen/_25sdp"
                 app:iconGravity="start"
                 app:iconSize="@dimen/_35sdp"
                 app:iconTintMode="multiply" />
-        </LinearLayout>
 
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                style="@style/nav_item_account"
+                android:text="@string/my_vehicle"
+                android:textColor="@drawable/color_text_state_outline_button"
+                android:id="@+id/btn_open_my_vehicle"
+                app:backgroundTint="@null"
+                app:backgroundTintMode="multiply"
+                app:icon="@drawable/ic_vehicle"
+                app:iconGravity="start"
+                app:iconPadding="@dimen/_25sdp"
+                app:iconSize="@dimen/_35sdp"
+                app:iconTintMode="multiply" />
+        </LinearLayout>
 </layout>

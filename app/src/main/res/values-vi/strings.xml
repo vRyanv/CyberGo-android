@@ -70,8 +70,7 @@
     <string name="all">Tất cả</string>
     <string name="find_transport">Tìm kiếm phương tiện</string>
     <string name="share_my_transport">Chia sẻ phương tiện của tôi</string>
-    <string name="select_transport">Chọn phương tiện</string>
-    <string name="the_type_of_transportation_you_want_to_share">Loại phương tiện giao thông bạn muốn chia sẻ</string>
+    <string name="the_type_of_transportation_you_want_to_share">Loại xe bạn muốn chia sẻ</string>
     <string name="choose_location">Chọn vị trí</string>
     <string name="origin">Điểm xuất phát</string>
     <string name="destination">Điểm đến</string>
@@ -92,7 +91,7 @@
     <string name="start_time">Thời gian khởi hành</string>
     <string name="location">Địa điểm</string>
     <string name="my_information">Thông tin của tôi</string>
-    <string name="my_transport">Phương tiện của tôi</string>
+    <string name="my_vehicle">Xe của tôi</string>
     <string name="register_as_a_driver">Đăng ký làm tài xế</string>
     <string name="driving_license">Giấy phép lái xe</string>
     <string name="identity_number">Số định danh</string>
@@ -130,4 +129,8 @@
     <string name="select_vehicle_type">Chọn loại xe</string>
     <string name="account">Tài khoản</string>
     <string name="notification">Thông báo</string>
+    <string name="vehicle_name">Tên xe</string>
+    <string name="select_your_vehicle">Lựa chọn xe của bạn</string>
+    <string name="vehicle_detail">Chi tiết xe</string>
+    <string name="reason_for_rejection">Lý do từ chối</string>
 </resources>
