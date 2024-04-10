@@ -1,23 +1,19 @@
 package com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Bundle;
-import android.view.View;
-
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.driver_registration.DriverRegistrationAdapter;
 import com.tech.cybercars.adapter.vehicle_detail.VehicleDetailAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.VehicleStatus;
 import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.ActivityVehicleDetailBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
-import com.tech.cybercars.ui.main.fragment.account.driver_register.DriverRegistrationViewModel;
 
 public class VehicleDetailActivity extends BaseActivity<ActivityVehicleDetailBinding, VehicleDetailViewModel> {
 

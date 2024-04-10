@@ -30,6 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CyberGo"
         android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
             android:name=".ui.main.fragment.account.my_vehicle.vehicle_detail.VehicleDetailActivity"
@@ -52,23 +53,12 @@
             android:name=".ui.main.notification.NotificationActivity"
             android:exported="false"
             android:parentActivityName=".ui.main.MainActivity" />
-
-        <service android:name=".services.socket.SocketService" />
-        <service
-            android:name=".services.fcm.CyberGoNotification"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
         <activity
             android:name=".ui.main.fragment.account.profile.edit_phone.update_phone_verification.UpdatePhoneVerificationActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.fragment.account.profile.edit_phone.EditPhoneActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="false" />
         <activity
             android:name=".ui.main.fragment.account.profile.edit_profile.EditProfileActivity"
             android:exported="false" />
@@ -82,7 +72,7 @@
             android:name=".ui.main.fragment.account.driver_register.DriverRegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.go.add_share_trip_information.AddShareTripInformationActivity"
+            android:name=".ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SearchMapActivity"
@@ -91,7 +81,10 @@
             android:name=".ui.main.fragment.account.VehicleTypeSelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.go.share_trip.ShareTripActivity"
+            android:name=".ui.main.fragment.go.share_trip.multiple_destination.MultipleShareTripActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.fragment.go.share_trip.single_destination.SingleShareTripActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.fragment.go.find_trip.FindTransportActivity"
@@ -113,8 +106,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.signup.verification.PhoneVerificationActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="false" />
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="false" />
@@ -124,14 +116,22 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            android:theme="@style/orange_status_bar"
-            android:windowSoftInputMode="adjustResize">
+            android:theme="@style/orange_status_bar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".services.socket.SocketService" />
+        <service
+            android:name=".services.fcm.CyberGoNotification"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

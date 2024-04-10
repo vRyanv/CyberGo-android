@@ -53,6 +53,9 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
         binding.txtResendAgainPhoneVerification.setText(SetUpSendAgainTextClickable());
         binding.txtResendAgainPhoneVerification.setMovementMethod(LinkMovementMethod.getInstance());
 
+        binding.headerPrimary.btnOutScreen.setOnClickListener(view -> {
+            OnBackPress();
+        });
     }
 
     @Override

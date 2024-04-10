@@ -17,10 +17,8 @@ import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.databinding.FragmentAccountBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
-import com.tech.cybercars.ui.main.fragment.account.driver_register.DriverRegistrationActivity;
 import com.tech.cybercars.ui.main.fragment.account.my_vehicle.MyVehicleActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
-import com.tech.cybercars.ui.main.fragment.go.vehicle_selection.VehicleSelectionActivity;
 import com.tech.cybercars.utils.PermissionUtil;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 

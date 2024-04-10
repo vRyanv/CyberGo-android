@@ -1,4 +1,4 @@
-package com.tech.cybercars.ui.main.fragment.go.share_trip;
+package com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination;
 
 import android.app.Application;
 
@@ -12,23 +12,24 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.StatusCode;
+import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.data.remote.base.CallServerStatus;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 import com.tech.cybercars.data.repositories.MapRepository;
 import com.tech.cybercars.services.mapbox.MapboxNavigationService;
 import com.tech.cybercars.ui.base.BaseViewModel;
+import com.tech.cybercars.utils.DateUtil;
 import com.tech.cybercars.utils.Helper;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShareTripViewModel extends BaseViewModel {
+public class SingleShareTripViewModel extends BaseViewModel {
     public final MutableLiveData<Boolean> is_success_reverse_geocoding = new MutableLiveData<>();
-    public final MutableLiveData<String> transport_type = new MutableLiveData<>();
+    public final MutableLiveData<Vehicle> vehicle = new MutableLiveData<>();
     public final MutableLiveData<String> route_time = new MutableLiveData<>();
     public final MutableLiveData<String> route_distance = new MutableLiveData<>();
     public final MutableLiveData<String> origin_address = new MutableLiveData<>();
@@ -88,15 +89,14 @@ public class ShareTripViewModel extends BaseViewModel {
             }
             DirectionsRoute route = response.body().routes().get(0);
             current_route.postValue(route);
-            String time = Helper.ConvertSecondToHour(route.duration());
+            String time = DateUtil.ConvertSecondToHour(route.duration());
             route_time.postValue(time);
 
             Double distance_meter = route.distance();
             if (distance_meter < 1000) {
                 route_distance.postValue(Math.round(distance_meter) + "m");
             } else {
-                DecimalFormat decimalFormat = new DecimalFormat("#.##");
-                String rounded_distance = decimalFormat.format(Helper.ConvertMeterToKiloMeter(distance_meter));
+                String rounded_distance = Helper.ConvertMeterToKiloMeterString(distance_meter);
                 route_distance.postValue(rounded_distance + " Km");
             }
 
@@ -149,7 +149,7 @@ public class ShareTripViewModel extends BaseViewModel {
         }
     };
 
-    public ShareTripViewModel(@NonNull Application application) {
+    public SingleShareTripViewModel(@NonNull Application application) {
         super(application);
     }
 

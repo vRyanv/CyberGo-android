@@ -19,45 +19,32 @@ public class DateTimePicker extends DialogFragment implements DatePickerDialog.O
     public static String D_M_Y = "dd/MM/yyyy";
     public static String Y_M_D = "yyyy/MM/dd/";
     public static String M_D_Y = "MM/dd/yyyy";
-    private TextView text_view;
-    private EditText edit_text;
     private String date_format;
-    private FragmentManager fragmentManager;
-    private String tag;
-
-    public DateTimePicker(FragmentManager fragmentManager, TextView text_view, String date_format,  String tag){
-        this.text_view = text_view;
+    private DateTimePickerCallback date_time_picker_callback;
+    private final FragmentManager fragment_manager;
+    public DateTimePicker(FragmentManager fragment_manager, String date_format){
         this.date_format = date_format;
-        this.fragmentManager = fragmentManager;
-        this.tag=tag;
-    }
-
-    public DateTimePicker(FragmentManager fragmentManager, EditText edit_text, String date_format, String tag){
-        this.edit_text = edit_text;
-        this.date_format = date_format;
-        this.fragmentManager = fragmentManager;
-        this.tag = tag;
+        this.fragment_manager = fragment_manager;
     }
 
     public void Run(){
-        this.show(this.fragmentManager, this.tag);
+        this.show(fragment_manager, "DateTimePicker");
     }
 
     public void SetFormatDate(String date_format){
         this.date_format = date_format;
+    }
+    public void SetOnDateTimePicked(DateTimePickerCallback date_time_picker_callback){
+        this.date_time_picker_callback = date_time_picker_callback;
     }
 
     @Override
     public void onDateSet(android.widget.DatePicker datePicker, int i, int i1, int i2) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(i,i1,i2);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(this.date_format, Locale.US);
-        String date_picked = simpleDateFormat.format(calendar.getTime());
-        if (this.edit_text != null){
-            this.edit_text.setText(date_picked);
-        }else if(this.text_view != null){
-            this.text_view.setText(date_picked);
-        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(this.date_format, Locale.getDefault());
+        String date_time_format = simpleDateFormat.format(calendar.getTime());
+        date_time_picker_callback.OnDateTimePicked(calendar, date_time_format);
     }
 
     @NonNull
@@ -68,5 +55,9 @@ public class DateTimePicker extends DialogFragment implements DatePickerDialog.O
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DATE);
         return new DatePickerDialog(requireActivity(), this, year, month, day);
+    }
+
+    public interface DateTimePickerCallback{
+        void OnDateTimePicked(Calendar calendar, String date_time_format);
     }
 }

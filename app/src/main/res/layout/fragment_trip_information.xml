@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationViewModel" />
+    </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_start_date"
+                    style="@style/input"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:endIconDrawable="@drawable/shape_ic_calendar"
+                    app:endIconMode="custom"
+                    app:endIconScaleType="center"
+                    app:endIconTint="@null"
+                    app:endIconTintMode="multiply"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:hint="@string/start_date"
+                        android:text="@{view_model.start_date}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_start_time"
+                    style="@style/input"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:endIconDrawable="@drawable/shape_ic_time"
+                    app:endIconMode="custom"
+                    app:endIconScaleType="center"
+                    app:endIconTint="@null"
+                    app:endIconTintMode="multiply"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/input_start_date">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:hint="@string/start_time"
+                        android:text="@{view_model.start_time}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_price"
+                    style="@style/input"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/input_start_time">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:hint="@string/price"
+                        android:inputType="numberDecimal"
+                        android:text="@={view_model.price}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_description"
+                    style="@style/input"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/input_price">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:layout_height="@dimen/_160sdp"
+                        android:gravity="start|top"
+                        android:hint="@string/description"
+                        android:inputType="textMultiLine"
+                        android:text="@={view_model.description}" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_85sdp">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_previous_to_location_info_fm"
+                    style="@style/btn_small_primary_outline"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/_0dp"
+                    android:text="@string/previous"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_share_trip"
+                    style="@style/btn_small_primary"
+                    android:layout_marginBottom="@dimen/_0dp"
+                    android:text="@string/share"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

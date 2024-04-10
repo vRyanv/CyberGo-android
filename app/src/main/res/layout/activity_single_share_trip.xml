@@ -24,8 +24,11 @@
             name="is_show_overlay"
             type="Boolean" />
         <variable
+            name="is_show_search_address_loading"
+            type="Boolean" />
+        <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.fragment.go.share_trip.ShareTripViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -212,12 +215,13 @@
                     android:id="@+id/input_from_map"
                     style="@style/input_location"
                     android:layout_marginTop="@dimen/_0dp"
-                    app:endIconMode="clear_text"
-                    app:endIconScaleType="centerInside"
-                    app:endIconTintMode="multiply"
+
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:endIconMode="clear_text"
+                    app:endIconScaleType="centerInside"
+                    app:endIconTintMode="multiply"
                     app:startIconDrawable="@drawable/ic_placeholder_red"
                     app:startIconScaleType="centerInside"
                     app:startIconTint="@null"
@@ -295,6 +299,15 @@
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/skeleton_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:visibility="@{is_show_search_address_loading ? View.VISIBLE : View.GONE, default=gone}">
+                <include layout="@layout/skeleton_search_address_result" />
+            </com.facebook.shimmer.ShimmerFrameLayout>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

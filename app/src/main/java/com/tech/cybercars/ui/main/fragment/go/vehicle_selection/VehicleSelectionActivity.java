@@ -1,32 +1,27 @@
 package com.tech.cybercars.ui.main.fragment.go.vehicle_selection;
 
+import android.app.Dialog;
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.notification.NotificationAdapter;
 import com.tech.cybercars.adapter.vehicles.VehicleAdapter;
+import com.tech.cybercars.constant.DestinationType;
 import com.tech.cybercars.constant.FieldName;
-import com.tech.cybercars.constant.VehicleType;
-import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.ActivityVehicleSelectionBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
+import com.tech.cybercars.ui.component.dialog.DestinationTypeSelectionDialog;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
-import com.tech.cybercars.ui.main.MainViewModel;
+import com.tech.cybercars.ui.main.fragment.go.share_trip.multiple_destination.MultipleShareTripActivity;
+import com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripActivity;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 
 public class VehicleSelectionActivity extends BaseActivity<ActivityVehicleSelectionBinding, VehicleSelectionViewModel> {
     private VehicleAdapter vehicle_adapter;
@@ -51,14 +46,20 @@ public class VehicleSelectionActivity extends BaseActivity<ActivityVehicleSelect
 
     @Override
     protected void InitView() {
+
+
         vehicle_adapter = new VehicleAdapter(this, new ArrayList<>());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         binding.rcvVehicle.setLayoutManager(layoutManager);
         binding.rcvVehicle.setAdapter(vehicle_adapter);
         vehicle_adapter.SetOnClickListener(vehicle -> {
-            Intent share_trip_intent = new Intent();
-            share_trip_intent.putExtra(FieldName.VEHICLE_TYPE, vehicle.vehicle_type);
-            startActivity(share_trip_intent);
+            DestinationTypeSelectionDialog type_selection_dialog = new DestinationTypeSelectionDialog(this);
+            type_selection_dialog.SetTypeSelectionCallback((dialog, destination_type) -> {
+                StartShareTripActivity(destination_type, vehicle);
+
+                dialog.dismiss();
+            });
+            type_selection_dialog.show();
         });
 
         binding.headerPrimary.btnOutScreen.setOnClickListener(view -> {
@@ -77,7 +78,7 @@ public class VehicleSelectionActivity extends BaseActivity<ActivityVehicleSelect
         });
 
         view_model.is_loading.observe(this, is_loading -> {
-            if(is_loading){
+            if (is_loading) {
                 binding.skeletonLoading.startShimmerAnimation();
             } else {
                 binding.swipeRefresh.setRefreshing(false);
@@ -91,6 +92,17 @@ public class VehicleSelectionActivity extends BaseActivity<ActivityVehicleSelect
     @Override
     protected void InitCommon() {
         view_model.HandleLoadVehicle();
+    }
+
+    private void StartShareTripActivity(String destination_type, Vehicle vehicle) {
+        Intent share_trip_intent;
+        if (destination_type.equals(DestinationType.MULTIPLE)) {
+            share_trip_intent = new Intent(this, MultipleShareTripActivity.class);
+        } else {
+            share_trip_intent = new Intent(this, SingleShareTripActivity.class);
+        }
+        share_trip_intent.putExtra(FieldName.VEHICLE, vehicle);
+        startActivity(share_trip_intent);
     }
 
     @Override

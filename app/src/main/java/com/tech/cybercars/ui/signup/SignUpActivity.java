@@ -51,6 +51,10 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
 
     @Override
     public void InitView() {
+        binding.headerPrimary.btnOutScreen.setOnClickListener(view ->{
+            OnBackPress();
+        });
+
         // check box terms and policy
         binding.txtAgreeTermPolicy.setText(SetUpCheckBoxOfTermsAndPolicyClickable());
         binding.txtAgreeTermPolicy.setMovementMethod(LinkMovementMethod.getInstance());

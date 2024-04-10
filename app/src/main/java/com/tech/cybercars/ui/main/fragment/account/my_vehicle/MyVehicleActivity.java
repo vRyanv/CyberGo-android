@@ -1,18 +1,14 @@
 package com.tech.cybercars.ui.main.fragment.account.my_vehicle;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.app.Dialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.vehicles.VehicleAdapter;
@@ -21,7 +17,6 @@ import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.databinding.ActivityMyVehicleBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
-import com.tech.cybercars.ui.main.MainViewModel;
 import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.VehicleDetailActivity;
 
 import java.util.ArrayList;

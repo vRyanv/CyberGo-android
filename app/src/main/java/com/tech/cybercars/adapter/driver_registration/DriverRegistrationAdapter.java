@@ -9,9 +9,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.DrivingLicenseTabFragment;
 import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.VehicleRegistrationCertificateTabFragment;
 import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.VehicleTabFragment;
-import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fragments.DrivingLicenseDetaiTablFragment;
-import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fragments.VehicleDetailTabFragment;
-import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fragments.VehicleRegistrationCertificateDetailTabFragment;
 
 public class DriverRegistrationAdapter extends FragmentStateAdapter {
     public DriverRegistrationAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {

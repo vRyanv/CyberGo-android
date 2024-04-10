@@ -48,6 +48,10 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
                 throw new RuntimeException(e);
             }
         });
+
+        binding.headerDriverRegistration.btnOutScreen.setOnClickListener(view -> {
+            OnBackPress();
+        });
     }
 
     @Override

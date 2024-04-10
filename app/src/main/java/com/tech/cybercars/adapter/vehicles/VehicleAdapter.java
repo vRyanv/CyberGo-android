@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.VehicleStatus;
 import com.tech.cybercars.constant.VehicleType;
-import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.data.models.Vehicle;
 
 import java.util.List;

@@ -13,10 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.FragmentGoBinding;
-import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.main.fragment.go.vehicle_selection.VehicleSelectionActivity;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class GoFragment extends Fragment {
     private FragmentGoBinding binding;

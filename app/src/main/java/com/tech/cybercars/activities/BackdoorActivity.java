@@ -9,9 +9,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.tech.cybercars.R;
 import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.main.fragment.account.VehicleTypeSelectionActivity;
-import com.tech.cybercars.ui.main.fragment.go.add_share_trip_information.AddShareTripInformationActivity;
-import com.tech.cybercars.ui.main.fragment.go.share_trip.ShareTripActivity;
+import com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripActivity;
 import com.tech.cybercars.ui.splash.SplashActivity;
+import com.tech.cybercars.utils.TimePicker;
 
 public class BackdoorActivity extends AppCompatActivity {
     MapView mapView;
@@ -41,7 +41,7 @@ public class BackdoorActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_select_location_bd).setOnClickListener(view -> {
-            startActivity(new Intent(this, ShareTripActivity.class));
+            startActivity(new Intent(this, SingleShareTripActivity.class));
         });
 
         findViewById(R.id.btn_choose_transport_to_share).setOnClickListener(view -> {
@@ -49,11 +49,24 @@ public class BackdoorActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_search_map_bd).setOnClickListener(view -> {
-            startActivity(new Intent(this, SearchMapActivity.class));
+//            startActivity(new Intent(this, SearchMapActivity.class));
         });
 
         findViewById(R.id.btn_share_info_tab).setOnClickListener(view -> {
-            startActivity(new Intent(this, AddShareTripInformationActivity.class));
+//            startActivity(new Intent(this, AddShareTripInformationActivity.class));
+//            DateTimePicker date_time_picker = new DateTimePicker(
+//                    this.getSupportFragmentManager(),
+//                    DateTimePicker.M_D_Y
+//            );
+//            date_time_picker.SetOnDateTimePicked((calendar, date_time_format) -> {
+//
+//            });
+//            date_time_picker.Run();
+            TimePicker time_picker = new TimePicker(getSupportFragmentManager());
+            time_picker.SetTimePickerCallback((hourOfDay, minute) -> {
+
+            });
+            time_picker.Run();
         });
     }
 }

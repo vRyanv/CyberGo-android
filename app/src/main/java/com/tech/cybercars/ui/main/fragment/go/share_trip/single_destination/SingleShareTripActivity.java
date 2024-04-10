@@ -1,4 +1,4 @@
-package com.tech.cybercars.ui.main.fragment.go.share_trip;
+package com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination;
 
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
@@ -50,18 +50,27 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.DestinationType;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.ThemeMode;
 import com.tech.cybercars.constant.VehicleType;
-import com.tech.cybercars.databinding.ActivityShareTripBinding;
+import com.tech.cybercars.data.models.Vehicle;
+import com.tech.cybercars.data.sub_models.Location;
+import com.tech.cybercars.data.sub_models.Road;
+import com.tech.cybercars.data.sub_models.TripSharing;
+import com.tech.cybercars.databinding.ActivitySingleShareTripBinding;
 import com.tech.cybercars.services.location.LocationService;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
-import com.tech.cybercars.ui.main.fragment.go.add_share_trip_information.AddShareTripInformationActivity;
+import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationActivity;
 import com.tech.cybercars.utils.KeyBoardUtil;
 
-public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, ShareTripViewModel> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTripBinding, SingleShareTripViewModel> {
     private BottomSheetBehavior<LinearLayout> bottom_sheet_behavior;
     private final String START_POINT_GEO_JSON_SOURCE_LAYER_ID = "start-point-source";
     private final String DESTINATION_GEO_JSON_SOURCE_LAYER_ID = "destination-source";
@@ -72,13 +81,13 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
     private Runnable search_debounce_runnable;
     @NonNull
     @Override
-    protected ShareTripViewModel InitViewModel() {
-        return new ViewModelProvider(this).get(ShareTripViewModel.class);
+    protected SingleShareTripViewModel InitViewModel() {
+        return new ViewModelProvider(this).get(SingleShareTripViewModel.class);
     }
 
     @Override
-    protected ActivityShareTripBinding InitBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_share_trip);
+    protected ActivitySingleShareTripBinding InitBinding() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_single_share_trip);
         binding.setViewModel(view_model);
         return binding;
     }
@@ -150,9 +159,9 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
             }
         });
 
-        view_model.transport_type.observe(this, transport_type -> {
-            if (transport_type != null) {
-                switch (transport_type) {
+        view_model.vehicle.observe(this, vehicle -> {
+            if (vehicle.vehicle_type != null) {
+                switch (vehicle.vehicle_type) {
                     case VehicleType.CAR:
                         binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_car);
                         break;
@@ -181,6 +190,9 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
                 binding.viewSearchAddressResultViewShareTrip.GetSearchAddressResultList().clear();
                 binding.viewSearchAddressResultViewShareTrip.setVisibility(View.GONE);
             }
+
+            binding.setIsShowSearchAddressLoading(false);
+            binding.skeletonLoading.stopShimmerAnimation();
         });
 
     }
@@ -193,8 +205,9 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
         binding.setIsExpandBottomSheet(false);
         binding.setIsShowOptionNextStep(false);
 
-        String transport_type = getIntent().getStringExtra(VehicleType.class.getSimpleName());
-        view_model.transport_type.setValue(transport_type);
+        Vehicle vehicle = (Vehicle) getIntent().getSerializableExtra(FieldName.VEHICLE);
+        assert vehicle != null;
+        view_model.vehicle.setValue(vehicle);
     }
 
     @Override
@@ -204,14 +217,57 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
 
     private void InitOptionNext() {
         binding.btnNextStepShareTrip.setOnClickListener(view -> {
-            Intent add_transport_information_activity = new Intent(this, AddShareTripInformationActivity.class);
-            startActivity(add_transport_information_activity);
+            startAddTripInformationActivity();
         });
 
         binding.btnCancelNextStepShareTrip.setOnClickListener(view -> {
             binding.setIsShowOptionNextStep(false);
             binding.bsLocationPicker.setVisibility(View.VISIBLE);
         });
+    }
+
+    private void startAddTripInformationActivity() {
+
+        String origin_city = view_model.origin_reverse.address.city;
+        String origin_state = view_model.origin_reverse.address.state;
+        String origin_county = view_model.origin_reverse.address.county;
+        String origin_address = view_model.origin_address.getValue();
+        List<Road> road_list = new ArrayList<>();
+        double time = view_model.current_route.getValue().duration();
+        double distance = view_model.current_route.getValue().distance();
+
+        double destination_longitude = view_model.destination_reverse.lng;
+        double destination_latitude = view_model.destination_reverse.lat;
+        String destination_address = view_model.destination_address.getValue();
+        Location location = new Location(
+                destination_longitude,
+                destination_latitude,
+                destination_address
+        );
+        String geometry = view_model.current_route.getValue().geometry();
+        Road road = new Road(
+                geometry,
+                time,
+                distance,
+                location
+        );
+        road_list.add(road);
+
+        TripSharing trip_sharing = new TripSharing(
+                origin_city,
+                origin_state,
+                origin_county,
+                origin_address,
+                road_list,
+                view_model.vehicle.getValue().id,
+                null,
+                null,
+                0
+        );
+        Intent trip_information_intent = new Intent(this, AddShareTripInformationActivity.class);
+        trip_information_intent.putExtra(FieldName.TRIP_SHARING, trip_sharing);
+        trip_information_intent.putExtra(FieldName.DESTINATION_TYPE, DestinationType.SINGLE);
+        startActivity(trip_information_intent);
     }
 
     private void InitSearchAddressResultView() {
@@ -407,6 +463,8 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
+            binding.setIsShowSearchAddressLoading(true);
+            binding.skeletonLoading.startShimmerAnimation();
             if (!s.toString().isEmpty() && bottom_sheet_behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                 search_debounce_handler.removeCallbacks(search_debounce_runnable);
                 search_debounce_runnable = () -> {
@@ -414,6 +472,8 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
                 };
                 search_debounce_handler.postDelayed(search_debounce_runnable, 1000);
             } else {
+                binding.setIsShowSearchAddressLoading(false);
+                binding.skeletonLoading.stopShimmerAnimation();
                 binding.viewSearchAddressResultViewShareTrip.GetSearchAddressResultList().clear();
                 binding.viewSearchAddressResultViewShareTrip.setVisibility(View.GONE);
             }
@@ -607,7 +667,7 @@ public class ShareTripActivity extends BaseActivity<ActivityShareTripBinding, Sh
 
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(ShareTripActivity.this, "WaitingGPS onFailure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SingleShareTripActivity.this, "WaitingGPS onFailure", Toast.LENGTH_SHORT).show();
             }
         };
         locationService.SetCallback(callback).Start();

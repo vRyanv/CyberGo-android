@@ -5,22 +5,70 @@
     <data>
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.fragment.go.add_share_trip_information.AddShareTripInformationViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.main.fragment.go.add_share_trip_information.fragment.LocationTabFragment">
+        tools:context=".ui.main.fragment.go.share_trip.add_share_trip_information.fragment.LocationTabFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="@dimen/_12sdp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_16sdp"
             android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/wrapper_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:src="@drawable/ic_route_distance" />
+
+                <TextView
+                    android:id="@+id/txt_total_distance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:breakStrategy="simple"
+                    android:fontFamily="@font/sp_pro_round_regular"
+                    android:text="@string/distance"
+                    android:textAlignment="inherit"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/wrapper_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:src="@drawable/ic_clock" />
+
+                <TextView
+                    android:id="@+id/txt_total_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:breakStrategy="simple"
+                    android:fontFamily="@font/sp_pro_round_regular"
+                    android:text="@string/time"
+                    android:textAlignment="inherit"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,103 +83,28 @@
                     android:src="@drawable/ic_placeholder_red" />
 
                 <TextView
+                    android:id="@+id/txt_origin_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:breakStrategy="simple"
                     android:fontFamily="@font/sp_pro_round_regular"
-                    android:text="@{view_model.origin, default=somewhere}"
                     android:textAlignment="inherit"
                     android:textSize="@dimen/_12ssp" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:src="@drawable/ic_placeholder_green" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:breakStrategy="simple"
-                    android:fontFamily="@font/sp_pro_round_regular"
-                    android:text="@{view_model.destination, default=somewhere}"
-                    android:textAlignment="inherit"
-                    android:textSize="@dimen/_12ssp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:src="@drawable/ic_route_distance" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:breakStrategy="simple"
-                    android:fontFamily="@font/sp_pro_round_regular"
-                    android:text="@{view_model.distance, default=distance}"
-                    android:textAlignment="inherit"
-                    android:textSize="@dimen/_12ssp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:src="@drawable/ic_clock" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:breakStrategy="simple"
-                    android:fontFamily="@font/sp_pro_round_regular"
-                    android:text="@{view_model.time_estimate, default=time}"
-                    android:textAlignment="inherit"
-                    android:textSize="@dimen/_12ssp" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/img_road_map_add_info_share_trip"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_16sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_choose_map" />
         </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_next_to_general_tab"
-            style="@style/btn_primary"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:text="@string/next" />
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:id="@+id/rcv_road_section"
+            android:layout_marginHorizontal="@dimen/_6sdp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:listitem="@layout/item_road_sections"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next_to_trip_info_fm"
+                android:layout_gravity="end"
+                android:text="@string/next"
+                style="@style/btn_small_primary"/>
     </LinearLayout>
 </layout>

@@ -68,8 +68,8 @@
     <string name="motorbike">Xe máy</string>
     <string name="truck">Xe tải</string>
     <string name="all">Tất cả</string>
-    <string name="find_transport">Tìm kiếm phương tiện</string>
-    <string name="share_my_transport">Chia sẻ phương tiện của tôi</string>
+    <string name="find_trip">Tìm kiếm chuyến đi</string>
+    <string name="share_my_trip">Chia sẻ chyến đi của tôi</string>
     <string name="the_type_of_transportation_you_want_to_share">Loại xe bạn muốn chia sẻ</string>
     <string name="choose_location">Chọn vị trí</string>
     <string name="origin">Điểm xuất phát</string>
@@ -133,4 +133,15 @@
     <string name="select_your_vehicle">Lựa chọn xe của bạn</string>
     <string name="vehicle_detail">Chi tiết xe</string>
     <string name="reason_for_rejection">Lý do từ chối</string>
+    <string name="trip_information">Thông tin chuyến đi</string>
+    <string name="distance">Khoảng cách</string>
+    <string name="time">Thời gian</string>
+    <string name="destination_type_selection">Lựa chọn loại điểm đến</string>
+    <string name="single">Một</string>
+    <string name="multiple">Nhiều</string>
+    <string name="the_type_of_destination_you_want">Loại điểm đến bạn muốn</string>
+    <string name="total_distance">"Tổng khoảng cách "</string>
+    <string name="total_time">Tổng thời gian</string>
+    <string name="price">Giá</string>
+    <string name="previous">Trước</string>
 </resources>

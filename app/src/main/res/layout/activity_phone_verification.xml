@@ -25,26 +25,9 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                style="@style/layout_header_box">
-
-                <TextView
-                    style="@style/txt_title_header"
-                    android:text="@string/phone_verification"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
-
-                <ImageButton
-                    style="@style/icon_button_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_arrow" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <include layout="@layout/header_primary"
+                android:id="@+id/header_primary"
+                app:title="@{@string/phone_verification}"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

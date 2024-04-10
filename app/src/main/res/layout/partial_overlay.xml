@@ -12,7 +12,7 @@
 
     <FrameLayout
         style="@style/loading_frame"
-        android:background="@color/white_blur_80"
+        android:background="@color/transparent"
         android:visibility="@{show ? View.VISIBLE : View.GONE, default=gone}">
     </FrameLayout>
 </layout>

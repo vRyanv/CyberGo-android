@@ -37,6 +37,5 @@ public class VehicleTypeSelectionActivity extends AppCompatActivity {
         selection.setBackgroundResource(R.drawable.shape_transport_type_selected);
 
         startActivity(new Intent(this, DriverRegistrationActivity.class).putExtra(FieldName.VEHICLE_TYPE, transport_type));
-        finish();
     }
 }

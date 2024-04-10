@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:minWidth="@dimen/_400sdp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_300sdp"
+        android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/layout_header_box">
+            <TextView
+                style="@style/txt_title_header"
+                android:text="@string/destination_type_selection"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/txt_sub_title_select_share_transportation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:text="@string/the_type_of_destination_you_want"
+                android:textAlignment="center"
+                android:textColor="@color/secondary"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:stretchColumns="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_sub_title_select_share_transportation">
+
+                <TableRow>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/type_multiple_select"
+                        style="@style/wrapper_transport_type_choose"
+                        android:layout_marginEnd="@dimen/_25sdp">
+
+                        <ImageView
+                            android:id="@+id/img_motorcycle_type_choose"
+                            style="@style/transport_type_choose"
+                            android:src="@drawable/ic_many_point_routing"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            style="@style/text_transport_type_choose"
+                            android:textSize="@dimen/_11ssp"
+                            android:text="@string/multiple"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/img_motorcycle_type_choose" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/type_single_select"
+                        style="@style/wrapper_transport_type_choose">
+
+                        <ImageView
+                            android:id="@+id/img_car_type_choose"
+                            style="@style/transport_type_choose"
+                            android:src="@drawable/ic_single_point_routing"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:textSize="@dimen/_11ssp"
+                            style="@style/text_transport_type_choose"
+                            android:text="@string/single"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/img_car_type_choose" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </TableRow>
+            </TableLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>

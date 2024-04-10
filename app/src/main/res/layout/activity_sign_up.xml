@@ -16,29 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            style="@style/layout_header_box"
-          >
-
-            <TextView
-                android:id="@+id/textView8"
-                android:text="@string/sign_up"
-                style="@style/txt_title_header"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"/>
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                style="@style/icon_button_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_arrow"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            layout="@layout/header_primary"
+            android:id="@+id/header_primary"
+            app:title="@{@string/sign_up}"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -148,6 +129,7 @@
                         style="@style/edit_text_input"
                         android:enabled="true"
                         android:focusable="false"
+                        android:cursorVisible="false"
                         android:hint="@string/gender"
                         android:inputType="none"
                         android:text="@{view_model.gender}" />

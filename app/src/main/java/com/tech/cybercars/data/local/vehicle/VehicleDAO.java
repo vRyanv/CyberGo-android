@@ -3,9 +3,7 @@ package com.tech.cybercars.data.local.vehicle;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
-import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.data.models.Vehicle;
 
 import java.util.List;

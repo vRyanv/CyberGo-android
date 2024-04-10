@@ -1,17 +1,16 @@
 package com.tech.cybercars.utils;
 
-import java.util.Locale;
+import java.text.DecimalFormat;
 
 public class Helper {
-    public static String ConvertSecondToHour(Double total_second){
-        int hours = (int) (total_second / 3600);
-        int minutes = (int) ((total_second % 3600) / 60);
-        int seconds = (int) (total_second % 60);
-        return String.format(Locale.US, "%02d:%02d:%02d", hours, minutes, seconds);
+    public static Double ConvertMeterToKiloMeter(Double meter){
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return meter/1000;
     }
 
-    public static Double ConvertMeterToKiloMeter(Double meter){
-       return meter/1000;
+    public static String ConvertMeterToKiloMeterString(Double meter){
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return decimalFormat.format(meter/1000);
     }
 
     public static String PadStart(int number, int length) {

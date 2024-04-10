@@ -4,7 +4,6 @@ import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
 import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
 import com.tech.cybercars.data.remote.retrofit.RetrofitRequest;
 import com.tech.cybercars.data.remote.retrofit.RetrofitResponse;
-import com.tech.cybercars.data.remote.user.UserServiceRetrofit;
 import com.tech.cybercars.data.remote.vehicle.ManyVehicleResponse;
 import com.tech.cybercars.data.remote.vehicle.VehicleServiceRetrofit;
 

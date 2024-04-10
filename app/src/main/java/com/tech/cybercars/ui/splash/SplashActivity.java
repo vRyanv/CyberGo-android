@@ -25,6 +25,12 @@ public class SplashActivity extends AppCompatActivity {
         animator.setTarget(findViewById(R.id.container_logo_splash));
         animator.start();
 
-        new Handler().postDelayed(()->{startActivity(new Intent(this, WelcomeActivity.class));}, DelayTime.SPLASH_SCREEN);
+        new Handler().postDelayed(
+                () -> {
+                    startActivity(new Intent(this, WelcomeActivity.class));
+                    finish();
+                },
+                DelayTime.SPLASH_SCREEN
+        );
     }
 }

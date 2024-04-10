@@ -2,17 +2,16 @@ package com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fr
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -23,7 +22,6 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.Vehicle;
-import com.tech.cybercars.databinding.FragmentDrivingLicenseDetailTabBinding;
 import com.tech.cybercars.databinding.FragmentVehicleRegistrationCertificateDetailTabBinding;
 import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.VehicleDetailViewModel;
 

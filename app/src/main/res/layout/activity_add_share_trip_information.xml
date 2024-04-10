@@ -5,10 +5,9 @@
     xmlns:bind="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.fragment.go.add_share_trip_information.AddShareTripInformationViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationViewModel" />
     </data>
 
     <LinearLayout
@@ -40,12 +39,8 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/my_information" />
+                    android:text="@string/trip_information" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/my_vehicle" />
             </com.google.android.material.tabs.TabLayout>
 
             <androidx.viewpager2.widget.ViewPager2

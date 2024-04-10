@@ -2,7 +2,6 @@ package com.tech.cybercars.ui.main;
 
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,12 +16,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.app.AppFragmentAdapter;
 import com.tech.cybercars.constant.FieldName;
-import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.databinding.ActivityMainBinding;
 import com.tech.cybercars.services.notification.NotificationService;
-import com.tech.cybercars.services.socket.SocketService;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.main.notification.NotificationActivity;
 import com.tech.cybercars.utils.SharedPreferencesUtil;

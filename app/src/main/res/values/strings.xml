@@ -69,8 +69,8 @@
     <string name="truck">Truck</string>
     <string name="all">All</string>
     <string name="go" translatable="false">Go</string>
-    <string name="find_transport">Find transport</string>
-    <string name="share_my_transport">Share my transport</string>
+    <string name="find_trip">Find trip</string>
+    <string name="share_my_trip">Share my trip</string>
     <string name="the_type_of_transportation_you_want_to_share">The type of vehicle you want to share</string>
     <string name="choose_location">Choose location</string>
     <string name="origin">Origin</string>
@@ -137,4 +137,16 @@
     <string name="select_your_vehicle">Select your vehicle</string>
     <string name="vehicle_detail">Vehicle detail</string>
     <string name="reason_for_rejection">Reason for rejection</string>
+    <string name="trip_information">Trip information</string>
+    <string name="distance">Distance</string>
+    <string name="time">Time</string>
+    <string name="destination_type_selection">Destination type selection</string>
+    <string name="single">Single</string>
+    <string name="multiple">Multiple</string>
+    <string name="the_type_of_destination_you_want">The type of destination you want</string>
+    <string name="total_distance">Total distance</string>
+    <string name="total_time">Total time</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+    <string name="previous">Previous</string>
 </resources>

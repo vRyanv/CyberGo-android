@@ -34,20 +34,21 @@ text normal = 14ssp
     10.1 notification: @done
     10.2 socket: @done
 11. my vehicle (account): @done
-12. my vehicle detail:
-    12.1 driving license:
-    12.2 vehicle detail:
-    12.3 registration detail:
+12. my vehicle detail: @done
+    12.1 driving license: @done
+    12.2 vehicle detail: @done
+    12.3 registration detail: @done
 
-11. share trip:
-    11.1 transport list:
-        view: done
-        model: done
-        repo: done
-        skeleton
-        activity:
-        view model:
-        api
+13. destination type selection: @done
+14. share trip:
+    14.1 select your vehicle: @done
+    14.2 Map performances (driver):
+        14.2.1 single route: @done
+        14.2.1 share trip information: ### thêm origin city | state | county
+            - location: origin | destination | distance | time
+        14.2.2 multiple route:
+
+
 12. vehicle management
 
 
