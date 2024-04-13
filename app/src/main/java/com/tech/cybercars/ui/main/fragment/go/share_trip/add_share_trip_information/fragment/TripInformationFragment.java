@@ -68,15 +68,56 @@ public class TripInformationFragment extends BaseFragment<FragmentTripInformatio
         binding.btnPreviousToLocationInfoFm.setOnClickListener(view -> {
             view_model.current_page.setValue(0);
         });
+
+        binding.btnShareTrip.setOnClickListener(view -> {
+            if (IsValidInfo()) {
+                view_model.HandleCreateTripSharing();
+            }
+        });
     }
 
     @Override
     protected void InitObserve() {
+        view_model.start_time.observe(this, start_time -> {
+            binding.inputStartTime.setError(null);
+        });
+
+        view_model.start_date.observe(this, start_date -> {
+            binding.inputStartDate.setError(null);
+        });
+
+        view_model.price.observe(this, price -> {
+            binding.inputPrice.setError(null);
+        });
 
     }
 
     @Override
     protected void InitCommon() {
 
+    }
+
+    private boolean IsValidInfo() {
+        boolean is_valid = true;
+        String error_str = "";
+        if (binding.inputStartDate.getEditText().getText().toString().equals("")) {
+            error_str = getString(R.string.start_date) + " " + getString(R.string.can_not_empty);
+            binding.inputStartDate.setError(error_str);
+            is_valid = false;
+        }
+
+        if (binding.inputStartTime.getEditText().getText().toString().equals("")) {
+            error_str = getString(R.string.start_time) + " " + getString(R.string.can_not_empty);
+            binding.inputStartTime.setError(error_str);
+            is_valid = false;
+        }
+
+        if (binding.inputPrice.getEditText().getText().toString().equals("")) {
+            error_str = getString(R.string.price) + " " + getString(R.string.can_not_empty);
+            binding.inputPrice.setError(error_str);
+            is_valid = false;
+        }
+
+        return is_valid;
     }
 }

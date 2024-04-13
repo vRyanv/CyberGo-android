@@ -51,6 +51,9 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
             KeyBoardUtil.HideKeyBoard(this);
             view_model.SignInHandle();
         });
+
+        view_model.email.setValue("khangok1610@gmail.com");
+        view_model.password.setValue("123123123");
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information;
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,9 +10,13 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.share_trip_information.ShareTripInformationAdapter;
 import com.tech.cybercars.constant.FieldName;
-import com.tech.cybercars.data.sub_models.TripSharing;
+import com.tech.cybercars.data.models.trip.Destination;
+import com.tech.cybercars.data.models.trip.Trip;
 import com.tech.cybercars.databinding.ActivityAddShareTripInformationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
+import com.tech.cybercars.ui.main.MainActivity;
+
+import java.util.ArrayList;
 
 public class AddShareTripInformationActivity extends BaseActivity<ActivityAddShareTripInformationBinding, AddShareTripInformationViewModel> {
 
@@ -44,6 +50,13 @@ public class AddShareTripInformationActivity extends BaseActivity<ActivityAddSha
         view_model.current_page.observe(this, current_page ->{
             binding.paperShareTripInformation.setCurrentItem(current_page);
         });
+
+        view_model.is_success.observe(this, is_success -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
     }
 
     @Override
@@ -56,11 +69,11 @@ public class AddShareTripInformationActivity extends BaseActivity<ActivityAddSha
             tab.setText(tab_name[position]);
         }).attach();
 
-        TripSharing trip_sharing = (TripSharing) getIntent().getSerializableExtra(FieldName.TRIP_SHARING);
-        view_model.trip_sharing.postValue(trip_sharing);
+        Trip trip = (Trip) getIntent().getSerializableExtra(FieldName.TRIP);
+        view_model.trip.postValue(trip);
 
-        String destination_type = getIntent().getStringExtra(FieldName.DESTINATION_TYPE);
-        view_model.destination_type.setValue(destination_type);
+        ArrayList<Destination> destination_list = (ArrayList<Destination>) getIntent().getSerializableExtra(FieldName.DESTINATIONS);
+        view_model.destination_list.setValue(destination_list);
     }
 
     @Override

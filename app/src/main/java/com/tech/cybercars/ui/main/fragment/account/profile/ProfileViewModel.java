@@ -68,7 +68,7 @@ public class ProfileViewModel extends BaseViewModel {
                 is_loading.postValue(false);
                 return;
             }
-            if (response.body().getCode() == StatusCode.OK) {
+            if (response.body().code == StatusCode.OK) {
                 user_profile = new User( response.body().id, response.body().role, response.body().email,
                         response.body().full_name, response.body().gender, response.body().avatar, response.body().id_number,
                         response.body().address, response.body().phone_number,  response.body().country.prefix,
@@ -85,7 +85,7 @@ public class ProfileViewModel extends BaseViewModel {
                 executor_service.shutdown();
 
                 BindData(user_profile);
-            } else if (response.body().getCode() == StatusCode.NOT_FOUND) {
+            } else if (response.body().code == StatusCode.NOT_FOUND) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
             is_loading.postValue(false);

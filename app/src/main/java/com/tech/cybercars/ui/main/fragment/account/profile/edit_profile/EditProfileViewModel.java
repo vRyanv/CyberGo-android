@@ -99,7 +99,7 @@ public class EditProfileViewModel extends BaseViewModel {
                 is_loading.postValue(false);
                 return;
             }
-            if (response.body().getCode() == StatusCode.UPDATED) {
+            if (response.body().code == StatusCode.UPDATED) {
                 edit_user.full_name = full_name.getValue();
                 SharedPreferencesUtil.SetString(getApplication(), FieldName.FULL_NAME, edit_user.full_name);
                 edit_user.gender = gender.getValue();
@@ -115,7 +115,7 @@ public class EditProfileViewModel extends BaseViewModel {
                 });
                 executor_service.shutdown();
                 is_success.postValue(true);
-            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+            } else if (response.body().code == StatusCode.BAD_REQUEST) {
                 error_update_profile.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
             is_loading.postValue(false);

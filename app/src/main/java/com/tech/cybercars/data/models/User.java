@@ -18,7 +18,6 @@ public class User implements Serializable {
     public String avatar;
     public String id_number;
     public String address;
-
     public String phone_number;
     public String country_prefix;
     public String country_name_code;

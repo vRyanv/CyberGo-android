@@ -1,22 +1,20 @@
 package com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.fragment;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.road_sections.RoadSectionsAdapter;
+import com.tech.cybercars.adapter.destination.DestinationAdapter;
 import com.tech.cybercars.constant.DestinationType;
-import com.tech.cybercars.data.sub_models.Road;
-import com.tech.cybercars.data.sub_models.TripSharing;
+import com.tech.cybercars.data.models.trip.Destination;
+import com.tech.cybercars.data.models.trip.Trip;
 import com.tech.cybercars.databinding.FragmentLocationTabBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationViewModel;
@@ -27,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocationTabFragment extends BaseFragment<FragmentLocationTabBinding, AddShareTripInformationViewModel> {
-    private RoadSectionsAdapter road_section_adapter;
+    private DestinationAdapter destination_adapter;
 
     @NonNull
     @Override
@@ -49,10 +47,10 @@ public class LocationTabFragment extends BaseFragment<FragmentLocationTabBinding
 
     @Override
     protected void InitView() {
-        road_section_adapter = new RoadSectionsAdapter(new ArrayList<>());
+        destination_adapter = new DestinationAdapter(new ArrayList<>());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        binding.rcvRoadSection.setLayoutManager(layoutManager);
-        binding.rcvRoadSection.setAdapter(road_section_adapter);
+        binding.rcvDestinations.setLayoutManager(layoutManager);
+        binding.rcvDestinations.setAdapter(destination_adapter);
 
         binding.btnNextToTripInfoFm.setOnClickListener(view -> {
             view_model.current_page.setValue(1);
@@ -61,13 +59,8 @@ public class LocationTabFragment extends BaseFragment<FragmentLocationTabBinding
 
     @Override
     protected void InitObserve() {
-        view_model.trip_sharing.observe(requireActivity(), this::BindDataToUI);
-        view_model.destination_type.observe(requireActivity(), destination_type -> {
-            if(destination_type.equals(DestinationType.SINGLE)){
-                binding.wrapperDistance.setVisibility(View.GONE);
-                binding.wrapperTime.setVisibility(View.GONE);
-            }
-        });
+        view_model.trip.observe(requireActivity(), this::BindTripDataToUI);
+        view_model.destination_list.observe(requireActivity(), this::BindDestinationDataToUI);
     }
 
     @Override
@@ -75,21 +68,25 @@ public class LocationTabFragment extends BaseFragment<FragmentLocationTabBinding
 
     }
 
-    private void BindDataToUI(TripSharing trip_sharing) {
-        List<Road> road_list = trip_sharing.road_sections;
-        road_section_adapter.UpdateAdapter(road_list);
+    private void BindTripDataToUI(Trip trip) {
+        binding.txtOriginAddress.setText(trip.origin_address);
+        if(trip.destination_type.equals(DestinationType.SINGLE)){
+            binding.wrapperTime.setVisibility(View.GONE);
+            binding.wrapperDistance.setVisibility(View.GONE);
+        }
+    }
+    private void BindDestinationDataToUI(ArrayList<Destination> destination_list) {
+        destination_adapter.UpdateAdapter(destination_list);
         double distance = 0;
         double time = 0;
-        for (Road road : road_list) {
-            distance += road.distance;
-            time += road.time;
+        for (Destination destination : destination_list) {
+            distance += destination.distance;
+            time += destination.time;
         }
         String total_distance = getString(R.string.total_distance) + ": " + Helper.ConvertMeterToKiloMeterString(distance) + " Km";
         binding.txtTotalDistance.setText(total_distance);
 
         String total_time = getString(R.string.total_time) + ": " + DateUtil.ConvertSecondToHour(time);
         binding.txtTotalTime.setText(total_time);
-
-        binding.txtOriginAddress.setText(trip_sharing.origin_address);
     }
 }

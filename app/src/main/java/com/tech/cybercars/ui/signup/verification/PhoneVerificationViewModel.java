@@ -101,16 +101,17 @@ public class PhoneVerificationViewModel extends BaseViewModel {
     private void CallVerifySuccess(Response<VerificationResponse> verify_response) {
         is_loading.postValue(false);
         new Handler().postDelayed(() -> {
-            if (verify_response.body().getCode() == StatusCode.UPDATED) {
+            assert verify_response.body() != null;
+            if (verify_response.body().code == StatusCode.UPDATED) {
                 String user_token = verify_response.body().getUser_token();
                 SharedPreferencesUtil.SetString(
                         getApplication(),
                         SharedPreferencesUtil.USER_TOKEN_KEY,
                         user_token);
                 is_success.postValue(true);
-            } else if (verify_response.body().getCode() == StatusCode.NOT_FOUND) {
+            } else if (verify_response.body().code == StatusCode.NOT_FOUND) {
                 error_otp_code.postValue(getApplication().getString(R.string.otp_code_is_incorrect));
-            } else if (verify_response.body().getCode() == StatusCode.BAD_REQUEST) {
+            } else if (verify_response.body().code == StatusCode.BAD_REQUEST) {
                 error_otp_code.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
         }, DelayTime.CALL_API);

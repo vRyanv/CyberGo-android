@@ -54,7 +54,7 @@ public class VehicleSelectionViewModel extends BaseViewModel {
                 is_loading.postValue(false);
                 return;
             }
-            if (response.body().getCode() == StatusCode.OK) {
+            if (response.body().code == StatusCode.OK) {
                 List<Vehicle> vehicle_accpected_list = new ArrayList<>();
                 for ( Vehicle vehicle : response.body().vehicle_list) {
                     if(vehicle.status.equals(VehicleStatus.ACCEPTED)){

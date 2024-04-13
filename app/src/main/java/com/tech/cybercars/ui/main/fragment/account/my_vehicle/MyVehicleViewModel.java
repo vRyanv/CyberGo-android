@@ -54,7 +54,7 @@ public class MyVehicleViewModel extends BaseViewModel {
                 is_loading.postValue(false);
                 return;
             }
-            if (response.body().getCode() == StatusCode.OK) {
+            if (response.body().code == StatusCode.OK) {
                 vehicle_list.postValue(response.body().vehicle_list);
                 ExecutorService executor_service = Executors.newSingleThreadExecutor();
                 executor_service.execute(() -> {

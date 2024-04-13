@@ -119,9 +119,9 @@ public class DriverRegistrationViewModel extends BaseViewModel {
                 is_loading.postValue(false);
                 return;
             }
-            if (response.body().getCode() == StatusCode.CREATED) {
+            if (response.body().code == StatusCode.CREATED) {
                 is_success.postValue(true);
-            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+            } else if (response.body().code == StatusCode.BAD_REQUEST) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
 

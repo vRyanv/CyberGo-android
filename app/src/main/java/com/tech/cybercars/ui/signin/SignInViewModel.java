@@ -108,7 +108,7 @@ public class SignInViewModel extends BaseViewModel {
                 is_loading.postValue(false);
                 return;
             }
-            if (response.body().getCode() == StatusCode.OK) {
+            if (response.body().code == StatusCode.OK) {
                 String token = response.body().token;
                 SharedPreferencesUtil.SetString(
                         getApplication(),
@@ -144,11 +144,11 @@ public class SignInViewModel extends BaseViewModel {
                         phone_number
                 );
                 is_success.postValue(true);
-            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+            } else if (response.body().code == StatusCode.BAD_REQUEST) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
-            } else if (response.body().getCode() == StatusCode.NOT_FOUND) {
+            } else if (response.body().code == StatusCode.NOT_FOUND) {
                 error_login.postValue(getApplication().getString(R.string.wrong_email_or_password));
-            } else if (response.body().getCode() == StatusCode.VERIFY) {
+            } else if (response.body().code == StatusCode.VERIFY) {
                 is_verify_account.postValue(true);
             }
             is_loading.postValue(false);

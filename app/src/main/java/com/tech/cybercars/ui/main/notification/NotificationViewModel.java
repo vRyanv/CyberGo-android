@@ -54,7 +54,7 @@ public class NotificationViewModel extends BaseViewModel {
                 return;
             }
 
-            if (response.body().getCode() == StatusCode.OK) {
+            if (response.body().code == StatusCode.OK) {
                 notification_list.postValue(response.body().notification_list);
             }
 

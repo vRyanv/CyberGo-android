@@ -2,7 +2,8 @@ package com.tech.cybercars.constant;
 
 public class FieldName {
     //map
-    public final static String TRIP_SHARING = "trip_sharing";
+    public final static String TRIP = "trip";
+    public final static String DESTINATIONS = "destinations";
     public final static String DESTINATION_TYPE = "destination_type";
 
     //notification

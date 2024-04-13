@@ -175,11 +175,11 @@ public class SignUpViewModel extends BaseViewModel {
                 return;
             }
 
-            if (response.body().getCode() == StatusCode.CREATED) {
+            if (response.body().code == StatusCode.CREATED) {
                 is_success.postValue(true);
-            } else if (response.body().getCode() == StatusCode.VERIFY) {
+            } else if (response.body().code == StatusCode.VERIFY) {
                 is_verify_account.postValue(true);
-            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+            } else if (response.body().code == StatusCode.BAD_REQUEST) {
                 if (response.body().isIs_email_used()) {
                     email_error.postValue(getApplication().getString(R.string.email_has_been_used));
                 }

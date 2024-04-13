@@ -23,7 +23,7 @@ public class DateUtil {
     }
 
     public static long ConvertTimeToTimestamp(String date_str) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
         Date date = sdf.parse(date_str);
         assert date != null;
         return  (date.getTime() / 1_000_000);

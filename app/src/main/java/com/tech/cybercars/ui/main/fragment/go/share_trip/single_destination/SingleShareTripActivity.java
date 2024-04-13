@@ -19,6 +19,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -56,9 +57,8 @@ import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.ThemeMode;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.Vehicle;
-import com.tech.cybercars.data.sub_models.Location;
-import com.tech.cybercars.data.sub_models.Road;
-import com.tech.cybercars.data.sub_models.TripSharing;
+import com.tech.cybercars.data.models.trip.Destination;
+import com.tech.cybercars.data.models.trip.Trip;
 import com.tech.cybercars.databinding.ActivitySingleShareTripBinding;
 import com.tech.cybercars.services.location.LocationService;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
@@ -227,46 +227,48 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
     }
 
     private void startAddTripInformationActivity() {
-
         String origin_city = view_model.origin_reverse.address.city;
         String origin_state = view_model.origin_reverse.address.state;
         String origin_county = view_model.origin_reverse.address.county;
         String origin_address = view_model.origin_address.getValue();
-        List<Road> road_list = new ArrayList<>();
+        ArrayList<Destination> destination_list = new ArrayList<>();
+        String geometry = view_model.current_route.getValue().geometry();
         double time = view_model.current_route.getValue().duration();
         double distance = view_model.current_route.getValue().distance();
-
-        double destination_longitude = view_model.destination_reverse.lng;
-        double destination_latitude = view_model.destination_reverse.lat;
-        String destination_address = view_model.destination_address.getValue();
-        Location location = new Location(
-                destination_longitude,
-                destination_latitude,
-                destination_address
-        );
-        String geometry = view_model.current_route.getValue().geometry();
-        Road road = new Road(
+        String city = view_model.destination_reverse.address.city;
+        String state = view_model.destination_reverse.address.state;
+        String county = view_model.destination_reverse.address.county;
+        String address = view_model.destination_address.getValue();
+        double longitude = view_model.destination_reverse.lng;
+        double latitude = view_model.destination_reverse.lat;
+        Destination destination = new Destination(
+                "",
+                "",
                 geometry,
                 time,
                 distance,
-                location
+                city,
+                state,
+                county,
+                address,
+                longitude,
+                latitude
         );
-        road_list.add(road);
-
-        TripSharing trip_sharing = new TripSharing(
+        destination_list.add(destination);
+        Trip trip = new Trip(
+                "",
                 origin_city,
                 origin_state,
                 origin_county,
                 origin_address,
-                road_list,
+                DestinationType.SINGLE,
                 view_model.vehicle.getValue().id,
-                null,
                 null,
                 0
         );
         Intent trip_information_intent = new Intent(this, AddShareTripInformationActivity.class);
-        trip_information_intent.putExtra(FieldName.TRIP_SHARING, trip_sharing);
-        trip_information_intent.putExtra(FieldName.DESTINATION_TYPE, DestinationType.SINGLE);
+        trip_information_intent.putExtra(FieldName.TRIP, trip);
+        trip_information_intent.putExtra(FieldName.DESTINATIONS, destination_list);
         startActivity(trip_information_intent);
     }
 

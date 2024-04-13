@@ -7,6 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.tech.cybercars.data.local.notification.NotificationDAO;
+import com.tech.cybercars.data.local.trip.DestinationDAO;
+import com.tech.cybercars.data.local.trip.TripDAO;
 import com.tech.cybercars.data.local.user.UserDAO;
 import com.tech.cybercars.data.local.vehicle.VehicleDAO;
 import com.tech.cybercars.data.models.Chat;
@@ -14,13 +16,17 @@ import com.tech.cybercars.data.models.Message;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.data.models.Vehicle;
+import com.tech.cybercars.data.models.trip.Destination;
+import com.tech.cybercars.data.models.trip.Trip;
 
 @Database(entities = {
         User.class,
         Notification.class,
         Chat.class,
         Message.class,
-        Vehicle.class
+        Vehicle.class,
+        Trip.class,
+        Destination.class
 }, version = 1)
 public abstract class AppDBContext extends RoomDatabase {
     private static final String DATABASE_NAME = "cyber_go.db";
@@ -41,4 +47,6 @@ public abstract class AppDBContext extends RoomDatabase {
     public abstract UserDAO UserDao();
     public abstract NotificationDAO NotificationDAO();
     public abstract VehicleDAO VehicleDAO();
+    public abstract TripDAO TripDAO();
+    public abstract DestinationDAO DestinationDAO();
 }

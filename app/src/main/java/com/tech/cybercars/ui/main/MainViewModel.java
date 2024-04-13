@@ -54,14 +54,14 @@ public class MainViewModel extends BaseViewModel {
                         return;
                     }
 
-                    if (response.body().getCode() == StatusCode.UPDATED) {
-                        Toast.makeText(getApplication(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    if (response.body().code == StatusCode.UPDATED) {
+                        Toast.makeText(getApplication(), response.body().message, Toast.LENGTH_SHORT).show();
                         SharedPreferencesUtil.SetBoolean(
                                 getApplication(),
                                 SharedPreferencesUtil.IS_FIREBASE_TOKEN_UPDATED,
                                 true);
                     } else {
-                        Toast.makeText(getApplication(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), response.body().message, Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> {

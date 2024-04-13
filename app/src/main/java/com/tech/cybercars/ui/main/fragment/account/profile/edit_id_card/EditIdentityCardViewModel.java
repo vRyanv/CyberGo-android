@@ -89,7 +89,7 @@ public class EditIdentityCardViewModel extends BaseViewModel {
                 return;
             }
             assert response.body() != null;
-            if (response.body().getCode() == StatusCode.UPDATED) {
+            if (response.body().code == StatusCode.UPDATED) {
                 if (response.body().front_id_card != null) {
                     user_edit.front_id_card = response.body().front_id_card;
                 }
@@ -105,7 +105,7 @@ public class EditIdentityCardViewModel extends BaseViewModel {
                 executor_service.shutdown();
 
                 is_success.postValue(true);
-            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+            } else if (response.body().code == StatusCode.BAD_REQUEST) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
             is_loading.postValue(false);

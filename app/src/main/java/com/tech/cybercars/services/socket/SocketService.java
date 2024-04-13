@@ -38,16 +38,19 @@ public class SocketService extends Service {
     public void onCreate() {
         super.onCreate();
         InitSocketIO();
-        is_running = true;
     }
 
     private void InitSocketIO() {
-        String token_key = SharedPreferencesUtil.GetString(
+        String user_token = SharedPreferencesUtil.GetString(
                 getApplicationContext(),
                 SharedPreferencesUtil.USER_TOKEN_KEY
         );
+        if(user_token.equals("")){
+            return;
+        }
+
         Map<String, String> auth = new HashMap<>();
-        auth.put("token", token_key);
+        auth.put("token", user_token);
         IO.Options options = IO.Options.builder()
                 .setForceNew(true)
                 .setReconnectionAttempts(Integer.MAX_VALUE)
@@ -56,10 +59,10 @@ public class SocketService extends Service {
                 .build();
 
         try {
-
             socket = IO.socket(URL.BASE_URL, options);
             SocketListener();
             socket.connect();
+            is_running = true;
         } catch (URISyntaxException ignored) {
             Log.e(Tag.CYBER_DEBUG, ignored.getMessage());
         }
@@ -81,6 +84,9 @@ public class SocketService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
          super.onStartCommand(intent, flags, startId);
         Log.e(Tag.CYBER_DEBUG, "onStartCommand");
+        if(!is_running){
+            InitSocketIO();
+        }
         return START_STICKY;
     }
 

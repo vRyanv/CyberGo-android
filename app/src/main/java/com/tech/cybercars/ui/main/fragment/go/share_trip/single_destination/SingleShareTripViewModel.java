@@ -126,7 +126,7 @@ public class SingleShareTripViewModel extends BaseViewModel {
         public void CallSuccess(Response<ReverseGeocodingResponse> response) {
             is_loading.postValue(false);
             assert response.body() != null;
-            if (response.body().getCode() == StatusCode.OK) {
+            if (response.body().code == StatusCode.OK) {
                 if (pick_location == PickLocation.PICK_START_POINT) {
                     origin_address.postValue(response.body().display_name);
                     origin_reverse = response.body();
@@ -135,9 +135,9 @@ public class SingleShareTripViewModel extends BaseViewModel {
                     destination_reverse = response.body();
                 }
                 is_success_reverse_geocoding.postValue(true);
-            } else if (response.body().getCode() == StatusCode.NOT_FOUND) {
+            } else if (response.body().code == StatusCode.NOT_FOUND) {
                 is_success_reverse_geocoding.postValue(false);
-            } else if (response.body().getCode() == StatusCode.BAD_REQUEST) {
+            } else if (response.body().code == StatusCode.BAD_REQUEST) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
         }

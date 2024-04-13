@@ -13,7 +13,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.tech.cybercars.constant.Tag;
+import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.services.socket.SocketService;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class CyberGoApplication extends Application {
     public static CyberGoApplication instance;
@@ -34,10 +39,7 @@ public class CyberGoApplication extends Application {
 
             @Override
             public void onActivityStarted(@NonNull Activity activity) {
-                if(!SocketService.is_running){
-                    StartSocketService();
-                }
-                Log.e(Tag.CYBER_DEBUG, "onActivityStarted");
+                StartSocketService();
             }
 
             @Override
@@ -65,9 +67,11 @@ public class CyberGoApplication extends Application {
         });
     }
 
-    private void StartSocketService(){
-        Intent socket_intent = new Intent(this, SocketService.class);
-        startService(socket_intent);
+    public void StartSocketService(){
+        if(!SocketService.is_running){
+            Intent socket_intent = new Intent(this, SocketService.class);
+            startService(socket_intent);
+        }
     }
 
     private void CreateNormalChanelNotification(){
