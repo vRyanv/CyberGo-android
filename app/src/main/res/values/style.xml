@@ -220,6 +220,7 @@
         <item name="android:layout_width">@dimen/_60sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
     </style>
+
     <style name="btn_primary_outline">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/_39sdp</item>

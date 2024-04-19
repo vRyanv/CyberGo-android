@@ -1,13 +1,13 @@
 <vector android:autoMirrored="true" android:height="128dp"
     android:viewportHeight="64" android:viewportWidth="64"
     android:width="128dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="#FF000000" android:pathData="m55,27h-46a3.968,3.968 0,0 0,-0.78 0.07,4.993 4.993,0 0,0 -4.22,4.93v2h7a5.002,5.002 0,0 1,5 5h32a5.002,5.002 0,0 1,5 -5h7v-2a5.021,5.021 0,0 0,-5 -5z"/>
-    <path android:fillColor="#FF000000" android:pathData="m11,36h-7v3h10a3.009,3.009 0,0 0,-3 -3z"/>
-    <path android:fillColor="#FF000000" android:pathData="m50,39h10v-3h-7a3.009,3.009 0,0 0,-3 3z"/>
-    <path android:fillColor="#FF000000" android:pathData="m25,41h14v6h-14z"/>
-    <path android:fillColor="#FF000000" android:pathData="m4,45a2.006,2.006 0,0 0,2 2h17v-6h-19z"/>
-    <path android:fillColor="#FF000000" android:pathData="m7,52a3.009,3.009 0,0 0,3 3h4a3.009,3.009 0,0 0,3 -3v-3h-10z"/>
-    <path android:fillColor="#FF000000" android:pathData="m41,47h17a2.006,2.006 0,0 0,2 -2v-4h-19z"/>
-    <path android:fillColor="#FF000000" android:pathData="m47,52a3.009,3.009 0,0 0,3 3h4a3.009,3.009 0,0 0,3 -3v-3h-10z"/>
-    <path android:fillColor="#FF000000" android:pathData="m55.21,25.01 l-3.43,-12.35a5.022,5.022 0,0 0,-4.82 -3.66h-29.92a5.022,5.022 0,0 0,-4.82 3.66l-3.43,12.35c0.459,-0.024 45.967,-0.013 46.42,0z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m55,27h-46a3.968,3.968 0,0 0,-0.78 0.07,4.993 4.993,0 0,0 -4.22,4.93v2h7a5.002,5.002 0,0 1,5 5h32a5.002,5.002 0,0 1,5 -5h7v-2a5.021,5.021 0,0 0,-5 -5z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m11,36h-7v3h10a3.009,3.009 0,0 0,-3 -3z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m50,39h10v-3h-7a3.009,3.009 0,0 0,-3 3z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m25,41h14v6h-14z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m4,45a2.006,2.006 0,0 0,2 2h17v-6h-19z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m7,52a3.009,3.009 0,0 0,3 3h4a3.009,3.009 0,0 0,3 -3v-3h-10z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m41,47h17a2.006,2.006 0,0 0,2 -2v-4h-19z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m47,52a3.009,3.009 0,0 0,3 3h4a3.009,3.009 0,0 0,3 -3v-3h-10z"/>
+    <path android:fillColor="@color/white_dark_reverse" android:pathData="m55.21,25.01 l-3.43,-12.35a5.022,5.022 0,0 0,-4.82 -3.66h-29.92a5.022,5.022 0,0 0,-4.82 3.66l-3.43,12.35c0.459,-0.024 45.967,-0.013 46.42,0z"/>
 </vector>

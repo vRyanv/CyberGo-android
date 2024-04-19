@@ -7,4 +7,6 @@ public class ActivityResult{
     public static final int CREATED = 4;
     public static final int DELETED = 5;
 
+    public static final int GO_TO_TRIP_FRAGMENT = 6;
+
 }

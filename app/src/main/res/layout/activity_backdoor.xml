@@ -5,6 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.BackdoorActivity">
+
+
+    <com.willy.ratingbar.BaseRatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srb_clearRatingEnabled="true"
+        app:srb_clickable="true"
+        app:srb_drawableEmpty="@drawable/ic_star_off"
+        app:srb_drawableFilled="@drawable/ic_star"
+        app:srb_isIndicator="false"
+        app:srb_minimumStars="1"
+        app:srb_numStars="3"
+        app:srb_rating="2"
+        app:srb_scrollable="true"
+        app:srb_starHeight="@dimen/_25sdp"
+        app:srb_starPadding="@dimen/_5sdp"
+        app:srb_starWidth="@dimen/_25sdp"
+        app:srb_stepSize="1" />
+
     <Button
         android:id="@+id/btn_push_notify"
         android:layout_width="wrap_content"
@@ -15,6 +41,7 @@
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_share_info_tab" />
+
     <Button
         android:id="@+id/btn_share_info_tab"
         android:layout_width="wrap_content"
@@ -80,21 +107,21 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="68dp"
         android:text="Back door"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <com.mapbox.mapboxsdk.maps.MapView-->
-<!--        android:id="@+id/mapbox"-->
-<!--        android:layout_width="384dp"-->
-<!--        android:layout_height="279dp"-->
-<!--        android:layout_marginEnd="9dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--    <com.mapbox.mapboxsdk.maps.MapView-->
+    <!--        android:id="@+id/mapbox"-->
+    <!--        android:layout_width="384dp"-->
+    <!--        android:layout_height="279dp"-->
+    <!--        android:layout_marginEnd="9dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

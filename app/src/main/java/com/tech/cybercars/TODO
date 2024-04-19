@@ -44,10 +44,27 @@ text normal = 14ssp
     14.1 select your vehicle: @done
     14.2 Map performances (driver):
         14.2.1 single route: @done
-        14.2.1 share trip information: ### thêm origin city | state | county
-            - location: origin | destination | distance | time
+        14.2.1 share trip information: @done
         14.2.2 multiple route:
+15. find trip:
+    15.1 trip found adapter: @done
+    15.2 choose location and find trip: @done
+    15.2 trip found list: @done
+    15.3 layer map: @done
+        15.3.1 route: @done
+        15.3.2 trip: @done
+        15.3.3 mark point: @done
+    15.4 filter vehicle type: @done
+    15.5 vehicle button clicked: @done
 
+16. trip found detail:
+    1. information FM: @done
+    2. location FM:
+    3. member FM:
+
+
+
+15. trip management:
 
 12. vehicle management
 

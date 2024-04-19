@@ -142,6 +142,21 @@
     <string name="the_type_of_destination_you_want">Loại điểm đến bạn muốn</string>
     <string name="total_distance">"Tổng khoảng cách "</string>
     <string name="total_time">Tổng thời gian</string>
+    <string name="description">Mô tả</string>
     <string name="price">Giá</string>
     <string name="previous">Trước</string>
+    <string name="trip">Chuyến đi</string>
+    <string name="trip_name">Tên chuyến đi</string>
+    <string name="multiple_destination">Nhiều điểm đến</string>
+    <string name="single_destination">Một điểm đến</string>
+    <string name="free">Miễn phí</string>
+    <string name="trip_management">Quản lý chuyến đi</string>
+    <string name="shared_successfully">Chia sẻ thành công</string>
+    <string name="you_will_get_notification_when_someone_else_wants_to_join_you">Bạn sẽ nhận được thông báo khi người khác muốn tham gia cùng bạn</string>
+    <string name="trip_detail">Chi tiết chuyến đi</string>
+    <string name="member">Thành viên</string>
+    <string name="information">Thông tin</string>
+    <string name="no_description_available">Không có mô tả</string>
+    <string name="no_members_have_been_joined_yet">Chưa có thành viên nào được tham gia</string>
+    <string name="request_to_join">Yêu cầu gia nhập</string>
 </resources>

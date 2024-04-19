@@ -22,7 +22,6 @@ import com.tech.cybercars.utils.DateUtil;
 import com.tech.cybercars.utils.Helper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LocationTabFragment extends BaseFragment<FragmentLocationTabBinding, AddShareTripInformationViewModel> {
     private DestinationAdapter destination_adapter;

@@ -33,6 +33,15 @@
         android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.user_profile.UserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.fragment.go.find_trip.trip_found_detail.TripFoundDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.fragment.go.find_trip.FindTripActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.fragment.account.my_vehicle.vehicle_detail.VehicleDetailActivity"
             android:exported="false" />
         <activity

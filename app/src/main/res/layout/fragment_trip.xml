@@ -5,19 +5,15 @@
     <data>
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.fragment.activity.ActivityViewModel" />
+            type="com.tech.cybercars.ui.main.fragment.trip.TripViewModel" />
     </data>
-
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.main.fragment.activity.ActivityFragment">
-
+        android:layout_height="match_parent">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="@dimen/_36sdp"
-            android:text="SHARE" />
-
-    </FrameLayout>
+            android:text="@string/share"/>
+    </LinearLayout>
 </layout>

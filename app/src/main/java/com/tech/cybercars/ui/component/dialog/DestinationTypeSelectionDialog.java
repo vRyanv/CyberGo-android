@@ -1,15 +1,12 @@
 package com.tech.cybercars.ui.component.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Window;
 
 import androidx.annotation.NonNull;
 
-import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DestinationType;
 import com.tech.cybercars.databinding.DialogDestinationTypeSelectionBinding;
 

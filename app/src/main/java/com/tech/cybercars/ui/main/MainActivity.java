@@ -7,15 +7,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.app.AppFragmentAdapter;
+import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
+import com.tech.cybercars.constant.PaperMain;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.databinding.ActivityMainBinding;
@@ -55,13 +60,31 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         binding.bottomNavMain.setOnItemSelectedListener(item -> {
             int selected_item = item.getItemId();
             if(R.id.go_fragment_item == selected_item){
-                binding.pagerMain.setCurrentItem(0, false);
-            } else if (R.id.activity_fragment_item == selected_item) {
-                binding.pagerMain.setCurrentItem(1, false);
-            } else if (R.id.setting_fragment_item == selected_item) {
-                binding.pagerMain.setCurrentItem(3, false);
+                binding.pagerMain.setCurrentItem(PaperMain.GO_FRAGMENT, true);
+            } else if (R.id.trip_fragment_item == selected_item) {
+                binding.pagerMain.setCurrentItem(PaperMain.TRIP_FRAGMENT, true);
+            } else if (R.id.account_fragment_item == selected_item) {
+                binding.pagerMain.setCurrentItem(PaperMain.ACCOUNT_FRAGMENT, true);
             }
             return true;
+        });
+
+        binding.pagerMain.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                switch (position){
+                    case PaperMain.GO_FRAGMENT:
+                        binding.bottomNavMain.setSelectedItemId(R.id.go_fragment_item);
+                        break;
+                    case PaperMain.TRIP_FRAGMENT:
+                        binding.bottomNavMain.setSelectedItemId(R.id.trip_fragment_item);
+                        break;
+                    default:
+                        binding.bottomNavMain.setSelectedItemId(R.id.account_fragment_item);
+                        break;
+                }
+            }
         });
 
         binding.btnOpenNavDrawer.setOnClickListener(view -> {
@@ -69,7 +92,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         });
 
         binding.btnOpenNotification.setOnClickListener(view -> {
-            startActivity(new Intent(this, NotificationActivity.class));
+            main_launcher.launch(new Intent(this, NotificationActivity.class));
             view_model.has_notification.setValue(false);
         });
 
@@ -91,18 +114,37 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     protected void InitCommon() {
+
+
         InitHeaderDrawer();
 
         AppFragmentAdapter app_fm_adapter = new AppFragmentAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.pagerMain.setAdapter(app_fm_adapter);
-        binding.pagerMain.setUserInputEnabled(false);
+        binding.pagerMain.setUserInputEnabled(true);
         view_model.HandleUpdateFirebaseToken();
+    }
+
+    @Subscribe
+    public void GoToTripFragment(ActionEvent action_event){
+        if(action_event.action.equals(ActionEvent.GO_TO_TRIP_FRAGMENT)){
+            binding.pagerMain.setCurrentItem(PaperMain.TRIP_FRAGMENT);
+            binding.bottomNavMain.setSelectedItemId(R.id.trip_fragment_item);
+        }
     }
 
     @Override
     protected void OnBackPress() {
 
     }
+
+    private final ActivityResultLauncher<Intent> main_launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == ActivityResult.GO_TO_TRIP_FRAGMENT){
+                    binding.pagerMain.setCurrentItem(PaperMain.TRIP_FRAGMENT);
+                }
+            }
+    );
 
     @Override
     protected void onDestroy() {

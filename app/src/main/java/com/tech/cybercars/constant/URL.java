@@ -8,7 +8,9 @@ public class URL {
     public static final String BASE_URL = "http://192.168.4.7:2108";
 
     //trip
+    public static final String MEMBER_REQUEST_TO_JOIN = "/trip/member/request-to-join";
     public static final String CREATE_TRIP = "/trip/create";
+    public static final String PASSENGER_FIND_TRIP = "/trip/passenger-find-trip";
 
     //vehicle
     public static final String VEHICLE_ACCEPTED_LIST = "/user/vehicle/accepted-list";

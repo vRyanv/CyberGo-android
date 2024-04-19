@@ -132,5 +132,7 @@ dependencies {
     //gson
     implementation("com.google.code.gson:gson:2.10.1")
 
+    //rating abr
+    implementation("com.github.ome450901:SimpleRatingBar:1.5.1")
 }
 

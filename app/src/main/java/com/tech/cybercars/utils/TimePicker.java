@@ -22,6 +22,9 @@ public class TimePicker extends DialogFragment implements TimePickerDialog.OnTim
     }
 
     public void Run(){
+        if(this.isAdded()){
+           return;
+        }
         this.show(fragment_manager, "TimePicker");
     }
 

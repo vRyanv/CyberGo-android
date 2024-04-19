@@ -11,8 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.main.fragment.go.share_trip.add_share_trip_information.fragment.LocationTabFragment">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"

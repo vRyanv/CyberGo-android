@@ -9,7 +9,7 @@
     <color name="light_secondary">#E0DCE0</color>
     <color name="orange">#FF8201</color>
     <color name="orange_blur">#33FF8201</color>
-    <color name="orange_red">#FF0000</color>
+    <color name="orange_red">#F13005</color>
     <color name="special_orange">#FF6347</color>
     <color name="bold_orange">#E57029</color>
     <color name="light_orange">#F3A354</color>
@@ -23,9 +23,11 @@
     <color name="gray">#C3C3C3</color>
     <color name="light_gray">#F2F2F2</color>
     <color name="green">#0E9F5B</color>
+    <color name="green_blur">#330E9F5B</color>
     <color name="light_green">#A8CB17</color>
     <color name="dark_green">#087043</color>
     <color name="lavender">#5863FD</color>
+    <color name="blue_special">#B302AFFE</color>
 
     <color name="dark_light_dynamic">#FFFBFF</color>
     <color name="transparent">#00FFFFFF</color>

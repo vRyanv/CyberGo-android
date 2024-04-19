@@ -13,7 +13,6 @@ public class Destination implements Serializable {
     @NonNull
     @SerializedName("_id")
     public String destination_id;
-    @SerializedName("trip")
     public String trip_id;
     public String geometry;
     public double time;

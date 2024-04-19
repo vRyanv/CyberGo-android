@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.FragmentGoBinding;
+import com.tech.cybercars.ui.main.fragment.go.find_trip.FindTripActivity;
 import com.tech.cybercars.ui.main.fragment.go.vehicle_selection.VehicleSelectionActivity;
 
 public class GoFragment extends Fragment {
@@ -29,8 +30,28 @@ public class GoFragment extends Fragment {
     }
 
     private void InitView(){
-        binding.cardShareTransport.setOnClickListener(view->{
-            startActivity(new Intent(requireContext(), VehicleSelectionActivity.class));
+        binding.cardFindTrip.setOnClickListener(view->{
+            StartFindTripActivity();
         });
+        binding.btnFindTrip.setOnClickListener(view->{
+            StartFindTripActivity();
+        });
+
+        binding.cardShareTrip.setOnClickListener(view->{
+            StartShareTripActivity();
+        });
+        binding.btnShareTrip.setOnClickListener(view->{
+            StartShareTripActivity();
+        });
+
+
+    }
+
+    private void StartFindTripActivity(){
+        startActivity(new Intent(requireContext(), FindTripActivity.class));
+    }
+
+    private void StartShareTripActivity(){
+        startActivity(new Intent(requireContext(), VehicleSelectionActivity.class));
     }
 }

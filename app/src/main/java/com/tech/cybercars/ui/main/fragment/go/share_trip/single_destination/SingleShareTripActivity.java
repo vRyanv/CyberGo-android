@@ -19,7 +19,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -68,7 +67,6 @@ import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_informat
 import com.tech.cybercars.utils.KeyBoardUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTripBinding, SingleShareTripViewModel> {
     private BottomSheetBehavior<LinearLayout> bottom_sheet_behavior;
@@ -94,7 +92,6 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
 
     @Override
     protected void InitFirst() {
-
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
     }
 
@@ -255,12 +252,17 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
                 latitude
         );
         destination_list.add(destination);
+        double origin_longitude = view_model.origin_reverse.lng;
+        double origin_latitude = view_model.origin_reverse.lat;
         Trip trip = new Trip(
+                "",
                 "",
                 origin_city,
                 origin_state,
                 origin_county,
                 origin_address,
+                origin_longitude,
+                origin_latitude,
                 DestinationType.SINGLE,
                 view_model.vehicle.getValue().id,
                 null,

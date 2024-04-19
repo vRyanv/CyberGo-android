@@ -149,4 +149,18 @@
     <string name="description">Description</string>
     <string name="price">Price</string>
     <string name="previous">Previous</string>
+    <string name="trip">Trip</string>
+    <string name="trip_name">Trip name</string>
+    <string name="multiple_destination">Multiple destinations</string>
+    <string name="single_destination">Single destination</string>
+    <string name="free">Free</string>
+    <string name="trip_management">Trip management</string>
+    <string name="shared_successfully">Shared successfully</string>
+    <string name="you_will_get_notification_when_someone_else_wants_to_join_you">You\'ll get a notification when someone else wants to join you</string>
+    <string name="trip_detail">Trip Detail</string>
+    <string name="member">Member</string>
+    <string name="information">Infomation</string>
+    <string name="no_description_available">No description available</string>
+    <string name="no_members_have_been_joined_yet">No members have been joined yet</string>
+    <string name="request_to_join">Request to join</string>
 </resources>

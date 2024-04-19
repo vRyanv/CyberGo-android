@@ -1,4 +1,5 @@
-package com.tech.cybercars.ui.main.fragment.activity;
+package com.tech.cybercars.ui.main.fragment.trip;
+
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,20 +9,21 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.tech.cybercars.R;
-import com.tech.cybercars.databinding.FragmentShareBinding;
+import com.tech.cybercars.databinding.FragmentTripBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 
-public class ActivityFragment extends BaseFragment<FragmentShareBinding, ActivityViewModel>{
+
+public class TripFragment extends BaseFragment<FragmentTripBinding, TripViewModel> {
 
     @NonNull
     @Override
-    protected ActivityViewModel InitViewModel() {
-        return new ViewModelProvider(this).get(ActivityViewModel.class);
+    protected TripViewModel InitViewModel() {
+        return new ViewModelProvider(this).get(TripViewModel.class);
     }
 
     @Override
-    protected FragmentShareBinding InitBinding(LayoutInflater inflater, ViewGroup container) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_share, container, false);
+    protected FragmentTripBinding InitBinding(LayoutInflater inflater, ViewGroup container) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trip, container, false);
         binding.setViewModel(view_model);
         return binding;
     }

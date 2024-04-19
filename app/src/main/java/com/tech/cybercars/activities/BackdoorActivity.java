@@ -7,14 +7,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.tech.cybercars.R;
+import com.tech.cybercars.ui.component.AvatarListView;
 import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.main.fragment.account.VehicleTypeSelectionActivity;
+import com.tech.cybercars.ui.main.fragment.go.find_trip.FindTripActivity;
+import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFoundDetailActivity;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripActivity;
 import com.tech.cybercars.ui.splash.SplashActivity;
-import com.tech.cybercars.utils.TimePicker;
 
 public class BackdoorActivity extends AppCompatActivity {
     MapView mapView;
+    AvatarListView view_avatar_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class BackdoorActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_search_map_bd).setOnClickListener(view -> {
 //            startActivity(new Intent(this, SearchMapActivity.class));
+            startActivity(new Intent(this, TripFoundDetailActivity.class));
         });
 
         findViewById(R.id.btn_share_info_tab).setOnClickListener(view -> {
@@ -62,11 +66,12 @@ public class BackdoorActivity extends AppCompatActivity {
 //
 //            });
 //            date_time_picker.Run();
-            TimePicker time_picker = new TimePicker(getSupportFragmentManager());
-            time_picker.SetTimePickerCallback((hourOfDay, minute) -> {
-
-            });
-            time_picker.Run();
+//            TimePicker time_picker = new TimePicker(getSupportFragmentManager());
+//            time_picker.SetTimePickerCallback((hourOfDay, minute) -> {
+//
+//            });
+//            time_picker.Run();
+            startActivity(new Intent(this, FindTripActivity.class));
         });
     }
 }

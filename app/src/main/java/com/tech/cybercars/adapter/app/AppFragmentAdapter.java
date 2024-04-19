@@ -6,9 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.tech.cybercars.constant.PaperMain;
 import com.tech.cybercars.ui.main.fragment.account.AccountFragment;
-import com.tech.cybercars.ui.main.fragment.activity.ActivityFragment;
 import com.tech.cybercars.ui.main.fragment.go.GoFragment;
+import com.tech.cybercars.ui.main.fragment.trip.TripFragment;
 
 public class AppFragmentAdapter extends FragmentStateAdapter {
     public AppFragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
@@ -19,19 +20,17 @@ public class AppFragmentAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 0:
+            case PaperMain.GO_FRAGMENT:
                 return new GoFragment();
-            case 1:
-                return new ActivityFragment();
-            case 2:
-                return new AccountFragment();
+            case PaperMain.TRIP_FRAGMENT:
+                return new TripFragment();
             default:
-                return new GoFragment();
+                return new AccountFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return PaperMain.COUNT;
     }
 }

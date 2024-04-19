@@ -1,8 +1,8 @@
 package com.tech.cybercars.ui.main.fragment.go.share_trip.multiple_destination;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.tech.cybercars.R;
 

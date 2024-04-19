@@ -48,12 +48,6 @@ public class VehicleTabFragment extends Fragment {
             take_img_launcher.launch(take_photo);
         });
 
-        binding.imgRightTransport.setOnClickListener(view -> {
-            Intent take_photo = new Intent(Intent.ACTION_PICK);
-            take_photo.setType("image/*");
-            current_pick_img_action = PICK_RIGHT_TRANSPORT;
-            take_img_launcher.launch(take_photo);
-        });
 
         binding.btnUploadRightVehicle.setOnClickListener(view -> {
             Intent take_photo = new Intent(Intent.ACTION_PICK);

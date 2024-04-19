@@ -3,8 +3,6 @@ package com.tech.cybercars.utils;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +26,9 @@ public class DateTimePicker extends DialogFragment implements DatePickerDialog.O
     }
 
     public void Run(){
+        if(this.isAdded()){
+            return;
+        }
         this.show(fragment_manager, "DateTimePicker");
     }
 

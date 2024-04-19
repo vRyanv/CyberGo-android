@@ -13,12 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.tech.cybercars.constant.Tag;
-import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.services.socket.SocketService;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 public class CyberGoApplication extends Application {
     public static CyberGoApplication instance;
