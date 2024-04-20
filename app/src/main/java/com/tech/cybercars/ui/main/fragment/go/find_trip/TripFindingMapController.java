@@ -22,19 +22,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -49,7 +43,6 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
-import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
@@ -61,6 +54,7 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.trip_found.TripFoundAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.VehicleType;
+import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.databinding.ActivityFindTripBinding;
@@ -78,6 +72,7 @@ public class TripFindingMapController {
     private List<TripFound> trip_found_list;
     private TripFoundAdapter trip_found_adapter;
     private final Context context;
+    private final FindTripViewModel view_model;
     private final MapboxMapService mapbox_service;
     private AnimatorSet animator_set;
     private final List<Feature> trip_features = new ArrayList<>();
@@ -98,9 +93,10 @@ public class TripFindingMapController {
     private final String TRUCK_IMAGE_ID = "TRUCK_IMAGE_ID";
 
     private final ActivityFindTripBinding find_trip_binding;
-    public TripFindingMapController(Context context, MapboxMapService mapbox_service, ActivityFindTripBinding find_trip_binding) {
+    public TripFindingMapController(Context context, FindTripViewModel view_model, MapboxMapService mapbox_service, ActivityFindTripBinding find_trip_binding) {
         this.find_trip_binding = find_trip_binding;
         this.context = context;
+        this.view_model = view_model;
         this.mapbox_service = mapbox_service;
         InitRecyclerViewTripFound();
         InitVehicleTypeFilter();
@@ -122,6 +118,10 @@ public class TripFindingMapController {
         });
     }
     private void ClearTripFoundData() {
+        find_trip_binding.imgCarSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
+        find_trip_binding.imgTruckSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
+        find_trip_binding.imgMotoSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
+        find_trip_binding.imgAllVehicleTypeSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_vehicle_type_selected));
         mapbox_service.GetMapBoxMap().getStyle(style -> {
             GeoJsonSource trip_src = style.getSourceAs(TRIP_SOURCE_ID);
             GeoJsonSource trip_route_src = style.getSourceAs(TRIP_ROUTE_SOURCE_ID);
@@ -327,6 +327,23 @@ public class TripFindingMapController {
     private void TripFoundItemClicked(TripFound trip_found) {
         Intent trip_found_detail_intent = new Intent(context, TripFoundDetailActivity.class);
         trip_found_detail_intent.putExtra(FieldName.TRIP_FOUND, trip_found);
+
+        MemberBody.Location origin = new MemberBody.Location();
+        origin.latitude = view_model.origin_reverse.lat;
+        origin.longitude = view_model.origin_reverse.lng;
+        origin.address = view_model.origin_reverse.display_name;
+        MemberBody.Location destination = new MemberBody.Location();
+        destination.latitude = view_model.destination_reverse.lat;
+        destination.longitude = view_model.destination_reverse.lng;
+        destination.address = view_model.destination_reverse.display_name;
+        MemberBody member = new MemberBody(
+                trip_found.trip_id,
+                origin,
+                destination,
+                trip_found.destination_list.get(0).geometry
+        );
+        trip_found_detail_intent.putExtra(FieldName.MEMBER, member);
+
         context.startActivity(trip_found_detail_intent);
     }
     private void TripFoundSeeOverviewClicked(TripFound trip_found) {
@@ -403,9 +420,11 @@ public class TripFindingMapController {
             GeoJsonSource trip_src = style.getSourceAs(TRIP_SOURCE_ID);
             FeatureCollection trip_feature_collection = FeatureCollection.fromFeatures(trip_features);
             assert trip_src != null;
-            trip_features.get(0).addBooleanProperty(IS_ACTIVE, true);
+            Feature active_trip_feature = trip_features.get(0);
+            active_trip_feature.addBooleanProperty(IS_ACTIVE, true);
             trip_src.setGeoJson(trip_feature_collection);
             ActiveTripRoute(trip_found_list.get(0));
+            AnimateCameraToActiveTrip(active_trip_feature);
         });
     }
     public boolean onMapClick(@NonNull LatLng point) {

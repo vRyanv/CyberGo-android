@@ -105,5 +105,18 @@
                 app:iconPadding="@dimen/_25sdp"
                 app:iconSize="@dimen/_35sdp"
                 app:iconTintMode="multiply" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/nav_item_account"
+                android:text="@string/logout"
+                android:textColor="@drawable/color_text_state_outline_button"
+                android:id="@+id/btn_logout"
+                app:backgroundTint="@null"
+                app:backgroundTintMode="multiply"
+                app:icon="@drawable/ic_logout"
+                app:iconGravity="start"
+                app:iconPadding="@dimen/_35sdp"
+                app:iconSize="@dimen/_25sdp"
+                app:iconTintMode="multiply" />
         </LinearLayout>
 </layout>

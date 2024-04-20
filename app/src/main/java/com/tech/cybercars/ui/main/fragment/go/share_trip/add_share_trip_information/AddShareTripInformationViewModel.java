@@ -55,7 +55,8 @@ public class AddShareTripInformationViewModel extends BaseViewModel {
         is_loading.setValue(true);
 
         trip.getValue().name = trip_name.getValue();
-        trip.getValue().start_date_time = start_date.getValue() + " " + start_time.getValue();
+        trip.getValue().start_date = start_date.getValue();
+        trip.getValue().start_time = start_time.getValue();
         trip.getValue().price = Double.parseDouble(price.getValue());
         trip.getValue().description = description.getValue();
         TripBodyAndResponse trip_body = new TripBodyAndResponse();

@@ -15,6 +15,7 @@ import com.tech.cybercars.constant.DestinationType;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripFound;
+import com.tech.cybercars.data.models.trip.Destination;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ public class TripFoundAdapter extends RecyclerView.Adapter<TripFoundViewHolder> 
                 .into(holder.img_avatar);
 
         holder.rating_bar.setClickable(false);
-        holder.rating_bar.setRating(trip_found.rating);
+        holder.rating_bar.setRating(trip_found.owner.rating);
 
         holder.txt_trip_name.setText(trip_found.trip_name);
 
@@ -91,10 +92,25 @@ public class TripFoundAdapter extends RecyclerView.Adapter<TripFoundViewHolder> 
         holder.txt_start_date.setText(trip_found.start_date);
         holder.txt_start_time.setText(trip_found.start_time);
 
-        if (trip_found.destination_type.equals(DestinationType.SINGLE)) {
-            holder.txt_destination_type.setText(context.getString(R.string.single_destination));
+        if(trip_found.origin_city != null){
+            holder.txt_origin_address.setText(trip_found.origin_city);
+        } else if (trip_found.origin_state != null) {
+            holder.txt_origin_address.setText(trip_found.origin_state);
+        } else if (trip_found.origin_county != null) {
+            holder.txt_origin_address.setText(trip_found.origin_county);
         } else {
-            holder.txt_destination_type.setText(context.getString(R.string.multiple_destination));
+            holder.txt_origin_address.setText(trip_found.origin_address);
+        }
+
+        Destination destination = trip_found.destination_list.get(trip_found.destination_list.size()-1);
+        if(destination.city != null){
+            holder.txt_destination_address.setText(destination.city);
+        } else if (destination.state != null) {
+            holder.txt_destination_address.setText(destination.state);
+        } else if (destination.county != null) {
+            holder.txt_destination_address.setText(destination.county);
+        } else {
+            holder.txt_destination_address.setText(destination.address);
         }
 
         if (trip_found.price > 0) {

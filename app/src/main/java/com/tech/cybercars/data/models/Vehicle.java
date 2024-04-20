@@ -14,6 +14,7 @@ public class Vehicle implements Serializable {
     @NonNull
     @SerializedName("_id")
     public String id;
+    public String driver_id;
     public String vehicle_name;
     public String vehicle_type;
     public String license_plates;

@@ -159,4 +159,8 @@
     <string name="no_description_available">Không có mô tả</string>
     <string name="no_members_have_been_joined_yet">Chưa có thành viên nào được tham gia</string>
     <string name="request_to_join">Yêu cầu gia nhập</string>
+    <string name="request_has_been_sent">Yêu cầu đã được gửi</string>
+    <string name="the_request_to_join_the_trip_has_been_sent_please_wait_for_notification_from_owner">Yêu cầu tham gia chuyến đi đã được gửi, vui lòng chờ thông báo từ chủ sở hữu</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="waiting_for_response_from_owner">Đang chờ phản hồi từ chủ sở hữu</string>
 </resources>

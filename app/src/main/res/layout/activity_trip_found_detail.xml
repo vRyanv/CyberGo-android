@@ -75,6 +75,13 @@
             </androidx.viewpager2.widget.ViewPager2>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
+            android:id="@+id/request_in_queue"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@color/lavender"
+            android:text="@string/waiting_for_response_from_owner"
+            style="@style/btn_primary"/>
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_request_to_join"
             android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/request_to_join"

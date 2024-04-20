@@ -10,7 +10,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineDasharray;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 import android.Manifest;
@@ -186,6 +185,8 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
             find_trip_controller.UpdateTripFoundAdapter(trip_found_list);
             binding.setIsShowRcvTripFound(!trip_found_list.isEmpty());
             binding.setIsShowVehicleFilter(!trip_found_list.isEmpty());
+            binding.setIsShowThumbNotFound(trip_found_list.isEmpty());
+            binding.setIsShowOverlay(false);
         });
     }
 
@@ -201,7 +202,7 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
 
     @Override
     protected void OnBackPress() {
-        if(binding.getIsShowRcvTripFound()){
+        if(binding.getIsShowRcvTripFound() || binding.getIsShowThumbNotFound()){
             CancelFindTrip();
             return;
         }
@@ -216,6 +217,8 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
     private void CancelFindTrip(){
         find_trip_controller.UpdateTripFoundAdapter(new ArrayList<>());
         binding.setIsShowRcvTripFound(false);
+        binding.setIsShowVehicleFilter(false);
+        binding.setIsShowThumbNotFound(false);
         ShowBottomSheet();
     }
 
@@ -274,16 +277,6 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
 
     private void MakeBoundingBox() {
         binding.setIsShowOverlay(true);
-//        double minLatitude = Math.min(view_model.origin_reverse.boundingbox[0], view_model.destination_reverse.boundingbox[0]);
-//        double minLongitude = Math.min(view_model.origin_reverse.boundingbox[2], view_model.destination_reverse.boundingbox[2]);
-//        double maxLatitude = Math.max(view_model.origin_reverse.boundingbox[1], view_model.destination_reverse.boundingbox[1]);
-//        double maxLongitude = Math.max(view_model.origin_reverse.boundingbox[3], view_model.destination_reverse.boundingbox[3]);
-//        LatLngBounds latLngBounds = new LatLngBounds.Builder()
-//                .include(new LatLng(view_model.destination_reverse.boundingbox[1], view_model.destination_reverse.boundingbox[3]))
-//                .include(new LatLng(view_model.destination_reverse.boundingbox[0], view_model.destination_reverse.boundingbox[2]))
-//                .include(new LatLng(view_model.origin_reverse.boundingbox[1], view_model.origin_reverse.boundingbox[3]))
-//                .include(new LatLng(view_model.origin_reverse.boundingbox[0], view_model.origin_reverse.boundingbox[2]))
-//                .build();
         LatLng northeast = new LatLng(view_model.origin_reverse.lat, view_model.origin_reverse.lng);
         LatLng southwest = new LatLng(view_model.destination_reverse.lat, view_model.destination_reverse.lng);
         LatLngBounds latLngBounds = new LatLngBounds.Builder()
@@ -302,8 +295,6 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
                     @Override
                     public void onFinish() {
                         binding.setIsShowOverlay(false);
-                        binding.setIsShowRcvTripFound(true);
-
                     }
                 });
     }
@@ -536,7 +527,9 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
 
                     InitLayerAndSource(style);
                     find_trip_controller = new TripFindingMapController(
-                            this, mapbox_service,
+                            this,
+                            view_model,
+                            mapbox_service,
                             binding
                     );
                     mapbox_service.GetMapBoxMap().addOnMapClickListener(point -> find_trip_controller.onMapClick(point));

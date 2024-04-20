@@ -19,7 +19,8 @@ public class TripFoundViewHolder extends RecyclerView.ViewHolder {
     public TextView txt_trip_name;
     public TextView txt_start_date;
     public TextView txt_start_time;
-    public TextView txt_destination_type;
+    public TextView txt_origin_address;
+    public TextView txt_destination_address;
     public TextView txt_price;
     public AvatarListView view_avatar_list;
     public ImageButton btn_see_overview_trip;
@@ -31,7 +32,8 @@ public class TripFoundViewHolder extends RecyclerView.ViewHolder {
         txt_trip_name = itemView.findViewById(R.id.txt_trip_name);
         txt_start_date = itemView.findViewById(R.id.txt_start_date);
         txt_start_time = itemView.findViewById(R.id.txt_start_time);
-        txt_destination_type = itemView.findViewById(R.id.txt_destination_type);
+        txt_origin_address = itemView.findViewById(R.id.txt_origin_address);
+        txt_destination_address = itemView.findViewById(R.id.txt_destination_address);
         txt_price = itemView.findViewById(R.id.txt_price);
         view_avatar_list = itemView.findViewById(R.id.view_avatar_list);
         btn_see_overview_trip = itemView.findViewById(R.id.btn_see_overview_trip);

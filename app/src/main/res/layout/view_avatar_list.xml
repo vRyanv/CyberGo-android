@@ -6,14 +6,5 @@
     android:gravity="end"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:fontFamily="@font/sp_pro_round_regular"
-        android:textSize="@dimen/_10ssp"
-        android:id="@+id/txt_no_member_join"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_members_have_been_joined_yet"
-        />
+
 </LinearLayout>

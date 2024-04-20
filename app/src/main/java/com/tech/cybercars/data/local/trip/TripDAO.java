@@ -18,4 +18,7 @@ public interface TripDAO {
 
     @Query("SELECT * FROM trip")
     List<Trip> FindAll();
+
+    @Query("DELETE FROM trip")
+    public void ClearTable();
 }

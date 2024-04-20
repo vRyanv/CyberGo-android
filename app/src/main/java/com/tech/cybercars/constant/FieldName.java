@@ -1,7 +1,8 @@
 package com.tech.cybercars.constant;
 
 public class FieldName {
-    //map
+    //trip
+    public final static String MEMBER = "MEMBER";
     public final static String TRIP_FOUND = "trip_found";
     public final static String TRIP = "trip";
     public final static String DESTINATIONS = "destinations";

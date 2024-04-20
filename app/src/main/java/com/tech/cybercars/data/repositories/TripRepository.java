@@ -1,11 +1,11 @@
 package com.tech.cybercars.data.repositories;
 
+import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
 import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
 import com.tech.cybercars.data.remote.retrofit.RetrofitRequest;
 import com.tech.cybercars.data.remote.retrofit.RetrofitResponse;
-import com.tech.cybercars.data.remote.trip.RequestToJoinBody;
 import com.tech.cybercars.data.remote.trip.TripBodyAndResponse;
 import com.tech.cybercars.data.remote.trip.TripServiceRetrofit;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripBody;
@@ -36,9 +36,9 @@ public class TripRepository {
                 .enqueue(new RetrofitResponse<FindTripResponse>().GetResponse(success_callback, fail_callback));
     }
 
-    public void MemberRequestToJoin(String user_token, RequestToJoinBody request_to_join_body, ResSuccessCallback<BaseResponse> success_callback, ResFailCallback fail_callback){
-        trip_service.MemberRequestToJoinRequest(user_token, request_to_join_body)
-                .enqueue(new RetrofitResponse<BaseResponse>().GetResponse(success_callback, fail_callback));
+    public void MemberRequestToJoin(String user_token, MemberBody member, ResSuccessCallback<TripBodyAndResponse> success_callback, ResFailCallback fail_callback){
+        trip_service.MemberRequestToJoinRequest(user_token, member)
+                .enqueue(new RetrofitResponse<TripBodyAndResponse>().GetResponse(success_callback, fail_callback));
     }
 
 }

@@ -6,6 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
+import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Trip implements Serializable {
     @NonNull
     @SerializedName("_id")
     public String trip_id;
+    public String trip_owner;
     public String name;
     public String origin_city;
     public String origin_state;
@@ -28,13 +30,16 @@ public class Trip implements Serializable {
     public String destination_type;
     @SerializedName("vehicle")
     public String vehicle_id;
-    public String start_date_time;
+    @Ignore
+    public ArrayList<MemberBody> members;
+    public String start_date;
+    public String start_time;
     public double price;
     public String description;
     public Trip(){}
     public Trip(@NonNull String trip_id, String name, String origin_city, String origin_state, String origin_county,
                 String origin_address, double origin_longitude, double origin_latitude,
-                String destination_type, String vehicle_id, String start_date_time, double price) {
+                String destination_type, String vehicle_id, String start_date, String start_time, double price) {
         this.name = name;
         this.origin_city = origin_city;
         this.origin_state = origin_state;
@@ -44,7 +49,8 @@ public class Trip implements Serializable {
         this.origin_address = origin_address;
         this.destination_type = destination_type;
         this.vehicle_id = vehicle_id;
-        this.start_date_time = start_date_time;
+        this.start_date = start_date;
+        this.start_time = start_time;
         this.price = price;
         this.trip_id = trip_id;
     }

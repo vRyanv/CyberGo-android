@@ -1,20 +1,16 @@
 package com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.destination.DestinationAdapter;
 import com.tech.cybercars.adapter.member.MemberAdapter;
 import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.databinding.FragmentMemberTripFoundDetailBinding;
@@ -23,7 +19,6 @@ import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFo
 import com.tech.cybercars.ui.main.user_profile.UserProfileActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MemberTripFoundDetailFragment extends BaseFragment<FragmentMemberTripFoundDetailBinding, TripFoundDetailViewModel> {
     private MemberAdapter member_adapter;

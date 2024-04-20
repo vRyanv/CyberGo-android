@@ -4,6 +4,7 @@ import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripBody;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripResponse;
+import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -12,9 +13,9 @@ import retrofit2.http.POST;
 
 public interface TripServiceRetrofit {
     @POST(URL.MEMBER_REQUEST_TO_JOIN)
-    Call<BaseResponse> MemberRequestToJoinRequest(
+    Call<TripBodyAndResponse> MemberRequestToJoinRequest(
             @Header("authorization") String user_token,
-            @Body RequestToJoinBody request_to_join_body
+            @Body MemberBody member
     );
 
     @POST(URL.CREATE_TRIP)

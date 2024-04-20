@@ -59,12 +59,15 @@ text normal = 14ssp
 
 16. trip found detail:
     1. information FM: @done
-    2. location FM:
-    3. member FM:
+    2. location FM: @done
+    3. member FM: @done
+    4. request to join: @done
+    5. View profile member and owner
 
-
-
-15. trip management:
+17. trip management:
+    17.1 trip adapter:
+    17.2 trip other:
+    17.3 my trip:
 
 12. vehicle management
 

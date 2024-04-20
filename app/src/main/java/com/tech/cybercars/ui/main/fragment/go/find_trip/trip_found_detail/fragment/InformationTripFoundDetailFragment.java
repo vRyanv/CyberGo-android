@@ -14,7 +14,6 @@ import com.tech.cybercars.constant.DestinationType;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripFound;
-import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.FragmentInformationTripFoundDetailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFoundDetailViewModel;
@@ -61,7 +60,7 @@ public class InformationTripFoundDetailFragment extends BaseFragment<FragmentInf
                 .into(binding.imgAvatar);
 
         binding.txtFullName.setText(trip_found.owner.full_name);
-        binding.ratingBar.setRating(trip_found.rating);
+        binding.ratingBar.setRating(trip_found.owner.rating);
         binding.txtTripName.setText(trip_found.trip_name);
 
         switch (trip_found.vehicle_type){

@@ -15,4 +15,7 @@ public interface NotificationDAO {
 
     @Query("SELECT * FROM notification ORDER BY datetime DESC")
     List<Notification> GetNotificationList();
+
+    @Query("DELETE FROM notification")
+    public void ClearTable();
 }

@@ -10,8 +10,10 @@ import java.util.List;
 
 @Dao
 public interface DestinationDAO {
-    @Query("SELECT * FROM Destination WHERE trip_id = :trip_id")
+    @Query("SELECT * FROM destination WHERE trip_id = :trip_id")
     List<Destination> FindByTripId(String trip_id);
     @Insert
     void InsertDestinations(List<Destination> destinations);
+    @Query("DELETE FROM destination")
+    public void ClearTable();
 }

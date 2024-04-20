@@ -17,4 +17,6 @@ public interface UserDAO {
     @Query("SELECT * FROM user WHERE id = :id")
     User FindUserById(String id);
 
+    @Query("DELETE FROM user")
+    public void ClearTable();
 }

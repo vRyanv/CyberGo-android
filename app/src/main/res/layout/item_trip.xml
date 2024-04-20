@@ -20,18 +20,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/img_avatar"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:src="@drawable/avatar"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:riv_corner_radius="30dip"
-                    app:riv_mutate_background="true"
-                    app:riv_oval="true" />
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="top"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:src="@drawable/avatar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:riv_corner_radius="30dip"
+                app:riv_mutate_background="true"
+                app:riv_oval="true" />
             <ImageView
                 android:padding="@dimen/_3sdp"
                 android:id="@+id/img_vehicle_type"
@@ -41,18 +41,8 @@
                 android:src="@drawable/ic_car"
                 android:layout_marginEnd="@dimen/_25sdp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_see_overview_trip"/>
-            <ImageButton
-                android:padding="@dimen/_5sdp"
-                android:id="@+id/btn_see_overview_trip"
-                android:scaleType="fitCenter"
-                android:background="@drawable/shape_icon_sub_button"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:src="@drawable/ic_see_overview"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
-            
+
             <com.willy.ratingbar.BaseRatingBar
                 android:id="@+id/rating_bar"
                 android:layout_width="wrap_content"
@@ -229,7 +219,7 @@
             android:id="@+id/divider5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray" />
+            android:background="?android:attr/listDivider" />
 
         <com.tech.cybercars.ui.component.AvatarListView
             android:layout_marginTop="@dimen/_5sdp"

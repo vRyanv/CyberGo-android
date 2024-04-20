@@ -29,6 +29,10 @@
     <color name="lavender">#5863FD</color>
     <color name="blue_special">#B302AFFE</color>
 
+
+    <color name="queue_color">#665863FD</color>
+    <color name="accepted_color">#660E9F5B</color>
+
     <color name="dark_light_dynamic">#FFFBFF</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="white_dark_reverse">#000000</color>

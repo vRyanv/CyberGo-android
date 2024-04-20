@@ -42,7 +42,6 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberViewHolder> {
         Glide.with(context)
                 .load(avatar_full_path)
                 .into(holder.img_avatar);
-        Toast.makeText(context, member.full_name, Toast.LENGTH_SHORT).show();
         holder.txt_full_name.setText(member.full_name);
         holder.rating_bar.setRating(member.rating);
         holder.itemView.setOnClickListener(view -> {

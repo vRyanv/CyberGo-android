@@ -266,6 +266,7 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
                 DestinationType.SINGLE,
                 view_model.vehicle.getValue().id,
                 null,
+                null,
                 0
         );
         Intent trip_information_intent = new Intent(this, AddShareTripInformationActivity.class);
