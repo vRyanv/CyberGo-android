@@ -60,6 +60,7 @@ import com.tech.cybercars.constant.ThemeMode;
 import com.tech.cybercars.databinding.ActivityFindTripBinding;
 import com.tech.cybercars.services.location.LocationService;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
+import com.tech.cybercars.services.mapbox.MapboxNavigationService;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.utils.DateTimePicker;
@@ -104,7 +105,7 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
     @Override
     protected void InitFirst() {
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
-        min_height_bottom_sheet = (int) getResources().getDimension(com.intuit.sdp.R.dimen._220sdp);
+        min_height_bottom_sheet = (int) getResources().getDimension(com.intuit.sdp.R.dimen._190sdp);
     }
 
     @Override
@@ -228,8 +229,6 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
         binding.setIsExpandBottomSheet(false);
         binding.setIsShowRcvTripFound(false);
         binding.setIsShowThumbNotFound(false);
-
-
     }
 
     @Override
@@ -304,13 +303,17 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
             GeoJsonSource route_source = style.getSourceAs(PASSENGER_ROUTE_SOURCE_LAYER_ID);
             assert route_source != null;
             route_source.setGeoJson(LineString.fromPolyline(geometry, PRECISION_6));
-//            binding.bsLocationPicker.setVisibility(View.GONE);
-
-            view_model.HandleFindTrip();
-
+            if(geometry.length() > MapboxNavigationService.GEOMETRY_LIMIT){
+                MapboxNavigationService.ShowRouteOutOfLimit(this);
+            } else {
+                view_model.HandleFindTrip();
+            }
             MakeBoundingBox();
         });
+
     }
+
+
 
     private void MakeBoundingBox() {
         binding.setIsShowOverlay(true);
@@ -503,7 +506,7 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
         this.bottom_sheet_behavior = BottomSheetBehavior.from(binding.bsLocationPicker);
         bottom_sheet_behavior.setPeekHeight(min_height_bottom_sheet);
         bottom_sheet_behavior.setDraggable(false);
-        binding.btnCloseBottomSheet.setVisibility(View.INVISIBLE);
+        binding.btnCloseBottomSheet.setVisibility(View.GONE);
         binding.btnCloseBottomSheet.setOnClickListener(view -> {
             CollapsedBottomSheet();
         });

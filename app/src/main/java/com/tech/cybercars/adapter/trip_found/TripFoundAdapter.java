@@ -16,6 +16,7 @@ import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.data.models.trip.Destination;
+import com.tech.cybercars.utils.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,6 +121,10 @@ public class TripFoundAdapter extends RecyclerView.Adapter<TripFoundViewHolder> 
             holder.txt_price.setText(context.getString(R.string.free));
             holder.txt_price.setTextColor(context.getColor(R.color.green));
         }
+
+        String ratio = Helper.BeautifulPercentage(trip_found.route_match_percentage) + "%";
+        holder.txt_trip_match_route_ratio.setText(ratio);
+
         List<String> avatar_list = new ArrayList<>();
         for (TripFound.User user :trip_found.member_list) {
             avatar_list.add(user.avatar);
@@ -129,6 +134,7 @@ public class TripFoundAdapter extends RecyclerView.Adapter<TripFoundViewHolder> 
 
     @SuppressLint("NotifyDataSetChanged")
     public void UpdateAdapter(List<TripFound> trip_found_list) {
+        trip_found_list.sort((o1, o2) -> Float.compare(o2.route_match_percentage, o1.route_match_percentage));
         this.trip_found_list = trip_found_list;
         this.notifyDataSetChanged();
     }

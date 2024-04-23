@@ -1,4 +1,4 @@
-package com.tech.cybercars.adapter.share_trip_information;
+package com.tech.cybercars.adapter.paper;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

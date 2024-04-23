@@ -100,14 +100,6 @@ public class InformationTripFoundDetailFragment extends BaseFragment<FragmentInf
         binding.txtStartDate.setText(trip_found.start_date);
         binding.txtStartTime.setText(trip_found.start_time);
 
-        String destination_type = "";
-        if(trip_found.destination_type.equals(DestinationType.SINGLE)){
-            destination_type = getString(R.string.single_destination);
-        } else {
-            destination_type =  getString(R.string.multiple_destination);
-        }
-        binding.txtDestinationType.setText(destination_type);
-
         if(trip_found.price > 0){
             binding.txtPrice.setText(String.valueOf(trip_found.price));
         } else {

@@ -4,8 +4,12 @@ import java.text.DecimalFormat;
 
 public class Helper {
     public static Double ConvertMeterToKiloMeter(Double meter){
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
         return meter/1000;
+    }
+
+    public static String BeautifulPercentage(float percent_bad){
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        return decimalFormat.format(percent_bad);
     }
 
     public static String ConvertMeterToKiloMeterString(Double meter){

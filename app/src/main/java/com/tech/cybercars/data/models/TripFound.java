@@ -13,6 +13,7 @@ public class TripFound implements Serializable {
     public String start_date;
     public String start_time;
     public double price;
+    public float route_match_percentage;
     public ArrayList<User> member_list;
     public ArrayList<Destination> destination_list;
     public String destination_type;

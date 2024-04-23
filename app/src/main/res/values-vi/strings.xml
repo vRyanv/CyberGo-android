@@ -165,4 +165,9 @@
     <string name="waiting_for_response_from_owner">Đang chờ phản hồi từ chủ sở hữu</string>
     <string name="not_update">Chưa cập nhật</string>
     <string name="birthday">Ngày sinh</string>
+    <string name="the_route_is_too_long">Tuyến đường quá dài</string>
+    <string name="please_reduce_the_distance_of_your_route">hãy giảm khoảng cách của tuyến đường của bạn lại</string>
+    <string name="selection_match_percentage">Chọn phần trăm phù hợp</string>
+    <string name="trip_participated">Chuyến đi đã tham gia</string>
+    <string name="shared_trip">chuyến đi đã chia sẻ</string>
 </resources>

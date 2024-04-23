@@ -53,13 +53,16 @@ public class VehicleSelectionActivity extends BaseActivity<ActivityVehicleSelect
         binding.rcvVehicle.setLayoutManager(layoutManager);
         binding.rcvVehicle.setAdapter(vehicle_adapter);
         vehicle_adapter.SetOnClickListener(vehicle -> {
-            DestinationTypeSelectionDialog type_selection_dialog = new DestinationTypeSelectionDialog(this);
-            type_selection_dialog.SetTypeSelectionCallback((dialog, destination_type) -> {
-                StartShareTripActivity(destination_type, vehicle);
-
-                dialog.dismiss();
-            });
-            type_selection_dialog.show();
+//            DestinationTypeSelectionDialog type_selection_dialog = new DestinationTypeSelectionDialog(this);
+//            type_selection_dialog.SetTypeSelectionCallback((dialog, destination_type) -> {
+//                StartShareTripActivity(destination_type, vehicle);
+//
+//                dialog.dismiss();
+//            });
+//            type_selection_dialog.show();
+            Intent share_trip_intent = new Intent(this, SingleShareTripActivity.class);
+            share_trip_intent.putExtra(FieldName.VEHICLE, vehicle);
+            startActivity(share_trip_intent);
         });
 
         binding.headerPrimary.btnOutScreen.setOnClickListener(view -> {

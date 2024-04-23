@@ -2,6 +2,8 @@ package com.tech.cybercars.services.mapbox;
 
 import static com.mapbox.api.directions.v5.DirectionsCriteria.GEOMETRY_POLYLINE;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Handler;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
@@ -15,6 +17,8 @@ import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.tech.cybercars.R;
+import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,15 @@ import java.util.List;
 import retrofit2.Callback;
 
 public class MapboxNavigationService {
+    public static int GEOMETRY_LIMIT = 16000;
+    public static void ShowRouteOutOfLimit(Context context){
+        NotificationDialog.Builder(context)
+                .SetIcon(R.drawable.ic_warning)
+                .SetTitle(context.getResources().getString(R.string.the_route_is_too_long))
+                .SetSubtitle(context.getResources().getString(R.string.please_reduce_the_distance_of_your_route))
+                .SetTextMainButton(context.getResources().getString(R.string.close))
+                .SetOnMainButtonClicked(Dialog::dismiss).show();
+    }
     public void GetRoute(Point origin, Point destination, String directions_criteria_profile, String token, Callback<DirectionsResponse> callback) {
         MapboxDirections map_direction_request = MapboxDirections.builder()
                 .origin(origin)

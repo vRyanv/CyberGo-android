@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.driver_registration.DriverRegistrationAdapter;
+import com.tech.cybercars.adapter.paper.DriverRegistrationAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.databinding.ActivityDriverRegistrationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;

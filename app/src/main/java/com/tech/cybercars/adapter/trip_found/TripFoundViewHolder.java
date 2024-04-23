@@ -22,6 +22,7 @@ public class TripFoundViewHolder extends RecyclerView.ViewHolder {
     public TextView txt_origin_address;
     public TextView txt_destination_address;
     public TextView txt_price;
+    public TextView txt_trip_match_route_ratio;
     public AvatarListView view_avatar_list;
     public ImageButton btn_see_overview_trip;
     public TripFoundViewHolder(@NonNull View itemView) {
@@ -35,6 +36,7 @@ public class TripFoundViewHolder extends RecyclerView.ViewHolder {
         txt_origin_address = itemView.findViewById(R.id.txt_origin_address);
         txt_destination_address = itemView.findViewById(R.id.txt_destination_address);
         txt_price = itemView.findViewById(R.id.txt_price);
+        txt_trip_match_route_ratio = itemView.findViewById(R.id.txt_trip_match_route_ratio);
         view_avatar_list = itemView.findViewById(R.id.view_avatar_list);
         btn_see_overview_trip = itemView.findViewById(R.id.btn_see_overview_trip);
     }

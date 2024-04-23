@@ -71,14 +71,13 @@ public class FindTripViewModel extends BaseViewModel {
         String start_date = trip_start_date_data;
         String geometry = current_route.getValue().geometry();
 
-        FindTripBody find_trip_body = new FindTripBody(origin_city, origin_state, origin_county, origin_address, start_date, geometry);
+        FindTripBody find_trip_body = new FindTripBody(origin_city, origin_state, origin_county, origin_address, start_date, 20, geometry);
         String user_token = SharedPreferencesUtil.GetString(getApplication(),SharedPreferencesUtil.USER_TOKEN_KEY);
         trip_repo.PassengerFindTrip(
                 user_token,
                 find_trip_body,
                 find_trip_callback::CallSuccess,
                 find_trip_callback::CallFail
-
         );
     }
     private final CallServerStatus<FindTripResponse> find_trip_callback = new CallServerStatus<FindTripResponse>() {

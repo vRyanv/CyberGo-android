@@ -17,7 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.app.AppFragmentAdapter;
+import com.tech.cybercars.adapter.paper.AppFragmentAdapter;
 import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.PaperMain;

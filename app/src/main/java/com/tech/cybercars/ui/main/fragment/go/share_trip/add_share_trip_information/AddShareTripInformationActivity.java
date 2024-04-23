@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.share_trip_information.ShareTripInformationAdapter;
+import com.tech.cybercars.adapter.paper.ShareTripInformationAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.data.models.trip.Trip;

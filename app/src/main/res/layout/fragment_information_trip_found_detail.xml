@@ -158,27 +158,6 @@
                     android:layout_height="@dimen/_25sdp"
                     android:layout_gravity="center"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_destination_point"/>
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/txt_destination_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_23sdp"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/sp_pro_round_black_semibold"
-                    android:text="@string/single_destination" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp">
-                <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_coin" />
 
                 <TextView

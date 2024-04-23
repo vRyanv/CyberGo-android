@@ -56,18 +56,14 @@ text normal = 14ssp
         15.3.3 mark point: @done
     15.4 filter vehicle type: @done
     15.5 vehicle button clicked: @done
-    đổi lại dưới 200 kí tự
 
-
-
-
-16. trip found detail:
+16. trip found detail: @####
     1. information FM: @done
     2. location FM: @done
     3. member FM: @done
     4. request to join: @done
-    5. View profile member and owner:
-
+    5. View profile member and owner: @done
+    6. go to chat: ####
 17. trip management:
     17.1 trip adapter:
     17.2 trip other:

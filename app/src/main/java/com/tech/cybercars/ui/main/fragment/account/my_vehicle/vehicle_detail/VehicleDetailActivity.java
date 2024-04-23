@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.vehicle_detail.VehicleDetailAdapter;
+import com.tech.cybercars.adapter.paper.VehicleDetailAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.VehicleStatus;
 import com.tech.cybercars.data.models.Vehicle;

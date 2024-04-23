@@ -18,6 +18,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,7 +27,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -53,6 +57,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.trip_found.TripFoundAdapter;
 import com.tech.cybercars.constant.FieldName;
+import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.data.models.TripFound;
@@ -63,6 +68,10 @@ import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFo
 import com.tech.cybercars.utils.AnimatorUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -93,6 +102,11 @@ public class TripFindingMapController {
     private final String TRUCK_IMAGE_ID = "TRUCK_IMAGE_ID";
 
     private final ActivityFindTripBinding find_trip_binding;
+    private String[] match_percentage_choices;
+    private AlertDialog match_percentage_dialog;
+    private int current_route_match_percentage = 20;
+    private String current_vehicle_type_filter = VehicleType.ALL;
+
     public TripFindingMapController(Context context, FindTripViewModel view_model, MapboxMapService mapbox_service, ActivityFindTripBinding find_trip_binding) {
         this.find_trip_binding = find_trip_binding;
         this.context = context;
@@ -100,8 +114,33 @@ public class TripFindingMapController {
         this.mapbox_service = mapbox_service;
         InitRecyclerViewTripFound();
         InitVehicleTypeFilter();
+        InitRouteMatchPercentageFilter();
         InitTripSource();
     }
+
+    @SuppressLint("SetTextI18n")
+    private void InitRouteMatchPercentageFilter() {
+        match_percentage_choices = new String[]{"80", "50", "20"};
+        AlertDialog.Builder match_percentage_dialog_builder = new AlertDialog.Builder(context);
+        match_percentage_dialog_builder
+                .setTitle(context.getResources().getString(R.string.selection_match_percentage))
+                .setItems(match_percentage_choices, (dialog, which) -> {
+                    current_route_match_percentage = Integer.parseInt(match_percentage_choices[which]);
+                    FilterRouteMatchPercentage(current_route_match_percentage);
+                    find_trip_binding.txtRouteMatchPercentage.setText(current_route_match_percentage + "%");
+                    dialog.dismiss();
+                });
+        match_percentage_dialog = match_percentage_dialog_builder.create();
+        find_trip_binding.btnChangeRouteMatchPercentage.setOnClickListener(view -> {
+            match_percentage_dialog.show();
+        });
+
+    }
+
+    private void FilterRouteMatchPercentage(int match_percentage){
+        TripFoundFilter(current_vehicle_type_filter, match_percentage);
+    }
+
     public void UpdateTripFoundAdapter(List<TripFound> trip_found_list) {
         trip_found_adapter.UpdateAdapter(trip_found_list);
         this.trip_found_list = trip_found_list;
@@ -117,6 +156,7 @@ public class TripFindingMapController {
             executor_service.shutdown();
         });
     }
+
     private void ClearTripFoundData() {
         find_trip_binding.imgCarSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
         find_trip_binding.imgTruckSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
@@ -138,6 +178,7 @@ public class TripFindingMapController {
             destination_src.setGeoJson(FeatureCollection.fromFeatures(new ArrayList<>()));
         });
     }
+
     private void InitRecyclerViewTripFound() {
         trip_found_adapter = new TripFoundAdapter(context, trip_found_list);
         trip_found_adapter.SetOnItemClicked(this::TripFoundItemClicked);
@@ -162,6 +203,7 @@ public class TripFindingMapController {
         SnapHelper snap_helper = new PagerSnapHelper();
         snap_helper.attachToRecyclerView(find_trip_binding.rcvTripFound);
     }
+
     private void InitTripSource() {
         mapbox_service.GetMapBoxMap().getStyle(style -> {
             // destination point layer
@@ -236,6 +278,7 @@ public class TripFindingMapController {
 
         });
     }
+
     private void ActiveTripRoute(TripFound trip_found) {
         StringBuilder total_geometry = new StringBuilder();
         List<Feature> marker_feature_list = new ArrayList<>();
@@ -259,6 +302,7 @@ public class TripFindingMapController {
             trip_marker_src.setGeoJson(FeatureCollection.fromFeatures(marker_feature_list));
         });
     }
+
     private void InitVehicleTypeFilter() {
         find_trip_binding.imgCarSelected.setOnClickListener(view -> ActiveVehicleTypeFilter(find_trip_binding.imgCarSelected, VehicleType.CAR));
         find_trip_binding.imgTruckSelected.setOnClickListener(view -> ActiveVehicleTypeFilter(find_trip_binding.imgTruckSelected, VehicleType.TRUCK));
@@ -267,24 +311,36 @@ public class TripFindingMapController {
 
         find_trip_binding.imgAllVehicleTypeSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_vehicle_type_selected));
     }
+
     private void ActiveVehicleTypeFilter(ImageView img_view, String vehicle_type) {
         find_trip_binding.imgCarSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
         find_trip_binding.imgTruckSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
         find_trip_binding.imgMotoSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
         find_trip_binding.imgAllVehicleTypeSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
         img_view.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_vehicle_type_selected));
+        current_vehicle_type_filter = vehicle_type;
+        TripFoundFilter(current_vehicle_type_filter, current_route_match_percentage);
+    }
 
+    private void TripFoundFilter(String vehicle_type, int match_percentage){
         trip_found_list = new ArrayList<>();
+        //vehicle type and match percentage filter
         if(vehicle_type.equals(VehicleType.ALL)){
-            trip_found_list = view_model.trip_found_list.getValue();
+            for (int i = 0; i < view_model.trip_found_list.getValue().size(); i++) {
+                TripFound trip_found = view_model.trip_found_list.getValue().get(i);
+                if (trip_found.route_match_percentage >= match_percentage) {
+                    trip_found_list.add(trip_found);
+                }
+            }
         } else {
             for (int i = 0; i < view_model.trip_found_list.getValue().size(); i++) {
                 TripFound trip_found = view_model.trip_found_list.getValue().get(i);
-                if (trip_found.vehicle_type.equals(vehicle_type)) {
+                if (trip_found.route_match_percentage >= match_percentage && trip_found.vehicle_type.equals(vehicle_type)) {
                     trip_found_list.add(trip_found);
                 }
             }
         }
+
         trip_found_adapter.UpdateAdapter(trip_found_list);
         assert trip_found_list != null;
         trip_features = GetFeaturesFromTripFoundList(trip_found_list);
@@ -300,7 +356,7 @@ public class TripFindingMapController {
             destination_point_src.setGeoJson(FeatureCollection.fromFeatures(new ArrayList<>()));
 
             //active first trip
-            if(trip_features.size() > 0){
+            if (trip_features.size() > 0) {
                 SetInactiveAllTrip(trip_features);
                 Feature trip_feature = trip_features.get(0);
                 trip_feature.addBooleanProperty(IS_ACTIVE, true);
@@ -312,7 +368,7 @@ public class TripFindingMapController {
             trip_src.setGeoJson(FeatureCollection.fromFeatures(trip_features));
 
             //active trip route
-            if(trip_found_list.size() > 0){
+            if (trip_found_list.size() > 0) {
                 ActiveTripRoute(trip_found_list.get(0));
                 find_trip_binding.setIsShowRcvTripFound(true);
                 find_trip_binding.setIsShowThumbNotFound(false);
@@ -323,6 +379,7 @@ public class TripFindingMapController {
             }
         });
     }
+
     private void TripFoundItemClicked(TripFound trip_found) {
         Intent trip_found_detail_intent = new Intent(context, TripFoundDetailActivity.class);
         trip_found_detail_intent.putExtra(FieldName.TRIP_FOUND, trip_found);
@@ -345,6 +402,7 @@ public class TripFindingMapController {
 
         context.startActivity(trip_found_detail_intent);
     }
+
     private void TripFoundSeeOverviewClicked(TripFound trip_found) {
         int destination_size = trip_found.destination_list.size();
         Destination destination = trip_found.destination_list.get(destination_size - 1);
@@ -358,10 +416,12 @@ public class TripFindingMapController {
 
         mapbox_service.GetMapBoxMap().easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 1500);
     }
+
     private void TripFoundTargetVehicleClicked(int trip_index) {
         Feature vehicle_feature = trip_features.get(trip_index);
         AnimateCameraToActiveTrip(vehicle_feature);
     }
+
     private void SetActiveTrip(int index, boolean with_scroll) {
         SetInactiveAllTrip(trip_features);
         Feature trip_feature = trip_features.get(index);
@@ -373,11 +433,13 @@ public class TripFindingMapController {
             find_trip_binding.rcvTripFound.scrollToPosition(index);
         }
     }
+
     private void SetInactiveAllTrip(List<Feature> trip_feature_list) {
         for (Feature trip_feature : trip_feature_list) {
             trip_feature.addBooleanProperty(IS_ACTIVE, false);
         }
     }
+
     private void ReFreshTripSource() {
         mapbox_service.GetMapBoxMap().getStyle(style -> {
             GeoJsonSource trip_src = style.getSourceAs(TRIP_SOURCE_ID);
@@ -385,6 +447,7 @@ public class TripFindingMapController {
             trip_src.setGeoJson(FeatureCollection.fromFeatures(trip_features));
         });
     }
+
     private void BindDataToTripSource(Style style) {
         trip_features = GetFeaturesFromTripFoundList(trip_found_list);
         Handler main_handler = new Handler(Looper.getMainLooper());
@@ -399,6 +462,7 @@ public class TripFindingMapController {
             AnimateCameraToActiveTrip(active_trip_feature);
         });
     }
+
     public boolean onMapClick(@NonNull LatLng point) {
         PointF screenPoint = mapbox_service.GetMapBoxMap().getProjection().toScreenLocation(point);
         List<Feature> features = mapbox_service.GetMapBoxMap().queryRenderedFeatures(screenPoint, TRIP_LAYER_ID);
@@ -410,6 +474,7 @@ public class TripFindingMapController {
         }
         return false;
     }
+
     private void AnimateCameraToActiveTrip(Feature feature) {
         CameraPosition cameraPosition = mapbox_service.GetMapBoxMap().getCameraPosition();
         if (animator_set != null) {
@@ -420,7 +485,8 @@ public class TripFindingMapController {
         Point symbolPoint = (Point) feature.geometry();
         LatLng latLng = new LatLng(symbolPoint.latitude(), symbolPoint.longitude());
 
-        double bearing = new Random().nextInt(90);;
+        double bearing = new Random().nextInt(90);
+        ;
         animator_set.playTogether(
                 animatorUtil.CreateLatLngAnimator(cameraPosition.target, latLng, ACTIVE_TRIP_ANIMATION_DURATION),
                 animatorUtil.CreateZoomAnimator(cameraPosition.zoom, 16, ACTIVE_TRIP_ANIMATION_DURATION),
@@ -429,7 +495,8 @@ public class TripFindingMapController {
         );
         animator_set.start();
     }
-    private List<Feature> GetFeaturesFromTripFoundList(List<TripFound> trip_found_list){
+
+    private List<Feature> GetFeaturesFromTripFoundList(List<TripFound> trip_found_list) {
         List<Feature> trip_feature_list = new ArrayList<>();
         for (int i = 0; i < trip_found_list.size(); i++) {
             TripFound trip_found = trip_found_list.get(i);

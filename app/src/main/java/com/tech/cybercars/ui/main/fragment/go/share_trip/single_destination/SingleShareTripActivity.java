@@ -61,6 +61,7 @@ import com.tech.cybercars.data.models.trip.Trip;
 import com.tech.cybercars.databinding.ActivitySingleShareTripBinding;
 import com.tech.cybercars.services.location.LocationService;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
+import com.tech.cybercars.services.mapbox.MapboxNavigationService;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationActivity;
@@ -77,6 +78,7 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
     private MapboxMapService mapbox_service;
     private final Handler search_debounce_handler = new Handler(Looper.getMainLooper());
     private Runnable search_debounce_runnable;
+    private int min_height_bottom_sheet;
     @NonNull
     @Override
     protected SingleShareTripViewModel InitViewModel() {
@@ -93,6 +95,7 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
     @Override
     protected void InitFirst() {
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
+        min_height_bottom_sheet = (int) getResources().getDimension(com.intuit.sdp.R.dimen._130sdp);
     }
 
     @Override
@@ -209,6 +212,15 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
 
     @Override
     protected void OnBackPress() {
+        if (binding.getIsActivatedPlacePicker()) {
+            DonePickLocationAction();
+            return;
+        }
+
+        if (binding.getIsExpandBottomSheet()) {
+            CollapsedBottomSheet();
+            return;
+        }
         finish();
     }
 
@@ -321,31 +333,25 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
             assert route_source != null;
             route_source.setGeoJson(LineString.fromPolyline(geometry, PRECISION_6));
             binding.bsLocationPicker.setVisibility(View.GONE);
+            if(geometry.length() > MapboxNavigationService.GEOMETRY_LIMIT){
+                MapboxNavigationService.ShowRouteOutOfLimit(this);
+                binding.setIsShowOptionNextStep(false);
+            }
             MakeBoundingBox();
         });
     }
 
     private void MakeBoundingBox() {
         binding.setIsShowOverlay(true);
-//        double minLatitude = Math.min(view_model.origin_reverse.boundingbox[0], view_model.destination_reverse.boundingbox[0]);
-//        double minLongitude = Math.min(view_model.origin_reverse.boundingbox[2], view_model.destination_reverse.boundingbox[2]);
-//        double maxLatitude = Math.max(view_model.origin_reverse.boundingbox[1], view_model.destination_reverse.boundingbox[1]);
-//        double maxLongitude = Math.max(view_model.origin_reverse.boundingbox[3], view_model.destination_reverse.boundingbox[3]);
-        LatLngBounds latLngBounds = new LatLngBounds.Builder()
-                .include(new LatLng(view_model.destination_reverse.boundingbox[1], view_model.destination_reverse.boundingbox[3]))
-                .include(new LatLng(view_model.destination_reverse.boundingbox[0], view_model.destination_reverse.boundingbox[2]))
-                .include(new LatLng(view_model.origin_reverse.boundingbox[1], view_model.origin_reverse.boundingbox[3]))
-                .include(new LatLng(view_model.origin_reverse.boundingbox[0], view_model.origin_reverse.boundingbox[2]))
+        LatLng northeast = new LatLng(view_model.origin_reverse.lat, view_model.origin_reverse.lng);
+        LatLng southwest = new LatLng(view_model.destination_reverse.lat, view_model.destination_reverse.lng);
+        LatLngBounds latLng_bounds = new LatLngBounds.Builder()
+                .include(northeast)
+                .include(southwest)
                 .build();
-//        LatLngBounds latLngBounds = new LatLngBounds.Builder()
-//                .include(new LatLng(maxLatitude, maxLongitude))
-//                .include(new LatLng(minLatitude, minLongitude))
-//                .build();
 
         mapbox_service.GetMapBoxMap().easeCamera(CameraUpdateFactory.newLatLngBounds(
-                        latLngBounds,
-                        -1,
-                        45,50),
+                        latLng_bounds, 50),
                 3000, new MapboxMap.CancelableCallback() {
                     @Override
                     public void onCancel() {
@@ -355,7 +361,9 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
                     @Override
                     public void onFinish() {
                         binding.setIsShowOverlay(false);
-                        binding.setIsShowOptionNextStep(true);
+                        boolean is_valid_limit = view_model.current_route.getValue().geometry().length() < MapboxNavigationService.GEOMETRY_LIMIT;
+                        binding.setIsShowOptionNextStep(is_valid_limit);
+                        binding.bsLocationPicker.setVisibility(is_valid_limit ? View.GONE : View.VISIBLE);
                     }
                 });
     }
@@ -371,6 +379,7 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
     }
 
     private void ShowErrorCallServer(String error_call_server) {
+        binding.setIsShowOverlay(false);
         NotificationDialog.Builder(this)
                 .SetIcon(R.drawable.ic_error)
                 .SetTitle(getResources().getString(R.string.something_went_wrong))
@@ -381,8 +390,7 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
 
     private void DonePickLocationAction() {
         binding.setIsActivatedPlacePicker(false);
-        float min_height = getResources().getDimension(com.intuit.sdp.R.dimen._170sdp);
-        bottom_sheet_behavior.setPeekHeight(Math.round(min_height));
+        bottom_sheet_behavior.setPeekHeight(Math.round(min_height_bottom_sheet));
         bottom_sheet_behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         binding.inputFromMap.setEndIconVisible(false);
         binding.inputToMap.setEndIconVisible(false);
@@ -501,10 +509,10 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
 
     private void InitBottomSheet() {
         this.bottom_sheet_behavior = BottomSheetBehavior.from(binding.bsLocationPicker);
-        int min_height = getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._170sdp);
-        bottom_sheet_behavior.setPeekHeight(min_height);
+
+        bottom_sheet_behavior.setPeekHeight(min_height_bottom_sheet);
         bottom_sheet_behavior.setDraggable(false);
-        binding.btnCloseBottomSheet.setVisibility(View.INVISIBLE);
+        binding.btnCloseBottomSheet.setVisibility(View.GONE);
         binding.btnCloseBottomSheet.setOnClickListener(view -> {
             CollapsedBottomSheet();
         });
