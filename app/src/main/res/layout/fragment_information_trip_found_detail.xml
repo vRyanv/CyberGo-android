@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:orientation="horizontal"
-                android:id="@+id/btn_open_profile"
+                android:id="@+id/btn_open_owner_profile"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_15sdp"

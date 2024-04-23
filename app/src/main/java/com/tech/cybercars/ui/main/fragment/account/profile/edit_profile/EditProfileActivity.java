@@ -24,15 +24,19 @@ import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.databinding.ActivityEditProfileBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+import com.tech.cybercars.utils.DateTimePicker;
 import com.tech.cybercars.utils.FileUtil;
 import com.tech.cybercars.utils.KeyBoardUtil;
 import com.tech.cybercars.utils.PermissionUtil;
+
+import java.util.Calendar;
 
 
 public class EditProfileActivity extends BaseActivity<ActivityEditProfileBinding, EditProfileViewModel> {
     private AlertDialog gender_dialog;
     private String[] gender_choices;
     private final PermissionUtil permission_util = new PermissionUtil();
+    private DateTimePicker date_time_picker;
 
     @NonNull
     @Override
@@ -55,6 +59,10 @@ public class EditProfileActivity extends BaseActivity<ActivityEditProfileBinding
     @Override
     protected void InitView() {
         InitAlertDialog();
+        InitDatePicker();
+        binding.inputBirthday.getEditText().setOnClickListener(view -> {
+            date_time_picker.Run();
+        });
 
         binding.btnUpdateProfile.setOnClickListener(view -> {
             KeyBoardUtil.HideKeyBoard(this);
@@ -79,6 +87,13 @@ public class EditProfileActivity extends BaseActivity<ActivityEditProfileBinding
                     .Start();
         });
 
+    }
+
+    private void InitDatePicker() {
+        date_time_picker = new DateTimePicker(getSupportFragmentManager(), DateTimePicker.M_D_Y);
+        date_time_picker.SetOnDateTimePicked((calendar, date_time_format) -> {
+            view_model.birthday.setValue(date_time_format);
+        });
     }
 
     @Override
@@ -191,6 +206,7 @@ public class EditProfileActivity extends BaseActivity<ActivityEditProfileBinding
 
         view_model.full_name.setValue(view_model.edit_user.full_name);
         view_model.gender.setValue(view_model.edit_user.gender);
+        view_model.birthday.setValue(view_model.edit_user.birthday);
         view_model.identity_number.setValue(view_model.edit_user.id_number);
         view_model.address.setValue(view_model.edit_user.address);
     }

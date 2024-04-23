@@ -28,7 +28,7 @@
     <style name="icon_label_profile">
         <item name="android:layout_width">@dimen/_20sdp</item>
         <item name="android:layout_height">@dimen/_20sdp</item>
-        <item name="android:layout_marginRight">@dimen/_10sdp</item>
+        <item name="android:layout_marginRight">@dimen/_25sdp</item>
         <item name="android:layout_gravity">center</item>
     </style>
 

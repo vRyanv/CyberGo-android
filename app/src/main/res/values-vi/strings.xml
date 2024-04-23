@@ -163,4 +163,6 @@
     <string name="the_request_to_join_the_trip_has_been_sent_please_wait_for_notification_from_owner">Yêu cầu tham gia chuyến đi đã được gửi, vui lòng chờ thông báo từ chủ sở hữu</string>
     <string name="logout">Đăng xuất</string>
     <string name="waiting_for_response_from_owner">Đang chờ phản hồi từ chủ sở hữu</string>
+    <string name="not_update">Chưa cập nhật</string>
+    <string name="birthday">Ngày sinh</string>
 </resources>

@@ -5,7 +5,7 @@ public class URL {
     public static final String AVATAR_RES_PATH = "/assets/media/avatar/";
     public static final String DRIVER_REGISTRATION_RES_PATH = "/assets/media/driver-registration/";
     public static final String ID_CARD_RES_PATH = "/assets/media/id-card/";
-    public static final String BASE_URL = "http://192.168.4.7:2108";
+    public static final String BASE_URL = "http://192.168.4.15:2108";
 
     //trip
     public static final String MEMBER_REQUEST_TO_JOIN = "/trip/member/request-to-join";
@@ -30,6 +30,7 @@ public class URL {
     public static final String SEARCH_ADDRESS = "/map/search-address/{address}/{limit}";
 
     //User
+    public static final String VIEW_USER_PROFILE = "/user/view-user-profile/{user_id}";
     public static final String DRIVER_REGISTRATION = "/user/driver-registration";
     public static final String PROFILE = "/user/profile";
     public static final String UPDATE_PROFILE = "/user/profile/update";

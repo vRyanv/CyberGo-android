@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.member.MemberAdapter;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.databinding.FragmentMemberTripFoundDetailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFoundDetailViewModel;
 import com.tech.cybercars.ui.main.user_profile.UserProfileActivity;
+import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 
@@ -43,13 +46,23 @@ public class MemberTripFoundDetailFragment extends BaseFragment<FragmentMemberTr
     protected void InitView() {
         member_adapter = new MemberAdapter(requireContext(), new ArrayList<>());
         member_adapter.SetMemberClicked(user_id -> {
-            startActivity(new Intent(requireContext(), UserProfileActivity.class));
+            OpenUserProfile(user_id);
         });
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
         binding.rcvMember.setLayoutManager(layoutManager);
         binding.rcvMember.setAdapter(member_adapter);
     }
 
+    private void OpenUserProfile(String user_id) {
+        String current_user_id = SharedPreferencesUtil.GetString(requireContext(), FieldName.USER_ID);
+        if(current_user_id.equals(user_id)){
+            startActivity(new Intent(requireContext(), ProfileActivity.class));
+        } else {
+            Intent user_profile_intent = new Intent(requireContext(), UserProfileActivity.class);
+            user_profile_intent.putExtra(FieldName.USER_ID, user_id);
+            startActivity(user_profile_intent);
+        }
+    }
     @Override
     protected void InitObserve() {
         view_model.trip_found.observe(this, this::BindDataToUI);

@@ -1,5 +1,6 @@
 package com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.fragment;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,12 +12,16 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DestinationType;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.databinding.FragmentInformationTripFoundDetailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFoundDetailViewModel;
+import com.tech.cybercars.ui.main.user_profile.UserProfileActivity;
+import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 public class InformationTripFoundDetailFragment extends BaseFragment<FragmentInformationTripFoundDetailBinding, TripFoundDetailViewModel> {
 
@@ -39,7 +44,21 @@ public class InformationTripFoundDetailFragment extends BaseFragment<FragmentInf
 
     @Override
     protected void InitView() {
+        binding.btnOpenOwnerProfile.setOnClickListener(view -> {
+            OpenUserProfile();
+        });
+    }
 
+    private void OpenUserProfile() {
+        String user_id = view_model.trip_found.getValue().owner.user_id;
+        String current_user_id = SharedPreferencesUtil.GetString(requireContext(), FieldName.USER_ID);
+        if(current_user_id.equals(user_id)){
+            startActivity(new Intent(requireContext(), ProfileActivity.class));
+        } else {
+            Intent user_profile_intent = new Intent(requireContext(), UserProfileActivity.class);
+            user_profile_intent.putExtra(FieldName.USER_ID, user_id);
+            startActivity(user_profile_intent);
+        }
     }
 
     @Override

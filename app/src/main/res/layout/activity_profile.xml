@@ -121,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@+id/card_avatar">
@@ -136,7 +136,10 @@
                             style="@style/text_label_profile"
                             android:text="@{view_model.email, default=Email}" />
                     </LinearLayout>
-
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"/>
                     <LinearLayout style="@style/layout_label_profile">
 
                         <ImageView
@@ -147,7 +150,10 @@
                             style="@style/text_label_profile"
                             android:text="@{view_model.phone_number, default=Phone}" />
                     </LinearLayout>
-
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"/>
                     <LinearLayout style="@style/layout_label_profile">
 
                         <ImageView
@@ -159,7 +165,25 @@
                             android:layout_gravity="center"
                             android:text="@{view_model.gender, default=Gender}" />
                     </LinearLayout>
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"/>
+                    <LinearLayout style="@style/layout_label_profile">
 
+                        <ImageView
+                            style="@style/icon_label_profile"
+                            android:src="@drawable/ic_birthday_cake" />
+
+                        <TextView
+                            style="@style/text_label_profile"
+                            android:layout_gravity="center"
+                            android:text="@{view_model.birthday, default=brithday}" />
+                    </LinearLayout>
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"/>
                     <LinearLayout style="@style/layout_label_profile">
 
                         <ImageView
@@ -171,7 +195,10 @@
                             android:layout_gravity="center"
                             android:text="@{view_model.identity_number, default=ID}" />
                     </LinearLayout>
-
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"/>
                     <LinearLayout style="@style/layout_label_profile">
 
                         <ImageView

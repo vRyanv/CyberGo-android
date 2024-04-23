@@ -25,6 +25,7 @@ public class FieldName {
     public final static String PHONE_NUMBER = "phone_number";
     public final static String COUNTRY_NAME_CODE = "country_name_code";
     public final static String GENDER = "gender";
+    public final static String BIRTHDAY = "birthday";
     public final static String ADDRESS = "address";
 
     public final static String FRONT_ID_CARD = "front_id_card";

@@ -13,6 +13,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -61,9 +62,13 @@ import com.tech.cybercars.services.location.LocationService;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+import com.tech.cybercars.utils.DateTimePicker;
+import com.tech.cybercars.utils.DateUtil;
+import com.tech.cybercars.utils.Helper;
 import com.tech.cybercars.utils.KeyBoardUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -80,6 +85,8 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
     private final String DESTINATION_MARKER_ICON_IMAGE_ID = "DESTINATION_MARKER_ICON_IMAGE_ID";
     private final String DESTINATION_MARKER_LAYER_ID = "DESTINATION_MARKER_LAYER_ID";
     private final String ICON_IMAGE = "ICON_IMAGE";
+    private DateTimePicker date_picker_dialog;
+    private int min_height_bottom_sheet;
 
     @NonNull
     @Override
@@ -97,6 +104,7 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
     @Override
     protected void InitFirst() {
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
+        min_height_bottom_sheet = (int) getResources().getDimension(com.intuit.sdp.R.dimen._220sdp);
     }
 
     @Override
@@ -105,6 +113,11 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
         InitSearchAddressResultView();
         InitBottomSheet();
         InitInputLocation();
+        InitDatePickerDialog();
+
+        binding.inputStartDate.getEditText().setOnClickListener(view -> {
+            date_picker_dialog.Run();
+        });
 
         binding.btnFocusCurrentLocationShareTrip.setOnClickListener(view -> {
             StartTracking();
@@ -121,6 +134,22 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
         binding.btnOutShareTransport.setOnClickListener(view -> {
             OnBackPress();
         });
+    }
+
+    private void InitDatePickerDialog() {
+        date_picker_dialog = new DateTimePicker(getSupportFragmentManager(), DateTimePicker.M_D_Y);
+        date_picker_dialog.SetOnDateTimePicked((calendar, date_time_format) -> {
+            view_model.trip_start_date.setValue(date_time_format);
+            view_model.trip_start_date_data = DateUtil.YMDFormat(calendar);
+            if (view_model.origin_reverse != null && view_model.destination_reverse != null) {
+                view_model.HandleFindTrip();
+            }
+        });
+        String current_date = DateUtil.GetCurrentDate();
+        view_model.trip_start_date.setValue(current_date);
+
+        Calendar calendar = Calendar.getInstance();
+        view_model.trip_start_date_data = DateUtil.YMDFormat(calendar);
     }
 
 
@@ -182,6 +211,7 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
         });
 
         view_model.trip_found_list.observe(this, trip_found_list -> {
+            binding.bsLocationPicker.setVisibility(View.GONE);
             find_trip_controller.UpdateTripFoundAdapter(trip_found_list);
             binding.setIsShowRcvTripFound(!trip_found_list.isEmpty());
             binding.setIsShowVehicleFilter(!trip_found_list.isEmpty());
@@ -198,23 +228,30 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
         binding.setIsExpandBottomSheet(false);
         binding.setIsShowRcvTripFound(false);
         binding.setIsShowThumbNotFound(false);
+
+
     }
 
     @Override
     protected void OnBackPress() {
-        if(binding.getIsShowRcvTripFound() || binding.getIsShowThumbNotFound()){
+        if (binding.getIsShowRcvTripFound() || binding.getIsShowThumbNotFound()) {
             CancelFindTrip();
             return;
         }
 
-        if(binding.getIsActivatedPlacePicker()){
+        if (binding.getIsActivatedPlacePicker()) {
             DonePickLocationAction();
+            return;
+        }
+
+        if (binding.getIsExpandBottomSheet()) {
+            CollapsedBottomSheet();
             return;
         }
         finish();
     }
 
-    private void CancelFindTrip(){
+    private void CancelFindTrip() {
         find_trip_controller.UpdateTripFoundAdapter(new ArrayList<>());
         binding.setIsShowRcvTripFound(false);
         binding.setIsShowVehicleFilter(false);
@@ -267,7 +304,7 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
             GeoJsonSource route_source = style.getSourceAs(PASSENGER_ROUTE_SOURCE_LAYER_ID);
             assert route_source != null;
             route_source.setGeoJson(LineString.fromPolyline(geometry, PRECISION_6));
-            binding.bsLocationPicker.setVisibility(View.GONE);
+//            binding.bsLocationPicker.setVisibility(View.GONE);
 
             view_model.HandleFindTrip();
 
@@ -320,17 +357,15 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
 
     private void DonePickLocationAction() {
         binding.setIsActivatedPlacePicker(false);
-        float min_height = getResources().getDimension(com.intuit.sdp.R.dimen._170sdp);
-        bottom_sheet_behavior.setPeekHeight(Math.round(min_height));
+        bottom_sheet_behavior.setPeekHeight(Math.round(min_height_bottom_sheet));
         bottom_sheet_behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         binding.inputFromMap.setEndIconVisible(false);
         binding.inputToMap.setEndIconVisible(false);
     }
 
-    private void ShowBottomSheet(){
+    private void ShowBottomSheet() {
         binding.bsLocationPicker.setVisibility(View.VISIBLE);
-        float min_height = getResources().getDimension(com.intuit.sdp.R.dimen._170sdp);
-        bottom_sheet_behavior.setPeekHeight(Math.round(min_height));
+        bottom_sheet_behavior.setPeekHeight(Math.round(min_height_bottom_sheet));
         bottom_sheet_behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
@@ -466,8 +501,7 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
 
     private void InitBottomSheet() {
         this.bottom_sheet_behavior = BottomSheetBehavior.from(binding.bsLocationPicker);
-        int min_height = getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._170sdp);
-        bottom_sheet_behavior.setPeekHeight(min_height);
+        bottom_sheet_behavior.setPeekHeight(min_height_bottom_sheet);
         bottom_sheet_behavior.setDraggable(false);
         binding.btnCloseBottomSheet.setVisibility(View.INVISIBLE);
         binding.btnCloseBottomSheet.setOnClickListener(view -> {
@@ -560,7 +594,7 @@ public class FindTripActivity extends BaseActivity<ActivityFindTripBinding, Find
         style.addSource(new GeoJsonSource(PASSENGER_ROUTE_SOURCE_LAYER_ID));
         LineLayer route_layer = new LineLayer("route-layer-id", PASSENGER_ROUTE_SOURCE_LAYER_ID);
         route_layer.setProperties(
-                lineDasharray(new Float[] {0.01f, 2f}),
+                lineDasharray(new Float[]{0.01f, 2f}),
                 lineCap(Property.LINE_CAP_ROUND),
                 lineJoin(Property.LINE_JOIN_ROUND),
                 lineWidth(6f),

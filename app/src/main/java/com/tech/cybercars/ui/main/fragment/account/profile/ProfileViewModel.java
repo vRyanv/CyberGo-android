@@ -30,6 +30,7 @@ public class ProfileViewModel extends BaseViewModel {
     public MutableLiveData<String> avatar = new MutableLiveData<>();
     public MutableLiveData<String> address = new MutableLiveData<>();
     public MutableLiveData<String> identity_number = new MutableLiveData<>();
+    public MutableLiveData<String> birthday = new MutableLiveData<>();
     private final UserRepository user_repo;
     private final AppDBContext app_db_context;
     public User user_profile;
@@ -70,7 +71,7 @@ public class ProfileViewModel extends BaseViewModel {
             }
             if (response.body().code == StatusCode.OK) {
                 user_profile = new User( response.body().id, response.body().role, response.body().email,
-                        response.body().full_name, response.body().gender, response.body().avatar, response.body().id_number,
+                        response.body().full_name, response.body().gender, response.body().birthday, response.body().avatar, response.body().id_number,
                         response.body().address, response.body().phone_number,  response.body().country.prefix,
                         response.body().country.code, response.body().front_id_card,  response.body().back_id_card
                 );
@@ -99,14 +100,16 @@ public class ProfileViewModel extends BaseViewModel {
     }
 
     private void BindData(User user){
-        avatar.postValue(user.avatar);
-        full_name.postValue(user.full_name);
+        String not_update = getApplication().getString(R.string.not_update);
+        avatar.postValue(user.avatar != null ? user.avatar : not_update);
+        full_name.postValue(user.full_name != null ? user.full_name : not_update);
         email.postValue(user.email);
         String phone = user.country_prefix + user.phone_number;
         phone_number.postValue(phone);
         gender.postValue(user.gender);
-        address.postValue(user.address);
-        identity_number.postValue(user.id_number);
+        address.postValue(user.address != null ? user.address : not_update);
+        identity_number.postValue(user.id_number != null ? user.id_number : not_update);
+        birthday.postValue(user.birthday != null ? user.birthday : not_update);
     }
 
 }

@@ -31,11 +31,16 @@ import retrofit2.Response;
 public class AddShareTripInformationViewModel extends BaseViewModel {
     public MutableLiveData<Integer> current_page = new MutableLiveData<>();
     public MutableLiveData<String> trip_name = new MutableLiveData<>();
+    public MutableLiveData<String> trip_name_error = new MutableLiveData<>();
     public MutableLiveData<Trip> trip = new MutableLiveData<>();
     public MutableLiveData<ArrayList<Destination>> destination_list = new MutableLiveData<>();
     public MutableLiveData<String> start_date = new MutableLiveData<>();
+    public MutableLiveData<String> start_date_error = new MutableLiveData<>();
+    public String start_date_data;
     public MutableLiveData<String> start_time = new MutableLiveData<>();
+    public MutableLiveData<String> start_time_error = new MutableLiveData<>();
     public MutableLiveData<String> price = new MutableLiveData<>();
+    public MutableLiveData<String> price_error = new MutableLiveData<>();
     public MutableLiveData<String> description = new MutableLiveData<>();
     public TripRepository trip_repo;
     public TripDAO trip_dao;
@@ -52,10 +57,15 @@ public class AddShareTripInformationViewModel extends BaseViewModel {
         if (trip.getValue() == null) {
             return;
         }
+
+        if(!IsValidTripData()){
+            return;
+        }
+
         is_loading.setValue(true);
 
         trip.getValue().name = trip_name.getValue();
-        trip.getValue().start_date = start_date.getValue();
+        trip.getValue().start_date = start_date_data;
         trip.getValue().start_time = start_time.getValue();
         trip.getValue().price = Double.parseDouble(price.getValue());
         trip.getValue().description = description.getValue();
@@ -69,6 +79,37 @@ public class AddShareTripInformationViewModel extends BaseViewModel {
                 this::CallCreateTripSharingSuccess,
                 this::CallCreateTripSharingFailed
         );
+    }
+
+    private boolean IsValidTripData() {
+        boolean is_valid = true;
+        String error_mess = "";
+        String can_not_empty = getApplication().getString(R.string.can_not_empty);
+        if(trip_name.getValue() == null || trip_name.getValue().equals("")){
+            error_mess = getApplication().getString(R.string.trip_name) + " " + can_not_empty;
+            trip_name_error.setValue(error_mess);
+            is_valid = false;
+        }
+
+        if(start_date.getValue() == null || start_date.getValue().equals("")){
+            error_mess = getApplication().getString(R.string.start_date) + " " + can_not_empty;
+            start_date_error.setValue(error_mess);
+            is_valid = false;
+        }
+
+        if(start_time.getValue() == null || start_time.getValue().equals("")){
+            error_mess = getApplication().getString(R.string.start_time) + " " + can_not_empty;
+            start_time_error.setValue(error_mess);
+            is_valid = false;
+        }
+
+        if(price.getValue() == null || price.getValue().equals("")){
+            error_mess = getApplication().getString(R.string.price) + " " + can_not_empty;
+            price_error.setValue(error_mess);
+            is_valid = false;
+        }
+
+        return is_valid;
     }
 
     private void CallCreateTripSharingSuccess(Response<TripBodyAndResponse> response) {

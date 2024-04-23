@@ -69,13 +69,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class TripFindingMapController {
-    private List<TripFound> trip_found_list;
+    private List<TripFound> trip_found_list = new ArrayList<>();
     private TripFoundAdapter trip_found_adapter;
+    private List<Feature> trip_features = new ArrayList<>();
     private final Context context;
     private final FindTripViewModel view_model;
     private final MapboxMapService mapbox_service;
     private AnimatorSet animator_set;
-    private final List<Feature> trip_features = new ArrayList<>();
     private final long ACTIVE_TRIP_ANIMATION_DURATION = 1500;
     private final String DESTINATION_MARKER_LAYER_ID = "DESTINATION_MARKER_LAYER_ID";
     private final String DESTINATION_POINT_SOURCE_ID = "DESTINATION_POINT_SOURCE_ID";
@@ -122,6 +122,7 @@ public class TripFindingMapController {
         find_trip_binding.imgTruckSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
         find_trip_binding.imgMotoSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
         find_trip_binding.imgAllVehicleTypeSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_vehicle_type_selected));
+
         mapbox_service.GetMapBoxMap().getStyle(style -> {
             GeoJsonSource trip_src = style.getSourceAs(TRIP_SOURCE_ID);
             GeoJsonSource trip_route_src = style.getSourceAs(TRIP_ROUTE_SOURCE_ID);
@@ -263,6 +264,8 @@ public class TripFindingMapController {
         find_trip_binding.imgTruckSelected.setOnClickListener(view -> ActiveVehicleTypeFilter(find_trip_binding.imgTruckSelected, VehicleType.TRUCK));
         find_trip_binding.imgMotoSelected.setOnClickListener(view -> ActiveVehicleTypeFilter(find_trip_binding.imgMotoSelected, VehicleType.MOTO));
         find_trip_binding.imgAllVehicleTypeSelected.setOnClickListener(view -> ActiveVehicleTypeFilter(find_trip_binding.imgAllVehicleTypeSelected, VehicleType.ALL));
+
+        find_trip_binding.imgAllVehicleTypeSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_vehicle_type_selected));
     }
     private void ActiveVehicleTypeFilter(ImageView img_view, String vehicle_type) {
         find_trip_binding.imgCarSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
@@ -271,24 +274,20 @@ public class TripFindingMapController {
         find_trip_binding.imgAllVehicleTypeSelected.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_transport_type_selected));
         img_view.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_vehicle_type_selected));
 
-        List<Feature> trip_feature_filter;
-        List<TripFound> trip_found_filter;
+        trip_found_list = new ArrayList<>();
         if(vehicle_type.equals(VehicleType.ALL)){
-            trip_feature_filter = trip_features;
-            trip_found_filter = trip_found_list;
+            trip_found_list = view_model.trip_found_list.getValue();
         } else {
-            trip_found_filter = new ArrayList<>();
-            trip_feature_filter = new ArrayList<>();
-            for (int i = 0; i < trip_found_list.size(); i++) {
-                TripFound trip_found = trip_found_list.get(i);
+            for (int i = 0; i < view_model.trip_found_list.getValue().size(); i++) {
+                TripFound trip_found = view_model.trip_found_list.getValue().get(i);
                 if (trip_found.vehicle_type.equals(vehicle_type)) {
-                    trip_found_filter.add(trip_found);
-                    trip_feature_filter.add(trip_features.get(i));
+                    trip_found_list.add(trip_found);
                 }
             }
         }
-
-        trip_found_adapter.UpdateAdapter(trip_found_filter);
+        trip_found_adapter.UpdateAdapter(trip_found_list);
+        assert trip_found_list != null;
+        trip_features = GetFeaturesFromTripFoundList(trip_found_list);
         mapbox_service.GetMapBoxMap().getStyle(style -> {
             //remove current trip route
             GeoJsonSource trip_route_src = style.getSourceAs(TRIP_ROUTE_SOURCE_ID);
@@ -301,20 +300,20 @@ public class TripFindingMapController {
             destination_point_src.setGeoJson(FeatureCollection.fromFeatures(new ArrayList<>()));
 
             //active first trip
-            if(trip_feature_filter.size() > 0){
-                SetInactiveAllTrip(trip_feature_filter);
-                Feature trip_feature = trip_feature_filter.get(0);
+            if(trip_features.size() > 0){
+                SetInactiveAllTrip(trip_features);
+                Feature trip_feature = trip_features.get(0);
                 trip_feature.addBooleanProperty(IS_ACTIVE, true);
                 AnimateCameraToActiveTrip(trip_feature);
             }
 
             GeoJsonSource trip_src = style.getSourceAs(TRIP_SOURCE_ID);
             assert trip_src != null;
-            trip_src.setGeoJson(FeatureCollection.fromFeatures(trip_feature_filter));
+            trip_src.setGeoJson(FeatureCollection.fromFeatures(trip_features));
 
             //active trip route
-            if(trip_found_filter.size() > 0){
-                ActiveTripRoute(trip_found_filter.get(0));
+            if(trip_found_list.size() > 0){
+                ActiveTripRoute(trip_found_list.get(0));
                 find_trip_binding.setIsShowRcvTripFound(true);
                 find_trip_binding.setIsShowThumbNotFound(false);
                 find_trip_binding.rcvTripFound.scrollToPosition(0);
@@ -387,34 +386,7 @@ public class TripFindingMapController {
         });
     }
     private void BindDataToTripSource(Style style) {
-        for (int i = 0; i < trip_found_list.size(); i++) {
-            TripFound trip_found = trip_found_list.get(i);
-            Feature feature = Feature.fromGeometry(Point.fromLngLat(
-                    trip_found.origin_longitude,
-                    trip_found.origin_latitude
-            ));
-            feature.addNumberProperty(INDEX_PROP, i);
-            feature.addBooleanProperty(IS_ACTIVE, false);
-            switch (trip_found.vehicle_type) {
-                case VehicleType.CAR:
-                    feature.addStringProperty(ICON_IMAGE, CAR_IMAGE_ID);
-                    feature.addNumberProperty(SIZE_ICON_IMAGE, .06f);
-                    feature.addStringProperty(FieldName.VEHICLE_TYPE, VehicleType.CAR);
-                    break;
-                case VehicleType.MOTO:
-                    feature.addStringProperty(ICON_IMAGE, MOTO_IMAGE_ID);
-                    feature.addNumberProperty(SIZE_ICON_IMAGE, .07f);
-                    feature.addStringProperty(FieldName.VEHICLE_TYPE, VehicleType.MOTO);
-                    break;
-                default:
-                    feature.addStringProperty(ICON_IMAGE, TRUCK_IMAGE_ID);
-                    feature.addNumberProperty(SIZE_ICON_IMAGE, .11f);
-                    feature.addStringProperty(FieldName.VEHICLE_TYPE, VehicleType.TRUCK);
-                    break;
-            }
-            trip_features.add(feature);
-        }
-
+        trip_features = GetFeaturesFromTripFoundList(trip_found_list);
         Handler main_handler = new Handler(Looper.getMainLooper());
         main_handler.post(() -> {
             GeoJsonSource trip_src = style.getSourceAs(TRIP_SOURCE_ID);
@@ -423,7 +395,7 @@ public class TripFindingMapController {
             Feature active_trip_feature = trip_features.get(0);
             active_trip_feature.addBooleanProperty(IS_ACTIVE, true);
             trip_src.setGeoJson(trip_feature_collection);
-            ActiveTripRoute(trip_found_list.get(0));
+            SetActiveTrip(0, false);
             AnimateCameraToActiveTrip(active_trip_feature);
         });
     }
@@ -456,5 +428,36 @@ public class TripFindingMapController {
                 animatorUtil.CreateTiltAnimator(cameraPosition.tilt, 45, ACTIVE_TRIP_ANIMATION_DURATION)
         );
         animator_set.start();
+    }
+    private List<Feature> GetFeaturesFromTripFoundList(List<TripFound> trip_found_list){
+        List<Feature> trip_feature_list = new ArrayList<>();
+        for (int i = 0; i < trip_found_list.size(); i++) {
+            TripFound trip_found = trip_found_list.get(i);
+            Feature feature = Feature.fromGeometry(Point.fromLngLat(
+                    trip_found.origin_longitude,
+                    trip_found.origin_latitude
+            ));
+            feature.addNumberProperty(INDEX_PROP, i);
+            feature.addBooleanProperty(IS_ACTIVE, false);
+            switch (trip_found.vehicle_type) {
+                case VehicleType.CAR:
+                    feature.addStringProperty(ICON_IMAGE, CAR_IMAGE_ID);
+                    feature.addNumberProperty(SIZE_ICON_IMAGE, .06f);
+                    feature.addStringProperty(FieldName.VEHICLE_TYPE, VehicleType.CAR);
+                    break;
+                case VehicleType.MOTO:
+                    feature.addStringProperty(ICON_IMAGE, MOTO_IMAGE_ID);
+                    feature.addNumberProperty(SIZE_ICON_IMAGE, .07f);
+                    feature.addStringProperty(FieldName.VEHICLE_TYPE, VehicleType.MOTO);
+                    break;
+                default:
+                    feature.addStringProperty(ICON_IMAGE, TRUCK_IMAGE_ID);
+                    feature.addNumberProperty(SIZE_ICON_IMAGE, .11f);
+                    feature.addStringProperty(FieldName.VEHICLE_TYPE, VehicleType.TRUCK);
+                    break;
+            }
+            trip_feature_list.add(feature);
+        }
+        return trip_feature_list;
     }
 }

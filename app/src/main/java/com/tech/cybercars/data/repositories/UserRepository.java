@@ -1,5 +1,6 @@
 package com.tech.cybercars.data.repositories;
 
+import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
 import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
@@ -38,6 +39,11 @@ public class UserRepository {
         user_service = RetrofitRequest.getInstance().create(UserServiceRetrofit.class);
     }
 
+    public void ViewUserProfile(String user_token, String user_id, ResSuccessCallback<ProfileResponse> success_callback, ResFailCallback fail_callback){
+        user_service.ViewUserProfileRequest(user_token, user_id)
+                .enqueue(new RetrofitResponse<ProfileResponse>().GetResponse(success_callback, fail_callback));
+    }
+
     public void UpdateFirebaseToken(String user_token, UpdateFCMBody update_firebase_token_body, ResSuccessCallback<BaseResponse> success_callback, ResFailCallback fail_callback){
         user_service.UpdateFirebaseTokenRequest(user_token, update_firebase_token_body)
                 .enqueue(new RetrofitResponse<BaseResponse>().GetResponse(success_callback, fail_callback));
@@ -54,10 +60,11 @@ public class UserRepository {
                                          MultipartBody.Part avatar_body,
                                          RequestBody full_name_body,
                                          RequestBody gender_body,
+                                         RequestBody birthday_body,
                                          RequestBody identity_number,
                                          RequestBody address,
                                          ResSuccessCallback<UpdateProfileResponse> success_callback, ResFailCallback fail_callback){
-        user_service.UpdateProfileRequest(user_token, avatar_body, full_name_body, gender_body, identity_number, address)
+        user_service.UpdateProfileRequest(user_token, avatar_body, full_name_body, gender_body, birthday_body, identity_number, address)
                 .enqueue(new RetrofitResponse<UpdateProfileResponse>().GetResponse(success_callback, fail_callback));
     }
 

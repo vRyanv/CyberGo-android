@@ -167,4 +167,6 @@
     <string name="the_request_to_join_the_trip_has_been_sent_please_wait_for_notification_from_owner">The request to join the trip has been sent, please wait for notification from owner</string>
     <string name="logout">Logout</string>
     <string name="waiting_for_response_from_owner">Waiting for response from owner</string>
+    <string name="not_update">Not update</string>
+    <string name="birthday">Birthday</string>
 </resources>

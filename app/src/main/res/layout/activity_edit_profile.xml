@@ -124,6 +124,10 @@
                     android:focusable="false"
                     app:errorIconDrawable="@null"
                     app:errorEnabled="true"
+                    app:endIconDrawable="@drawable/shape_ic_gender"
+                    app:endIconMode="custom"
+                    app:endIconTint="@null"
+                    app:endIconTintMode="multiply"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/input_full_name">
@@ -131,10 +135,35 @@
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/edit_text_input"
                         android:enabled="true"
+                        android:cursorVisible="false"
                         android:focusable="false"
                         android:hint="@string/gender"
                         android:inputType="none"
                         android:text="@{view_model.gender}" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_birthday"
+                    style="@style/input"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:focusable="false"
+                    app:errorIconDrawable="@null"
+                    app:errorEnabled="true"
+                    app:endIconDrawable="@drawable/shape_ic_birthday"
+                    app:endIconMode="custom"
+                    app:endIconTint="@null"
+                    app:endIconTintMode="multiply"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/input_gender">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:enabled="true"
+                        android:focusable="false"
+                        android:cursorVisible="false"
+                        android:hint="@string/birthday"
+                        android:inputType="none"
+                        android:text="@{view_model.birthday}" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_id_number"
@@ -144,7 +173,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/input_gender">
+                    app:layout_constraintTop_toBottomOf="@id/input_birthday">
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/edit_text_input"
                         android:text="@={view_model.identity_number}"

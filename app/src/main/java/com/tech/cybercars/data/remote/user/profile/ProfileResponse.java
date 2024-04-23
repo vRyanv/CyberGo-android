@@ -7,8 +7,10 @@ public class ProfileResponse extends BaseResponse {
     public String role;
     public String email;
     public String gender;
+    public String birthday;
     public String full_name;
     public String phone_number;
+    public int rating;
     public Country country;
     public String avatar;
     public String address;

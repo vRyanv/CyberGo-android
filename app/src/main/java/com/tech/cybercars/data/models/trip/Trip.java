@@ -36,6 +36,7 @@ public class Trip implements Serializable {
     public String start_time;
     public double price;
     public String description;
+    public String status;
     public Trip(){}
     public Trip(@NonNull String trip_id, String name, String origin_city, String origin_state, String origin_county,
                 String origin_address, double origin_longitude, double origin_latitude,

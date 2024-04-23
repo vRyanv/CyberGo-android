@@ -15,21 +15,27 @@ public class User implements Serializable {
     public String email;
     public String full_name;
     public String gender;
+    public String birthday;
     public String avatar;
     public String id_number;
     public String address;
+    public int rating;
     public String phone_number;
     public String country_prefix;
     public String country_name_code;
     public String front_id_card;
     public String back_id_card;
+    public User(){}
 
-    public User(@NonNull String id, String role, String email, String full_name, String gender, String avatar, String id_number, String address, String phone_number, String country_prefix, String country_name_code, String front_id_card, String back_id_card) {
+    public User(@NonNull String id, String role, String email, String full_name, String gender, String birthday,
+                String avatar, String id_number, String address, String phone_number,
+                String country_prefix, String country_name_code, String front_id_card, String back_id_card) {
         this.id = id;
         this.role = role;
         this.email = email;
         this.full_name = full_name;
         this.gender = gender;
+        this.birthday = birthday;
         this.avatar = avatar;
         this.id_number = id_number;
         this.address = address;

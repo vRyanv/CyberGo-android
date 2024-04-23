@@ -28,8 +28,14 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface UserServiceRetrofit {
+    @GET(URL.VIEW_USER_PROFILE)
+    Call<ProfileResponse> ViewUserProfileRequest(
+            @Header("authorization") String user_token,
+            @Path("user_id") String user_id
+    );
 
     @PUT(URL.UPDATE_FIREBASE_TOKEN)
     Call<BaseResponse> UpdateFirebaseTokenRequest(
@@ -50,6 +56,7 @@ public interface UserServiceRetrofit {
             @Part MultipartBody.Part avatar_body,
             @Part(FieldName.FULL_NAME) RequestBody full_name_body,
             @Part(FieldName.GENDER) RequestBody gender_body,
+            @Part(FieldName.BIRTHDAY) RequestBody birthday_body,
             @Part(FieldName.ID_NUMBER) RequestBody identity_number_body,
             @Part(FieldName.ADDRESS) RequestBody address_body
     );

@@ -243,15 +243,6 @@
                 android:id="@+id/constraintLayout2"
                 style="@style/layout_header_box">
 
-                <TextView
-                    style="@style/txt_title_header"
-                    android:text="@string/choose_location"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
-
                 <ImageButton
                     android:id="@+id/btn_close_bottom_sheet"
                     style="@style/icon_button_back"
@@ -264,18 +255,38 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_start_date"
+                    style="@style/input_location"
+                    android:layout_marginTop="@dimen/_0dp"
+                    app:startIconDrawable="@drawable/shape_ic_calendar"
+                    app:startIconScaleType="centerInside"
+                    app:startIconTint="@null"
+                    app:startIconTintMode="multiply"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:paddingStart="@dimen/_35sdp"
+                        android:hint="@string/start_date"
+                        android:textColor="@color/black"
+                        android:text="@{view_model.trip_start_date}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_from_map"
                     style="@style/input_location"
-                    android:layout_marginTop="@dimen/_0dp"
-
                     app:endIconMode="clear_text"
                     app:endIconScaleType="centerInside"
                     app:endIconTintMode="multiply"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/input_start_date"
                     app:startIconDrawable="@drawable/ic_placeholder_red"
                     app:startIconScaleType="centerInside"
                     app:startIconTint="@null"

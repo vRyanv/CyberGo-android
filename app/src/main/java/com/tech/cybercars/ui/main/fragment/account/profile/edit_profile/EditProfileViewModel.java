@@ -34,6 +34,7 @@ public class EditProfileViewModel extends BaseViewModel {
     public MutableLiveData<String> full_name = new MutableLiveData<>();
     public MutableLiveData<String> full_name_error = new MutableLiveData<>();
     public MutableLiveData<String> gender = new MutableLiveData<>();
+    public MutableLiveData<String> birthday = new MutableLiveData<>();
     public MutableLiveData<String> identity_number = new MutableLiveData<>();
     public MutableLiveData<String> address = new MutableLiveData<>();
     public MutableLiveData<String> error_update_profile = new MutableLiveData<>();
@@ -73,6 +74,11 @@ public class EditProfileViewModel extends BaseViewModel {
         //other field
         RequestBody full_name_body = RequestBody.create(MediaType.parse(FieldName.FULL_NAME), full_name.getValue());
         RequestBody gender_body = RequestBody.create(MediaType.parse(FieldName.GENDER), gender.getValue());
+        RequestBody birthday_body = RequestBody.create(
+                MediaType.parse(FieldName.BIRTHDAY),
+                birthday.getValue() == null ? "" : birthday.getValue()
+        );
+
         RequestBody id_number_body = RequestBody.create(
                 MediaType.parse(FieldName.ID_NUMBER),
                 identity_number.getValue() == null ? "" : identity_number.getValue()
@@ -86,7 +92,7 @@ public class EditProfileViewModel extends BaseViewModel {
         String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
         user_repo.UpdateProfileInformation(
                 user_token, avatar_body, full_name_body,
-                gender_body, id_number_body, address_body,
+                gender_body, birthday_body, id_number_body, address_body,
                 this::CallUpdateProfileSuccess,
                 this::CallUpdateProfileFailed
         );
@@ -103,6 +109,7 @@ public class EditProfileViewModel extends BaseViewModel {
                 edit_user.full_name = full_name.getValue();
                 SharedPreferencesUtil.SetString(getApplication(), FieldName.FULL_NAME, edit_user.full_name);
                 edit_user.gender = gender.getValue();
+                edit_user.birthday = birthday.getValue();
                 edit_user.id_number = identity_number.getValue();
                 edit_user.address = address.getValue();
                 if(response.body().avatar != null){

@@ -33,7 +33,8 @@ import com.tech.cybercars.utils.SharedPreferencesUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements NavigationView.OnNavigationItemSelectedListener{
+
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements NavigationView.OnNavigationItemSelectedListener {
 
     @NonNull
     @Override
@@ -59,7 +60,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         binding.bottomNavMain.setOnItemSelectedListener(item -> {
             int selected_item = item.getItemId();
-            if(R.id.go_fragment_item == selected_item){
+            if (R.id.go_fragment_item == selected_item) {
                 binding.pagerMain.setCurrentItem(PaperMain.GO_FRAGMENT, true);
             } else if (R.id.trip_fragment_item == selected_item) {
                 binding.pagerMain.setCurrentItem(PaperMain.TRIP_FRAGMENT, true);
@@ -73,7 +74,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                switch (position){
+                switch (position) {
                     case PaperMain.GO_FRAGMENT:
                         binding.bottomNavMain.setSelectedItemId(R.id.go_fragment_item);
                         break;
@@ -125,8 +126,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Subscribe
-    public void GoToTripFragment(ActionEvent action_event){
-        if(action_event.action.equals(ActionEvent.GO_TO_TRIP_FRAGMENT)){
+    public void GoToTripFragment(ActionEvent action_event) {
+        if (action_event.action.equals(ActionEvent.GO_TO_TRIP_FRAGMENT)) {
             binding.pagerMain.setCurrentItem(PaperMain.TRIP_FRAGMENT);
             binding.bottomNavMain.setSelectedItemId(R.id.trip_fragment_item);
         }
@@ -140,7 +141,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     private final ActivityResultLauncher<Intent> main_launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
-                if(result.getResultCode() == ActivityResult.GO_TO_TRIP_FRAGMENT){
+                if (result.getResultCode() == ActivityResult.GO_TO_TRIP_FRAGMENT) {
                     binding.pagerMain.setCurrentItem(PaperMain.TRIP_FRAGMENT);
                 }
             }
@@ -153,7 +154,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnNotificationEvent(Notification notification){
+    public void OnNotificationEvent(Notification notification) {
         NotificationService.PushNormal(
                 getApplicationContext(),
                 notification.avatar,
@@ -163,27 +164,45 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         view_model.has_notification.setValue(true);
     }
 
+    private ImageView img_avatar_drawer;
+    private TextView txt_full_name_drawer;
+    private TextView txt_phone_drawer;
 
     private void InitHeaderDrawer() {
         View view = binding.navDrawerView.getHeaderView(0);
         String avatar = SharedPreferencesUtil.GetString(this, FieldName.AVATAR);
         String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + avatar;
-        ImageView img_avatar_drawer = view.findViewById(R.id.img_avatar_drawer);
+        img_avatar_drawer = view.findViewById(R.id.img_avatar_drawer);
 
         Glide.with(this)
                 .load(avatar_full_path)
                 .into(img_avatar_drawer);
 
         String full_name = SharedPreferencesUtil.GetString(this, FieldName.FULL_NAME);
-        TextView txt_full_name_drawer = view.findViewById(R.id.txt_full_name_drawer);
+        txt_full_name_drawer = view.findViewById(R.id.txt_full_name_drawer);
         txt_full_name_drawer.setText(full_name);
 
         String phone_number = SharedPreferencesUtil.GetString(this, FieldName.PHONE_NUMBER);
-        TextView txt_phone_drawer = view.findViewById(R.id.txt_phone_drawer);
+        txt_phone_drawer = view.findViewById(R.id.txt_phone_drawer);
         txt_phone_drawer.setText(phone_number);
     }
 
-    private void initDrawerNavigation(){
+    @Subscribe
+    public void UpdateAvatarDrawer(ActionEvent action_event) {
+        if (action_event.action.equals(ActionEvent.UPDATE_DRAWER_INFO)) {
+            String avatar = SharedPreferencesUtil.GetString(this, FieldName.AVATAR);
+            String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + avatar;
+            Glide.with(this).load(avatar_full_path).into(img_avatar_drawer);
+
+            String full_name = SharedPreferencesUtil.GetString(this, FieldName.FULL_NAME);
+            txt_full_name_drawer.setText(full_name);
+
+            String phone = SharedPreferencesUtil.GetString(this, FieldName.PHONE_NUMBER);
+            txt_phone_drawer.setText(phone);
+        }
+    }
+
+    private void initDrawerNavigation() {
         binding.navDrawerView.setNavigationItemSelectedListener(this);
     }
 

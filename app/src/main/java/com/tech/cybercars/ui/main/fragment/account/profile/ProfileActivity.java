@@ -18,12 +18,15 @@ import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.databinding.ActivityProfileBinding;
+import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_id_card.EditIdentityCardActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_phone.EditPhoneActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_profile.EditProfileActivity;
 import com.tech.cybercars.utils.PermissionUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.FileNotFoundException;
 
@@ -182,6 +185,8 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
 
         view_model.full_name.setValue(user_updated.full_name);
         view_model.gender.setValue(user_updated.gender);
+        view_model.birthday.setValue(user_updated.birthday);
+        EventBus.getDefault().post(new ActionEvent(ActionEvent.UPDATE_DRAWER_INFO));
         view_model.identity_number.setValue(user_updated.id_number);
         view_model.address.setValue(user_updated.address);
 

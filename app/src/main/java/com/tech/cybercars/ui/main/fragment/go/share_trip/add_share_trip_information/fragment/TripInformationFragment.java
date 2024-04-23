@@ -12,6 +12,7 @@ import com.tech.cybercars.databinding.FragmentTripInformationBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationViewModel;
 import com.tech.cybercars.utils.DateTimePicker;
+import com.tech.cybercars.utils.DateUtil;
 import com.tech.cybercars.utils.TimePicker;
 
 public class TripInformationFragment extends BaseFragment<FragmentTripInformationBinding, AddShareTripInformationViewModel> {
@@ -53,7 +54,9 @@ public class TripInformationFragment extends BaseFragment<FragmentTripInformatio
         );
         date_time_picker.SetOnDateTimePicked((calendar, date_time_format) -> {
             view_model.start_date.setValue(date_time_format);
+            view_model.start_date_data = DateUtil.YMDFormat(calendar);
         });
+
         binding.inputStartDate.getEditText().setOnClickListener(view -> {
             date_time_picker.Run();
         });
@@ -74,17 +77,29 @@ public class TripInformationFragment extends BaseFragment<FragmentTripInformatio
         view_model.trip_name.observe(this, trip_name -> {
             binding.inputTripName.setError(null);
         });
+        view_model.trip_name_error.observe(this, trip_name_error -> {
+            binding.inputTripName.setError(trip_name_error);
+        });
 
         view_model.start_time.observe(this, start_time -> {
             binding.inputStartTime.setError(null);
+        });
+        view_model.start_time_error.observe(this, start_time_error -> {
+            binding.inputStartTime.setError(start_time_error);
         });
 
         view_model.start_date.observe(this, start_date -> {
             binding.inputStartDate.setError(null);
         });
+        view_model.start_date_error.observe(this, start_date_error -> {
+            binding.inputStartDate.setError(start_date_error);
+        });
 
         view_model.price.observe(this, price -> {
             binding.inputPrice.setError(null);
+        });
+        view_model.price_error.observe(this, price_error -> {
+            binding.inputPrice.setError(price_error);
         });
 
     }

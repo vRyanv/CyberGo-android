@@ -115,6 +115,7 @@ public class TripFoundAdapter extends RecyclerView.Adapter<TripFoundViewHolder> 
 
         if (trip_found.price > 0) {
             holder.txt_price.setText(String.valueOf(trip_found.price));
+            holder.txt_price.setTextColor(context.getColor(R.color.black));
         } else {
             holder.txt_price.setText(context.getString(R.string.free));
             holder.txt_price.setTextColor(context.getColor(R.color.green));

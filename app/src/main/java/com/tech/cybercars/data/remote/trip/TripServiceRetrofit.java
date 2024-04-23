@@ -1,7 +1,6 @@
 package com.tech.cybercars.data.remote.trip;
 
 import com.tech.cybercars.constant.URL;
-import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripBody;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;

@@ -54,6 +54,8 @@ public class FindTripViewModel extends BaseViewModel {
     private final MapRepository map_repository = MapRepository.GetInstance();
     private int pick_location;
     public MutableLiveData<List<TripFound>> trip_found_list = new MutableLiveData<>();
+    public MutableLiveData<String> trip_start_date = new MutableLiveData<>();
+    public String trip_start_date_data;
     private final TripRepository trip_repo;
     public FindTripViewModel(@NonNull Application application) {
         super(application);
@@ -62,12 +64,14 @@ public class FindTripViewModel extends BaseViewModel {
 
     public void HandleFindTrip(){
         is_loading.postValue(true);
-        String start_city = origin_reverse.address.city;
-        String start_state = origin_reverse.address.state;
-        String start_county = origin_reverse.address.county;
+        String origin_city = origin_reverse.address.city;
+        String origin_state = origin_reverse.address.state;
+        String origin_county = origin_reverse.address.county;
+        String origin_address = this.origin_address.getValue();
+        String start_date = trip_start_date_data;
         String geometry = current_route.getValue().geometry();
 
-        FindTripBody find_trip_body = new FindTripBody(start_city, start_state, start_county, geometry);
+        FindTripBody find_trip_body = new FindTripBody(origin_city, origin_state, origin_county, origin_address, start_date, geometry);
         String user_token = SharedPreferencesUtil.GetString(getApplication(),SharedPreferencesUtil.USER_TOKEN_KEY);
         trip_repo.PassengerFindTrip(
                 user_token,
