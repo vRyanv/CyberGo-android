@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
@@ -13,6 +14,7 @@ import com.tech.cybercars.ui.component.AvatarListView;
 import com.willy.ratingbar.BaseRatingBar;
 
 public class TripViewHolder extends RecyclerView.ViewHolder {
+    public CardView wrapper_item_trip;
     public ImageView img_avatar;
     public BaseRatingBar rating_bar;
     public ImageView img_vehicle_type;
@@ -26,6 +28,7 @@ public class TripViewHolder extends RecyclerView.ViewHolder {
     public AvatarListView view_avatar_list;
     public TripViewHolder(@NonNull View itemView) {
         super(itemView);
+        wrapper_item_trip = itemView.findViewById(R.id.wrapper_item_trip);
         img_avatar = itemView.findViewById(R.id.img_avatar);
         rating_bar = itemView.findViewById(R.id.rating_bar);
         img_vehicle_type = itemView.findViewById(R.id.img_vehicle_type);

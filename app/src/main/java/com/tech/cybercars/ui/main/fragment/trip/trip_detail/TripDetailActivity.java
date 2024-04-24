@@ -1,4 +1,4 @@
-package com.tech.cybercars.ui.main.fragment.trip;
+package com.tech.cybercars.ui.main.fragment.trip.trip_detail;
 
 import androidx.appcompat.app.AppCompatActivity;
 

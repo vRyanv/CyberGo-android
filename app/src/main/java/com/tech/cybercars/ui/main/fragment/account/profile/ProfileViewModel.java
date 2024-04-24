@@ -78,7 +78,7 @@ public class ProfileViewModel extends BaseViewModel {
 
                 ExecutorService executor_service = Executors.newSingleThreadExecutor();
                 executor_service.execute(()-> {
-                    User user = app_db_context.UserDao().FindUserById(user_profile.id);
+                    User user = app_db_context.UserDao().FindUserById(user_profile.user_id);
                     if(user == null){
                         app_db_context.UserDao().InsertUser(user_profile);
                     }

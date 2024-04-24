@@ -30,8 +30,9 @@
     <color name="blue_special">#B302AFFE</color>
 
 
-    <color name="queue_color">#665863FD</color>
-    <color name="accepted_color">#660E9F5B</color>
+    <color name="closed_color">#335863FD</color>
+    <color name="opening_color">#33A8CB17</color>
+    <color name="finish_color">#33000000</color>
 
     <color name="dark_light_dynamic">#FFFBFF</color>
     <color name="transparent">#00FFFFFF</color>

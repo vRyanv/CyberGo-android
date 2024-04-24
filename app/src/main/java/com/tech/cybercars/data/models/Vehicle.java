@@ -1,6 +1,7 @@
 package com.tech.cybercars.data.models;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,10 +11,10 @@ import java.io.Serializable;
 
 @Entity(tableName = "vehicle")
 public class Vehicle implements Serializable {
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    public int id;
     @SerializedName("_id")
-    public String id;
+    public String vehicle_id;
     public String driver_id;
     public String vehicle_name;
     public String vehicle_type;
@@ -29,11 +30,11 @@ public class Vehicle implements Serializable {
     public String back_driving_license;
     public String front_driving_license;
 
-    public Vehicle(@NonNull String id, String vehicle_name, String vehicle_type, String license_plates, Long registration_date,
+    public Vehicle(String vehicle_id, String vehicle_name, String vehicle_type, String license_plates, Long registration_date,
                    String front_vehicle_registration_certificate, String back_vehicle_registration_certificate,
                    String front_vehicle, String back_vehicle, String right_vehicle, String left_vehicle, String status,
                    String back_driving_license, String front_driving_license) {
-        this.id = id;
+        this.vehicle_id = vehicle_id;
         this.vehicle_name = vehicle_name;
         this.vehicle_type = vehicle_type;
         this.license_plates = license_plates;

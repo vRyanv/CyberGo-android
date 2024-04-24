@@ -1,6 +1,7 @@
 package com.tech.cybercars.data.models.trip;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -29,6 +30,7 @@ public class Trip implements Serializable {
     public double origin_latitude;
     public String destination_type;
     @SerializedName("vehicle")
+    @ColumnInfo(name = "vehicle_id_trip")
     public String vehicle_id;
     @Ignore
     public ArrayList<MemberBody> members;
@@ -36,6 +38,7 @@ public class Trip implements Serializable {
     public String start_time;
     public double price;
     public String description;
+    @ColumnInfo(name = "trip_status")
     public String status;
     public Trip(){}
     public Trip(@NonNull String trip_id, String name, String origin_city, String origin_state, String origin_county,

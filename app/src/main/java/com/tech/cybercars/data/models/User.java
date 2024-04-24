@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 @Entity(tableName = "user")
 public class User implements Serializable {
-    @PrimaryKey
-    @NonNull
-    public String id;
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+    public String user_id;
     public String role;
     public String email;
     public String full_name;
@@ -27,10 +27,10 @@ public class User implements Serializable {
     public String back_id_card;
     public User(){}
 
-    public User(@NonNull String id, String role, String email, String full_name, String gender, String birthday,
+    public User(String user_id, String role, String email, String full_name, String gender, String birthday,
                 String avatar, String id_number, String address, String phone_number,
                 String country_prefix, String country_name_code, String front_id_card, String back_id_card) {
-        this.id = id;
+        this.user_id = user_id;
         this.role = role;
         this.email = email;
         this.full_name = full_name;

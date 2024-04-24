@@ -1,7 +1,9 @@
 package com.tech.cybercars.data.models;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
@@ -10,11 +12,13 @@ import java.io.Serializable;
 
 @Entity(tableName = "Member")
 public class Member implements Serializable{
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    public int _id;
     public String member_id;
     public String trip_id;
     public String user_id;
+    @Ignore
+    public User user;
     public double origin_longitude;
     public double origin_latitude;
     public double destination_longitude;
@@ -23,10 +27,11 @@ public class Member implements Serializable{
     public String destination_address;
     public String geometry;
     public long request_at;
+    @ColumnInfo(name = "member_status")
     public String status;
     public Member(){}
 
-    public Member(@NonNull String member_id, String trip_id, String user_id,
+    public Member(String member_id, String trip_id, String user_id,
                   double origin_longitude, double origin_latitude, double destination_longitude,
                   double destination_latitude, String origin_address, String destination_address, String geometry, long request_at, String status) {
         this.member_id = member_id;

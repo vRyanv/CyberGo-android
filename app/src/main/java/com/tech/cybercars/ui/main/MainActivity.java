@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         AppFragmentAdapter app_fm_adapter = new AppFragmentAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.pagerMain.setAdapter(app_fm_adapter);
-        binding.pagerMain.setUserInputEnabled(true);
+        binding.pagerMain.setUserInputEnabled(false);
         view_model.HandleUpdateFirebaseToken();
     }
 

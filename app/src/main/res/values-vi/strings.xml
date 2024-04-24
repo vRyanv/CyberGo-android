@@ -170,4 +170,10 @@
     <string name="selection_match_percentage">Chọn phần trăm phù hợp</string>
     <string name="trip_participated">Chuyến đi đã tham gia</string>
     <string name="shared_trip">chuyến đi đã chia sẻ</string>
+    <string name="queue">Xếp hàng</string>
+    <string name="finish">Hoàn thành</string>
+    <string name="joining_trip">Tham gia chuyến đi</string>
+    <string name="joined">Đã tham gia</string>
+    <string name="opening">Đang mở</string>
+    <string name="closed">Đã đóng</string>
 </resources>

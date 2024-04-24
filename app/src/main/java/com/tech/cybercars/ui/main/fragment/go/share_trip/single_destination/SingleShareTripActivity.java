@@ -276,7 +276,7 @@ public class SingleShareTripActivity extends BaseActivity<ActivitySingleShareTri
                 origin_longitude,
                 origin_latitude,
                 DestinationType.SINGLE,
-                view_model.vehicle.getValue().id,
+                view_model.vehicle.getValue().vehicle_id,
                 null,
                 null,
                 0

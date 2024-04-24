@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.willy.ratingbar.BaseRatingBar
+            android:layout_gravity="center"
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:srb_clearRatingEnabled="true"
+            app:srb_clickable="true"
+            app:srb_drawableEmpty="@drawable/ic_star_off"
+            app:srb_drawableFilled="@drawable/ic_star"
+            app:srb_isIndicator="false"
+            app:srb_minimumStars="0"
+            app:srb_numStars="5"
+            app:srb_rating="5"
+            app:srb_scrollable="true"
+            app:srb_starHeight="@dimen/_30sdp"
+            app:srb_starPadding="@dimen/_1sdp"
+            app:srb_starWidth="@dimen/_30sdp"
+            app:srb_stepSize="1" />
+    </LinearLayout>
+</layout>

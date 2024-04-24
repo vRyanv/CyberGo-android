@@ -1,66 +1,85 @@
 package com.tech.cybercars.ui.main.fragment.trip.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.adapter.trip.TripAdapter;
+import com.tech.cybercars.constant.TripStatus;
+import com.tech.cybercars.data.models.TripManagement;
+import com.tech.cybercars.databinding.FragmentJoinedTripBinding;
+import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.main.MainViewModel;
+import com.tech.cybercars.ui.main.fragment.trip.TripViewModel;
+import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link JoinedTripFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class JoinedTripFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public JoinedTripFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment JoinedTripFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static JoinedTripFragment newInstance(String param1, String param2) {
-        JoinedTripFragment fragment = new JoinedTripFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private TripAdapter trip_join_adapter;
+    private TripViewModel view_model;
+    private FragmentJoinedTripBinding binding;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_joined_trip, container, false);
+        view_model = new ViewModelProvider(requireParentFragment()).get(TripViewModel.class);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_joined_trip, container, false);
+        InitView();
+        InitObserve();
+        return binding.getRoot();
+    }
+
+    protected void InitView() {
+        trip_join_adapter = new TripAdapter(requireContext(), new ArrayList<>());
+        trip_join_adapter.SetOnTripClicked(trip_management -> {
+            startActivity(new Intent(requireContext(), TripDetailActivity.class));
+        });
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        binding.rcvJoinTrip.setLayoutManager(layoutManager);
+        binding.rcvJoinTrip.setAdapter(trip_join_adapter);
+    }
+
+    protected void InitObserve() {
+        view_model.joined_trip_list.observe(getViewLifecycleOwner(), this::BindDataToUI);
+    }
+
+    private void BindDataToUI(List<TripManagement> shared_trip_list) {
+        int opening_quantity = 0;
+        int closed_quantity = 0;
+        int finish_quantity = 0;
+        for (TripManagement trip :shared_trip_list) {
+            switch (trip.trip_status){
+                case TripStatus.OPENING:
+                    opening_quantity++;
+                    break;
+                case TripStatus.CLOSED:
+                    closed_quantity++;
+                    break;
+                default:
+                    finish_quantity++;
+                    break;
+            }
+        }
+        binding.txtOpeningJoinTripQuantity.setText(String.valueOf(opening_quantity));
+        binding.txtClosedJoinTripQuantity.setText(String.valueOf(closed_quantity));
+        binding.txtFinishJoinTripQuantity.setText(String.valueOf(finish_quantity));
+        trip_join_adapter.UpdateData(shared_trip_list);
     }
 }

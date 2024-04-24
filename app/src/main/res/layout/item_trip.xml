@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapper_item_trip"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_150sdp"
-    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_6sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginEnd="@dimen/_10sdp"
     android:layout_marginLeft="@dimen/_10sdp"
@@ -42,7 +43,6 @@
                 android:layout_marginEnd="@dimen/_25sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
-
 
             <com.willy.ratingbar.BaseRatingBar
                 android:id="@+id/rating_bar"
@@ -152,27 +152,6 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:fontFamily="@font/sp_pro_round_black_semibold"
                         android:text="@string/price"
-                        android:textSize="@dimen/_10ssp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_see_overview_trip">
-                    <ImageView
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_gravity="center"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_puzzle" />
-                    <TextView
-                        android:id="@+id/txt_trip_match_route_ratio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:fontFamily="@font/sp_pro_round_black_semibold"
-                        android:text="20%"
                         android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
             </LinearLayout>

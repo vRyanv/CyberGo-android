@@ -57,7 +57,7 @@ public class UserProfileViewModel extends BaseViewModel {
             }
             if (response.body().code == StatusCode.OK) {
                 User user = new User();
-                user.id = response.body().id;
+                user.user_id = response.body().id;
                 user.rating = response.body().rating;
                 user.email = response.body().email;
                 user.full_name = response.body().full_name;
@@ -70,7 +70,7 @@ public class UserProfileViewModel extends BaseViewModel {
 
                 ExecutorService executor_service = Executors.newSingleThreadExecutor();
                 executor_service.execute(()-> {
-                    user_dao.DeleteById(user.id);
+                    user_dao.DeleteById(user.user_id);
                     user_dao.InsertUser(user);
                 });
                 executor_service.shutdown();

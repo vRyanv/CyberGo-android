@@ -17,7 +17,7 @@ public interface VehicleDAO {
     @Query("DELETE FROM vehicle")
     public void ClearTable();
 
-    @Query("SELECT * FROM vehicle WHERE id = :id")
+    @Query("SELECT * FROM vehicle WHERE vehicle_id = :id")
     Vehicle FindVehicleById(String id);
 
     @Query("SELECT * FROM vehicle ORDER BY registration_date DESC")

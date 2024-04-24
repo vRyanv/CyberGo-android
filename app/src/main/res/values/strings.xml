@@ -96,8 +96,6 @@
     <string name="my_vehicle">My vehicle</string>
     <string name="register_as_a_driver">Register as a driver</string>
     <string name="driving_license">Driving license</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="identity_number">Identity number</string>
     <string name="front_id_card">Front of ID card</string>
     <string name="back_id_card">Back of ID card</string>
@@ -174,4 +172,10 @@
     <string name="selection_match_percentage">Select match percentage</string>
     <string name="trip_participated">Trip participated</string>
     <string name="shared_trip">Shared trip</string>
+    <string name="queue">Queue</string>
+    <string name="finish">Finish</string>
+    <string name="joining_trip">Joining trip</string>
+    <string name="joined">Joined</string>
+    <string name="opening">Opening</string>
+    <string name="closed">Closed</string>
 </resources>

@@ -1,66 +1,94 @@
 package com.tech.cybercars.ui.main.fragment.trip.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.adapter.trip.TripAdapter;
+import com.tech.cybercars.constant.Tag;
+import com.tech.cybercars.constant.TripStatus;
+import com.tech.cybercars.data.models.TripManagement;
+import com.tech.cybercars.databinding.FragmentJoinedTripBinding;
+import com.tech.cybercars.databinding.FragmentSharedTripBinding;
+import com.tech.cybercars.ui.base.BaseActivity;
+import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.main.fragment.trip.TripViewModel;
+import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SharedTripFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class SharedTripFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SharedTripFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SharedTripFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SharedTripFragment newInstance(String param1, String param2) {
-        SharedTripFragment fragment = new SharedTripFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private TripAdapter shared_trip_adapter;
+    private TripViewModel view_model;
+    private FragmentSharedTripBinding binding;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shared_trip, container, false);
+        assert getParentFragment() != null;
+        view_model = new ViewModelProvider(getParentFragment()).get(TripViewModel.class);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shared_trip, container, false);
+
+        InitView();
+        InitObserve();
+        return binding.getRoot();
+    }
+
+    protected void InitView() {
+        shared_trip_adapter = new TripAdapter(requireContext(), new ArrayList<>());
+        shared_trip_adapter.SetOnTripClicked(trip_management -> {
+            startActivity(new Intent(requireContext(), TripDetailActivity.class));
+        });
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        binding.rcvSharedTrip.setLayoutManager(layoutManager);
+        binding.rcvSharedTrip.setAdapter(shared_trip_adapter);
+    }
+
+    protected void InitObserve() {
+        Toast.makeText(requireContext(), "shared_trip_list.size() + ", Toast.LENGTH_SHORT).show();
+        view_model.shared_trip_list.observe(getViewLifecycleOwner(), this::BindDataToUI);
+
+        view_model.is_loading.observe(getViewLifecycleOwner(), is_loading->{
+
+        });
+    }
+
+    private void BindDataToUI(List<TripManagement> shared_trip_list) {
+        int opening_quantity = 0;
+        int closed_quantity = 0;
+        int finish_quantity = 0;
+        for (TripManagement trip :shared_trip_list) {
+            switch (trip.trip_status){
+                case TripStatus.OPENING:
+                    opening_quantity++;
+                    break;
+                case TripStatus.CLOSED:
+                    closed_quantity++;
+                    break;
+                default:
+                    finish_quantity++;
+                    break;
+            }
+        }
+        binding.txtOpeningSharedTripQuantity.setText(String.valueOf(opening_quantity));
+        binding.txtClosedSharedTripQuantity.setText(String.valueOf(closed_quantity));
+        binding.txtFinishSharedTripQuantity.setText(String.valueOf(finish_quantity));
+        shared_trip_adapter.UpdateData(shared_trip_list);
     }
 }
