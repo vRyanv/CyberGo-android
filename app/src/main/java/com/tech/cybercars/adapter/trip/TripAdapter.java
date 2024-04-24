@@ -81,7 +81,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
 
         holder.txt_trip_name.setText(trip_management.trip_name);
 
-        switch (trip_management.vehicle_type) {
+        switch (trip_management.vehicle.type) {
             case VehicleType.CAR:
                 holder.img_vehicle_type.setImageResource(R.drawable.ic_car);
                 break;

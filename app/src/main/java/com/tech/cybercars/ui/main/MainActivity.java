@@ -17,7 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.paper.AppFragmentAdapter;
+import com.tech.cybercars.adapter.paper.AppFragmentPageAdapter;
 import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.PaperMain;
@@ -119,7 +119,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         InitHeaderDrawer();
 
-        AppFragmentAdapter app_fm_adapter = new AppFragmentAdapter(getSupportFragmentManager(), this.getLifecycle());
+        AppFragmentPageAdapter app_fm_adapter = new AppFragmentPageAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.pagerMain.setAdapter(app_fm_adapter);
         binding.pagerMain.setUserInputEnabled(false);
         view_model.HandleUpdateFirebaseToken();

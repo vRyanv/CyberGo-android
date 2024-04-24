@@ -2,16 +2,11 @@ package com.tech.cybercars.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TableLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.paper.TripManagementAdapter;
 import com.tech.cybercars.ui.component.AvatarListView;
 import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.main.fragment.account.VehicleTypeSelectionActivity;

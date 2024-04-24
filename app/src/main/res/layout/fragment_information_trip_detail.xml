@@ -4,9 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="view_model"
-            type="com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFoundDetailViewModel" />
+
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -91,6 +89,7 @@
                 android:id="@+id/btn_open_view_vehicle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
                 android:layout_marginTop="@dimen/_15sdp">
                 <ImageView
                     android:id="@+id/img_vehicle_type"
@@ -186,7 +185,21 @@
                     android:fontFamily="@font/sp_pro_round_black_semibold"
                     android:text="@string/price" />
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp">
+                <TextView
+                    android:padding="@dimen/_5sdp"
+                    android:background="@color/opening_color"
+                    android:layout_gravity="center"
+                    android:id="@+id/txt_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/sp_pro_round_black_semibold"
+                    android:text="status" />
+            </LinearLayout>
             <TextView
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_width="wrap_content"

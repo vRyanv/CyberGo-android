@@ -78,7 +78,7 @@ public class TripFoundAdapter extends RecyclerView.Adapter<TripFoundViewHolder> 
 
         holder.txt_trip_name.setText(trip_found.trip_name);
 
-        switch (trip_found.vehicle_type) {
+        switch (trip_found.vehicle.type) {
             case VehicleType.CAR:
                 holder.img_vehicle_type.setImageResource(R.drawable.ic_car);
                 break;

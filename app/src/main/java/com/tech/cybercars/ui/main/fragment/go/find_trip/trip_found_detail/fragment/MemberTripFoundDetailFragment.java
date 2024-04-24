@@ -45,9 +45,7 @@ public class MemberTripFoundDetailFragment extends BaseFragment<FragmentMemberTr
     @Override
     protected void InitView() {
         member_adapter = new MemberAdapter(requireContext(), new ArrayList<>());
-        member_adapter.SetMemberClicked(user_id -> {
-            OpenUserProfile(user_id);
-        });
+        member_adapter.SetMemberClicked(this::OpenUserProfile);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
         binding.rcvMember.setLayoutManager(layoutManager);
         binding.rcvMember.setAdapter(member_adapter);

@@ -11,8 +11,8 @@ import com.tech.cybercars.ui.main.fragment.account.AccountFragment;
 import com.tech.cybercars.ui.main.fragment.go.GoFragment;
 import com.tech.cybercars.ui.main.fragment.trip.TripFragment;
 
-public class AppFragmentAdapter extends FragmentStateAdapter {
-    public AppFragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+public class AppFragmentPageAdapter extends FragmentStateAdapter {
+    public AppFragmentPageAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 

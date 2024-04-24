@@ -68,10 +68,14 @@ text normal = 14ssp
     17.1 trip adapter: @done
     17.2 trip other: @done
 
+18. trip detail:
 
 
 12. vehicle management
 
+
+
+android:background="?attr/selectableItemBackground"
 
 ##, sửa lại register thêm tên xe
 bỏ field vehicle type thay vào đó là select activity

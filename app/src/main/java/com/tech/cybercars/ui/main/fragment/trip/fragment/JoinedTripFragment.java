@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.trip.TripAdapter;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.TripStatus;
 import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.databinding.FragmentJoinedTripBinding;
@@ -48,7 +49,9 @@ public class JoinedTripFragment extends Fragment {
     protected void InitView() {
         trip_join_adapter = new TripAdapter(requireContext(), new ArrayList<>());
         trip_join_adapter.SetOnTripClicked(trip_management -> {
-            startActivity(new Intent(requireContext(), TripDetailActivity.class));
+            Intent trip_detail_intent = new Intent(requireContext(), TripDetailActivity.class);
+            trip_detail_intent.putExtra(FieldName.TRIP, trip_management);
+            startActivity(trip_detail_intent);
         });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());

@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.paper.ShareTripInformationAdapter;
+import com.tech.cybercars.adapter.paper.ShareTripInformationPageAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.data.models.trip.Trip;
@@ -71,7 +71,7 @@ public class AddShareTripInformationActivity extends BaseActivity<ActivityAddSha
     @Override
     protected void InitCommon() {
         binding.paperShareTripInformation.setUserInputEnabled(false);
-        ShareTripInformationAdapter share_trip_information_fm_adapter = new ShareTripInformationAdapter(getSupportFragmentManager(), this.getLifecycle());
+        ShareTripInformationPageAdapter share_trip_information_fm_adapter = new ShareTripInformationPageAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.paperShareTripInformation.setAdapter(share_trip_information_fm_adapter);
         String[] tab_name = new String[]{getString(R.string.location),getString(R.string.trip_information)};
         new TabLayoutMediator(binding.tabShareTripInfo, binding.paperShareTripInformation, (tab, position) -> {

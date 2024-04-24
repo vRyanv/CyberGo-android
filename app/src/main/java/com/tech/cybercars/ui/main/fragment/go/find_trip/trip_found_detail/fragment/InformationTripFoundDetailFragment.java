@@ -82,7 +82,7 @@ public class InformationTripFoundDetailFragment extends BaseFragment<FragmentInf
         binding.ratingBar.setRating(trip_found.owner.rating);
         binding.txtTripName.setText(trip_found.trip_name);
 
-        switch (trip_found.vehicle_type){
+        switch (trip_found.vehicle.type){
             case VehicleType.CAR:
                 binding.txtVehicleType.setText(getString(R.string.car));
                 binding.imgVehicleType.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_car));

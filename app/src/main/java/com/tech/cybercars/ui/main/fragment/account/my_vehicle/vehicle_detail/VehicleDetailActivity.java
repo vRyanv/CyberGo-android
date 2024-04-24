@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.paper.VehicleDetailAdapter;
+import com.tech.cybercars.adapter.paper.VehicleDetailPageAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.VehicleStatus;
 import com.tech.cybercars.data.models.Vehicle;
@@ -63,7 +63,7 @@ public class VehicleDetailActivity extends BaseActivity<ActivityVehicleDetailBin
 
     @Override
     protected void InitCommon() {
-        VehicleDetailAdapter vehicle_detail_adapter = new VehicleDetailAdapter(getSupportFragmentManager(), this.getLifecycle());
+        VehicleDetailPageAdapter vehicle_detail_adapter = new VehicleDetailPageAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.paperVehicleDetail.setAdapter(vehicle_detail_adapter);
         String[] tab_name = new String[]{
                 getString(R.string.vehicle_registration_certificate),

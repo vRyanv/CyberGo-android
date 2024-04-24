@@ -176,4 +176,9 @@
     <string name="joined">Đã tham gia</string>
     <string name="opening">Đang mở</string>
     <string name="closed">Đã đóng</string>
+    <string name="vehicle_of">Xe của</string>
+    <string name="leave">Rời khỏi</string>
+    <string name="delete">Xóa</string>
+    <string name="accept">Đồng ý</string>
+    <string name="denied">Từ chối</string>
 </resources>

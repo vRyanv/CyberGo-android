@@ -10,8 +10,8 @@ import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.Driv
 import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.VehicleRegistrationCertificateTabFragment;
 import com.tech.cybercars.ui.main.fragment.account.driver_register.fragment.VehicleTabFragment;
 
-public class DriverRegistrationAdapter extends FragmentStateAdapter {
-    public DriverRegistrationAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+public class DriverRegistrationPageAdapter extends FragmentStateAdapter {
+    public DriverRegistrationPageAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 

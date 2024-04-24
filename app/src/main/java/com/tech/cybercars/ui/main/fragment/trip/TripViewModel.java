@@ -51,7 +51,6 @@ public class TripViewModel extends BaseViewModel {
     private void CallGetTripListSuccess(Response<TripManagementResponse> response) {
         new Handler().postDelayed(() -> {
             if(!response.isSuccessful() || response.body() == null){
-                Log.e(Tag.CYBER_DEBUG, "response.message()" + response.message());
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
                 is_loading.postValue(false);
                 return;

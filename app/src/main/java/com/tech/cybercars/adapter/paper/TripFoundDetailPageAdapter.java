@@ -10,8 +10,8 @@ import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.fragme
 import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.fragment.LocationTripFoundDetailFragment;
 import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.fragment.MemberTripFoundDetailFragment;
 
-public class TripFoundDetailAdapter extends FragmentStateAdapter {
-    public TripFoundDetailAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+public class TripFoundDetailPageAdapter extends FragmentStateAdapter {
+    public TripFoundDetailPageAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 

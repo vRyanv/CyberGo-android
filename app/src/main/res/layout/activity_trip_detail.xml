@@ -1,9 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.fragment.trip.trip_detail.TripDetailActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel" />
+        <variable
+            name="is_trip_owner"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            style="@style/layout_header_box">
+            <ImageButton
+                android:id="@+id/btn_out_screen"
+                style="@style/icon_button_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow" />
+            <TextView
+                style="@style/txt_title_header"
+                android:text="@string/trip_detail"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <ImageButton
+                android:visibility="@{is_trip_owner ? View.VISIBLE : View.GONE}"
+                android:id="@+id/btn_close_trip"
+                style="@style/icon_button_back"
+                android:padding="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_trash" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_trip_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="30dp">
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/information" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/member" />
+            </com.google.android.material.tabs.TabLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/paper_trip_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tab_trip_found_detail">
+            </androidx.viewpager2.widget.ViewPager2>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="@{is_trip_owner ? View.GONE : View.VISIBLE}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp">
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/btn_primary"
+                android:text="@string/leave"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="@{is_trip_owner ? View.VISIBLE : View.GONE}"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp">
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/btn_small_danger_outline"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/close"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/btn_small_info"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/update"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/btn_small_success"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/finish"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -9,9 +9,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.fragment.LocationTabFragment;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.fragment.TripInformationFragment;
 
-public class ShareTripInformationAdapter extends FragmentStateAdapter {
+public class ShareTripInformationPageAdapter extends FragmentStateAdapter {
 
-    public ShareTripInformationAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    public ShareTripInformationPageAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 

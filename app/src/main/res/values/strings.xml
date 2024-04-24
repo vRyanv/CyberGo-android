@@ -155,7 +155,7 @@
     <string name="trip_management">Trip management</string>
     <string name="shared_successfully">Shared successfully</string>
     <string name="you_will_get_notification_when_someone_else_wants_to_join_you">You\'ll get a notification when someone else wants to join you</string>
-    <string name="trip_detail">Trip Detail</string>
+    <string name="trip_detail">Trip detail</string>
     <string name="member">Member</string>
     <string name="information">Infomation</string>
     <string name="no_description_available">No description available</string>
@@ -178,4 +178,11 @@
     <string name="joined">Joined</string>
     <string name="opening">Opening</string>
     <string name="closed">Closed</string>
+    <string name="vehicle_of">Vehicle of</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="leave">Leave</string>
+    <string name="delete">Delete</string>
+    <string name="accept">Accept</string>
+    <string name="denied">Denied</string>
 </resources>

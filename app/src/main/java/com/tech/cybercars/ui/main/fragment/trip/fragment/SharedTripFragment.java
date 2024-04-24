@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.trip.TripAdapter;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.TripStatus;
 import com.tech.cybercars.data.models.TripManagement;
@@ -29,6 +30,7 @@ import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.trip.TripViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,9 @@ public class SharedTripFragment extends Fragment {
     protected void InitView() {
         shared_trip_adapter = new TripAdapter(requireContext(), new ArrayList<>());
         shared_trip_adapter.SetOnTripClicked(trip_management -> {
-            startActivity(new Intent(requireContext(), TripDetailActivity.class));
+            Intent trip_detail_intent = new Intent(requireContext(), TripDetailActivity.class);
+            trip_detail_intent.putExtra(FieldName.TRIP, trip_management);
+            startActivity(trip_detail_intent);
         });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
@@ -61,7 +65,6 @@ public class SharedTripFragment extends Fragment {
     }
 
     protected void InitObserve() {
-        Toast.makeText(requireContext(), "shared_trip_list.size() + ", Toast.LENGTH_SHORT).show();
         view_model.shared_trip_list.observe(getViewLifecycleOwner(), this::BindDataToUI);
 
         view_model.is_loading.observe(getViewLifecycleOwner(), is_loading->{

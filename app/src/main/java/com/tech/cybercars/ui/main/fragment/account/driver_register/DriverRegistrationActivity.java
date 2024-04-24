@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.paper.DriverRegistrationAdapter;
+import com.tech.cybercars.adapter.paper.DriverRegistrationPageAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.databinding.ActivityDriverRegistrationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
@@ -78,7 +78,7 @@ public class DriverRegistrationActivity extends BaseActivity<ActivityDriverRegis
 
     @Override
     protected void InitCommon() {
-        DriverRegistrationAdapter driver_registration_adapter = new DriverRegistrationAdapter(getSupportFragmentManager(), this.getLifecycle());
+        DriverRegistrationPageAdapter driver_registration_adapter = new DriverRegistrationPageAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.paperDriverRegistration.setAdapter(driver_registration_adapter);
         String[] tab_name = new String[]{
                 getString(R.string.vehicle_registration_certificate),

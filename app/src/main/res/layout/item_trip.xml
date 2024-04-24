@@ -36,7 +36,6 @@
             <ImageView
                 android:padding="@dimen/_3sdp"
                 android:id="@+id/img_vehicle_type"
-                android:background="@drawable/shape_icon_sub_button"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:src="@drawable/ic_car"

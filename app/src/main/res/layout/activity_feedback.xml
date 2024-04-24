@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.feedback.FeedbackViewModel" />
     </data>
 
     <LinearLayout
@@ -12,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.willy.ratingbar.BaseRatingBar
+        <com.willy.ratingbar.RotationRatingBar
             android:layout_gravity="center"
             android:id="@+id/rating_bar"
             android:layout_width="wrap_content"

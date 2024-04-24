@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.paper.TripFoundDetailAdapter;
+import com.tech.cybercars.adapter.paper.TripFoundDetailPageAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.data.models.TripFound;
@@ -69,7 +69,7 @@ public class TripFoundDetailActivity extends BaseActivity<ActivityTripFoundDetai
 
     @Override
     protected void InitCommon() {
-        TripFoundDetailAdapter trip_found_detail = new TripFoundDetailAdapter(getSupportFragmentManager(), this.getLifecycle());
+        TripFoundDetailPageAdapter trip_found_detail = new TripFoundDetailPageAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.paperTripFoundDetail.setAdapter(trip_found_detail);
         binding.paperTripFoundDetail.setUserInputEnabled(true);
         String[] tab_name = new String[]{

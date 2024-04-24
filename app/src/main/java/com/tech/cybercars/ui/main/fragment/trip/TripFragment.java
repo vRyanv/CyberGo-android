@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -15,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.paper.TripManagementAdapter;
+import com.tech.cybercars.adapter.paper.TripManagementPageAdapter;
 import com.tech.cybercars.databinding.FragmentTripBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
@@ -42,9 +41,9 @@ public class TripFragment extends BaseFragment<FragmentTripBinding, TripViewMode
 
     @Override
     protected void InitView() {
-        TripManagementAdapter trip_management_adapter = new TripManagementAdapter(getChildFragmentManager(), getLifecycle());
+        TripManagementPageAdapter trip_management_adapter = new TripManagementPageAdapter(getChildFragmentManager(), getLifecycle());
         binding.paperTrip.setAdapter(trip_management_adapter);
-        binding.paperTrip.setUserInputEnabled(true);
+        binding.paperTrip.setUserInputEnabled(false);
         String[] tab_name = new String[]{
                 getString(R.string.joining_trip),
                 getString(R.string.shared_trip)};

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="title"
+            type="String" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/header_primary"
+            app:title="@{title}"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txt_licence_plate"
+                    style="@style/form_label"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/license_plates"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <LinearLayout
+                    android:id="@+id/title_front_vehicle"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txt_licence_plate"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/label_front_id_card"
+                        style="@style/form_label"
+                        android:layout_margin="0dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:text="@string/front_vehicle"
+                        app:layout_constraintBottom_toTopOf="@+id/img_front_id_card"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+                <com.makeramen.roundedimageview.RoundedImageView
+                    app:riv_corner_radius="8dip"
+                    android:id="@+id/img_front_transport"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginHorizontal="@dimen/padding_horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/shape_btn_outline"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_front_car"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_front_vehicle" />
+                <LinearLayout
+                    android:id="@+id/title_back_vehicle"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/img_front_transport"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/label_back_driver_transport"
+                        style="@style/form_label"
+                        android:layout_margin="0dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:text="@string/back_vehicle"
+                        app:layout_constraintBottom_toTopOf="@+id/img_front_transport"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </LinearLayout>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    app:riv_corner_radius="8dip"
+                    android:id="@+id/img_back_transport"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginHorizontal="@dimen/padding_horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/shape_btn_outline"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_side_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_back_vehicle" />
+                <LinearLayout
+                    android:id="@+id/label_right_transport"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/img_back_transport"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/form_label"
+                        android:layout_margin="0dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:text="@string/right_side_vehicle"
+                        app:layout_constraintBottom_toTopOf="@+id/img_front_transport"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    app:riv_corner_radius="8dip"
+                    android:id="@+id/img_right_transport"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginHorizontal="@dimen/padding_horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/shape_btn_outline"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_side_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_right_transport" />
+                <LinearLayout
+                    android:id="@+id/label_left_transport"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/img_right_transport"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/form_label"
+                        android:layout_margin="0dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:text="@string/right_side_vehicle"
+                        app:layout_constraintBottom_toTopOf="@+id/img_front_transport"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </LinearLayout>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    app:riv_corner_radius="8dip"
+                    android:id="@+id/img_left_transport"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginHorizontal="@dimen/padding_horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/shape_btn_outline"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_back_car"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_left_transport" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

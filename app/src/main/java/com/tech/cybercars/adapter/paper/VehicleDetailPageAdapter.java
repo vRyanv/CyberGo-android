@@ -10,8 +10,8 @@ import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fra
 import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fragments.VehicleDetailTabFragment;
 import com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.fragments.VehicleRegistrationCertificateDetailTabFragment;
 
-public class VehicleDetailAdapter extends FragmentStateAdapter {
-    public VehicleDetailAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+public class VehicleDetailPageAdapter extends FragmentStateAdapter {
+    public VehicleDetailPageAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 

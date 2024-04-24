@@ -35,8 +35,8 @@ public class TripFoundDetailViewModel extends BaseViewModel {
     public MutableLiveData<TripFound> trip_found = new MutableLiveData<>();
     public MemberBody member;
     private final TripRepository trip_repo;
-    private MemberDAO member_dao;
-    private TripDAO trip_dao;
+    private final MemberDAO member_dao;
+    private final TripDAO trip_dao;
     public TripFoundDetailViewModel(@NonNull Application application) {
         super(application);
         trip_repo = TripRepository.GetInstance();

@@ -9,7 +9,7 @@ public class TripFound implements Serializable {
     public String trip_id;
     public User owner;
     public String trip_name;
-    public String vehicle_type;
+    public Vehicle vehicle;
     public String start_date;
     public String start_time;
     public double price;
@@ -29,5 +29,14 @@ public class TripFound implements Serializable {
         public String full_name;
         public String avatar;
         public float rating;
+    }
+
+    public static class Vehicle implements Serializable{
+        public String id;
+        public String type;
+        public String front_vehicle;
+        public String back_vehicle;
+        public String left_vehicle;
+        public String right_vehicle;
     }
 }

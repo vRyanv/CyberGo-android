@@ -335,7 +335,7 @@ public class TripFindingMapController {
         } else {
             for (int i = 0; i < view_model.trip_found_list.getValue().size(); i++) {
                 TripFound trip_found = view_model.trip_found_list.getValue().get(i);
-                if (trip_found.route_match_percentage >= match_percentage && trip_found.vehicle_type.equals(vehicle_type)) {
+                if (trip_found.route_match_percentage >= match_percentage && trip_found.vehicle.type.equals(vehicle_type)) {
                     trip_found_list.add(trip_found);
                 }
             }
@@ -506,7 +506,7 @@ public class TripFindingMapController {
             ));
             feature.addNumberProperty(INDEX_PROP, i);
             feature.addBooleanProperty(IS_ACTIVE, false);
-            switch (trip_found.vehicle_type) {
+            switch (trip_found.vehicle.type) {
                 case VehicleType.CAR:
                     feature.addStringProperty(ICON_IMAGE, CAR_IMAGE_ID);
                     feature.addNumberProperty(SIZE_ICON_IMAGE, .06f);
