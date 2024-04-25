@@ -21,6 +21,7 @@
     <color name="deep_blue">#01061B</color>
     <color name="light_blue">#0E132D</color>
     <color name="gray">#C3C3C3</color>
+    <color name="dark_gray">#8D8C8C</color>
     <color name="light_gray">#F2F2F2</color>
     <color name="green">#0E9F5B</color>
     <color name="green_blur">#330E9F5B</color>

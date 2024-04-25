@@ -38,7 +38,7 @@
 
             <ImageButton
                 android:visibility="@{is_trip_owner ? View.VISIBLE : View.GONE}"
-                android:id="@+id/btn_close_trip"
+                android:id="@+id/btn_delete_trip"
                 style="@style/icon_button_back"
                 android:padding="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
@@ -93,22 +93,25 @@
                 />
         </LinearLayout>
         <LinearLayout
-            android:visibility="@{is_trip_owner ? View.VISIBLE : View.GONE}"
+            android:id="@+id/wrapper_control_button"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp">
             <androidx.appcompat.widget.AppCompatButton
+                android:visibility="gone"
+                android:id="@+id/btn_reopen_trip"
+                style="@style/btn_small_primary_outline"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/open_again"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_close_trip"
                 style="@style/btn_small_danger_outline"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="@string/close"
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                style="@style/btn_small_info"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="@string/update"
                 />
             <androidx.appcompat.widget.AppCompatButton
                 style="@style/btn_small_success"

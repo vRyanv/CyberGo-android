@@ -185,4 +185,12 @@
     <string name="delete">Delete</string>
     <string name="accept">Accept</string>
     <string name="denied">Denied</string>
+    <string name="open_again">Open again</string>
+    <string name="image_upload_failed">Image upload failed</string>
+    <string name="edit_trip">Edit trip</string>
+    <string name="delete_this_trip">Delete this trip</string>
+    <string name="send">Send</string>
+    <string name="success">Success</string>
+    <string name="feedback_has_been_sent">Your feedback has been sent</string>
+    <string name="content">Content</string>
 </resources>

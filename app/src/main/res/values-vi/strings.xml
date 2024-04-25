@@ -181,4 +181,12 @@
     <string name="delete">Xóa</string>
     <string name="accept">Đồng ý</string>
     <string name="denied">Từ chối</string>
+    <string name="open_again">Mở lại</string>
+    <string name="image_upload_failed">Tải lên ảnh thất bại</string>
+    <string name="edit_trip">Chỉnh sửa chuyến đi</string>
+    <string name="delete_this_trip">Xóa chuyến đi này</string>
+    <string name="send">Gửi</string>
+    <string name="success">Thành công</string>
+    <string name="feedback_has_been_sent">Đánh giá của bạn đã được gửi</string>
+    <string name="content">Nội dung</string>
 </resources>

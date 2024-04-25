@@ -8,31 +8,86 @@
             name="view_model"
             type="com.tech.cybercars.ui.main.feedback.FeedbackViewModel" />
     </data>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.willy.ratingbar.RotationRatingBar
-            android:layout_gravity="center"
-            android:id="@+id/rating_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            app:srb_clearRatingEnabled="true"
-            app:srb_clickable="true"
-            app:srb_drawableEmpty="@drawable/ic_star_off"
-            app:srb_drawableFilled="@drawable/ic_star"
-            app:srb_isIndicator="false"
-            app:srb_minimumStars="0"
-            app:srb_numStars="5"
-            app:srb_rating="5"
-            app:srb_scrollable="true"
-            app:srb_starHeight="@dimen/_30sdp"
-            app:srb_starPadding="@dimen/_1sdp"
-            app:srb_starWidth="@dimen/_30sdp"
-            app:srb_stepSize="1" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            style="@style/layout_header_box">
+            <ImageButton
+                android:id="@+id/btn_out_screen"
+                style="@style/icon_button_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_marginBottom="@dimen/_25sdp"
+                    android:id="@+id/img_avatar"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_gravity="center"
+                    android:background="@color/gray"
+                    app:riv_corner_radius="30dip"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="true"/>
+                <TextView
+                    android:id="@+id/txt_full_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sp_pro_round_black_semibold"
+                    android:text="@string/full_name"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    />
+                <com.willy.ratingbar.RotationRatingBar
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:id="@+id/rating_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:srb_clearRatingEnabled="true"
+                    app:srb_clickable="true"
+                    app:srb_drawableEmpty="@drawable/ic_star_off"
+                    app:srb_drawableFilled="@drawable/ic_star"
+                    app:srb_isIndicator="false"
+                    app:srb_minimumStars="0"
+                    app:srb_numStars="5"
+                    app:srb_rating="5"
+                    app:srb_scrollable="true"
+                    app:srb_starHeight="@dimen/_30sdp"
+                    app:srb_starPadding="@dimen/_1sdp"
+                    app:srb_starWidth="@dimen/_30sdp"
+                    app:srb_stepSize="1" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_content"
+                    style="@style/input"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:errorEnabled="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/edit_text_input"
+                        android:layout_height="@dimen/_110sdp"
+                        android:gravity="start|top"
+                        android:hint="@string/content"
+                        android:inputType="textMultiLine"
+                        android:text="@={view_model.content}" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_send"
+                    style="@style/btn_primary"
+                    android:text="@string/send"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

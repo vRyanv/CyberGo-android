@@ -3,13 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="@{view_model.can_perform_trip ? View.VISIBLE : View.GONE}"
+            android:id="@+id/btn_update_trip_location"
+            style="@style/btn_small_info"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:text="@string/update"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -7,31 +7,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        style="@style/layout_header_box">
-
-        <TextView
-            style="@style/txt_title_header"
-            android:text="@string/select_vehicle_type"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <ImageButton
-            style="@style/icon_button_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_arrow" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/header_primary"
+        layout="@layout/header_primary"
+        app:title="@{@string/select_vehicle_type}" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <TextView
             android:id="@+id/txt_sub_title_select_share_transportation"
             android:layout_width="wrap_content"
@@ -56,6 +41,7 @@
             app:layout_constraintTop_toBottomOf="@id/txt_sub_title_select_share_transportation">
 
             <TableRow>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/type_moto_select"
                     style="@style/wrapper_transport_type_choose"
@@ -76,9 +62,11 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/img_motorcycle_type_choose" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/type_car_select"
                     style="@style/wrapper_transport_type_choose">
+
                     <ImageView
                         android:id="@+id/img_car_type_choose"
                         style="@style/transport_type_choose"
@@ -99,11 +87,13 @@
             </TableRow>
 
             <TableRow>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/type_truck_select"
+                    style="@style/wrapper_transport_type_choose"
                     android:layout_marginTop="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    style="@style/wrapper_transport_type_choose">
+                    android:layout_marginEnd="@dimen/_25sdp">
+
                     <ImageView
                         android:id="@+id/img_truck_type_choose"
                         style="@style/transport_type_choose"
@@ -119,16 +109,16 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/img_truck_type_choose" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                    android:layout_marginTop="@dimen/_25sdp"-->
-<!--                    android:layout_width="@dimen/_70sdp"-->
-<!--                    android:layout_height="@dimen/_70sdp"-->
-<!--                    android:background="@color/yellow"-->
-<!--                    tools:layout_editor_absoluteX="60dp"-->
-<!--                    tools:layout_editor_absoluteY="107dp">-->
+                <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                    android:layout_marginTop="@dimen/_25sdp"-->
+                <!--                    android:layout_width="@dimen/_70sdp"-->
+                <!--                    android:layout_height="@dimen/_70sdp"-->
+                <!--                    android:background="@color/yellow"-->
+                <!--                    tools:layout_editor_absoluteX="60dp"-->
+                <!--                    tools:layout_editor_absoluteY="107dp">-->
 
 
-<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+                <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
             </TableRow>
         </TableLayout>
 

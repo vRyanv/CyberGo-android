@@ -68,13 +68,20 @@ text normal = 14ssp
     17.1 trip adapter: @done
     17.2 trip other: @done
 
-18. trip detail:
+18. trip detail: @done
 
 
-12. vehicle management
+fake UI:
+    1. update
+        1.1 update map: #####
+        1.2 update information: @done
+    2. chat:
 
+    3. message:
 
-
+        <include
+            android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE }"
+            layout="@layout/partial_loading_primary"/>
 android:background="?attr/selectableItemBackground"
 
 ##, sửa lại register thêm tên xe

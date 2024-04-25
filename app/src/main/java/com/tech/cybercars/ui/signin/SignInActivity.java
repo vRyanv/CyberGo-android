@@ -52,7 +52,7 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
             view_model.SignInHandle();
         });
 
-        view_model.email.setValue("khangok1610@gmail.com");
+        view_model.email.setValue("kien@gmail.com");
         view_model.password.setValue("123123123");
     }
 

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberViewHolder> {
     private List<TripFound.User> member_list;
-    private Context context;
+    private final Context context;
     private MemberClickedCallback member_clicked_callback;
 
     public MemberAdapter(Context context, List<TripFound.User> member_list) {

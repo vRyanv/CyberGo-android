@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -72,7 +73,7 @@ public class MemberTripDetailAdapter extends RecyclerView.Adapter<MemberTripDeta
             }
         }
 
-        if(trip_owner_id.equals(current_user_id)){
+        if(trip_owner_id.equals(current_user_id) && !trip_status.equals(TripStatus.FINISH) && member.status.equals(MemberStatus.QUEUE)){
             holder.btn_accept_member.setOnClickListener(view -> {
                 accept_clicked_callback.OnCLicked(member);
             });

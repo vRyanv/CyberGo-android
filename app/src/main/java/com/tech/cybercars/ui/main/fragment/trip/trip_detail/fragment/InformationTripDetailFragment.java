@@ -4,6 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.databinding.DataBindingUtil;
@@ -23,9 +27,13 @@ import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.databinding.FragmentInformationTripDetailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationViewModel;
+import com.tech.cybercars.ui.main.fragment.trip.edit_trip.EditTripInformationActivity;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel;
+import com.tech.cybercars.ui.main.user_profile.UserProfileActivity;
 import com.tech.cybercars.ui.main.view_vehicle.ViewVehicleActivity;
+import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 public class InformationTripDetailFragment extends BaseFragment<FragmentInformationTripDetailBinding, TripDetailViewModel> {
     @NonNull
@@ -37,6 +45,7 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
     @Override
     protected FragmentInformationTripDetailBinding InitBinding(LayoutInflater inflater, ViewGroup container) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_trip_detail, container, false);
+        binding.setViewModel(view_model);
         return binding;
     }
 
@@ -47,12 +56,19 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
 
     @Override
     protected void InitView() {
-
     }
 
     @Override
     protected void InitObserve() {
         view_model.trip_management.observe(requireActivity(), this::BindDataToUI);
+
+        view_model.can_perform_trip.observe(this, can_perform_trip-> {
+            if(can_perform_trip){
+                binding.btnUpdateTripInformation.setVisibility(View.VISIBLE);
+            } else {
+                binding.btnUpdateTripInformation.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -64,8 +80,20 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
         String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + trip_management.trip_owner.avatar;
         Glide.with(requireContext()).load(avatar_full_path).placeholder(R.drawable.loading_placeholder).into(binding.imgAvatar);
 
+        binding.btnOpenOwnerProfile.setOnClickListener(view -> {
+            OpenUserProfile(trip_management.trip_owner.user_id);
+        });
+
         binding.txtFullName.setText(trip_management.trip_owner.full_name);
         binding.ratingBar.setRating(trip_management.trip_owner.rating);
+
+        if(!trip_management.trip_status.equals(TripStatus.FINISH)){
+            binding.btnUpdateTripInformation.setOnClickListener(view -> {
+                Intent edit_trip_intent = new Intent(requireContext(), EditTripInformationActivity.class);
+                edit_trip_intent.putExtra(FieldName.TRIP, trip_management);
+                edit_trip_launcher.launch(edit_trip_intent);
+            });
+        }
 
         binding.btnOpenViewVehicle.setOnClickListener(view -> {
             Intent view_vehicle_intent = new Intent(requireContext(), ViewVehicleActivity.class);
@@ -120,5 +148,23 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
             binding.txtDescription.setText(trip_management.description);
         }
     }
+
+    private void OpenUserProfile(String user_id) {
+        String current_user_id = SharedPreferencesUtil.GetString(requireContext(), FieldName.USER_ID);
+        if(current_user_id.equals(user_id)){
+            startActivity(new Intent(requireContext(), ProfileActivity.class));
+        } else {
+            Intent user_profile_intent = new Intent(requireContext(), UserProfileActivity.class);
+            user_profile_intent.putExtra(FieldName.USER_ID, user_id);
+            startActivity(user_profile_intent);
+        }
+    }
+
+    private final ActivityResultLauncher<Intent> edit_trip_launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+
+            }
+    );
 
 }

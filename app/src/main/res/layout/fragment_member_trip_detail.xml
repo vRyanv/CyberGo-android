@@ -33,7 +33,6 @@
                 android:text="5"/>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginHorizontal="@dimen/_16sdp"
             android:id="@+id/rcv_member"
             tools:listitem="@layout/item_trip_member"
             android:layout_width="match_parent"

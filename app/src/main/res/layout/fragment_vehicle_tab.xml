@@ -13,7 +13,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:paddingBottom="@dimen/_15sdp">
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_license_plates"
                 style="@style/input"
@@ -130,7 +131,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/shape_btn_outline"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_side_card"
+                android:src="@drawable/ic_back_car"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -201,7 +202,7 @@
                     android:layout_margin="0dp"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:text="@string/right_side_vehicle"
+                    android:text="@string/left_side_vehicle"
                     app:layout_constraintBottom_toTopOf="@+id/img_front_transport"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -234,7 +235,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/shape_btn_outline"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_back_car"
+                android:src="@drawable/ic_side_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

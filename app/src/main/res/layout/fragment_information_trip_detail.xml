@@ -4,7 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel" />
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -57,26 +60,50 @@
                         app:layout_constraintVertical_bias="0.5" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
-            <com.willy.ratingbar.BaseRatingBar
-                android:id="@+id/rating_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                app:layout_constraintStart_toEndOf="@id/img_avatar"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srb_clearRatingEnabled="true"
-                app:srb_clickable="false"
-                app:srb_drawableEmpty="@drawable/ic_star_off"
-                app:srb_drawableFilled="@drawable/ic_star"
-                app:srb_isIndicator="false"
-                app:srb_minimumStars="0"
-                app:srb_numStars="5"
-                app:srb_rating="2"
-                app:srb_scrollable="true"
-                app:srb_starHeight="@dimen/_15sdp"
-                app:srb_starPadding="@dimen/_3sdp"
-                app:srb_starWidth="@dimen/_15sdp"
-                app:srb_stepSize="1" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.willy.ratingbar.BaseRatingBar
+                    android:id="@+id/rating_bar"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/img_avatar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srb_clearRatingEnabled="true"
+                    app:srb_clickable="false"
+                    app:srb_drawableEmpty="@drawable/ic_star_off"
+                    app:srb_drawableFilled="@drawable/ic_star"
+                    app:srb_isIndicator="false"
+                    app:srb_minimumStars="0"
+                    app:srb_numStars="5"
+                    app:srb_rating="2"
+                    app:srb_scrollable="true"
+                    app:srb_starHeight="@dimen/_15sdp"
+                    app:srb_starPadding="@dimen/_3sdp"
+                    app:srb_starWidth="@dimen/_15sdp"
+                    app:srb_stepSize="1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:visibility="@{view_model.can_perform_trip ? View.VISIBLE : View.GONE}"
+                        android:id="@+id/btn_update_trip_information"
+                        style="@style/btn_small_info"
+                        android:layout_gravity="center"
+                        android:layout_margin="0dp"
+                        android:text="@string/update"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/txt_trip_name"
                 android:layout_marginTop="@dimen/_15sdp"

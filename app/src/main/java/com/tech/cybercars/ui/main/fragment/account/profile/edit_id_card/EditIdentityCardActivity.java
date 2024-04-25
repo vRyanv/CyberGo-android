@@ -118,7 +118,7 @@ public class EditIdentityCardActivity extends BaseActivity<ActivityEditIdentityC
 
         view_model.user_edit = (User) getIntent().getSerializableExtra(FieldName.USER);
         assert view_model.user_edit != null;
-        if(view_model.user_edit.front_id_card != null){
+        if(view_model.user_edit.front_id_card != null &&  !view_model.user_edit.front_id_card.equals("")){
             String front_id_card_full_path = base_img_res + view_model.user_edit.front_id_card;
             Glide.with(this)
                     .load(front_id_card_full_path)
@@ -126,6 +126,7 @@ public class EditIdentityCardActivity extends BaseActivity<ActivityEditIdentityC
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
+                            Toast.makeText(EditIdentityCardActivity.this, getString(R.string.image_upload_failed), Toast.LENGTH_SHORT).show();
                             return false;
                         }
 
@@ -139,7 +140,7 @@ public class EditIdentityCardActivity extends BaseActivity<ActivityEditIdentityC
         }
 
 
-        if(view_model.user_edit.back_id_card != null){
+        if(view_model.user_edit.back_id_card != null && !view_model.user_edit.back_id_card.equals("")){
             String back_id_card_full_path = base_img_res + view_model.user_edit.back_id_card;
             Glide.with(this)
                     .load(back_id_card_full_path)
@@ -147,6 +148,7 @@ public class EditIdentityCardActivity extends BaseActivity<ActivityEditIdentityC
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
+                            Toast.makeText(EditIdentityCardActivity.this, getString(R.string.image_upload_failed), Toast.LENGTH_SHORT).show();
                             return false;
                         }
 

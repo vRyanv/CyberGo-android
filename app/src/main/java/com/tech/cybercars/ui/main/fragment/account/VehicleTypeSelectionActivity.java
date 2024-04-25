@@ -25,6 +25,10 @@ public class VehicleTypeSelectionActivity extends AppCompatActivity {
     }
 
     private void InitView() {
+        binding.headerPrimary.btnOutScreen.setOnClickListener(view -> {
+            finish();
+        });
+
         binding.typeCarSelect.setOnClickListener(view -> ActiveSelection(binding.typeCarSelect, VehicleType.CAR));
         binding.typeMotoSelect.setOnClickListener(view ->  ActiveSelection(binding.typeMotoSelect, VehicleType.MOTO));
         binding.typeTruckSelect.setOnClickListener(view -> ActiveSelection(binding.typeTruckSelect, VehicleType.TRUCK));
