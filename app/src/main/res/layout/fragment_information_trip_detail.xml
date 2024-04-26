@@ -27,6 +27,7 @@
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/img_avatar"
                     android:layout_height="@dimen/_40sdp"
+                    android:scaleType="fitXY"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_gravity="top"
                     android:background="@color/gray"

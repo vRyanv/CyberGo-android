@@ -27,6 +27,7 @@ import com.tech.cybercars.databinding.ActivityMainBinding;
 import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.services.notification.NotificationService;
 import com.tech.cybercars.ui.base.BaseActivity;
+import com.tech.cybercars.ui.main.chat.ChatActivity;
 import com.tech.cybercars.ui.main.notification.NotificationActivity;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
@@ -97,8 +98,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             view_model.has_notification.setValue(false);
         });
 
-        binding.btnOpenMessage.setOnClickListener(view -> {
-
+        binding.btnOpenChat.setOnClickListener(view -> {
+            startActivity(new Intent(this, ChatActivity.class));
         });
 
 //        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.container_fragment_main);

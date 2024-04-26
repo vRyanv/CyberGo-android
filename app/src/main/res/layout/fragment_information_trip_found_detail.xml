@@ -28,6 +28,7 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_gravity="top"
+                    android:scaleType="fitXY"
                     android:background="@color/gray"
                     app:riv_corner_radius="30dip"
                     app:riv_mutate_background="true"

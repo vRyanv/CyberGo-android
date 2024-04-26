@@ -1,6 +1,9 @@
 package com.tech.cybercars.constant;
 
 public class FieldName {
+    //chat
+    public final static String CHAT = "CHAT";
+
     //trip
     public final static String MEMBER = "MEMBER";
     public final static String TRIP_FOUND = "trip_found";

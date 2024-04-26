@@ -3,6 +3,7 @@ package com.tech.cybercars.ui.component;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -46,16 +47,6 @@ public class AvatarListView extends LinearLayout {
             return;
         }
 
-//            <TextView
-//        android:visibility="gone"
-//        android:layout_marginTop="@dimen/_3sdp"
-//        android:fontFamily="@font/sp_pro_round_regular"
-//        android:textSize="@dimen/_10ssp"
-//        android:id="@+id/txt_no_member_join"
-//        android:layout_width="wrap_content"
-//        android:layout_height="wrap_content"
-//        android:text="@string/no_members_have_been_joined_yet"
-//                />
         for (String avatar : avatar_list) {
             RoundedImageView img_avatar = CreateAvatarImageView(avatar);
             wrapper_avatar_list.addView(img_avatar);
@@ -76,6 +67,7 @@ public class AvatarListView extends LinearLayout {
         img_avatar.setLayoutParams(img_layout);
         img_avatar.setOval(true);
         img_avatar.mutateBackground(true);
+        img_avatar.setScaleType(ImageView.ScaleType.FIT_XY);
         img_avatar.setCornerRadius(30);
         img_avatar.setBackgroundColor(context.getColor(R.color.gray));
         String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + avatar;

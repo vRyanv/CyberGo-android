@@ -34,6 +34,7 @@
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_marginBottom="@dimen/_25sdp"
                     android:id="@+id/img_avatar"
+                    android:scaleType="fitXY"
                     android:layout_height="@dimen/_120sdp"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_gravity="center"

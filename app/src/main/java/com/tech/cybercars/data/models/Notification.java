@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "notification")
 public class Notification{
     @PrimaryKey(autoGenerate = true)
     public int id;
+    @SerializedName("_id")
     public String notification_id;
     //datetime as timestamp
     public Long datetime;

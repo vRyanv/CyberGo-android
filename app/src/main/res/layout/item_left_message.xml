@@ -10,11 +10,12 @@
         android:layout_gravity="bottom"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_15sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_width="@dimen/_25sdp"
         android:background="@color/gray"
         app:riv_corner_radius="30dip"
         app:riv_mutate_background="true"
+        android:scaleType="fitXY"
         app:riv_oval="true" />
     <LinearLayout
         android:orientation="vertical"
@@ -23,11 +24,12 @@
         <TextView
             android:id="@+id/txt_content"
             android:fontFamily="@font/sp_pro_round_light"
-            android:padding="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_11ssp"
             android:background="@drawable/shape_message_gray"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_50sdp"
             android:text="@string/content"/>

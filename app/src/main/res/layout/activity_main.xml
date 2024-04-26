@@ -67,7 +67,7 @@
                 >
 
                 <ImageButton
-                    android:id="@+id/btn_open_message"
+                    android:id="@+id/btn_open_chat"
                     style="@style/icon_button_back"
                     android:layout_marginStart="0dp"
                     app:srcCompat="@drawable/ic_chat" />

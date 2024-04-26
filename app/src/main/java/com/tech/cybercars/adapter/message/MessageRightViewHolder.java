@@ -13,11 +13,11 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.models.Message;
 
-public class MessageLeftViewHolder extends RecyclerView.ViewHolder {
+public class MessageRightViewHolder extends RecyclerView.ViewHolder {
     public ImageView img_avatar;
     public TextView txt_content;
     public TextView txt_time;
-    public MessageLeftViewHolder(@NonNull View itemView) {
+    public MessageRightViewHolder(@NonNull View itemView) {
         super(itemView);
         img_avatar = itemView.findViewById(R.id.img_avatar);
         txt_content = itemView.findViewById(R.id.txt_content);
