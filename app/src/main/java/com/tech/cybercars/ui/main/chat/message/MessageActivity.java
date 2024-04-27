@@ -65,7 +65,7 @@ public class MessageActivity extends BaseActivity<ActivityMessageBinding, Messag
         String[] contents = new String[]{"hi!", "what's up?", ">.<", "-.-"};
         String[] times = new String[]{"21:08", "21:08", "22:00", "22:00"};
         String current_user_id = SharedPreferencesUtil.GetString(this, FieldName.USER_ID);
-        String[] user_ids = new String[]{"1", current_user_id, "1", current_user_id};
+        String[] user_ids = new String[]{current_user_id, "1", current_user_id, "1"};
         for (int i = 0; i < 4; i++) {
             Message mess = new Message(
                     String.valueOf(i),

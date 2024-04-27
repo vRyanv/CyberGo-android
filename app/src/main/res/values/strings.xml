@@ -193,4 +193,11 @@
     <string name="success">Success</string>
     <string name="feedback_has_been_sent">Your feedback has been sent</string>
     <string name="content">Content</string>
+    <string name="rating">Rating</string>
+    <string name="view_rating_report">View rating report</string>
+    <string name="view_statistics">View statistics</string>
+    <string name="statistic">Statistic</string>
+    <string name="you_can_log_in_now">You can log in now</string>
+    <string name="trip_quantity">Trip quantity</string>
+    <string name="end_date">End date</string>
 </resources>

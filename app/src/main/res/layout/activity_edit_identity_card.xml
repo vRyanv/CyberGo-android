@@ -61,21 +61,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp">
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_id_number"
+                        style="@style/input"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        app:errorEnabled="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/edit_text_input"
+                            android:hint="@string/identity_number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                     <LinearLayout
                         android:id="@+id/title_front_id_card"
                         android:layout_width="match_parent"
-                        android:layout_marginHorizontal="@dimen/_16sdp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="@dimen/_25sdp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginHorizontal="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/input_id_number">
 
                         <TextView
                             android:id="@+id/label_front_id_card"
                             style="@style/form_label"
-                            android:layout_margin="0dp"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="0dp"
                             android:text="@string/front_id_card"
                             app:layout_constraintBottom_toTopOf="@+id/img_front_id_card"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -84,8 +99,8 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
 
                             <ImageButton
                                 android:id="@+id/btn_upload_front_id_card"
@@ -118,16 +133,16 @@
                         android:id="@+id/title_back_id_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
                         android:layout_marginHorizontal="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         app:layout_constraintTop_toBottomOf="@+id/img_front_id_card">
 
                         <TextView
                             android:id="@+id/label_back_id_card"
                             style="@style/form_label"
-                            android:layout_margin="0dp"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="0dp"
                             android:text="@string/back_id_card"
                             app:layout_constraintBottom_toTopOf="@+id/img_front_id_card"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -136,8 +151,8 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
 
                             <ImageButton
                                 android:id="@+id/btn_upload_back_id_card"

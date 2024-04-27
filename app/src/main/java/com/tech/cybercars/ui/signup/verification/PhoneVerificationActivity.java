@@ -50,6 +50,10 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
 
     @Override
     protected void InitView() {
+        binding.btnPhoneVerification.setOnClickListener(view -> {
+            ShowSuccessFeedback();
+        });
+
         binding.txtResendAgainPhoneVerification.setText(SetUpSendAgainTextClickable());
         binding.txtResendAgainPhoneVerification.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -190,6 +194,17 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
                 })
                 .setPositiveButton(R.string.cancel,(dialog, which_button)->{
                     Toast.makeText(this, "cancel click", Toast.LENGTH_SHORT).show();
+                }).show();
+    }
+
+    private void ShowSuccessFeedback() {
+        NotificationDialog.Builder(this)
+                .SetIcon(R.drawable.ic_success)
+                .SetTitle(getResources().getString(R.string.success))
+                .SetSubtitle(getResources().getString(R.string.you_can_log_in_now))
+                .SetTextMainButton(getResources().getString(R.string.login))
+                .SetOnMainButtonClicked(dialog -> {
+                    finish();
                 }).show();
     }
 }

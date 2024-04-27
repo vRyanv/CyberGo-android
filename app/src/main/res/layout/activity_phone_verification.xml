@@ -105,7 +105,6 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_phone_verification"
                     style="@style/btn_primary"
-                    android:onClick="@{() -> view_model.VerifyHandle()}"
                     android:text="@string/verify"
                     android:layout_marginBottom="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_12sdp"

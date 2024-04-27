@@ -214,6 +214,15 @@
                             style="@style/text_label_profile"
                             android:text="@string/address" />
                     </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_view_rating_report"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_15sdp"
+                       style="@style/btn_small_primary"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/view_rating_report"
+                        />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>

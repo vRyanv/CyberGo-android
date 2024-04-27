@@ -1,5 +1,6 @@
 package com.tech.cybercars.ui.main.user_profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.databinding.ActivityUserProfileBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.main.MainViewModel;
+import com.tech.cybercars.ui.main.rating_report.RatingReportActivity;
 
 public class UserProfileActivity extends BaseActivity<ActivityUserProfileBinding, UserProfileViewModel> {
 
@@ -38,6 +40,10 @@ public class UserProfileActivity extends BaseActivity<ActivityUserProfileBinding
 
     @Override
     protected void InitView() {
+        binding.btnViewRatingReport.setOnClickListener(view -> {
+            startActivity(new Intent(this, RatingReportActivity.class));
+        });
+
         binding.btnOpenChatUser.setOnClickListener(view -> {
 
         });

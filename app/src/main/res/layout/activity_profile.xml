@@ -12,7 +12,7 @@
     </data>
 
     <RelativeLayout
-        android:id="@+id/loadingPanel"
+        android:id="@+id/loadingPane"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
@@ -111,7 +111,29 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/card_avatar" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_view_rating_report"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    style="@style/btn_small_primary"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:text="@string/view_rating_report"
+                    />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_view_statistics"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    style="@style/btn_small_primary"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:text="@string/view_statistics"
+                    />
+            </LinearLayout>
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -149,6 +171,21 @@
                         <TextView
                             style="@style/text_label_profile"
                             android:text="@{view_model.phone_number, default=Phone}" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/btn_open_edit_phone"
+                                style="@style/icon_button_back"
+                                android:padding="@dimen/_3sdp"
+                                android:src="@drawable/ic_pencil"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.5" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                     </LinearLayout>
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="wrap_content"
@@ -194,6 +231,20 @@
                             style="@style/text_label_profile"
                             android:layout_gravity="center"
                             android:text="@{view_model.identity_number, default=ID}" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/btn_open_view_id_card"
+                                style="@style/icon_button_back"
+                                android:padding="@dimen/_3sdp"
+                                android:src="@drawable/ic_pencil"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.5" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="wrap_content"
@@ -209,31 +260,6 @@
                             style="@style/text_label_profile"
                             android:text="@{view_model.address, default=Address}" />
                     </LinearLayout>
-
-                    <LinearLayout style="@style/layout_label_profile">
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_open_view_id_card"
-                            style="@style/btn_primary_outline"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginEnd="0dp"
-                            android:text="@string/edit_id_card"
-                            android:textSize="@dimen/_12ssp" />
-                    </LinearLayout>
-
-                    <LinearLayout style="@style/layout_label_profile">
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_open_edit_phone"
-                            style="@style/btn_primary_outline"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginEnd="0dp"
-                            android:text="@string/edit_phone_number"
-                            android:textSize="@dimen/_12ssp" />
-                    </LinearLayout>
-
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>

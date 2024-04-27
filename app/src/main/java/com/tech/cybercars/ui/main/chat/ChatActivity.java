@@ -46,11 +46,11 @@ public class ChatActivity extends BaseActivity<ActivityChatBinding, ChatViewMode
 
     @Override
     protected void InitView() {
-        String[] avatars = new String[]{"ryan.jpg", "truc.jpg", "lap.png", "vinh.png","nhan.png","chuong.png","thai.png","hung.png","duy.png","phuongduy.png"};
-        String[] full_names = new String[]{"Ryan", "Le Truc", "Lucky", "Owen","Yummy","Chuong","Thai","Hung","ĐDuy","PDuy"};
-        String[] messages = new String[]{"hello", "hi!", "thanks", "hi ^_^", "hi", "hello", "hello", "hello", "hello","hello"};
+        String[] avatars = new String[]{"ryan.jpg", "truc.jpg", "lap.png", "vinh.png","nhan.png","chuong.png", "hung.png","duy.png","phuongduy.png"};
+        String[] full_names = new String[]{"Ryan", "Le Truc", "Lucky", "Owen","Yummy","Chuong", "Hung","ĐDuy","PDuy"};
+        String[] messages = new String[]{"hello", "hi!", "thanks", "hi ^_^", "hi", "hello", "hello", "hello","hello"};
         List<Chat> chat_list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 9; i++) {
             Chat chat = new Chat(
                     String.valueOf(i),
                     String.valueOf(i),

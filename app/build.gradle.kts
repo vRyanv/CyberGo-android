@@ -134,5 +134,8 @@ dependencies {
 
     //rating abr
     implementation("com.github.ome450901:SimpleRatingBar:1.5.1")
+
+    //chart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
 

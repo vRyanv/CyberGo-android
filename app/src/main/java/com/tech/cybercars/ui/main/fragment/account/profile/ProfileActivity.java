@@ -24,6 +24,8 @@ import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_id_card.EditIdentityCardActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_phone.EditPhoneActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_profile.EditProfileActivity;
+import com.tech.cybercars.ui.main.fragment.account.profile.user_statistic.UserStatisticActivity;
+import com.tech.cybercars.ui.main.rating_report.RatingReportActivity;
 import com.tech.cybercars.utils.PermissionUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -52,6 +54,13 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
 
     @Override
     protected void InitView() {
+        binding.btnViewRatingReport.setOnClickListener(view -> {
+            startActivity(new Intent(this, RatingReportActivity.class));
+        });
+
+        binding.btnViewStatistics.setOnClickListener(view -> {
+            startActivity(new Intent(this, UserStatisticActivity.class));
+        });
 
         binding.btnOpenEditProfile.setOnClickListener(view -> {
             Intent edit_profile_intent = new Intent(this, EditProfileActivity.class);
