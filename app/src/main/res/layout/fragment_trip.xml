@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="view_model"
             type="com.tech.cybercars.ui.main.fragment.trip.TripViewModel" />
@@ -36,8 +37,17 @@
                     android:text="@string/trip_participated" />
 
             </com.google.android.material.tabs.TabLayout>
-
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/skeleton_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone}">
+                <include layout="@layout/skeleton_trip_management" />
+            </com.facebook.shimmer.ShimmerFrameLayout>
             <androidx.viewpager2.widget.ViewPager2
+                android:visibility="@{view_model.is_loading ? View.GONE : View.VISIBLE}"
                 android:id="@+id/paper_trip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

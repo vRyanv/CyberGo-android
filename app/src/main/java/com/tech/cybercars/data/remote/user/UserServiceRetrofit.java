@@ -47,8 +47,10 @@ public interface UserServiceRetrofit {
     @PUT(URL.UPDATE_ID_CARD)
     Call<UpdateIdCardResponse> UpdateIdCardRequest(
             @Header("authorization") String user_token,
+            @Part(FieldName.ID_NUMBER) RequestBody id_number_body,
             @Part List<MultipartBody.Part> id_card_body
     );
+
     @Multipart
     @PUT(URL.UPDATE_PROFILE)
     Call<UpdateProfileResponse> UpdateProfileRequest(

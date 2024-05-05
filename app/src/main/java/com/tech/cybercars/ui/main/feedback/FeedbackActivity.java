@@ -39,14 +39,7 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Feed
 
     @Override
     protected void InitView() {
-        TripManagement.Member member = (TripManagement.Member) getIntent().getSerializableExtra(FieldName.MEMBER);
-        assert member != null;
-        binding.ratingBar.setRating(member.rating);
-
-        String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + member.avatar;
-        Glide.with(this).load(avatar_full_path).into(binding.imgAvatar);
-
-        binding.txtFullName.setText(member.full_name);
+        binding.ratingBar.setRating(5);
 
         binding.btnOutScreen.setOnClickListener(view -> {
             OnBackPress();
@@ -55,6 +48,27 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Feed
         binding.btnSend.setOnClickListener(view -> {
             ShowSuccessFeedback();
         });
+    }
+
+
+    @Override
+    protected void InitObserve() {
+
+    }
+
+    @Override
+    protected void InitCommon() {
+        String avatar = getIntent().getStringExtra(FieldName.AVATAR);
+        String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + avatar;
+        Glide.with(this).load(avatar_full_path).into(binding.imgAvatar);
+
+        String full_name = getIntent().getStringExtra(FieldName.FULL_NAME);
+        binding.txtFullName.setText(full_name);
+    }
+
+    @Override
+    protected void OnBackPress() {
+        finish();
     }
 
     private void ShowSuccessFeedback() {
@@ -68,18 +82,4 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Feed
                 }).show();
     }
 
-    @Override
-    protected void InitObserve() {
-
-    }
-
-    @Override
-    protected void InitCommon() {
-
-    }
-
-    @Override
-    protected void OnBackPress() {
-        finish();
-    }
 }

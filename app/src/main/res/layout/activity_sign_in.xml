@@ -75,12 +75,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:padding="@dimen/_5sdp"
                     android:id="@+id/txt_forget_password_sign_in"
                     android:layout_width="wrap_content"
                     android:textColor="@color/light_red"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_16sdp"
-                    android:text="@string/forget_password"
+                    android:text="@string/forgot_password"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/input_password_sign_in" />
                 <androidx.appcompat.widget.AppCompatButton

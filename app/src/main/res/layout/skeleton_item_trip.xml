@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapper_item_trip"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_150sdp"
+    app:cardCornerRadius="@dimen/_6sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_marginRight="@dimen/_10sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp">
+    <LinearLayout
+        android:background="#1A000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:scaleType="fitXY"
+                android:layout_gravity="top"
+                android:background="@color/gray"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:riv_corner_radius="30dip"
+                app:riv_mutate_background="true"
+                app:riv_oval="true" />
+            <ImageView
+                android:padding="@dimen/_3sdp"
+                android:id="@+id/img_vehicle_type"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@color/gray"
+                android:layout_marginEnd="@dimen/_25sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rating_bar"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/gray"
+                app:layout_constraintStart_toEndOf="@id/img_avatar"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/sp_pro_round_heavy"
+                android:id="@+id/txt_trip_name"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/rating_bar"
+                app:layout_constraintStart_toEndOf="@id/img_avatar"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_15sdp"/>
+            <LinearLayout
+                android:id="@+id/wrapper_date_time_price"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_15sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/txt_trip_name">
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_15sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/wrapper_date_time_price">
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="end">
+           <com.makeramen.roundedimageview.RoundedImageView
+               android:layout_marginStart="@dimen/_5sdp"
+               android:layout_width="@dimen/_20sdp"
+               android:layout_height="@dimen/_20sdp"
+               android:scaleType="fitXY"
+               android:layout_gravity="top"
+               android:background="@color/gray"
+               android:layout_marginTop="@dimen/_5sdp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:riv_corner_radius="30dip"
+               app:riv_mutate_background="true"
+               app:riv_oval="true" />
+           <com.makeramen.roundedimageview.RoundedImageView
+               android:layout_marginStart="@dimen/_5sdp"
+               android:layout_width="@dimen/_20sdp"
+               android:layout_height="@dimen/_20sdp"
+               android:scaleType="fitXY"
+               android:layout_gravity="top"
+               android:background="@color/gray"
+               android:layout_marginTop="@dimen/_5sdp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:riv_corner_radius="30dip"
+               app:riv_mutate_background="true"
+               app:riv_oval="true" />
+           <com.makeramen.roundedimageview.RoundedImageView
+               android:layout_marginStart="@dimen/_5sdp"
+               android:layout_width="@dimen/_20sdp"
+               android:layout_height="@dimen/_20sdp"
+               android:scaleType="fitXY"
+               android:layout_gravity="top"
+               android:background="@color/gray"
+               android:layout_marginTop="@dimen/_5sdp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:riv_corner_radius="30dip"
+               app:riv_mutate_background="true"
+               app:riv_oval="true" />
+           <com.makeramen.roundedimageview.RoundedImageView
+               android:layout_marginStart="@dimen/_5sdp"
+               android:layout_width="@dimen/_20sdp"
+               android:layout_height="@dimen/_20sdp"
+               android:scaleType="fitXY"
+               android:layout_gravity="top"
+               android:background="@color/gray"
+               android:layout_marginTop="@dimen/_5sdp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:riv_corner_radius="30dip"
+               app:riv_mutate_background="true"
+               app:riv_oval="true" />
+       </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

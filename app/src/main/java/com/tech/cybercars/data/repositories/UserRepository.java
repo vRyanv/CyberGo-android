@@ -50,9 +50,10 @@ public class UserRepository {
     }
 
     public void UpdateIdCard(String user_token,
+                                         RequestBody id_number_body,
                                          List<MultipartBody.Part> id_card_body,
                                          ResSuccessCallback<UpdateIdCardResponse> success_callback, ResFailCallback fail_callback){
-        user_service.UpdateIdCardRequest(user_token, id_card_body)
+        user_service.UpdateIdCardRequest(user_token, id_number_body, id_card_body)
                 .enqueue(new RetrofitResponse<UpdateIdCardResponse>().GetResponse(success_callback, fail_callback));
     }
 

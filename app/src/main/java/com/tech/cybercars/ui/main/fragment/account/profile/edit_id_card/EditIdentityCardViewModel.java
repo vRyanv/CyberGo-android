@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
@@ -35,6 +36,7 @@ public class EditIdentityCardViewModel extends BaseViewModel {
 
     public Uri front_id_card_uri;
     public Uri back_id_card_uri;
+    public MutableLiveData<String> id_number = new MutableLiveData<>();
     public User user_edit;
     private final UserRepository user_repo;
     private final AppDBContext app_db_context;
@@ -46,10 +48,11 @@ public class EditIdentityCardViewModel extends BaseViewModel {
     }
 
     public void HandleUpdateIdCard() {
-        if (front_id_card_uri == null && back_id_card_uri == null) {
-            Toast.makeText(getApplication(), getApplication().getString(R.string.there_are_no_changes), Toast.LENGTH_SHORT).show();
-            return;
-        }
+
+//        if (front_id_card_uri == null && back_id_card_uri == null) {
+//            Toast.makeText(getApplication(), getApplication().getString(R.string.there_are_no_changes), Toast.LENGTH_SHORT).show();
+//            return;
+//        }
 
         is_loading.setValue(true);
         MultipartBody.Part front_id_card_body = null;
@@ -71,9 +74,12 @@ public class EditIdentityCardViewModel extends BaseViewModel {
         id_card_body.add(front_id_card_body);
         id_card_body.add(back_id_card_body);
 
+        RequestBody id_number_body = RequestBody.create(MultipartBody.FORM, id_number.getValue());
+
         String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
         user_repo.UpdateIdCard(
                 user_token,
+                id_number_body,
                 id_card_body,
                 this::CallUpdateIdCardSuccess,
                 this::CallUpdateIdCardFailed
@@ -90,6 +96,7 @@ public class EditIdentityCardViewModel extends BaseViewModel {
             }
             assert response.body() != null;
             if (response.body().code == StatusCode.UPDATED) {
+                user_edit.id_number = id_number.getValue();
                 if (response.body().front_id_card != null) {
                     user_edit.front_id_card = response.body().front_id_card;
                 }

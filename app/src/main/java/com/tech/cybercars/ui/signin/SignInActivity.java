@@ -20,6 +20,7 @@ import com.tech.cybercars.databinding.ActivitySignInBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.MainActivity;
+import com.tech.cybercars.ui.signin.forgot_password.ForgotPasswordActivity;
 import com.tech.cybercars.ui.signup.SignUpActivity;
 import com.tech.cybercars.ui.signup.verification.PhoneVerificationActivity;
 import com.tech.cybercars.utils.KeyBoardUtil;
@@ -52,8 +53,12 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
             view_model.SignInHandle();
         });
 
-        view_model.email.setValue("kien@gmail.com");
+        view_model.email.setValue("letruc2108@gmail.com");
         view_model.password.setValue("123123123");
+
+        binding.txtForgetPasswordSignIn.setOnClickListener(view -> {
+            startActivity(new Intent(this, ForgotPasswordActivity.class));
+        });
     }
 
     @Override

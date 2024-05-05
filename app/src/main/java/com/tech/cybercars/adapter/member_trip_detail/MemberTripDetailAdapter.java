@@ -59,7 +59,9 @@ public class MemberTripDetailAdapter extends RecyclerView.Adapter<MemberTripDeta
             member_clicked_callback.OnCLicked(member);
         });
 
-        if(trip_status.equals(TripStatus.FINISH)){
+
+        if(trip_status.equals(TripStatus.FINISH) && !member.user_id.equals(current_user_id)){
+            holder.img_join_status.setVisibility(View.GONE);
             holder.btn_make_rating.setVisibility(View.VISIBLE);
             holder.btn_make_rating.setOnClickListener(view -> {
                 make_rating_clicked_callback.OnCLicked(member);

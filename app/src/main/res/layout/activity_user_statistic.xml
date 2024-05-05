@@ -42,7 +42,7 @@
                         android:layout_height="@dimen/_25sdp"
                         android:cursorVisible="false"
                         android:focusable="false"
-                        android:text="12/24/2024"
+                        android:text="04/01/2024"
                         android:hint="@string/start_date" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -62,7 +62,7 @@
                         android:layout_height="@dimen/_25sdp"
                         android:cursorVisible="false"
                         android:focusable="false"
-                        android:text="12/24/2024"
+                        android:text="04/30/2024"
                         android:hint="@string/end_date" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>

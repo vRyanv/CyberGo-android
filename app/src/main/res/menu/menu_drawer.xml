@@ -6,31 +6,19 @@
         <item android:id="@+id/nav_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/logo_white_full"
-            android:title="@string/go" />
+            android:icon="@drawable/ic_user"
+            android:title="@string/profile" />
 
         <item android:id="@+id/nav_go1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/logo_white_full"
-            android:title="@string/go" />
+            android:icon="@drawable/ic_graph_bar"
+            android:title="@string/statistic" />
         <item android:id="@+id/nav_go2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/logo_white_full"
-            android:title="@string/go" />
-
-        <item android:id="@+id/nav_go3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/logo_white_full"
-            android:title="@string/go" />
-
-        <item android:id="@+id/nav_go4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/logo_white_full"
-            android:title="@string/go" />
+            android:icon="@drawable/ic_star"
+            android:title="@string/rating" />
     </group>
 
     <item android:title="" >
@@ -38,8 +26,10 @@
             <item android:id="@+id/nav_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/logo_white_full"
-                android:title="@string/go"
+                android:icon="@drawable/ic_logout"
+                android:iconTint="@null"
+                android:iconTintMode="multiply"
+                android:title="@string/logout"
                 />
         </menu>
     </item>

@@ -27,6 +27,7 @@ import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.databinding.FragmentLocationTripDetailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.main.fragment.trip.edit_trip.map_edit_location.MapEditLocationActivity;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel;
 import com.tech.cybercars.ui.main.view_vehicle.ViewVehicleActivity;
 import com.tech.cybercars.utils.DateUtil;
@@ -45,6 +46,7 @@ public class LocationTripDetailFragment extends BaseFragment<FragmentLocationTri
     @Override
     protected FragmentLocationTripDetailBinding InitBinding(LayoutInflater inflater, ViewGroup container) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_location_trip_detail, container, false);
+        binding.setViewModel(view_model);
         return binding;
     }
 
@@ -72,6 +74,9 @@ public class LocationTripDetailFragment extends BaseFragment<FragmentLocationTri
     }
 
     private void BindDataToUI(TripManagement trip_management) {
+        if(trip_management == null){
+            return;
+        }
         binding.txtOriginAddress.setText(trip_management.origin_address);
         if(trip_management.destination_type.equals(DestinationType.SINGLE)){
             binding.wrapperTime.setVisibility(View.GONE);
@@ -90,5 +95,15 @@ public class LocationTripDetailFragment extends BaseFragment<FragmentLocationTri
 
         String total_time = getString(R.string.total_time) + ": " + DateUtil.ConvertSecondToHour(time);
         binding.txtTotalTime.setText(total_time);
+
+        if(!trip_management.trip_status.equals(TripStatus.FINISH)){
+            binding.btnUpdateTripLocation.setVisibility(View.VISIBLE);
+            binding.btnUpdateTripLocation.setOnClickListener(view -> {
+
+                Intent map_edit_location_intent = new Intent(requireContext(), MapEditLocationActivity.class);
+                map_edit_location_intent.putExtra(FieldName.TRIP, trip_management);
+                startActivity(map_edit_location_intent);
+            });
+        }
     }
 }

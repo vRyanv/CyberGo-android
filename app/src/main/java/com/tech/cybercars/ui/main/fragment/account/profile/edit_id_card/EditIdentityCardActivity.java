@@ -118,6 +118,8 @@ public class EditIdentityCardActivity extends BaseActivity<ActivityEditIdentityC
 
         view_model.user_edit = (User) getIntent().getSerializableExtra(FieldName.USER);
         assert view_model.user_edit != null;
+        view_model.id_number.setValue(view_model.user_edit.id_number);
+
         if(view_model.user_edit.front_id_card != null &&  !view_model.user_edit.front_id_card.equals("")){
             String front_id_card_full_path = base_img_res + view_model.user_edit.front_id_card;
             Glide.with(this)

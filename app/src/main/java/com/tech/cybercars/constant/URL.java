@@ -5,9 +5,10 @@ public class URL {
     public static final String AVATAR_RES_PATH = "/assets/media/avatar/";
     public static final String DRIVER_REGISTRATION_RES_PATH = "/assets/media/driver-registration/";
     public static final String ID_CARD_RES_PATH = "/assets/media/id-card/";
-    public static final String BASE_URL = "http://192.168.4.19:2108";
+    public static final String BASE_URL = "http://192.168.4.47:2108";
 
     //trip
+    public static final String UPDATE_TRIP_STATUS = "/trip/update-status";
     public static final String TRIP_LIST = "/trip/list";
     public static final String MEMBER_REQUEST_TO_JOIN = "/trip/member/request-to-join";
     public static final String CREATE_TRIP = "/trip/create";

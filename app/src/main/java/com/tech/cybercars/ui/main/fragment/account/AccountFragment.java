@@ -1,6 +1,7 @@
 package com.tech.cybercars.ui.main.fragment.account;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,6 +25,8 @@ import com.tech.cybercars.data.local.AppDBContext;
 import com.tech.cybercars.databinding.FragmentAccountBinding;
 import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+import com.tech.cybercars.ui.component.dialog.UpdatePasswordDialog;
 import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.main.fragment.account.my_vehicle.MyVehicleActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
@@ -78,6 +81,22 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
             startActivity(new Intent(this.getActivity(), MyVehicleActivity.class));
         });
 
+        binding.btnChangePass.setOnClickListener(view -> {
+                new UpdatePasswordDialog(requireContext())
+                        .SetButtonSelectedCallback(new UpdatePasswordDialog.SelectButtonCallback() {
+                            @Override
+                            public void OnUpdate(Dialog dialog, String current_pass, String new_pass, String confirm_pass) {
+                                dialog.dismiss();
+                                ShowUpdatePassSuccess();
+                            }
+
+                            @Override
+                            public void OnCancel(Dialog dialog) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+        });
+
         binding.btnLogout.setOnClickListener(view -> {
             Logout();
         });
@@ -91,6 +110,15 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
     @Override
     protected void InitCommon() {
         BindUserUI();
+    }
+
+    private void ShowUpdatePassSuccess(){
+        NotificationDialog.Builder(requireContext())
+                .SetIcon(R.drawable.ic_success)
+                .SetTitle(getResources().getString(R.string.success))
+                .SetSubtitle(getResources().getString(R.string.update_pass_success))
+                .SetTextMainButton(getResources().getString(R.string.close))
+                .SetOnMainButtonClicked(Dialog::dismiss).show();
     }
 
     private final ActivityResultLauncher<Intent> profile_result_launcher = registerForActivityResult(
@@ -120,6 +148,8 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
             app_context_db.MemberDAO().ClearTable();
             app_context_db.DestinationDAO().ClearTable();
             app_context_db.NotificationDAO().ClearTable();
+
+            SharedPreferencesUtil.Clear(requireContext());
 
             Handler main_handler = new Handler(Looper.getMainLooper());
             main_handler.post(() -> {

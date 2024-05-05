@@ -13,7 +13,7 @@ import com.tech.cybercars.databinding.DialogDeleteBinding;
 public class DeleteDialog extends Dialog {
     private SelectButtonCallback select_button_callback;
     private final DialogDeleteBinding binding;
-    private String title;
+    private final String title;
     public DeleteDialog(@NonNull Context context, String title) {
         super(context);
         this.title = title;

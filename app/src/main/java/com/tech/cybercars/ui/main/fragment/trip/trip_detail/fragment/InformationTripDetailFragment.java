@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
@@ -27,6 +28,7 @@ import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.databinding.FragmentInformationTripDetailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
+import com.tech.cybercars.ui.main.feedback.FeedbackActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.edit_trip.EditTripInformationActivity;
@@ -77,6 +79,10 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
     }
 
     private void BindDataToUI(TripManagement trip_management){
+        if(trip_management == null){
+            return;
+        }
+
         String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + trip_management.trip_owner.avatar;
         Glide.with(requireContext()).load(avatar_full_path).placeholder(R.drawable.loading_placeholder).into(binding.imgAvatar);
 
@@ -92,6 +98,16 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
                 Intent edit_trip_intent = new Intent(requireContext(), EditTripInformationActivity.class);
                 edit_trip_intent.putExtra(FieldName.TRIP, trip_management);
                 edit_trip_launcher.launch(edit_trip_intent);
+            });
+        }
+
+        if(trip_management.trip_status.equals(TripStatus.FINISH)){
+            binding.btnMakeRatingOwner.setVisibility(View.VISIBLE);
+            binding.btnMakeRatingOwner.setOnClickListener(view -> {
+                Intent feedback_intent = new Intent(requireContext(), FeedbackActivity.class);
+                feedback_intent.putExtra(FieldName.AVATAR, trip_management.trip_owner.avatar);
+                feedback_intent.putExtra(FieldName.FULL_NAME, trip_management.trip_owner.full_name);
+                startActivity(feedback_intent);
             });
         }
 
@@ -131,12 +147,15 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
 
         switch (trip_management.trip_status){
             case TripStatus.OPENING:
+                binding.txtStatus.setBackgroundColor(requireContext().getColor(R.color.opening_color));
                 binding.txtStatus.setText(getString(R.string.opening));
                 break;
             case TripStatus.CLOSED:
+                binding.txtStatus.setBackgroundColor(requireContext().getColor(R.color.closed_color));
                 binding.txtStatus.setText(getString(R.string.closed));
                 break;
             default:
+                binding.txtStatus.setBackgroundColor(requireContext().getColor(R.color.finish_color));
                 binding.txtStatus.setText(getString(R.string.finish));
                 break;
         }

@@ -37,7 +37,7 @@
     <string name="confirm_password">Xác nhận mật khẩu</string>
     <string name="password">Mật khẩu</string>
     <string name="register">Đăng ký</string>
-    <string name="forget_password">Quên mật khẩu?</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
     <string name="do_not_have_an_account">Không có tài khoản? Đăng ký</string>
     <string name="can_not_contain_space">không được chứa khoảng trống</string>
     <string name="must_be_greater_than_or_equal_to_8_characters">phải lớn hơn hoặc bằng 8 ký tự</string>
@@ -196,4 +196,14 @@
     <string name="you_can_log_in_now">Bạn có thể đăng nhập ngay bây giờ</string>
     <string name="trip_quantity">Số lượng chuyến đi</string>
     <string name="end_date">Ngày kết thúc</string>
+    <string name="delete_this_vehicle">Xóa xe này</string>
+    <string name="number_of_completed_trips">Số lượng số trip đã hoàn thành</string>
+    <string name="update_password">Cập nhật mật khẩu</string>
+    <string name="current_password">Mật khẩu hiện tại</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="update_pass_success">Cập nhật mật khẩu thành công</string>
+    <string name="recover_password">Khôi phục mật khẩu</string>
+    <string name="otp_code">Mã OTP</string>
+    <string name="reset">Đặt lại</string>
+    <string name="receive_otp_code_in_your_email">Nhận OTP code trong email của bạn</string>
 </resources>

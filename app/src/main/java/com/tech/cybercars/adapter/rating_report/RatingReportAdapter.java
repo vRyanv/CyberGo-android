@@ -34,11 +34,12 @@ public class RatingReportAdapter extends RecyclerView.Adapter<RatingReportViewHo
     public void onBindViewHolder(@NonNull RatingReportViewHolder holder, int position) {
         Rating rating = rating_list.get(position);
 
-        String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + "seed/" + rating.user_rating.avatar;
+        String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + rating.user_rating.avatar;
         Glide.with(context).load(avatar_full_path).into(holder.img_avatar);
         holder.txt_full_name.setText(rating.user_rating.full_name);
         holder.txt_date.setText(rating.rating_date);
         holder.txt_content.setText(rating.comment);
+        holder.rating_bar.setRating(rating.star);
     }
 
     @Override

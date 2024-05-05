@@ -55,6 +55,9 @@ public class UserStatisticActivity extends BaseActivity<ActivityUserStatisticBin
         InitPieChart();
         InitBarChart();
 
+        binding.headerPrimary.btnOutScreen.setOnClickListener(view -> {
+
+        });
 
     }
 
@@ -147,16 +150,16 @@ public class UserStatisticActivity extends BaseActivity<ActivityUserStatisticBin
     private ArrayList<BarEntry> DataValue(){
         ArrayList<BarEntry> data = new ArrayList<>();
         data.add(new BarEntry(0,3));
-        data.add(new BarEntry(1,6));
-        data.add(new BarEntry(2,10));
+        data.add(new BarEntry(1,1));
+        data.add(new BarEntry(2,0));
         return data;
     }
 
     private ArrayList<PieEntry> DataPieChartValue(){
         ArrayList<PieEntry> data = new ArrayList<>();
-        data.add(new PieEntry(20,"Moto"));
-        data.add(new PieEntry(20,"Car"));
-        data.add(new PieEntry(60,"truck"));
+        data.add(new PieEntry(33,"Moto"));
+        data.add(new PieEntry(10,"Car"));
+        data.add(new PieEntry(5,"Truck"));
         return data;
     }
 

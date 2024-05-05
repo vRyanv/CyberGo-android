@@ -45,8 +45,8 @@ public class RatingReportActivity extends BaseActivity<ActivityRatingReportBindi
         List<Rating> rating_list = new ArrayList<>();
         Rating rating = new Rating();
         Rating.User user_rating = new Rating.User();
-        user_rating.avatar = "truc.jpg";
-        user_rating.full_name = "Truc";
+        user_rating.avatar = "1713681127628_72860647104981271050_cover.webp1701365331478.webp";
+        user_rating.full_name = "Ryan";
         rating.user_rating = user_rating;
         rating.star = 5;
         rating.comment = "Good!";

@@ -61,8 +61,8 @@ public class MessageActivity extends BaseActivity<ActivityMessageBinding, Messag
         });
 
         List<Message> message_list = new ArrayList<>();
-        String[] avatars = new String[]{"truc.jpg", "ryan.jpg", "truc.jpg", "ryan.jpg"};
-        String[] contents = new String[]{"hi!", "what's up?", ">.<", "-.-"};
+        String[] avatars = new String[]{"truc.jpg", "ryan.webp", "truc.jpg", "ryan.webp"};
+        String[] contents = new String[]{"hi!", "join with me!", "ok", "thanks"};
         String[] times = new String[]{"21:08", "21:08", "22:00", "22:00"};
         String current_user_id = SharedPreferencesUtil.GetString(this, FieldName.USER_ID);
         String[] user_ids = new String[]{current_user_id, "1", current_user_id, "1"};

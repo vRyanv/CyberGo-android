@@ -1,5 +1,6 @@
 package com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail;
 
+import android.app.Dialog;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import com.tech.cybercars.constant.VehicleStatus;
 import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.ActivityVehicleDetailBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
+import com.tech.cybercars.ui.component.dialog.DeleteDialog;
+import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 
 public class VehicleDetailActivity extends BaseActivity<ActivityVehicleDetailBinding, VehicleDetailViewModel> {
 
@@ -40,6 +43,38 @@ public class VehicleDetailActivity extends BaseActivity<ActivityVehicleDetailBin
         binding.btnOutScreen.setOnClickListener(view -> {
             OnBackPress();
         });
+
+        binding.btnDeleteVehicle.setOnClickListener(view -> {
+            String title_dialog = getString(R.string.delete_this_vehicle);
+            new DeleteDialog(this, title_dialog)
+                    .SetButtonSelectedCallback(new DeleteDialog.SelectButtonCallback() {
+                        @Override
+                        public void OnDelete(Dialog dialog) {
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void OnCancel(Dialog dialog) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        });
+
+        binding.btnOpenReasonRefuseModal.setOnClickListener(v -> {
+            String title_dialog = getString(R.string.delete_this_vehicle);
+            new DeleteDialog(this, title_dialog)
+                    .SetButtonSelectedCallback(new DeleteDialog.SelectButtonCallback() {
+                        @Override
+                        public void OnDelete(Dialog dialog) {
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void OnCancel(Dialog dialog) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        });
     }
 
     @Override
@@ -49,13 +84,14 @@ public class VehicleDetailActivity extends BaseActivity<ActivityVehicleDetailBin
                 case VehicleStatus.ACCEPTED:
                     binding.imgVehicleStatus.setImageResource(R.drawable.ic_success);
                     binding.btnOpenReasonRefuseModal.setVisibility(View.GONE);
+                    binding.btnDeleteVehicle.setVisibility(View.VISIBLE);
                     break;
                 case VehicleStatus.REFUSED:
                     binding.imgVehicleStatus.setImageResource(R.drawable.ic_refuse);
+                    binding.btnOpenReasonRefuseModal.setVisibility(View.VISIBLE);
                     break;
                 default:
                     binding.imgVehicleStatus.setImageResource(R.drawable.ic_queue);
-                    binding.btnOpenReasonRefuseModal.setVisibility(View.GONE);
                     break;
             }
         });
@@ -81,4 +117,5 @@ public class VehicleDetailActivity extends BaseActivity<ActivityVehicleDetailBin
     protected void OnBackPress() {
         finish();
     }
+
 }

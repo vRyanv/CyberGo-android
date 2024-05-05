@@ -50,8 +50,19 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1">
-
                     <ImageView
+                        android:id="@+id/btn_make_rating_owner"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:src="@drawable/ic_make_rating"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/icon_arrow"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5" />
+                    <ImageView
+                        android:id="@+id/icon_arrow"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_15sdp"
                         android:src="@drawable/ic_right_arrow_choose_location"

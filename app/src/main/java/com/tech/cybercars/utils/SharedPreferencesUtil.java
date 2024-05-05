@@ -30,4 +30,11 @@ public class SharedPreferencesUtil {
         SharedPreferences session  = context.getSharedPreferences(SHARE_PREFERENCE_KEY, MODE_PRIVATE);
         return session.getBoolean(key, false);
     }
+
+    public static void Clear(Context context){
+        SharedPreferences session = context.getSharedPreferences(SHARE_PREFERENCE_KEY, MODE_PRIVATE);
+        SharedPreferences.Editor editor = session.edit();
+        editor.clear();
+        editor.apply();
+    }
 }

@@ -42,18 +42,19 @@ public class ProfileViewModel extends BaseViewModel {
     }
 
     public void LoadProfileInformation() {
-        is_loading.setValue(true);
         String user_id = SharedPreferencesUtil.GetString(getApplication(), FieldName.USER_ID);
-
         if(!user_id.equals("")){
             user_profile = app_db_context.UserDao().FindUserById(user_id);
             if(user_profile != null){
                 BindData(user_profile);
-                is_loading.setValue(false);
                 return;
             }
         }
 
+        LoadProfileFromServer();
+    }
+    public void LoadProfileFromServer(){
+        is_loading.setValue(true);
         String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
         user_repo.GetProfileInformation(
                 user_token,
@@ -61,7 +62,6 @@ public class ProfileViewModel extends BaseViewModel {
                 this::CallProfileInfoFailed
         );
     }
-
     private void CallProfileInfoSuccess(Response<ProfileResponse> response) {
         new Handler().postDelayed(() -> {
             if(!response.isSuccessful() || response.body() == null){
@@ -81,6 +81,8 @@ public class ProfileViewModel extends BaseViewModel {
                     User user = app_db_context.UserDao().FindUserById(user_profile.user_id);
                     if(user == null){
                         app_db_context.UserDao().InsertUser(user_profile);
+                    } else {
+                        app_db_context.UserDao().UpdateUser(user_profile);
                     }
                 });
                 executor_service.shutdown();
@@ -101,8 +103,8 @@ public class ProfileViewModel extends BaseViewModel {
 
     private void BindData(User user){
         String not_update = getApplication().getString(R.string.not_update);
-        avatar.postValue(user.avatar != null ? user.avatar : not_update);
-        full_name.postValue(user.full_name != null ? user.full_name : not_update);
+        avatar.postValue(user.avatar);
+        full_name.postValue(user.full_name);
         email.postValue(user.email);
         String phone = user.country_prefix + user.phone_number;
         phone_number.postValue(phone);

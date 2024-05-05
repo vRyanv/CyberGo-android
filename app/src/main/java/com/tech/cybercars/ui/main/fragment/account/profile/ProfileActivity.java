@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
@@ -86,10 +87,16 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
         });
 
         binding.btnOpenEditPhone.setOnClickListener(view -> {
-            Intent edit_phone_intent = new Intent(this, EditPhoneActivity.class);
-            edit_phone_intent.putExtra(FieldName.PHONE_NUMBER, view_model.phone_number.getValue());
-            edit_phone_intent.putExtra(FieldName.COUNTRY_NAME_CODE, view_model.user_profile.country_name_code);
-            edit_phone_launcher.launch(edit_phone_intent);
+            Toast.makeText(this, "feature under development", Toast.LENGTH_SHORT).show();
+//            return;
+//            Intent edit_phone_intent = new Intent(this, EditPhoneActivity.class);
+//            edit_phone_intent.putExtra(FieldName.PHONE_NUMBER, view_model.phone_number.getValue());
+//            edit_phone_intent.putExtra(FieldName.COUNTRY_NAME_CODE, view_model.user_profile.country_name_code);
+//            edit_phone_launcher.launch(edit_phone_intent);
+        });
+
+        binding.swipeRefresh.setOnRefreshListener(() -> {
+            view_model.LoadProfileFromServer();
         });
     }
 
@@ -106,9 +113,11 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
 
         view_model.is_loading.observe(this, is_loading -> {
             if(is_loading){
+
                 binding.skeletonLoading.startShimmerAnimation();
             } else {
                 binding.skeletonLoading.stopShimmerAnimation();
+                binding.swipeRefresh.setRefreshing(false);
             }
         });
 
@@ -117,6 +126,7 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
                 ShowErrorCallServer(error_call_server);
             }
         });
+
     }
 
     @Override
@@ -146,7 +156,9 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
                 }
                 Intent result_intent = result.getData();
                 if (result_intent != null && result.getResultCode() == ActivityResult.UPDATED) {
+
                     view_model.user_profile = (User) result_intent.getSerializableExtra(FieldName.USER);
+                    view_model.identity_number.setValue(view_model.user_profile.id_number);
                     Toast.makeText(this, R.string.successfully_updated, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -196,7 +208,6 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
         view_model.gender.setValue(user_updated.gender);
         view_model.birthday.setValue(user_updated.birthday);
         EventBus.getDefault().post(new ActionEvent(ActionEvent.UPDATE_DRAWER_INFO));
-        view_model.identity_number.setValue(user_updated.id_number);
         view_model.address.setValue(user_updated.address);
 
         view_model.user_profile = user_updated;

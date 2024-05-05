@@ -60,11 +60,10 @@ public class TripFragment extends BaseFragment<FragmentTripBinding, TripViewMode
     protected void InitObserve() {
         view_model.is_loading.observe(this, is_loading->{
             if(is_loading){
-
-//                binding.skeletonLoading.startShimmerAnimation();
+                binding.skeletonLoading.startShimmerAnimation();
             } else {
                 binding.swipeRefresh.setRefreshing(false);
-//                binding.skeletonLoading.stopShimmerAnimation();
+                binding.skeletonLoading.stopShimmerAnimation();
             }
         });
 

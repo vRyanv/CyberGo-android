@@ -86,7 +86,16 @@
             </androidx.viewpager2.widget.ViewPager2>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/btn_primary"
+            android:visibility="gone"
+            style="@style/btn_small_danger_outline"
+            android:id="@+id/btn_delete_vehicle"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="@string/delete" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
+            style="@style/btn_small_primary"
+            android:layout_width="match_parent"
             android:id="@+id/btn_open_reason_refuse_modal"
             android:layout_marginTop="@dimen/_12sdp"
             android:text="@string/reason_for_rejection" />

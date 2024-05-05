@@ -5,7 +5,9 @@ public class FieldName {
     public final static String CHAT = "CHAT";
 
     //trip
+    public final static String TRIP_ID = "trip_id";
     public final static String MEMBER = "MEMBER";
+    public final static String STATUS = "status";
     public final static String TRIP_FOUND = "trip_found";
     public final static String TRIP = "trip";
     public final static String DESTINATIONS = "destinations";

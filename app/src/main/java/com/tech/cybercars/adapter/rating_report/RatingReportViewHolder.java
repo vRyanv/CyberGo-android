@@ -8,17 +8,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
+import com.willy.ratingbar.BaseRatingBar;
 
 public class RatingReportViewHolder extends RecyclerView.ViewHolder {
     public ImageView img_avatar;
     public TextView txt_full_name;
     public TextView txt_date;
     public TextView txt_content;
+    public BaseRatingBar rating_bar;
     public RatingReportViewHolder(@NonNull View itemView) {
         super(itemView);
         img_avatar = itemView.findViewById(R.id.img_avatar);
         txt_full_name = itemView.findViewById(R.id.txt_full_name);
         txt_date = itemView.findViewById(R.id.txt_date);
         txt_content = itemView.findViewById(R.id.txt_content);
+        rating_bar = itemView.findViewById(R.id.rating_bar);
     }
 }

@@ -32,6 +32,14 @@ public class NotificationViewModel extends BaseViewModel {
 
     public void HandleLoadNotification() {
         List<Notification> notifications = AppDBContext.GetInstance(getApplication()).NotificationDAO().GetNotificationList();
+        Notification notification = new Notification(
+                "dasd",
+                "request join trip",
+                "1714275843198IMG_1714221231203_1714221496668.jpg",
+                Long.parseLong("1714298090443"),
+                "Le Truc has accepted your request to join"
+        );
+        notifications.add(0, notification);
         if(!notifications.isEmpty()){
             notification_list.setValue(notifications);
             return;

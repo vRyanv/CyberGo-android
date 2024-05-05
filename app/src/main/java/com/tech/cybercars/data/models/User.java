@@ -8,8 +8,8 @@ import java.io.Serializable;
 
 @Entity(tableName = "user")
 public class User implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+    @PrimaryKey
+    @NonNull
     public String user_id;
     public String role;
     public String email;

@@ -73,6 +73,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             style="@style/edit_text_input"
+                            android:text="@={view_model.id_number}"
                             android:hint="@string/identity_number" />
                     </com.google.android.material.textfield.TextInputLayout>
 

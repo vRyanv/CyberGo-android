@@ -59,9 +59,11 @@ public class MemberTripDetailFragment extends BaseFragment<FragmentMemberTripDet
     }
 
     private void MakeRatingMember(TripManagement.Member member) {
-        Intent make_rating_intent = new Intent(requireContext(), FeedbackActivity.class);
-        make_rating_intent.putExtra(FieldName.MEMBER, member);
-        make_rating_launcher.launch(make_rating_intent);
+        Intent feedback_intent = new Intent(requireContext(), FeedbackActivity.class);
+        feedback_intent.putExtra(FieldName.AVATAR, member.avatar);
+        feedback_intent.putExtra(FieldName.FULL_NAME, member.full_name);
+        startActivity(feedback_intent);
+        make_rating_launcher.launch(feedback_intent);
     }
 
     private void OpenUserProfile(TripManagement.Member member) {
@@ -81,6 +83,9 @@ public class MemberTripDetailFragment extends BaseFragment<FragmentMemberTripDet
     }
 
     private void BindDataToUI(TripManagement trip_management) {
+        if(trip_management == null){
+            return;
+        }
         binding.txtMemberCount.setText(String.valueOf(trip_management.members.size()));
         String current_user_id = SharedPreferencesUtil.GetString(requireContext(), FieldName.USER_ID);
         member_adapter.SetTripCondition(trip_management.trip_status, trip_management.trip_owner.user_id, current_user_id);

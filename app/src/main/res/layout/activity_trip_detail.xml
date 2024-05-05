@@ -12,7 +12,11 @@
             name="is_trip_owner"
             type="Boolean" />
     </data>
-
+    <RelativeLayout
+        style="@style/wrapper_loading_relative">
+    <include
+        layout="@layout/partial_loading_primary"
+        app:show="@{view_model.is_loading}" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -83,14 +87,14 @@
             </androidx.viewpager2.widget.ViewPager2>
         </LinearLayout>
         <LinearLayout
-            android:visibility="@{is_trip_owner ? View.GONE : View.VISIBLE}"
+            android:visibility="gone"
+            android:id="@+id/wrapper_btn_leave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp">
             <androidx.appcompat.widget.AppCompatButton
                 style="@style/btn_primary"
-                android:text="@string/leave"
-                />
+                android:text="@string/leave" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/wrapper_control_button"
@@ -114,6 +118,7 @@
                 android:text="@string/close"
                 />
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_finish_trip"
                 style="@style/btn_small_success"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -121,4 +126,5 @@
                 />
         </LinearLayout>
     </LinearLayout>
+    </RelativeLayout>
 </layout>
