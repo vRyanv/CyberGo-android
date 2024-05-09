@@ -37,7 +37,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         String title = getString(R.string.vehicle_of) + " " + full_name;
         binding.setTitle(title);
 
-        TripManagement.Vehicle vehicle = (TripManagement.Vehicle) getIntent().getSerializableExtra(FieldName.VEHICLE);
+        Vehicle vehicle = (Vehicle) getIntent().getSerializableExtra(FieldName.VEHICLE);
         assert vehicle != null;
 
         String license_plates = getString(R.string.license_plates) + ": " + vehicle.license_plates;

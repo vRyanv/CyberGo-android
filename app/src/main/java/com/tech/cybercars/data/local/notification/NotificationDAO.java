@@ -12,6 +12,8 @@ import java.util.List;
 public interface NotificationDAO {
     @Insert
     void InsertNotification(Notification notification);
+    @Insert
+    void InsertNotification(List<Notification> notifications);
 
     @Query("SELECT * FROM notification ORDER BY datetime DESC")
     List<Notification> GetNotificationList();

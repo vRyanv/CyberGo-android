@@ -26,6 +26,7 @@ import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.databinding.FragmentLocationTripDetailBinding;
+import com.tech.cybercars.services.eventbus.UpdateTripLocationEvent;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.trip.edit_trip.map_edit_location.MapEditLocationActivity;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel;
@@ -33,10 +34,15 @@ import com.tech.cybercars.ui.main.view_vehicle.ViewVehicleActivity;
 import com.tech.cybercars.utils.DateUtil;
 import com.tech.cybercars.utils.Helper;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class LocationTripDetailFragment extends BaseFragment<FragmentLocationTripDetailBinding, TripDetailViewModel> {
     private DestinationAdapter destination_adapter;
+
     @NonNull
     @Override
     protected TripDetailViewModel InitViewModel() {
@@ -52,7 +58,7 @@ public class LocationTripDetailFragment extends BaseFragment<FragmentLocationTri
 
     @Override
     protected void InitFirst() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -74,11 +80,11 @@ public class LocationTripDetailFragment extends BaseFragment<FragmentLocationTri
     }
 
     private void BindDataToUI(TripManagement trip_management) {
-        if(trip_management == null){
+        if (trip_management == null) {
             return;
         }
         binding.txtOriginAddress.setText(trip_management.origin_address);
-        if(trip_management.destination_type.equals(DestinationType.SINGLE)){
+        if (trip_management.destination_type.equals(DestinationType.SINGLE)) {
             binding.wrapperTime.setVisibility(View.GONE);
             binding.wrapperDistance.setVisibility(View.GONE);
         }
@@ -96,7 +102,7 @@ public class LocationTripDetailFragment extends BaseFragment<FragmentLocationTri
         String total_time = getString(R.string.total_time) + ": " + DateUtil.ConvertSecondToHour(time);
         binding.txtTotalTime.setText(total_time);
 
-        if(!trip_management.trip_status.equals(TripStatus.FINISH)){
+        if (!trip_management.trip_status.equals(TripStatus.FINISH)) {
             binding.btnUpdateTripLocation.setVisibility(View.VISIBLE);
             binding.btnUpdateTripLocation.setOnClickListener(view -> {
 
@@ -105,5 +111,19 @@ public class LocationTripDetailFragment extends BaseFragment<FragmentLocationTri
                 startActivity(map_edit_location_intent);
             });
         }
+    }
+
+    @Subscribe
+    public void LocationUpdated(UpdateTripLocationEvent update_trip_location_event) {
+        String origin_address = update_trip_location_event.trip_management.origin_address;
+        binding.txtOriginAddress.setText(origin_address);
+        List<Destination> destinations =  update_trip_location_event.trip_management.destinations;
+        destination_adapter.UpdateAdapter(destinations);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

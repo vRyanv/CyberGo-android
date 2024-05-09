@@ -17,8 +17,11 @@ import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.data.remote.trip.UpdateTripResponse;
 import com.tech.cybercars.data.remote.user.profile.ProfileResponse;
 import com.tech.cybercars.data.repositories.TripRepository;
+import com.tech.cybercars.services.eventbus.UpdateTripInformationEvent;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -62,6 +65,7 @@ public class TripDetailViewModel extends BaseViewModel {
                 TripManagement temp_trip = trip_management.getValue();
                 trip_management.setValue(null);
                 trip_management.setValue(temp_trip);
+                EventBus.getDefault().post(new UpdateTripInformationEvent(temp_trip));
             } else if (response.body().code == StatusCode.NOT_FOUND) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
@@ -74,5 +78,12 @@ public class TripDetailViewModel extends BaseViewModel {
         is_loading.postValue(false);
         error_call_server.postValue(getApplication().getString(R.string.can_not_connect_to_server));
         Log.e(Tag.CYBER_DEBUG, "error call server: " + error.getMessage());
+    }
+
+    public void UpdateTripFinish(String status){
+        trip_management.getValue().trip_status = status;
+        TripManagement temp_trip = trip_management.getValue();
+        trip_management.setValue(null);
+        trip_management.setValue(temp_trip);
     }
 }

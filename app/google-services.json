@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "502397513051",
-    "project_id": "cyberspace-409502",
-    "storage_bucket": "cyberspace-409502.appspot.com"
+    "project_number": "145646450864",
+    "project_id": "cybergo-7af66",
+    "storage_bucket": "cybergo-7af66.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:502397513051:android:ccb59614395bdad582fe7e",
+        "mobilesdk_app_id": "1:145646450864:android:a392d6d69b8578b526e375",
         "android_client_info": {
           "package_name": "com.tech.cybercars"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBDWR8opL5vhobSEcKRFirCxjOhUQajwes"
+          "current_key": "AIzaSyCfGeR1kPtzxTE0FLGhdUCwffCT1A_ZkPk"
         }
       ],
       "services": {

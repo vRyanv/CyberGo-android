@@ -15,10 +15,15 @@ import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.TripStatus;
 import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.databinding.ActivityTripDetailBinding;
+import com.tech.cybercars.services.eventbus.TripFinishEvent;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.DeleteDialog;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, TripDetailViewModel> {
 
@@ -37,7 +42,7 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
 
     @Override
     protected void InitFirst() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -135,6 +140,8 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
 
         if(!is_trip_owner && !trip_management.trip_status.equals(TripStatus.FINISH)){
             binding.wrapperBtnLeave.setVisibility(View.VISIBLE);
+        } else {
+            binding.wrapperBtnLeave.setVisibility(View.GONE);
         }
     }
 
@@ -145,5 +152,21 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
                 .SetSubtitle(error_call_server)
                 .SetTextMainButton(getResources().getString(R.string.close))
                 .SetOnMainButtonClicked(Dialog::dismiss).show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnTripFinishEvent(TripFinishEvent trip_finish_event) {
+        String trip_id = trip_finish_event.trip_id;
+        String status = trip_finish_event.status;
+        if(view_model.trip_management.getValue().trip_id.equals(trip_id)){
+            view_model.UpdateTripFinish(status);
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

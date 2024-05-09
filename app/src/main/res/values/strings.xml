@@ -210,4 +210,6 @@
     <string name="otp_code">OTP code</string>
     <string name="reset">Reset</string>
     <string name="receive_otp_code_in_your_email">Receive OTP code in your email</string>
+    <string name="edit">Edit</string>
+    <string name="edit_location">Edit location</string>
 </resources>

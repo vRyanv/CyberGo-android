@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.StatusCode;
+import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.data.remote.base.CallServerStatus;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
@@ -28,6 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MapEditLocationViewModel extends BaseViewModel {
+    public TripManagement trip_management;
     public final MutableLiveData<Boolean> is_success_reverse_geocoding = new MutableLiveData<>();
     public final MutableLiveData<String> route_time = new MutableLiveData<>();
     public final MutableLiveData<String> route_distance = new MutableLiveData<>();
@@ -91,7 +93,7 @@ public class MapEditLocationViewModel extends BaseViewModel {
             String time = DateUtil.ConvertSecondToHour(route.duration());
             route_time.postValue(time);
 
-            Double distance_meter = route.distance();
+            double distance_meter = route.distance();
             if (distance_meter < 1000) {
                 route_distance.postValue(Math.round(distance_meter) + "m");
             } else {

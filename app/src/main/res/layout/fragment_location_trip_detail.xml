@@ -20,7 +20,7 @@
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_16sdp"
-            android:text="@string/update"/>
+            android:text="@string/edit"/>
 
         <LinearLayout
             android:layout_width="match_parent"

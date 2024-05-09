@@ -11,6 +11,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.mapbox.android.core.location.LocationEngineCallback;
 import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.api.directions.v5.DirectionsCriteria;
+import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -51,6 +53,7 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.DestinationType;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.PickLocation;
@@ -60,6 +63,7 @@ import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.data.models.trip.Trip;
+import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 import com.tech.cybercars.databinding.ActivityMapEditLocationBinding;
 import com.tech.cybercars.databinding.ActivitySingleShareTripBinding;
 import com.tech.cybercars.services.location.LocationService;
@@ -70,6 +74,9 @@ import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationActivity;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripActivity;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripViewModel;
+import com.tech.cybercars.ui.main.fragment.trip.edit_trip.map_edit_location.review_location.ReviewLocationActivity;
+import com.tech.cybercars.utils.DateUtil;
+import com.tech.cybercars.utils.Helper;
 import com.tech.cybercars.utils.KeyBoardUtil;
 
 import java.util.ArrayList;
@@ -85,6 +92,8 @@ public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocatio
     private final Handler search_debounce_handler = new Handler(Looper.getMainLooper());
     private Runnable search_debounce_runnable;
     private int min_height_bottom_sheet;
+    private boolean is_prepare_data = true;
+
     @NonNull
     @Override
     protected MapEditLocationViewModel InitViewModel() {
@@ -195,24 +204,6 @@ public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocatio
         binding.setIsActivatedPlacePicker(false);
         binding.setIsExpandBottomSheet(false);
         binding.setIsShowOptionNextStep(false);
-
-        TripManagement trip_management = (TripManagement) getIntent().getSerializableExtra(FieldName.TRIP);
-        switch (trip_management.vehicle.type) {
-            case VehicleType.CAR:
-                binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_car);
-                break;
-            case VehicleType.MOTO:
-                binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_motorcycle);
-                break;
-            case VehicleType.TRUCK:
-                binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_truck);
-                break;
-        }
-
-        view_model.origin_address.setValue(trip_management.origin_address);
-        view_model.destination_address.setValue(trip_management.destinations.get(0).address);
-
-//        MarkLocationOnMap(Point.fromLngLat());
     }
 
     @Override
@@ -231,7 +222,7 @@ public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocatio
 
     private void InitOptionNext() {
         binding.btnNextStepShareTrip.setOnClickListener(view -> {
-            startAddTripInformationActivity();
+            StartReviewLocationActivity();
         });
 
         binding.btnCancelNextStepShareTrip.setOnClickListener(view -> {
@@ -240,57 +231,39 @@ public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocatio
         });
     }
 
-    private void startAddTripInformationActivity() {
-        String origin_city = view_model.origin_reverse.address.city;
-        String origin_state = view_model.origin_reverse.address.state;
-        String origin_county = view_model.origin_reverse.address.county;
-        String origin_address = view_model.origin_address.getValue();
-        ArrayList<Destination> destination_list = new ArrayList<>();
-        String geometry = view_model.current_route.getValue().geometry();
-        double time = view_model.current_route.getValue().duration();
-        double distance = view_model.current_route.getValue().distance();
-        String city = view_model.destination_reverse.address.city;
-        String state = view_model.destination_reverse.address.state;
-        String county = view_model.destination_reverse.address.county;
-        String address = view_model.destination_address.getValue();
-        double longitude = view_model.destination_reverse.lng;
-        double latitude = view_model.destination_reverse.lat;
-        Destination destination = new Destination(
-                "",
-                "",
-                geometry,
-                time,
-                distance,
-                city,
-                state,
-                county,
-                address,
-                longitude,
-                latitude
-        );
-        destination_list.add(destination);
-        double origin_longitude = view_model.origin_reverse.lng;
-        double origin_latitude = view_model.origin_reverse.lat;
-        Trip trip = new Trip(
-                "",
-                "",
-                origin_city,
-                origin_state,
-                origin_county,
-                origin_address,
-                origin_longitude,
-                origin_latitude,
-                DestinationType.SINGLE,
-                "view_model.vehicle.getValue().vehicle_id",
-                null,
-                null,
-                0
-        );
-        Intent trip_information_intent = new Intent(this, AddShareTripInformationActivity.class);
-        trip_information_intent.putExtra(FieldName.TRIP, trip);
-        trip_information_intent.putExtra(FieldName.DESTINATIONS, destination_list);
-        startActivity(trip_information_intent);
+    private void StartReviewLocationActivity() {
+        view_model.trip_management.origin_latitude = view_model.origin_reverse.lat;
+        view_model.trip_management.origin_longitude = view_model.origin_reverse.lng;
+        view_model.trip_management.origin_city = view_model.origin_reverse.address.city;
+        view_model.trip_management.origin_state = view_model.origin_reverse.address.state;
+        view_model.trip_management.origin_county = view_model.origin_reverse.address.county;
+        view_model.trip_management.origin_address = view_model.origin_address.getValue();
+
+        Destination destination = view_model.trip_management.destinations.get(0);
+        destination.geometry = view_model.current_route.getValue().geometry();
+        destination.time = view_model.current_route.getValue().duration();
+        destination.distance = view_model.current_route.getValue().distance();
+        destination.city = view_model.destination_reverse.address.city;
+        destination.state = view_model.destination_reverse.address.state;
+        destination.county = view_model.destination_reverse.address.county;
+        destination.address = view_model.destination_address.getValue();
+
+        destination.longitude = view_model.destination_reverse.lng;
+        destination.latitude = view_model.destination_reverse.lat;
+
+        Intent review_location_intent = new Intent(this, ReviewLocationActivity.class);
+        review_location_intent.putExtra(FieldName.TRIP, view_model.trip_management);
+        review_location_launcher.launch(review_location_intent);
     }
+
+    private final ActivityResultLauncher<Intent> review_location_launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == ActivityResult.UPDATED){
+                    finish();
+                }
+            }
+    );
 
     private void InitSearchAddressResultView() {
         binding.viewSearchAddressResultViewShareTrip.setVisibility(View.GONE);
@@ -338,7 +311,7 @@ public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocatio
             assert route_source != null;
             route_source.setGeoJson(LineString.fromPolyline(geometry, PRECISION_6));
             binding.bsLocationPicker.setVisibility(View.GONE);
-            if(geometry.length() > MapboxNavigationService.GEOMETRY_LIMIT){
+            if (geometry.length() > MapboxNavigationService.GEOMETRY_LIMIT) {
                 MapboxNavigationService.ShowRouteOutOfLimit(this);
                 binding.setIsShowOptionNextStep(false);
             }
@@ -366,6 +339,11 @@ public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocatio
                     @Override
                     public void onFinish() {
                         binding.setIsShowOverlay(false);
+                        if (is_prepare_data) {
+                            is_prepare_data = false;
+                            binding.bsLocationPicker.setVisibility(View.VISIBLE);
+                            return;
+                        }
                         boolean is_valid_limit = view_model.current_route.getValue().geometry().length() < MapboxNavigationService.GEOMETRY_LIMIT;
                         binding.setIsShowOptionNextStep(is_valid_limit);
                         binding.bsLocationPicker.setVisibility(is_valid_limit ? View.GONE : View.VISIBLE);
@@ -549,7 +527,7 @@ public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocatio
 
     private void InitMapBox() {
         String map_style = "";
-        if(getResources().getString(R.string.theme_mode).equals(ThemeMode.DARK)){
+        if (getResources().getString(R.string.theme_mode).equals(ThemeMode.DARK)) {
             map_style = Style.DARK;
         } else {
             map_style = Style.LIGHT;
@@ -574,7 +552,80 @@ public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocatio
                     });
 
                     InitLayerAndSource(style);
+                    BindDataToUI(style);
                 });
+    }
+
+    private void BindDataToUI(Style style) {
+        view_model.trip_management = (TripManagement) getIntent().getSerializableExtra(FieldName.TRIP);
+        switch (view_model.trip_management.vehicle.type) {
+            case VehicleType.CAR:
+                binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_car);
+                break;
+            case VehicleType.MOTO:
+                binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_motorcycle);
+                break;
+            case VehicleType.TRUCK:
+                binding.imgTransportTypeToShare.setImageResource(R.drawable.ic_truck);
+                break;
+        }
+
+        //origin reverse
+        ReverseGeocodingResponse origin_reverse = new ReverseGeocodingResponse();
+        origin_reverse.lat = view_model.trip_management.origin_latitude;
+        origin_reverse.lng = view_model.trip_management.origin_longitude;
+
+        origin_reverse.address = new ReverseGeocodingResponse.Address();
+        origin_reverse.address.city = view_model.trip_management.origin_city;
+        origin_reverse.address.state = view_model.trip_management.origin_state;
+        origin_reverse.address.county = view_model.trip_management.origin_county;
+        view_model.origin_reverse = origin_reverse;
+        String origin_address = view_model.trip_management.origin_address;
+        view_model.origin_address.setValue(origin_address);
+
+
+        //destination reverse
+        Destination destination = view_model.trip_management.destinations.get(0);
+        ReverseGeocodingResponse destination_reverse = new ReverseGeocodingResponse();
+        destination_reverse.lng = destination.longitude;
+        destination_reverse.lat = destination.latitude;
+        destination_reverse.address = new ReverseGeocodingResponse.Address();
+        destination_reverse.address.city = destination.city;
+        destination_reverse.address.state = destination.state;
+        destination_reverse.address.county = destination.county;
+        view_model.destination_reverse = destination_reverse;
+        view_model.destination_address.setValue(destination.address);
+
+        //current route
+        DirectionsRoute current_route = DirectionsRoute.builder()
+                .geometry(destination.geometry)
+                .distance(destination.distance)
+                .duration(destination.time)
+                .build();
+        view_model.current_route.setValue(current_route);
+
+        String time = DateUtil.ConvertSecondToHour(destination.time);
+        view_model.route_time.setValue(time);
+
+        double distance_meter = destination.distance;
+        if (distance_meter < 1000) {
+            view_model.route_distance.setValue(Math.round(distance_meter) + "m");
+        } else {
+            String rounded_distance = Helper.ConvertMeterToKiloMeterString(distance_meter);
+            view_model.route_distance.setValue(rounded_distance + " Km");
+        }
+
+        view_model.origin_address.setValue(view_model.trip_management.origin_address);
+        view_model.destination_address.setValue(destination.address);
+
+        //mark point
+        Point start_point = Point.fromLngLat(view_model.trip_management.origin_longitude, view_model.trip_management.origin_latitude);
+        Point destination_point = Point.fromLngLat(destination.longitude, destination.latitude);
+
+        GeoJsonSource start_point_source = style.getSourceAs(START_POINT_GEO_JSON_SOURCE_LAYER_ID);
+        GeoJsonSource destination_point_source = style.getSourceAs(DESTINATION_GEO_JSON_SOURCE_LAYER_ID);
+        start_point_source.setGeoJson(start_point);
+        destination_point_source.setGeoJson(destination_point);
     }
 
     private void InitLayerAndSource(Style style) {

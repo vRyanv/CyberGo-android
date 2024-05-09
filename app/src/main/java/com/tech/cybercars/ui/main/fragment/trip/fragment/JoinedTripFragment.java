@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,15 +23,24 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.trip.TripAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.TripStatus;
+import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.data.models.TripManagement;
+import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.databinding.FragmentJoinedTripBinding;
+import com.tech.cybercars.services.eventbus.TripFinishEvent;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.MainViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.TripViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class JoinedTripFragment extends Fragment {
     private TripAdapter trip_join_adapter;
@@ -43,6 +54,7 @@ public class JoinedTripFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_joined_trip, container, false);
         InitView();
         InitObserve();
+        EventBus.getDefault().register(this);
         return binding.getRoot();
     }
 
@@ -84,5 +96,32 @@ public class JoinedTripFragment extends Fragment {
         binding.txtClosedJoinTripQuantity.setText(String.valueOf(closed_quantity));
         binding.txtFinishJoinTripQuantity.setText(String.valueOf(finish_quantity));
         trip_join_adapter.UpdateData(shared_trip_list);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnTripFinishEvent(TripFinishEvent trip_finish_event) {
+        String trip_id = trip_finish_event.trip_id;
+        String status = trip_finish_event.status;
+        ExecutorService executor_service = Executors.newSingleThreadExecutor();
+        executor_service.execute(()-> {
+            for (TripManagement trip_management: view_model.joined_trip_list.getValue()) {
+                if(trip_management.trip_id.equals(trip_id)){
+                    int index_of_trip =  view_model.joined_trip_list.getValue().indexOf(trip_management);
+                    trip_management.trip_status = status;
+                    Handler main_handler = new Handler(Looper.getMainLooper());
+                    main_handler.post(()->{
+                        trip_join_adapter.UpdateData(trip_management, index_of_trip);
+                    });
+                    break;
+                }
+            }
+        });
+        executor_service.shutdown();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

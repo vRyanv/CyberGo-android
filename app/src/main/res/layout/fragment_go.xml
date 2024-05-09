@@ -45,6 +45,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_share_trip"
                 style="@style/btn_white"
+
                 android:text="@string/share_my_trip" />
             <ImageView
                 android:layout_width="match_parent"

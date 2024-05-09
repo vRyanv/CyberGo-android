@@ -16,11 +16,13 @@ import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripFound;
+import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.FragmentInformationTripFoundDetailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFoundDetailViewModel;
 import com.tech.cybercars.ui.main.user_profile.UserProfileActivity;
+import com.tech.cybercars.ui.main.view_vehicle.ViewVehicleActivity;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 public class InformationTripFoundDetailFragment extends BaseFragment<FragmentInformationTripFoundDetailBinding, TripFoundDetailViewModel> {
@@ -44,6 +46,20 @@ public class InformationTripFoundDetailFragment extends BaseFragment<FragmentInf
 
     @Override
     protected void InitView() {
+        binding.btnOpenViewVehicle.setOnClickListener(view -> {
+            Intent view_vehicle_intent = new Intent(requireContext(), ViewVehicleActivity.class);
+            Vehicle vehicle = new Vehicle();
+            vehicle.license_plates = view_model.trip_found.getValue().vehicle.license_plates;
+            vehicle.front_vehicle = view_model.trip_found.getValue().vehicle.front_vehicle;
+            vehicle.back_vehicle = view_model.trip_found.getValue().vehicle.back_vehicle;
+            vehicle.left_vehicle = view_model.trip_found.getValue().vehicle.left_vehicle;
+            vehicle.right_vehicle = view_model.trip_found.getValue().vehicle.right_vehicle;
+
+            view_vehicle_intent.putExtra(FieldName.VEHICLE, vehicle);
+            view_vehicle_intent.putExtra(FieldName.FULL_NAME, view_model.trip_found.getValue().owner.full_name);
+            startActivity(view_vehicle_intent);
+        });
+
         binding.btnOpenOwnerProfile.setOnClickListener(view -> {
             OpenUserProfile();
         });

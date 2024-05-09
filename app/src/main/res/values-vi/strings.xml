@@ -206,4 +206,6 @@
     <string name="otp_code">Mã OTP</string>
     <string name="reset">Đặt lại</string>
     <string name="receive_otp_code_in_your_email">Nhận OTP code trong email của bạn</string>
+    <string name="edit">Chỉnh sửa</string>
+    <string name="edit_location">Chỉnh sửa vị trí</string>
 </resources>

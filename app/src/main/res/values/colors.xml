@@ -34,7 +34,7 @@
 
     <color name="closed_color">#335863FD</color>
     <color name="opening_color">#33A8CB17</color>
-    <color name="finish_color">#33000000</color>
+    <color name="finish_color">#1A000000</color>
 
     <color name="dark_light_dynamic">#FFFBFF</color>
     <color name="transparent">#00FFFFFF</color>

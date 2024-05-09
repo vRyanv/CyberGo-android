@@ -18,7 +18,7 @@ public class ReverseGeocodingResponse extends BaseResponse {
     public Double[] boundingbox;
 
 
-    public class Address{
+    public static class Address{
         @SerializedName("road")
         public String road;
         @SerializedName("city")

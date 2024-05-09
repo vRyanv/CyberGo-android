@@ -91,7 +91,7 @@ public class MyVehicleActivity extends BaseActivity<ActivityMyVehicleBinding, My
         finish();
     }
 
-    private void ShowErrorCallServer(String error_call_server) {
+    public void ShowErrorCallServer(String error_call_server) {
         NotificationDialog.Builder(this)
                 .SetIcon(R.drawable.ic_error)
                 .SetTitle(getResources().getString(R.string.something_went_wrong))

@@ -34,6 +34,7 @@ public class TripFound implements Serializable {
     public static class Vehicle implements Serializable{
         public String id;
         public String type;
+        public String license_plates;
         public String front_vehicle;
         public String back_vehicle;
         public String left_vehicle;

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -21,12 +20,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.TripStatus;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripManagement;
+import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.FragmentInformationTripDetailBinding;
+import com.tech.cybercars.services.eventbus.UpdateTripInformationEvent;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.main.feedback.FeedbackActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
@@ -36,6 +38,9 @@ import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel;
 import com.tech.cybercars.ui.main.user_profile.UserProfileActivity;
 import com.tech.cybercars.ui.main.view_vehicle.ViewVehicleActivity;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public class InformationTripDetailFragment extends BaseFragment<FragmentInformationTripDetailBinding, TripDetailViewModel> {
     @NonNull
@@ -53,7 +58,7 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
 
     @Override
     protected void InitFirst() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -101,7 +106,8 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
             });
         }
 
-        if(trip_management.trip_status.equals(TripStatus.FINISH)){
+        String current_user_id = SharedPreferencesUtil.GetString(requireContext(), FieldName.USER_ID);
+        if(trip_management.trip_status.equals(TripStatus.FINISH) && !trip_management.trip_owner.user_id.equals(current_user_id)){
             binding.btnMakeRatingOwner.setVisibility(View.VISIBLE);
             binding.btnMakeRatingOwner.setOnClickListener(view -> {
                 Intent feedback_intent = new Intent(requireContext(), FeedbackActivity.class);
@@ -113,7 +119,14 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
 
         binding.btnOpenViewVehicle.setOnClickListener(view -> {
             Intent view_vehicle_intent = new Intent(requireContext(), ViewVehicleActivity.class);
-            view_vehicle_intent.putExtra(FieldName.VEHICLE, trip_management.vehicle);
+            Vehicle vehicle = new Vehicle();
+            vehicle.license_plates = trip_management.vehicle.license_plates;
+            vehicle.front_vehicle = trip_management.vehicle.front_vehicle;
+            vehicle.back_vehicle = trip_management.vehicle.back_vehicle;
+            vehicle.left_vehicle = trip_management.vehicle.left_vehicle;
+            vehicle.right_vehicle = trip_management.vehicle.right_vehicle;
+
+            view_vehicle_intent.putExtra(FieldName.VEHICLE, vehicle);
             view_vehicle_intent.putExtra(FieldName.FULL_NAME, trip_management.trip_owner.full_name);
             startActivity(view_vehicle_intent);
         });
@@ -182,8 +195,23 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
     private final ActivityResultLauncher<Intent> edit_trip_launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
+                if(result.getResultCode() == ActivityResult.UPDATED){
+                    assert result.getData() != null;
+                    TripManagement trip_management = (TripManagement) result.getData().getSerializableExtra(FieldName.TRIP);
+                    view_model.trip_management.setValue(trip_management);
 
+                }
             }
     );
 
+    @Subscribe
+    public void InformationUpdated(UpdateTripInformationEvent update_trip_info_event){
+        BindDataToUI(update_trip_info_event.trip_management);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

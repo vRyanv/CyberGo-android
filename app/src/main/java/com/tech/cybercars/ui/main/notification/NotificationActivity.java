@@ -49,8 +49,9 @@ public class NotificationActivity extends BaseActivity<ActivityNotificationBindi
             OnBackPress();
         });
 
+        binding.swipeRefresh.setColorSchemeColors(getColor(R.color.orange));
         binding.swipeRefresh.setOnRefreshListener(() -> {
-            view_model.HandleLoadNotification();
+            view_model.LoadDataFromServer();
         });
     }
 
@@ -96,8 +97,7 @@ public class NotificationActivity extends BaseActivity<ActivityNotificationBindi
     }
 
     private void BindNotificationToList(List<Notification> notification_list) {
-        if(!notification_list.isEmpty()){
-            notification_adapter.UpdateData(notification_list);
-        }
+        notification_adapter.UpdateData(notification_list);
+        binding.swipeRefresh.setRefreshing(false);
     }
 }

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="view_model"
+            type="com.tech.cybercars.ui.main.fragment.trip.edit_trip.map_edit_location.review_location.ReviewLocationViewModel" />
+    </data>
+    <RelativeLayout
+        android:id="@+id/loadingPane"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/partial_loading_primary" app:show="@{view_model.is_loading}" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            style="@style/layout_header_box">
+            <ImageButton
+                android:id="@+id/btn_out_screen"
+                style="@style/icon_button_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow" />
+            <TextView
+                style="@style/txt_title_header"
+                android:text="@string/edit_location"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+
+            <ImageButton
+                android:id="@+id/btn_update"
+                style="@style/icon_button_back"
+                android:layout_marginEnd="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_save" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:src="@drawable/ic_placeholder_red" />
+            <TextView
+                android:id="@+id/txt_origin_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/address"
+                android:breakStrategy="simple"
+                android:fontFamily="@font/sp_pro_round_regular"
+                android:textAlignment="inherit"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/_15sdp">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/ic_car_and_road"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:src="@drawable/ic_clock" />
+
+                <TextView
+                    android:id="@+id/txt_time_road"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:breakStrategy="simple"
+                    android:fontFamily="@font/sp_pro_round_regular"
+                    android:text="@string/time"
+                    android:textAlignment="inherit"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:src="@drawable/ic_route_distance" />
+
+                <TextView
+                    android:id="@+id/txt_distance_road"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:breakStrategy="simple"
+                    android:fontFamily="@font/sp_pro_round_regular"
+                    android:text="@string/distance"
+                    android:textAlignment="inherit"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:src="@drawable/ic_placeholder_green" />
+            <TextView
+                android:id="@+id/txt_destination_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/address"
+                android:breakStrategy="simple"
+                android:fontFamily="@font/sp_pro_round_regular"
+                android:textAlignment="inherit"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+    </LinearLayout>
+    </RelativeLayout>
+</layout>

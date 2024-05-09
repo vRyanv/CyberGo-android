@@ -200,7 +200,7 @@ public class EditIdentityCardActivity extends BaseActivity<ActivityEditIdentityC
         }
     }
 
-    private void ShowErrorCallServer(String error){
+    public void ShowErrorCallServer(String error){
         NotificationDialog.Builder(this)
                 .SetIcon(R.drawable.ic_error)
                 .SetTitle(getResources().getString(R.string.something_went_wrong))

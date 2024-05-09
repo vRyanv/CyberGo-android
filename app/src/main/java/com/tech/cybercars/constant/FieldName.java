@@ -17,9 +17,9 @@ public class FieldName {
     public final static String TYPE = "type";
     public final static String TITLE = "title";
     public final static String ID = "id";
+    public final static String _ID = "_id";
     public final static String DATETIME = "datetime";
     public final static String CONTENT = "content";
-
 
 
     //user

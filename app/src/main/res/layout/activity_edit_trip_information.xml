@@ -9,13 +9,21 @@
             name="view_model"
             type="com.tech.cybercars.ui.main.fragment.trip.edit_trip.EditTripInformationViewModel" />
     </data>
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+    <include
+        layout="@layout/partial_loading_primary"
+        app:show="@{view_model.is_loading}" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE }"
-            layout="@layout/partial_loading_primary"/>
+
         <include
             android:id="@+id/header_primary"
             layout="@layout/header_primary"
@@ -128,6 +136,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_update_trip"
                     style="@style/btn_primary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -136,6 +145,6 @@
                     app:layout_constraintTop_toBottomOf="@id/input_description" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-
     </LinearLayout>
+    </RelativeLayout>
 </layout>

@@ -139,6 +139,11 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
         this.notifyDataSetChanged();
     }
 
+    public void UpdateData(TripManagement trip_management, int index){
+        this.trip_maganement_list.set(index, trip_management);
+        this.notifyItemChanged(index);
+    }
+
     public void SetOnTripClicked(TripClickedCallback trip_clicked_callback){
         this.trip_clicked_callback = trip_clicked_callback;
     }

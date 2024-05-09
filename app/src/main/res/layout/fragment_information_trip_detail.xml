@@ -108,7 +108,7 @@
                         style="@style/btn_small_info"
                         android:layout_gravity="center"
                         android:layout_margin="0dp"
-                        android:text="@string/update"
+                        android:text="@string/edit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"

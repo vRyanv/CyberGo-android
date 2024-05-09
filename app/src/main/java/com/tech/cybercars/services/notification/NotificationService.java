@@ -23,6 +23,7 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.ui.main.notification.NotificationActivity;
+import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import java.util.Date;
 
@@ -49,9 +50,11 @@ public class NotificationService {
                                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
                                 .setPriority(NotificationCompat.PRIORITY_MAX)
                                 .setAutoCancel(true).build();
+
                         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                         if(notificationManager != null){
                             notificationManager.notify(GenerateNotificationId(), notification);
+                            SharedPreferencesUtil.SetBoolean(context, SharedPreferencesUtil.HAS_NOTIFICATION, true);
                         }
                     }
 

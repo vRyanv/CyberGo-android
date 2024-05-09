@@ -2,13 +2,11 @@ package com.tech.cybercars.data.remote.trip;
 
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
-import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripBody;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -19,6 +17,16 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface TripServiceRetrofit {
+    @PUT(URL.UPDATE_TRIP_LOCATION)
+    Call<BaseResponse> UpdateTripLocationRequest(
+            @Header("authorization") String user_token,
+            @Body UpdateTripLocationBody update_trip_location_body
+    );
+    @PUT(URL.UPDATE_TRIP_INFORMATION)
+    Call<BaseResponse> UpdateTripInformationRequest(
+            @Header("authorization") String user_token,
+            @Body UpdateTripInformationBody update_trip_information_body
+    );
 
     @FormUrlEncoded
     @POST(URL.UPDATE_TRIP_STATUS)

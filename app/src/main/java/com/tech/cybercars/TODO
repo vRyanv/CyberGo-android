@@ -68,8 +68,7 @@ text normal = 14ssp
     17.1 trip adapter: @done
     17.2 trip other: @done
     17.3 update trip status: @done
-            #### finish -> notify to member
-    17.4 update trip information:
+    17.4 update trip information: @done
     17.5 update trip location:
 
 18. trip detail: @done
@@ -126,9 +125,21 @@ password field
 
 
 
+                ExecutorService executor_service = Executors.newSingleThreadExecutor();
+                executor_service.execute(()-> {
+                    User user = app_db_context.UserDao().FindUserById(user_profile.user_id);
+                    if(user == null){
+                        app_db_context.UserDao().InsertUser(user_profile);
+                    } else {
+                        app_db_context.UserDao().UpdateUser(user_profile);
+                    }
+                });
+                executor_service.shutdown();
 
+                    Handler main_handler = new Handler(Looper.getMainLooper());
+                    main_handler.post(()->{
 
-
+                    });
 
 
 

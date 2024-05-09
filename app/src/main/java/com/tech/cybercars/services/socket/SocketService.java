@@ -13,9 +13,12 @@ import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.local.AppDBContext;
 import com.tech.cybercars.data.models.Notification;
+import com.tech.cybercars.services.eventbus.ActionEvent;
+import com.tech.cybercars.services.eventbus.TripFinishEvent;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONArray;
 
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -75,7 +78,7 @@ public class SocketService extends Service {
         socket.disconnect();
         socket.off(SocketEvent.CONNECT, OnConnectEvent);
         socket.off(SocketEvent.DISCONNECT, OnDisconnectEvent);
-        socket.off(SocketEvent.NOTIFICATION, OnNotificationEvent);
+        socket.off(SocketEvent.TRIP_FINISH, OnTripFinishEvent);
         is_running = false;
         Log.e(Tag.CYBER_DEBUG, "Socket Service: Stoped");
     }
@@ -93,14 +96,12 @@ public class SocketService extends Service {
     private void SocketListener() {
         socket.on(SocketEvent.CONNECT, OnConnectEvent);
         socket.on(SocketEvent.DISCONNECT, OnDisconnectEvent);
-        socket.on(SocketEvent.NOTIFICATION, OnNotificationEvent);
+        socket.on(SocketEvent.TRIP_FINISH, OnTripFinishEvent);
     }
 
-    private final Emitter.Listener OnNotificationEvent = args -> {
-        String notification_str = (String) args[0];
-        Notification notification = new Gson().fromJson(notification_str, Notification.class);
-        EventBus.getDefault().post(notification);
-        AppDBContext.GetInstance(this).NotificationDAO().InsertNotification(notification);
+    private final Emitter.Listener OnTripFinishEvent = args -> {
+        TripFinishEvent trip_finish_event = new Gson().fromJson((String) args[0], TripFinishEvent.class);
+        EventBus.getDefault().post(trip_finish_event);
     };
 
     private final Emitter.Listener OnDisconnectEvent = args -> {
@@ -110,5 +111,4 @@ public class SocketService extends Service {
     private final Emitter.Listener OnConnectEvent = args -> {
         Log.e(Tag.CYBER_DEBUG, "Socket id::" + socket.id());
     };
-
 }

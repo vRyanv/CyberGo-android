@@ -62,7 +62,6 @@ public class MemberTripDetailFragment extends BaseFragment<FragmentMemberTripDet
         Intent feedback_intent = new Intent(requireContext(), FeedbackActivity.class);
         feedback_intent.putExtra(FieldName.AVATAR, member.avatar);
         feedback_intent.putExtra(FieldName.FULL_NAME, member.full_name);
-        startActivity(feedback_intent);
         make_rating_launcher.launch(feedback_intent);
     }
 

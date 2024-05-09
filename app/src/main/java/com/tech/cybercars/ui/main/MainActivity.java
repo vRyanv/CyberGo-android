@@ -96,6 +96,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         binding.btnOpenNotification.setOnClickListener(view -> {
             main_launcher.launch(new Intent(this, NotificationActivity.class));
             view_model.has_notification.setValue(false);
+            SharedPreferencesUtil.SetBoolean(this, SharedPreferencesUtil.HAS_NOTIFICATION, false);
         });
 
         binding.btnOpenChat.setOnClickListener(view -> {
@@ -116,7 +117,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     protected void InitCommon() {
-
+        boolean has_notification = SharedPreferencesUtil.GetBoolean(this, SharedPreferencesUtil.HAS_NOTIFICATION);
+        view_model.has_notification.setValue(has_notification);
 
         InitHeaderDrawer();
 
@@ -156,13 +158,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnNotificationEvent(Notification notification) {
-        NotificationService.PushNormal(
-                getApplicationContext(),
-                notification.avatar,
-                notification.title,
-                notification.content
-        );
         view_model.has_notification.setValue(true);
+        SharedPreferencesUtil.SetBoolean(this, SharedPreferencesUtil.HAS_NOTIFICATION, true);
     }
 
     private ImageView img_avatar_drawer;
