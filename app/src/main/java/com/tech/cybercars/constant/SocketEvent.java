@@ -7,4 +7,5 @@ public class SocketEvent {
     public final static String CONNECT_ERROR = "connect_error";
     public final static String MESSAGE = "message";
     public final static String TRIP_FINISH = "TRIP_FINISH";
+    public final static String PASSENGER_REQUEST = "PASSENGER_REQUEST";
 }

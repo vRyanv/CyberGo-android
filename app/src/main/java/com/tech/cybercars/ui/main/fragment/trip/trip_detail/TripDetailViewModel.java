@@ -9,25 +9,26 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
-import com.tech.cybercars.constant.FieldName;
+import com.tech.cybercars.constant.MemberStatus;
 import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.data.models.TripManagement;
-import com.tech.cybercars.data.models.User;
+import com.tech.cybercars.data.remote.base.BaseResponse;
+import com.tech.cybercars.data.remote.trip.member_status.UpdateMemberStatusBody;
 import com.tech.cybercars.data.remote.trip.UpdateTripResponse;
-import com.tech.cybercars.data.remote.user.profile.ProfileResponse;
+import com.tech.cybercars.data.remote.trip.member_status.UpdateMemberStatusResponse;
 import com.tech.cybercars.data.repositories.TripRepository;
+import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.services.eventbus.UpdateTripInformationEvent;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Response;
 
 public class TripDetailViewModel extends BaseViewModel {
@@ -38,6 +39,72 @@ public class TripDetailViewModel extends BaseViewModel {
     public TripDetailViewModel(@NonNull Application application) {
         super(application);
         trip_repo = TripRepository.GetInstance();
+    }
+
+    public void HandleMemberRequestJoin(String member_id, String user_id, String status){
+        is_loading.setValue(true);
+        String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
+        String trip_id = trip_management.getValue().trip_id;
+        UpdateMemberStatusBody.Member member = new UpdateMemberStatusBody.Member();
+        member.member_id = member_id;
+        member.user_id = user_id;
+
+        UpdateMemberStatusBody update_member_status_body = new UpdateMemberStatusBody(
+                trip_id,
+                member,
+                status
+        );
+
+        trip_repo.UpdateMemberStatus(
+                user_token,
+                update_member_status_body,
+                this::CallUpdateMemberStatusSuccess,
+                this::CallUpdateMemberStatusFailed
+        );
+    }
+    private void CallUpdateMemberStatusSuccess(Response<UpdateMemberStatusResponse> response) {
+        new Handler().postDelayed(() -> {
+            if(!response.isSuccessful() || response.body() == null){
+                error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+                is_loading.postValue(false);
+                return;
+            }
+            if (response.body().code == StatusCode.UPDATED) {
+                ExecutorService executor_service = Executors.newSingleThreadExecutor();
+                executor_service.execute(()-> {
+                    List<TripManagement.Member> members = trip_management.getValue().members;
+                    String update_member_id = response.body().member_id;
+                    String update_status = response.body().status;
+                    for (TripManagement.Member member:members) {
+                        if(member.member_id.equals(update_member_id)){
+                            if(update_status.equals(MemberStatus.JOINED)){
+                                member.status = MemberStatus.JOINED;
+                            } else {
+                                members.remove(member);
+                            }
+                            break;
+                        }
+                    }
+
+                    TripManagement temp_trip = trip_management.getValue();
+                    trip_management.postValue(null);
+                    trip_management.postValue(temp_trip);
+                    EventBus.getDefault().post(new ActionEvent(ActionEvent.REFRESH_TRIP_LIST));
+                });
+                executor_service.shutdown();
+
+            } else if (response.body().code == StatusCode.BAD_REQUEST) {
+                error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
+            }
+            is_loading.postValue(false);
+        }, DelayTime.CALL_API);
+    }
+
+
+    private void CallUpdateMemberStatusFailed(Throwable error) {
+        is_loading.postValue(false);
+        error_call_server.postValue(getApplication().getString(R.string.can_not_connect_to_server));
+        Log.e(Tag.CYBER_DEBUG, "error call server: " + error.getMessage());
     }
 
     public void UpdateTripStatus(String trip_status){

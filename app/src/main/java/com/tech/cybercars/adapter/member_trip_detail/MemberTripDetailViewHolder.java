@@ -17,6 +17,7 @@ public class MemberTripDetailViewHolder extends RecyclerView.ViewHolder {
     public BaseRatingBar rating_bar;
     public TextView txt_full_name;
     public ImageView btn_make_rating;
+    public ImageView btn_open_view_location;
     public AppCompatButton btn_accept_member;
     public AppCompatButton btn_denied_member;
     public LinearLayout wrapper_control_member;
@@ -26,6 +27,7 @@ public class MemberTripDetailViewHolder extends RecyclerView.ViewHolder {
         this.img_avatar = itemView.findViewById(R.id.img_avatar);
         this.rating_bar = itemView.findViewById(R.id.rating_bar);
         this.txt_full_name = itemView.findViewById(R.id.txt_full_name);
+        this.btn_open_view_location = itemView.findViewById(R.id.btn_open_view_location);
         this.btn_make_rating = itemView.findViewById(R.id.btn_make_rating);
         this.btn_accept_member = itemView.findViewById(R.id.btn_accept_member);
         this.btn_denied_member = itemView.findViewById(R.id.btn_denied_member);

@@ -21,8 +21,11 @@ import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.repositories.TripRepository;
+import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,11 +68,12 @@ public class TripFoundDetailViewModel extends BaseViewModel {
             }
             if (response.body().code == StatusCode.OK) {
                 is_success.postValue(true);
-                ExecutorService executor_service = Executors.newSingleThreadExecutor();
-                executor_service.execute(() -> {
-                    SaveTripData(response.body().trip);
-                });
-                executor_service.shutdown();
+                EventBus.getDefault().post(new ActionEvent(ActionEvent.PASSENGER_REQUEST));
+//                ExecutorService executor_service = Executors.newSingleThreadExecutor();
+//                executor_service.execute(() -> {
+//                    SaveTripData(response.body().trip);
+//                });
+//                executor_service.shutdown();
             } else if (response.body().code == StatusCode.BAD_REQUEST) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }

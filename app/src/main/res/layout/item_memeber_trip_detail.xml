@@ -62,7 +62,9 @@
                 <TextView
                     android:layout_marginStart="@dimen/_4sdp"
                     android:id="@+id/txt_full_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sp_pro_round_black_semibold"
                     android:text="@string/full_name"
@@ -74,12 +76,21 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1">
-
+                <ImageView
+                    android:id="@+id/btn_open_view_location"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/shape_icon_sub_button"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:src="@drawable/ic_choose_map"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_join_status"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
                 <ImageView
                     android:id="@+id/img_join_status"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
                     android:src="@drawable/ic_success"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -129,7 +140,7 @@
                 android:padding="0dp"
                 android:layout_margin="0dp"
                 style="@style/btn_small_danger_outline"
-                android:text="@string/denied"
+                android:text="@string/refuse"
                 />
         </LinearLayout>
     </LinearLayout>

@@ -33,6 +33,10 @@ public class ViewVehicleActivity extends AppCompatActivity {
     }
 
     private void InitView() {
+        binding.headerPrimary.btnOutScreen.setOnClickListener(view -> {
+            finish();
+        });
+
         String full_name = getIntent().getStringExtra(FieldName.FULL_NAME);
         String title = getString(R.string.vehicle_of) + " " + full_name;
         binding.setTitle(title);

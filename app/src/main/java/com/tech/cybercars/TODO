@@ -42,7 +42,7 @@ text normal = 14ssp
 13. destination type selection: @done
 14. share trip:
     14.1 select your vehicle: @done
-    14.2 Map performances (driver):
+    14.2 Map performances (driver):### update to ui
         14.2.1 single route: @done
         14.2.1 share trip information: @done
         14.2.2 multiple route:
@@ -69,9 +69,15 @@ text normal = 14ssp
     17.2 trip other: @done
     17.3 update trip status: @done
     17.4 update trip information: @done
-    17.5 update trip location:
-
+    17.5 update trip location: @done
+    17.6 accept and refuse request join trip: @done
+    17.7 view location of member:
+    17.8 make rating:
 18. trip detail: @done
+19. send trip state real time:  @done
+20. rating of user:
+21. chat list:
+22. message:
 
 
 fake UI:

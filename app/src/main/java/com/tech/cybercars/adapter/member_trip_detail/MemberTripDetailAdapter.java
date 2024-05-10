@@ -32,6 +32,7 @@ public class MemberTripDetailAdapter extends RecyclerView.Adapter<MemberTripDeta
     private MemberClickedCallback make_rating_clicked_callback;
     private MemberClickedCallback accept_clicked_callback;
     private MemberClickedCallback denied_clicked_callback;
+    private MemberClickedCallback view_location_clicked_callback;
 
     public MemberTripDetailAdapter(Context context, List<TripManagement.Member> member_list) {
         this.member_list = member_list;
@@ -59,6 +60,10 @@ public class MemberTripDetailAdapter extends RecyclerView.Adapter<MemberTripDeta
             member_clicked_callback.OnCLicked(member);
         });
 
+
+        holder.btn_open_view_location.setOnClickListener(view -> {
+            view_location_clicked_callback.OnCLicked(member);
+        });
 
         if(trip_status.equals(TripStatus.FINISH) && !member.user_id.equals(current_user_id)){
             holder.img_join_status.setVisibility(View.GONE);
@@ -121,6 +126,12 @@ public class MemberTripDetailAdapter extends RecyclerView.Adapter<MemberTripDeta
     public void SetDeniedMemberClicked(MemberClickedCallback denied_clicked_callback){
         this.denied_clicked_callback = denied_clicked_callback;
     }
+
+    public void SetViewLocationClicked(MemberClickedCallback view_location_clicked_callback){
+        this.view_location_clicked_callback = view_location_clicked_callback;
+    }
+
+
 
     public interface MemberClickedCallback{
         void OnCLicked(TripManagement.Member member);

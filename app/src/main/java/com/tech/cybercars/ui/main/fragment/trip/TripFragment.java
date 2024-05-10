@@ -5,9 +5,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,8 +18,13 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.paper.TripManagementPageAdapter;
 import com.tech.cybercars.databinding.FragmentTripBinding;
+import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 
 public class TripFragment extends BaseFragment<FragmentTripBinding, TripViewModel> {
@@ -36,7 +43,7 @@ public class TripFragment extends BaseFragment<FragmentTripBinding, TripViewMode
 
     @Override
     protected void InitFirst() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -89,5 +96,26 @@ public class TripFragment extends BaseFragment<FragmentTripBinding, TripViewMode
                 .SetSubtitle(error_call_server)
                 .SetTextMainButton(getResources().getString(R.string.close))
                 .SetOnMainButtonClicked(Dialog::dismiss).show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void UpdatePassengerRequestEvent(ActionEvent action_event) {
+        if(!action_event.action.equals(ActionEvent.PASSENGER_REQUEST)){
+            return;
+        }
+        view_model.HandleGetTripList();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void ReFreshTripListEvent(ActionEvent action_event){
+        if(action_event.action.equals(ActionEvent.REFRESH_TRIP_LIST)){
+            view_model.HandleGetTripList();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

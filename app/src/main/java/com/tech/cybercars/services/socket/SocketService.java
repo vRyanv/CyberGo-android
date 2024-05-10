@@ -79,6 +79,7 @@ public class SocketService extends Service {
         socket.off(SocketEvent.CONNECT, OnConnectEvent);
         socket.off(SocketEvent.DISCONNECT, OnDisconnectEvent);
         socket.off(SocketEvent.TRIP_FINISH, OnTripFinishEvent);
+        socket.off(SocketEvent.PASSENGER_REQUEST, OnPassengerRequestEvent);
         is_running = false;
         Log.e(Tag.CYBER_DEBUG, "Socket Service: Stoped");
     }
@@ -97,11 +98,17 @@ public class SocketService extends Service {
         socket.on(SocketEvent.CONNECT, OnConnectEvent);
         socket.on(SocketEvent.DISCONNECT, OnDisconnectEvent);
         socket.on(SocketEvent.TRIP_FINISH, OnTripFinishEvent);
+        socket.on(SocketEvent.PASSENGER_REQUEST, OnPassengerRequestEvent);
     }
 
     private final Emitter.Listener OnTripFinishEvent = args -> {
         TripFinishEvent trip_finish_event = new Gson().fromJson((String) args[0], TripFinishEvent.class);
         EventBus.getDefault().post(trip_finish_event);
+    };
+
+    private final Emitter.Listener OnPassengerRequestEvent = args -> {
+        Log.e(Tag.CYBER_DEBUG, "OnPassengerRequestEvent" );
+        EventBus.getDefault().post(new ActionEvent(ActionEvent.PASSENGER_REQUEST));
     };
 
     private final Emitter.Listener OnDisconnectEvent = args -> {

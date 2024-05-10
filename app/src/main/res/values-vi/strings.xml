@@ -208,4 +208,6 @@
     <string name="receive_otp_code_in_your_email">Nhận OTP code trong email của bạn</string>
     <string name="edit">Chỉnh sửa</string>
     <string name="edit_location">Chỉnh sửa vị trí</string>
+    <string name="refuse_this_passenger">Từ chối hành khách này</string>
+    <string name="refuse">Từ chối</string>
 </resources>

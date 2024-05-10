@@ -12,7 +12,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/header_primary"
+        <include
+            android:id="@+id/header_primary"
+            layout="@layout/header_primary"
             app:title="@{title}"/>
         <ScrollView
             android:layout_width="match_parent"

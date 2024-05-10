@@ -212,4 +212,6 @@
     <string name="receive_otp_code_in_your_email">Receive OTP code in your email</string>
     <string name="edit">Edit</string>
     <string name="edit_location">Edit location</string>
+    <string name="refuse_this_passenger">Refuse this passenger</string>
+    <string name="refuse">Refuse</string>
 </resources>

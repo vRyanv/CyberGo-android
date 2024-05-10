@@ -36,6 +36,12 @@ public class DeleteDialog extends Dialog {
         });
     }
 
+    public DeleteDialog SetTextDeleteButton(String text){
+        binding.btnDelete.setText(text);
+        return this;
+    }
+
+
     public DeleteDialog SetButtonSelectedCallback(SelectButtonCallback select_button_callback){
         this.select_button_callback = select_button_callback;
         return this;

@@ -6,6 +6,8 @@ import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripBody;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
+import com.tech.cybercars.data.remote.trip.member_status.UpdateMemberStatusBody;
+import com.tech.cybercars.data.remote.trip.member_status.UpdateMemberStatusResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -17,6 +19,12 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface TripServiceRetrofit {
+    @PUT(URL.UPDATE_MEMBER_STATUS)
+    Call<UpdateMemberStatusResponse> UpdateMemberStatusRequest(
+            @Header("authorization") String user_token,
+            @Body UpdateMemberStatusBody update_member_status_body
+    );
+
     @PUT(URL.UPDATE_TRIP_LOCATION)
     Call<BaseResponse> UpdateTripLocationRequest(
             @Header("authorization") String user_token,

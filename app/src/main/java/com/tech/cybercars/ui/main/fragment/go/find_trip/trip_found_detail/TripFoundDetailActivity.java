@@ -3,6 +3,7 @@ package com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail;
 import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -93,6 +94,7 @@ public class TripFoundDetailActivity extends BaseActivity<ActivityTripFoundDetai
 
     private void BindDataToUI(TripFound trip_found) {
         String user_id = SharedPreferencesUtil.GetString(this, FieldName.USER_ID);
+
         for (TripFound.User member: trip_found.member_list) {
             if(member.user_id.equals(user_id)){
                 binding.btnRequestToJoin.setVisibility(View.GONE);

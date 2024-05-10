@@ -7,6 +7,10 @@ public class URL {
     public static final String ID_CARD_RES_PATH = "/assets/media/id-card/";
     public static final String BASE_URL = "http://192.168.4.47:2108";
 
+
+    //member
+    public static final String UPDATE_MEMBER_STATUS = "/trip/member/update-status";
+
     //trip
     public static final String UPDATE_TRIP_LOCATION = "/trip/update-location";
     public static final String UPDATE_TRIP_INFORMATION = "/trip/update-information";
