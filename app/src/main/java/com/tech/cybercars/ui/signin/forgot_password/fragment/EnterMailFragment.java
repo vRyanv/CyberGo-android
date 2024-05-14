@@ -1,20 +1,15 @@
 package com.tech.cybercars.ui.signin.forgot_password.fragment;
 
-import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.FragmentEnterMailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
-import com.tech.cybercars.ui.signin.SignInViewModel;
 import com.tech.cybercars.ui.signin.forgot_password.ForgotPasswordViewModel;
 
 public class EnterMailFragment extends BaseFragment<FragmentEnterMailBinding, ForgotPasswordViewModel> {

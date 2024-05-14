@@ -4,10 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="view_model"
             type="com.tech.cybercars.ui.main.rating_report.RatingReportViewModel" />
     </data>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -23,9 +28,18 @@
             android:gravity="end"
             android:paddingHorizontal="@dimen/_15sdp"
             android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/sp_pro_round_black_semibold"
-            android:text="1 rating"/>
+            android:fontFamily="@font/sp_pro_round_black_semibold"/>
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/skeleton_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone}">
+            <include layout="@layout/skeleton_rating_report" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="@{view_model.is_loading ? View.GONE : View.VISIBLE}"
             android:id="@+id/rcv_rating_report"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -33,6 +47,6 @@
             android:paddingHorizontal="@dimen/_10sdp"
             tools:listitem="@layout/item_rating_report"
             android:layout_weight="1"/>
-
     </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

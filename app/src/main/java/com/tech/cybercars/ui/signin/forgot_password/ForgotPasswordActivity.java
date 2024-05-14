@@ -1,21 +1,13 @@
 package com.tech.cybercars.ui.signin.forgot_password;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Bundle;
-
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.paper.DriverRegistrationPageAdapter;
 import com.tech.cybercars.adapter.paper.ForgotPasswordAdapter;
 import com.tech.cybercars.databinding.ActivityForgotPasswordBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
-import com.tech.cybercars.ui.main.MainViewModel;
-import com.tech.cybercars.ui.signin.forgot_password.fragment.EnterMailFragment;
 
 public class ForgotPasswordActivity extends BaseActivity<ActivityForgotPasswordBinding, ForgotPasswordViewModel> {
 

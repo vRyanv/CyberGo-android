@@ -29,8 +29,6 @@ import com.tech.cybercars.utils.FileUtil;
 import com.tech.cybercars.utils.KeyBoardUtil;
 import com.tech.cybercars.utils.PermissionUtil;
 
-import java.util.Calendar;
-
 
 public class EditProfileActivity extends BaseActivity<ActivityEditProfileBinding, EditProfileViewModel> {
     private AlertDialog gender_dialog;

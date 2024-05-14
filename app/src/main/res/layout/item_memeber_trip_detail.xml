@@ -81,10 +81,9 @@
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/shape_icon_sub_button"
-                    android:layout_marginEnd="@dimen/_15sdp"
                     android:src="@drawable/ic_choose_map"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/img_join_status"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5" />
                 <ImageView
@@ -92,9 +91,10 @@
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:src="@drawable/ic_success"
+                    android:layout_marginEnd="@dimen/_15sdp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_open_view_location"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5" />
 
@@ -102,11 +102,12 @@
                     android:id="@+id/btn_make_rating"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
                     android:src="@drawable/ic_make_rating"
+                    android:background="@drawable/shape_icon_sub_button"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_open_view_location"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5" />
             </androidx.constraintlayout.widget.ConstraintLayout>

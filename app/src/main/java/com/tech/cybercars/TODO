@@ -71,13 +71,21 @@ text normal = 14ssp
     17.4 update trip information: @done
     17.5 update trip location: @done
     17.6 accept and refuse request join trip: @done
-    17.7 view location of member:
-    17.8 make rating:
+    17.7 view location of member: @done
+    17.8 make rating: @done
+    17.9 leave trip: @done
+    17.10 delete trip: @done
+
 18. trip detail: @done
 19. send trip state real time:  @done
-20. rating of user:
-21. chat list:
+20. rating of user: @done
+21. chat list: ####
 22. message:
+    click mess icon -> send current user id and target user id
+    -> create new chat if not exist.
+23. statistic
+24. update password
+
 
 
 fake UI:

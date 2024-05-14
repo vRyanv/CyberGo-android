@@ -1,7 +1,6 @@
 package com.tech.cybercars.data.local.trip;
 
 import androidx.room.Dao;
-import androidx.room.Embedded;
 import androidx.room.Insert;
 import androidx.room.Query;
 

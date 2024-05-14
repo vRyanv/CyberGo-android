@@ -1,22 +1,16 @@
 package com.tech.cybercars.ui.main.fragment.trip.trip_detail.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
@@ -30,9 +24,8 @@ import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.FragmentInformationTripDetailBinding;
 import com.tech.cybercars.services.eventbus.UpdateTripInformationEvent;
 import com.tech.cybercars.ui.base.BaseFragment;
-import com.tech.cybercars.ui.main.feedback.FeedbackActivity;
+import com.tech.cybercars.ui.main.rating.RatingActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
-import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.edit_trip.EditTripInformationActivity;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel;
 import com.tech.cybercars.ui.main.user_profile.UserProfileActivity;
@@ -63,6 +56,7 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
 
     @Override
     protected void InitView() {
+
     }
 
     @Override
@@ -110,10 +104,11 @@ public class InformationTripDetailFragment extends BaseFragment<FragmentInformat
         if(trip_management.trip_status.equals(TripStatus.FINISH) && !trip_management.trip_owner.user_id.equals(current_user_id)){
             binding.btnMakeRatingOwner.setVisibility(View.VISIBLE);
             binding.btnMakeRatingOwner.setOnClickListener(view -> {
-                Intent feedback_intent = new Intent(requireContext(), FeedbackActivity.class);
-                feedback_intent.putExtra(FieldName.AVATAR, trip_management.trip_owner.avatar);
-                feedback_intent.putExtra(FieldName.FULL_NAME, trip_management.trip_owner.full_name);
-                startActivity(feedback_intent);
+                Intent rating_intent = new Intent(requireContext(), RatingActivity.class);
+                rating_intent.putExtra(FieldName.USER_ID, trip_management.trip_owner.user_id);
+                rating_intent.putExtra(FieldName.AVATAR, trip_management.trip_owner.avatar);
+                rating_intent.putExtra(FieldName.FULL_NAME, trip_management.trip_owner.full_name);
+                startActivity(rating_intent);
             });
         }
 

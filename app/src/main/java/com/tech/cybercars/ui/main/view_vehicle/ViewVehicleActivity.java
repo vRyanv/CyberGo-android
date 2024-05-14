@@ -1,13 +1,13 @@
 package com.tech.cybercars.ui.main.view_vehicle;
 
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -17,10 +17,8 @@ import com.bumptech.glide.request.target.Target;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
-import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.ActivityViewVehicleBinding;
-import com.tech.cybercars.ui.base.BaseActivity;
 
 public class ViewVehicleActivity extends AppCompatActivity {
     private ActivityViewVehicleBinding binding;

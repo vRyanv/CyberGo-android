@@ -53,6 +53,7 @@
                     <ImageView
                         android:id="@+id/btn_make_rating_owner"
                         android:layout_width="@dimen/_35sdp"
+                        android:background="@drawable/shape_icon_sub_button"
                         android:layout_height="@dimen/_35sdp"
                         android:layout_marginEnd="@dimen/_30sdp"
                         android:src="@drawable/ic_make_rating"

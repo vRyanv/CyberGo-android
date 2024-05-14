@@ -16,7 +16,6 @@ import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.ActivityVehicleDetailBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.DeleteDialog;
-import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 
 public class VehicleDetailActivity extends BaseActivity<ActivityVehicleDetailBinding, VehicleDetailViewModel> {
 

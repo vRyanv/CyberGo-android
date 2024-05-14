@@ -11,14 +11,12 @@ import com.google.gson.Gson;
 import com.tech.cybercars.constant.SocketEvent;
 import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.URL;
-import com.tech.cybercars.data.local.AppDBContext;
-import com.tech.cybercars.data.models.Notification;
+import com.tech.cybercars.data.models.chat.Message;
 import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.services.eventbus.TripFinishEvent;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONArray;
 
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -80,6 +78,7 @@ public class SocketService extends Service {
         socket.off(SocketEvent.DISCONNECT, OnDisconnectEvent);
         socket.off(SocketEvent.TRIP_FINISH, OnTripFinishEvent);
         socket.off(SocketEvent.PASSENGER_REQUEST, OnPassengerRequestEvent);
+        socket.off(SocketEvent.PASSENGER_LEAVE, OnPassengerLeaveEvent);
         is_running = false;
         Log.e(Tag.CYBER_DEBUG, "Socket Service: Stoped");
     }
@@ -97,9 +96,32 @@ public class SocketService extends Service {
     private void SocketListener() {
         socket.on(SocketEvent.CONNECT, OnConnectEvent);
         socket.on(SocketEvent.DISCONNECT, OnDisconnectEvent);
+
+        //trip
         socket.on(SocketEvent.TRIP_FINISH, OnTripFinishEvent);
         socket.on(SocketEvent.PASSENGER_REQUEST, OnPassengerRequestEvent);
+        socket.on(SocketEvent.PASSENGER_LEAVE, OnPassengerLeaveEvent);
+        socket.on(SocketEvent.DELETE_TRIP, OnDeleteTripEvent);
+
+        //chat
+        socket.on(SocketEvent.RECEIVE_MESSAGE, OnReceiveMessageEvent);
     }
+
+    private final Emitter.Listener OnReceiveMessageEvent = args -> {
+        Log.e(Tag.CYBER_DEBUG, "OnReceiveMessageEvent" );
+        Message message = new Message();
+        EventBus.getDefault().post(message);
+    };
+
+    private final Emitter.Listener OnDeleteTripEvent = args -> {
+        Log.e(Tag.CYBER_DEBUG, "OnDeleteTripEvent" );
+        EventBus.getDefault().post(new ActionEvent(ActionEvent.REFRESH_TRIP_LIST));
+    };
+
+    private final Emitter.Listener OnPassengerLeaveEvent = args -> {
+        Log.e(Tag.CYBER_DEBUG, "OnPassengerLeaveEvent" );
+        EventBus.getDefault().post(new ActionEvent(ActionEvent.REFRESH_TRIP_LIST));
+    };
 
     private final Emitter.Listener OnTripFinishEvent = args -> {
         TripFinishEvent trip_finish_event = new Gson().fromJson((String) args[0], TripFinishEvent.class);

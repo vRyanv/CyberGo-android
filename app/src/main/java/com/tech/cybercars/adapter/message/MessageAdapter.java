@@ -4,14 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.FieldName;
-import com.tech.cybercars.data.models.Message;
+import com.tech.cybercars.data.models.chat.Message;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import java.util.List;
@@ -67,5 +66,10 @@ public class MessageAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return message_list.size();
+    }
+
+    public void UpdateData(List<Message> message_list){
+        this.message_list = message_list;
+        this.notifyDataSetChanged();
     }
 }

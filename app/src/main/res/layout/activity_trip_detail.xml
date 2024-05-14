@@ -93,6 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp">
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_leave_trip"
                 style="@style/btn_primary"
                 android:text="@string/leave" />
         </LinearLayout>

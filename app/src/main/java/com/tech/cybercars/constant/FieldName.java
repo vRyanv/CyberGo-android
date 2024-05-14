@@ -7,6 +7,7 @@ public class FieldName {
     //trip
     public final static String TRIP_ID = "trip_id";
     public final static String MEMBER = "MEMBER";
+    public final static String MEMBER_ID = "member_id";
     public final static String STATUS = "status";
     public final static String TRIP_FOUND = "trip_found";
     public final static String TRIP = "trip";
@@ -53,4 +54,8 @@ public class FieldName {
     public final static String BACK_VEHICLE = "back_vehicle";
     public final static String RIGHT_VEHICLE = "right_vehicle";
     public final static String LEFT_VEHICLE = "left_vehicle";
+
+    //map
+    public final static String LATITUDE = "LATITUDE";
+    public final static String LONGITUDE = "LONGITUDE";
 }

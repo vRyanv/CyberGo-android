@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
-import com.tech.cybercars.constant.DestinationType;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;

@@ -11,15 +11,11 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
 import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.constant.Tag;
-import com.tech.cybercars.data.local.AppDBContext;
-import com.tech.cybercars.data.local.trip.MemberDAO;
-import com.tech.cybercars.data.local.trip.TripDAO;
 import com.tech.cybercars.data.models.Member;
+import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.data.models.trip.Trip;
 import com.tech.cybercars.data.remote.trip.TripBodyAndResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
-import com.tech.cybercars.data.models.TripFound;
-import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.repositories.TripRepository;
 import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseViewModel;
@@ -29,8 +25,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import retrofit2.Response;
 
@@ -38,13 +32,13 @@ public class TripFoundDetailViewModel extends BaseViewModel {
     public MutableLiveData<TripFound> trip_found = new MutableLiveData<>();
     public MemberBody member;
     private final TripRepository trip_repo;
-    private final MemberDAO member_dao;
-    private final TripDAO trip_dao;
+//    private final MemberDAO member_dao;
+//    private final TripDAO trip_dao;
     public TripFoundDetailViewModel(@NonNull Application application) {
         super(application);
         trip_repo = TripRepository.GetInstance();
-        member_dao = AppDBContext.GetInstance(application).MemberDAO();
-        trip_dao = AppDBContext.GetInstance(application).TripDAO();
+//        member_dao = AppDBContext.GetInstance(application).MemberDAO();
+//        trip_dao = AppDBContext.GetInstance(application).TripDAO();
     }
 
     public void HandleRequestToJoin(){
@@ -88,7 +82,7 @@ public class TripFoundDetailViewModel extends BaseViewModel {
     }
 
     private void SaveTripData(Trip trip){
-        trip_dao.InsertTrip(trip);
+//        trip_dao.InsertTrip(trip);
 
         List<Member> members = new ArrayList<>();
         for (MemberBody member_body:trip.members) {
@@ -108,7 +102,7 @@ public class TripFoundDetailViewModel extends BaseViewModel {
             );
             members.add(member);
         }
-        member_dao.InsertMembers(members);
+//        member_dao.InsertMembers(members);
     }
 
 }

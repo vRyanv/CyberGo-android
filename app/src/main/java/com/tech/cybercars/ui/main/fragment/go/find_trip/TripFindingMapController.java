@@ -27,9 +27,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -57,21 +55,16 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.trip_found.TripFoundAdapter;
 import com.tech.cybercars.constant.FieldName;
-import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.VehicleType;
-import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.data.models.trip.Destination;
+import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.databinding.ActivityFindTripBinding;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
 import com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail.TripFoundDetailActivity;
 import com.tech.cybercars.utils.AnimatorUtil;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -391,12 +384,16 @@ public class TripFindingMapController {
         MemberBody.Location destination = new MemberBody.Location();
         destination.latitude = view_model.destination_reverse.lat;
         destination.longitude = view_model.destination_reverse.lng;
+        destination.time = view_model.current_route.getValue().duration();
+        destination.distance = view_model.current_route.getValue().distance();
         destination.address = view_model.destination_reverse.display_name;
+
+        String geometry = view_model.current_route.getValue().geometry();
         MemberBody member = new MemberBody(
                 trip_found.trip_id,
                 origin,
                 destination,
-                trip_found.destination_list.get(0).geometry
+                geometry
         );
         trip_found_detail_intent.putExtra(FieldName.MEMBER, member);
 

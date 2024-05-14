@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.URL;
-import com.tech.cybercars.data.models.Chat;
+import com.tech.cybercars.data.models.chat.Chat;
 
 import java.util.List;
 

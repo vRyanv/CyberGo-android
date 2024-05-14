@@ -10,7 +10,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
@@ -23,7 +22,6 @@ import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_id_card.EditIdentityCardActivity;
-import com.tech.cybercars.ui.main.fragment.account.profile.edit_phone.EditPhoneActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.edit_profile.EditProfileActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.user_statistic.UserStatisticActivity;
 import com.tech.cybercars.ui.main.rating_report.RatingReportActivity;
@@ -56,7 +54,9 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
     @Override
     protected void InitView() {
         binding.btnViewRatingReport.setOnClickListener(view -> {
-            startActivity(new Intent(this, RatingReportActivity.class));
+            Intent rating_intent =  new Intent(this, RatingReportActivity.class);
+            rating_intent.putExtra(FieldName.USER_ID, view_model.user_profile.user_id);
+            startActivity(rating_intent);
         });
 
         binding.btnViewStatistics.setOnClickListener(view -> {
@@ -95,6 +95,7 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
 //            edit_phone_launcher.launch(edit_phone_intent);
         });
 
+        binding.swipeRefresh.setColorSchemeColors(getColor(R.color.orange));
         binding.swipeRefresh.setOnRefreshListener(() -> {
             view_model.LoadProfileFromServer();
         });
@@ -113,7 +114,6 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
 
         view_model.is_loading.observe(this, is_loading -> {
             if(is_loading){
-
                 binding.skeletonLoading.startShimmerAnimation();
             } else {
                 binding.skeletonLoading.stopShimmerAnimation();

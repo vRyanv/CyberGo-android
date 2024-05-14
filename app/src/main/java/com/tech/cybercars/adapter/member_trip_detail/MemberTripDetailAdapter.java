@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -13,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
-import com.tech.cybercars.adapter.member.MemberViewHolder;
 import com.tech.cybercars.constant.MemberStatus;
 import com.tech.cybercars.constant.TripStatus;
 import com.tech.cybercars.constant.URL;
-import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.data.models.TripManagement;
 
 import java.util.List;
@@ -65,7 +62,7 @@ public class MemberTripDetailAdapter extends RecyclerView.Adapter<MemberTripDeta
             view_location_clicked_callback.OnCLicked(member);
         });
 
-        if(trip_status.equals(TripStatus.FINISH) && !member.user_id.equals(current_user_id)){
+        if(trip_status.equals(TripStatus.FINISH) && trip_owner_id.equals(current_user_id)){
             holder.img_join_status.setVisibility(View.GONE);
             holder.btn_make_rating.setVisibility(View.VISIBLE);
             holder.btn_make_rating.setOnClickListener(view -> {

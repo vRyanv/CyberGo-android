@@ -1,13 +1,11 @@
-package com.tech.cybercars.data.models;
+package com.tech.cybercars.data.models.chat;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "message")
 public class Message {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+    @PrimaryKey
     public String message_id;
     public String chat_id;
     public String sender_id;

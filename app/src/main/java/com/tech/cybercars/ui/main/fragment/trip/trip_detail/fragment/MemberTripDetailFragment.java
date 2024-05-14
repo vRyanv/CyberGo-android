@@ -2,9 +2,9 @@ package com.tech.cybercars.ui.main.fragment.trip.trip_detail.fragment;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -12,9 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.member_trip_detail.MemberTripDetailAdapter;
@@ -24,7 +21,7 @@ import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.databinding.FragmentMemberTripDetailBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.component.dialog.DeleteDialog;
-import com.tech.cybercars.ui.main.feedback.FeedbackActivity;
+import com.tech.cybercars.ui.main.rating.RatingActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.view_member_location.ViewLocationMemberActivity;
@@ -93,10 +90,11 @@ public class MemberTripDetailFragment extends BaseFragment<FragmentMemberTripDet
     );
 
     private void MakeRatingMember(TripManagement.Member member) {
-        Intent feedback_intent = new Intent(requireContext(), FeedbackActivity.class);
-        feedback_intent.putExtra(FieldName.AVATAR, member.avatar);
-        feedback_intent.putExtra(FieldName.FULL_NAME, member.full_name);
-        make_rating_launcher.launch(feedback_intent);
+        Intent rating_intent = new Intent(requireContext(), RatingActivity.class);
+        rating_intent.putExtra(FieldName.USER_ID, member.user_id);
+        rating_intent.putExtra(FieldName.AVATAR, member.avatar);
+        rating_intent.putExtra(FieldName.FULL_NAME, member.full_name);
+        make_rating_launcher.launch(rating_intent);
     }
 
     private void OpenUserProfile(TripManagement.Member member) {

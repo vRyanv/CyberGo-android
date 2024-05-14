@@ -1,13 +1,10 @@
 package com.tech.cybercars.services.fcm;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.tech.cybercars.constant.FieldName;
-import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.data.local.AppDBContext;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.services.notification.NotificationService;

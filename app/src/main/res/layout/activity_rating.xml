@@ -6,8 +6,17 @@
     <data>
         <variable
             name="view_model"
-            type="com.tech.cybercars.ui.main.feedback.FeedbackViewModel" />
+            type="com.tech.cybercars.ui.main.rating.RatingViewModel" />
     </data>
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+    <include
+        layout="@layout/partial_loading_primary"
+        app:show="@{view_model.is_loading}" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -82,7 +91,7 @@
                         android:gravity="start|top"
                         android:hint="@string/content"
                         android:inputType="textMultiLine"
-                        android:text="@={view_model.content}" />
+                        android:text="@={view_model.comment}" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_send"
@@ -91,4 +100,5 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
+    </RelativeLayout>
 </layout>

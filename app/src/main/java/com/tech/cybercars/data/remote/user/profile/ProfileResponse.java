@@ -3,7 +3,7 @@ package com.tech.cybercars.data.remote.user.profile;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 
 public class ProfileResponse extends BaseResponse {
-    public String id;
+    public String user_id;
     public String role;
     public String email;
     public String gender;

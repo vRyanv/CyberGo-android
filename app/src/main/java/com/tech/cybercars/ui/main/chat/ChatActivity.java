@@ -1,10 +1,8 @@
 package com.tech.cybercars.ui.main.chat;
 
 import android.content.Intent;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,17 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.chat.ChatAdapter;
-import com.tech.cybercars.adapter.notification.NotificationAdapter;
 import com.tech.cybercars.constant.FieldName;
-import com.tech.cybercars.data.models.Chat;
-import com.tech.cybercars.data.models.Message;
 import com.tech.cybercars.databinding.ActivityChatBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.main.chat.message.MessageActivity;
-import com.tech.cybercars.ui.main.chat.message.MessageViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ChatActivity extends BaseActivity<ActivityChatBinding, ChatViewModel> {
     private ChatAdapter chat_adapter;
@@ -46,26 +39,7 @@ public class ChatActivity extends BaseActivity<ActivityChatBinding, ChatViewMode
 
     @Override
     protected void InitView() {
-        String[] avatars = new String[]{"ryan.webp"};
-        String[] full_names = new String[]{"Ryan",};
-        String[] messages = new String[]{"Thanks"};
-        List<Chat> chat_list = new ArrayList<>();
-        for (int i = 0; i < 1; i++) {
-            Chat chat = new Chat(
-                    String.valueOf(i),
-                    String.valueOf(i),
-                    avatars[i],
-                    full_names[i],
-                    messages[i],
-                    "22:00",
-                    false,
-                    true
-            );
-            chat_list.add(chat);
-        }
-
-
-        chat_adapter = new ChatAdapter(this, chat_list);
+        chat_adapter = new ChatAdapter(this, new ArrayList<>());
         chat_adapter.SetOnChatSelected(chat -> {
             Intent message_intent = new Intent(this, MessageActivity.class);
             message_intent.putExtra(FieldName.CHAT, chat);
@@ -83,7 +57,7 @@ public class ChatActivity extends BaseActivity<ActivityChatBinding, ChatViewMode
 
     @Override
     protected void InitCommon() {
-
+        view_model.HandleLoadChatList();
     }
 
     @Override

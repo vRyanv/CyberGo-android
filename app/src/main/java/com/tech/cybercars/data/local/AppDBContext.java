@@ -6,15 +6,17 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.tech.cybercars.data.local.chat.ChatDAO;
+import com.tech.cybercars.data.local.chat.MessageDAO;
 import com.tech.cybercars.data.local.notification.NotificationDAO;
 import com.tech.cybercars.data.local.trip.DestinationDAO;
 import com.tech.cybercars.data.local.trip.MemberDAO;
 import com.tech.cybercars.data.local.trip.TripDAO;
 import com.tech.cybercars.data.local.user.UserDAO;
 import com.tech.cybercars.data.local.vehicle.VehicleDAO;
-import com.tech.cybercars.data.models.Chat;
+import com.tech.cybercars.data.models.chat.Chat;
 import com.tech.cybercars.data.models.Member;
-import com.tech.cybercars.data.models.Message;
+import com.tech.cybercars.data.models.chat.Message;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.data.models.Vehicle;
@@ -53,4 +55,6 @@ public abstract class AppDBContext extends RoomDatabase {
     public abstract TripDAO TripDAO();
     public abstract DestinationDAO DestinationDAO();
     public abstract MemberDAO MemberDAO();
+    public abstract ChatDAO ChatDAO();
+    public abstract MessageDAO MessageDAO();
 }

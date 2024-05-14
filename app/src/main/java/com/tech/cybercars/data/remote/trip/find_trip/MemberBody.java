@@ -19,6 +19,8 @@ public class MemberBody implements Serializable {
     public static class Location implements Serializable {
         public double longitude;
         public double latitude;
+        public double time;
+        public double distance;
         public String address;
     }
     public MemberBody(){}

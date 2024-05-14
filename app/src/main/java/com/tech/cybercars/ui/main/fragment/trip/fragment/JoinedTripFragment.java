@@ -2,34 +2,26 @@ package com.tech.cybercars.ui.main.fragment.trip.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.trip.TripAdapter;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.TripStatus;
-import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.data.models.TripManagement;
-import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.databinding.FragmentJoinedTripBinding;
 import com.tech.cybercars.services.eventbus.TripFinishEvent;
-import com.tech.cybercars.ui.base.BaseFragment;
-import com.tech.cybercars.ui.main.MainViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.TripViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailActivity;
 

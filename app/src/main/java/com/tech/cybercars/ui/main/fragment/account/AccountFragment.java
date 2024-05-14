@@ -15,26 +15,19 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.FeatureCollection;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.local.AppDBContext;
 import com.tech.cybercars.databinding.FragmentAccountBinding;
-import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.component.dialog.UpdatePasswordDialog;
-import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.main.fragment.account.my_vehicle.MyVehicleActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.signin.SignInActivity;
 import com.tech.cybercars.utils.PermissionUtil;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

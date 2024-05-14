@@ -13,7 +13,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 import android.Manifest;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -65,7 +64,6 @@ import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.utils.DateTimePicker;
 import com.tech.cybercars.utils.DateUtil;
-import com.tech.cybercars.utils.Helper;
 import com.tech.cybercars.utils.KeyBoardUtil;
 
 import java.util.ArrayList;

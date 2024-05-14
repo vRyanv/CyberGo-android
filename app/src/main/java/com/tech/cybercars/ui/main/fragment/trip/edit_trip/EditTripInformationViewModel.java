@@ -9,16 +9,11 @@ import androidx.lifecycle.MutableLiveData;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
 import com.tech.cybercars.constant.StatusCode;
-import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.trip.UpdateTripInformationBody;
-import com.tech.cybercars.data.remote.user.profile.ProfileResponse;
 import com.tech.cybercars.data.repositories.TripRepository;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import retrofit2.Response;
 

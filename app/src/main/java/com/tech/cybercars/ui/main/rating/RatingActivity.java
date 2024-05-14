@@ -1,33 +1,30 @@
-package com.tech.cybercars.ui.main.feedback;
+package com.tech.cybercars.ui.main.rating;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Bundle;
-
 import com.bumptech.glide.Glide;
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
-import com.tech.cybercars.data.models.TripManagement;
-import com.tech.cybercars.databinding.ActivityFeedbackBinding;
+import com.tech.cybercars.databinding.ActivityRatingBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
-import com.tech.cybercars.ui.main.fragment.go.find_trip.FindTripViewModel;
+import com.willy.ratingbar.BaseRatingBar;
 
-public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, FeedbackViewModel> {
+public class RatingActivity extends BaseActivity<ActivityRatingBinding, RatingViewModel> {
 
     @NonNull
     @Override
-    protected FeedbackViewModel InitViewModel() {
-        return new ViewModelProvider(this).get(FeedbackViewModel.class);
+    protected RatingViewModel InitViewModel() {
+        return new ViewModelProvider(this).get(RatingViewModel.class);
     }
 
     @Override
-    protected ActivityFeedbackBinding InitBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_feedback);
+    protected ActivityRatingBinding InitBinding() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_rating);
         binding.setViewModel(view_model);
         return binding;
     }
@@ -39,25 +36,33 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Feed
 
     @Override
     protected void InitView() {
+        binding.ratingBar.setMinimumStars(1);
         binding.ratingBar.setRating(5);
-
+        binding.ratingBar.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
+            view_model.rating =  (int) rating;
+        });
         binding.btnOutScreen.setOnClickListener(view -> {
             OnBackPress();
         });
 
         binding.btnSend.setOnClickListener(view -> {
-            ShowSuccessFeedback();
+            view_model.HandleSendRating();
         });
     }
 
 
     @Override
     protected void InitObserve() {
-
+        view_model.is_success.observe(this, is_success -> {
+            if(is_success){
+                ShowSuccessFeedback();
+            }
+        });
     }
 
     @Override
     protected void InitCommon() {
+        view_model.user_receive  = getIntent().getStringExtra(FieldName.USER_ID);
         String avatar = getIntent().getStringExtra(FieldName.AVATAR);
         String avatar_full_path = URL.BASE_URL + URL.AVATAR_RES_PATH + avatar;
         Glide.with(this).load(avatar_full_path).into(binding.imgAvatar);
@@ -78,6 +83,7 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Feed
                 .SetSubtitle(getResources().getString(R.string.feedback_has_been_sent))
                 .SetTextMainButton(getResources().getString(R.string.go_back))
                 .SetOnMainButtonClicked(dialog -> {
+                    setResult(ActivityResult.CREATED);
                     finish();
                 }).show();
     }

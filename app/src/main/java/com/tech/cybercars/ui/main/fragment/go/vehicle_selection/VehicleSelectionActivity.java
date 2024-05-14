@@ -16,7 +16,6 @@ import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.ActivityVehicleSelectionBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
-import com.tech.cybercars.ui.component.dialog.DestinationTypeSelectionDialog;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.multiple_destination.MultipleShareTripActivity;
 import com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripActivity;

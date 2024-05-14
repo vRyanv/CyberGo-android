@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.paper.TripDetailPageAdapter;
+import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.TripStatus;
 import com.tech.cybercars.data.models.TripManagement;
@@ -71,12 +72,28 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
             view_model.UpdateTripStatus(TripStatus.CLOSED);
         });
 
-        binding.btnReopenTrip.setOnClickListener(view ->{
+        binding.btnReopenTrip.setOnClickListener(view -> {
             view_model.UpdateTripStatus(TripStatus.OPENING);
         });
 
-        binding.btnFinishTrip.setOnClickListener(view ->{
+        binding.btnFinishTrip.setOnClickListener(view -> {
             view_model.UpdateTripStatus(TripStatus.FINISH);
+        });
+
+        binding.btnDeleteTrip.setOnClickListener(view -> {
+            new DeleteDialog(this, getString(R.string.delete_this_trip))
+                    .SetButtonSelectedCallback(new DeleteDialog.SelectButtonCallback() {
+                        @Override
+                        public void OnDelete(Dialog dialog) {
+                            view_model.HandleDeleteTrip();
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void OnCancel(Dialog dialog) {
+                            dialog.dismiss();
+                        }
+                    }).show();
         });
 
         TripDetailPageAdapter trip_detail_page = new TripDetailPageAdapter(getSupportFragmentManager(), this.getLifecycle());
@@ -96,6 +113,13 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
     protected void InitObserve() {
         view_model.error_call_server.observe(this, this::ShowErrorCallServer);
         view_model.trip_management.observe(this, this::ActiveTripEditor);
+        view_model.is_leave_trip_success.observe(this, is_leave_trip_success -> {
+            finish();
+        });
+        view_model.is_delete_trip_success.observe(this, is_delete_trip_success -> {
+            Toast.makeText(this, getString(R.string.deleted_successfully), Toast.LENGTH_SHORT).show();
+            finish();
+        });
     }
 
     @Override
@@ -110,7 +134,7 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
     }
 
     private void ActiveTripEditor(TripManagement trip_management) {
-        if(trip_management == null){
+        if (trip_management == null) {
             return;
         }
         // hide close and show re open
@@ -128,8 +152,8 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
         binding.setIsTripOwner(is_trip_owner);
 
         //show control if trip owner and trip not finish status
-        if(is_trip_owner && !trip_management.trip_status.equals(TripStatus.FINISH)){
-           view_model.can_perform_trip.setValue(true);
+        if (is_trip_owner && !trip_management.trip_status.equals(TripStatus.FINISH)) {
+            view_model.can_perform_trip.setValue(true);
             binding.wrapperControlButton.setVisibility(View.VISIBLE);
 
         } else {
@@ -138,11 +162,38 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
         }
 
 
-        if(!is_trip_owner && !trip_management.trip_status.equals(TripStatus.FINISH)){
+        if (!is_trip_owner && !trip_management.trip_status.equals(TripStatus.FINISH)) {
             binding.wrapperBtnLeave.setVisibility(View.VISIBLE);
+            binding.btnLeaveTrip.setOnClickListener(view -> {
+                TripManagement.Member member_leave = null;
+                for (TripManagement.Member member : trip_management.members) {
+                    if (member.user_id.equals(current_user_id)) {
+                        member_leave = member;
+                        break;
+                    }
+                }
+                LeaveTrip(trip_management.trip_id, member_leave);
+            });
         } else {
             binding.wrapperBtnLeave.setVisibility(View.GONE);
         }
+    }
+
+    private void LeaveTrip(String trip_id, TripManagement.Member member) {
+        new DeleteDialog(this, getString(R.string.leave_this_trip)).SetTextDeleteButton(getString(R.string.leave))
+                .SetButtonSelectedCallback(new DeleteDialog.SelectButtonCallback() {
+                    @Override
+                    public void OnDelete(Dialog dialog) {
+                        view_model.HandleLeaveTrip(trip_id, member);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void OnCancel(Dialog dialog) {
+                        dialog.dismiss();
+                    }
+                }).show();
+
     }
 
     private void ShowErrorCallServer(String error_call_server) {
@@ -158,7 +209,7 @@ public class TripDetailActivity extends BaseActivity<ActivityTripDetailBinding, 
     public void OnTripFinishEvent(TripFinishEvent trip_finish_event) {
         String trip_id = trip_finish_event.trip_id;
         String status = trip_finish_event.status;
-        if(view_model.trip_management.getValue().trip_id.equals(trip_id)){
+        if (view_model.trip_management.getValue().trip_id.equals(trip_id)) {
             view_model.UpdateTripFinish(status);
         }
 

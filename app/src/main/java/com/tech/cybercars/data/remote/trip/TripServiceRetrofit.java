@@ -11,14 +11,27 @@ import com.tech.cybercars.data.remote.trip.member_status.UpdateMemberStatusRespo
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface TripServiceRetrofit {
+
+    @DELETE(URL.DELETE_TRIP)
+    Call<BaseResponse> DeleteTripRequest(
+            @Header("authorization") String user_token,
+            @Path(FieldName.TRIP_ID) String trip_id
+    );
+    @PUT(URL.MEMBER_LEAVE_TRIP)
+    Call<BaseResponse> MemberLeaveTripRequest(
+            @Header("authorization") String user_token,
+            @Body MemberLeaveTripBody mem_leave_trip_body
+    );
     @PUT(URL.UPDATE_MEMBER_STATUS)
     Call<UpdateMemberStatusResponse> UpdateMemberStatusRequest(
             @Header("authorization") String user_token,

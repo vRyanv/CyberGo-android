@@ -70,7 +70,7 @@ public class ProfileViewModel extends BaseViewModel {
                 return;
             }
             if (response.body().code == StatusCode.OK) {
-                user_profile = new User( response.body().id, response.body().role, response.body().email,
+                user_profile = new User( response.body().user_id, response.body().role, response.body().email,
                         response.body().full_name, response.body().gender, response.body().birthday, response.body().avatar, response.body().id_number,
                         response.body().address, response.body().phone_number,  response.body().country.prefix,
                         response.body().country.code, response.body().front_id_card,  response.body().back_id_card

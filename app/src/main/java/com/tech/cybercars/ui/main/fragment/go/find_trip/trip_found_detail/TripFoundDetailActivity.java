@@ -3,7 +3,6 @@ package com.tech.cybercars.ui.main.fragment.go.find_trip.trip_found_detail;
 import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -13,8 +12,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.paper.TripFoundDetailPageAdapter;
 import com.tech.cybercars.constant.FieldName;
-import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.data.models.TripFound;
+import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.databinding.ActivityTripFoundDetailBinding;
 import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseActivity;

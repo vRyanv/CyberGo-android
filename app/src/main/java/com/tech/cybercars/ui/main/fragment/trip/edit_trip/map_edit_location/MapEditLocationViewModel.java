@@ -13,7 +13,6 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.data.models.TripManagement;
-import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.data.remote.base.CallServerStatus;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 import com.tech.cybercars.data.repositories.MapRepository;

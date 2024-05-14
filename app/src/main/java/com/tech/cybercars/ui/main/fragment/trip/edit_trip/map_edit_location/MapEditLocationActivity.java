@@ -11,14 +11,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
@@ -34,6 +26,12 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.mapbox.android.core.location.LocationEngineCallback;
@@ -54,32 +52,23 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.ActivityResult;
-import com.tech.cybercars.constant.DestinationType;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.ThemeMode;
 import com.tech.cybercars.constant.VehicleType;
 import com.tech.cybercars.data.models.TripManagement;
-import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.data.models.trip.Destination;
-import com.tech.cybercars.data.models.trip.Trip;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 import com.tech.cybercars.databinding.ActivityMapEditLocationBinding;
-import com.tech.cybercars.databinding.ActivitySingleShareTripBinding;
 import com.tech.cybercars.services.location.LocationService;
 import com.tech.cybercars.services.mapbox.MapboxMapService;
 import com.tech.cybercars.services.mapbox.MapboxNavigationService;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
-import com.tech.cybercars.ui.main.fragment.go.share_trip.add_share_trip_information.AddShareTripInformationActivity;
-import com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripActivity;
-import com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination.SingleShareTripViewModel;
 import com.tech.cybercars.ui.main.fragment.trip.edit_trip.map_edit_location.review_location.ReviewLocationActivity;
 import com.tech.cybercars.utils.DateUtil;
 import com.tech.cybercars.utils.Helper;
 import com.tech.cybercars.utils.KeyBoardUtil;
-
-import java.util.ArrayList;
 
 public class MapEditLocationActivity extends BaseActivity<ActivityMapEditLocationBinding, MapEditLocationViewModel> {
 

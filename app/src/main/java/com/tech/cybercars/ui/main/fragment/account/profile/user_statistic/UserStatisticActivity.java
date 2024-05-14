@@ -1,15 +1,11 @@
 package com.tech.cybercars.ui.main.fragment.account.profile.user_statistic;
 
+import android.graphics.Color;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.graphics.Color;
-import android.os.Bundle;
-
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -20,12 +16,9 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.tech.cybercars.R;
 import com.tech.cybercars.databinding.ActivityUserStatisticBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
-import com.tech.cybercars.ui.main.fragment.account.profile.ProfileViewModel;
 
 import java.util.ArrayList;
 

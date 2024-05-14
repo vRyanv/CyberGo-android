@@ -18,8 +18,11 @@ import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.data.models.trip.Trip;
 import com.tech.cybercars.data.remote.trip.TripBodyAndResponse;
 import com.tech.cybercars.data.repositories.TripRepository;
+import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,19 +125,20 @@ public class AddShareTripInformationViewModel extends BaseViewModel {
             }
             if (response.body().code == StatusCode.CREATED) {
                 is_success.postValue(true);
-                ExecutorService executor_service = Executors.newSingleThreadExecutor();
-                executor_service.execute(() -> {
-                    Trip trip = response.body().trip;
-                    trip_dao.InsertTrip(trip);
-
-                    List<Destination> destinations = trip.destinations;
-                    String trip_id = trip.trip_id;
-                    for (Destination des : destinations){
-                        des.trip_id = trip_id;
-                    }
-                    destination_dao.InsertDestinations(destinations);
-                });
-                executor_service.shutdown();
+                EventBus.getDefault().post(new ActionEvent(ActionEvent.REFRESH_TRIP_LIST));
+//                ExecutorService executor_service = Executors.newSingleThreadExecutor();
+//                executor_service.execute(() -> {
+//                    Trip trip = response.body().trip;
+//                    trip_dao.InsertTrip(trip);
+//
+//                    List<Destination> destinations = trip.destinations;
+//                    String trip_id = trip.trip_id;
+//                    for (Destination des : destinations){
+//                        des.trip_id = trip_id;
+//                    }
+//                    destination_dao.InsertDestinations(destinations);
+//                });
+//                executor_service.shutdown();
             } else if (response.body().code == StatusCode.BAD_REQUEST) {
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }

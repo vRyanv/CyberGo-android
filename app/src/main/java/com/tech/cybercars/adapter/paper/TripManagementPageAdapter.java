@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-
 import com.tech.cybercars.ui.main.fragment.trip.fragment.JoinedTripFragment;
 import com.tech.cybercars.ui.main.fragment.trip.fragment.SharedTripFragment;
 

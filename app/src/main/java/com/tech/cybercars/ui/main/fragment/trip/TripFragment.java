@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -58,6 +57,7 @@ public class TripFragment extends BaseFragment<FragmentTripBinding, TripViewMode
             tab.setText(tab_name[position]);
         }).attach();
 
+        binding.swipeRefresh.setColorSchemeColors(requireContext().getColor(R.color.orange));
         binding.swipeRefresh.setOnRefreshListener(() -> {
             view_model.HandleGetTripList();
         });

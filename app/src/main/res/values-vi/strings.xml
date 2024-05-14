@@ -210,4 +210,7 @@
     <string name="edit_location">Chỉnh sửa vị trí</string>
     <string name="refuse_this_passenger">Từ chối hành khách này</string>
     <string name="refuse">Từ chối</string>
+    <string name="view_on_map">Xem trên bản đồ</string>
+    <string name="leave_this_trip">Rời khỏi chuyến đi này</string>
+    <string name="deleted_successfully">Xóa thành công</string>
 </resources>

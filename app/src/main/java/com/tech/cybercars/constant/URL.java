@@ -7,11 +7,20 @@ public class URL {
     public static final String ID_CARD_RES_PATH = "/assets/media/id-card/";
     public static final String BASE_URL = "http://192.168.4.47:2108";
 
+    //chat
+    public static final String CHAT_LIST = "/chat/list";
+    public static final String PRIVATE_CHAT = "/chat/private-chat/{user_receive_id}";
+
+    //rating
+    public static final String CREATE_RATING = "/rating/create";
+    public static final String RATING_LIST = "/rating/list/{user_id}";
 
     //member
     public static final String UPDATE_MEMBER_STATUS = "/trip/member/update-status";
+    public static final String MEMBER_LEAVE_TRIP = "/trip/member/leave";
 
     //trip
+    public static final String DELETE_TRIP = "/trip/delete/{trip_id}";
     public static final String UPDATE_TRIP_LOCATION = "/trip/update-location";
     public static final String UPDATE_TRIP_INFORMATION = "/trip/update-information";
     public static final String UPDATE_TRIP_STATUS = "/trip/update-status";

@@ -1,6 +1,7 @@
 package com.tech.cybercars.ui.main.fragment.go.share_trip.single_destination;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -12,6 +13,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.StatusCode;
+import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.data.remote.base.CallServerStatus;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
@@ -145,6 +147,7 @@ public class SingleShareTripViewModel extends BaseViewModel {
         @Override
         public void CallFail(Throwable error) {
             is_loading.postValue(false);
+            Log.e(Tag.CYBER_DEBUG, "reverse_geocoding_callback: " + error.getMessage());
             error_call_server.postValue(getApplication().getString(R.string.can_not_connect_to_server));
         }
     };

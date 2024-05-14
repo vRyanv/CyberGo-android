@@ -10,6 +10,10 @@
             name="view_model"
             type="com.tech.cybercars.ui.main.user_profile.UserProfileViewModel" />
     </data>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/loadingPanel"
@@ -32,6 +36,7 @@
                     app:srcCompat="@drawable/ic_arrow" />
 
                 <com.willy.ratingbar.BaseRatingBar
+                    android:visibility="@{view_model.is_loading ? View.GONE : View.VISIBLE}"
                     android:id="@+id/rating_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,13 +48,13 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5"
                     app:srb_clearRatingEnabled="true"
-                    app:srb_clickable="true"
+                    app:srb_clickable="false"
                     app:srb_drawableEmpty="@drawable/ic_star_off"
                     app:srb_drawableFilled="@drawable/ic_star"
                     app:srb_isIndicator="false"
                     app:srb_minimumStars="0"
                     app:srb_numStars="5"
-                    app:srb_rating="2"
+                    app:srb_rating="0"
                     app:srb_scrollable="true"
                     app:srb_starHeight="@dimen/_15sdp"
                     app:srb_starPadding="@dimen/_1sdp"
@@ -227,4 +232,5 @@
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
     </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

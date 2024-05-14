@@ -1,11 +1,9 @@
 package com.tech.cybercars.data.models;
 
-import androidx.room.Embedded;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.tech.cybercars.data.models.trip.Destination;
-import com.tech.cybercars.data.models.trip.Trip;
 
 import java.io.Serializable;
 import java.util.List;
@@ -50,12 +48,15 @@ public class TripManagement implements Serializable {
         public String status; //queue | joined | finish
         public Location origin;
         public Location destination;
+        public String geometry;
         public long request_at;
 
         public static class Location implements Serializable{
             public double longitude;
             public double latitude;
-            public String origin_address;
+            public double time;
+            public double distance;
+            public String address;
         }
     }
 

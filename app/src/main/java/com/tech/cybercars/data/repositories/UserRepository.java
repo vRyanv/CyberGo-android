@@ -1,6 +1,5 @@
 package com.tech.cybercars.data.repositories;
 
-import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
 import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;

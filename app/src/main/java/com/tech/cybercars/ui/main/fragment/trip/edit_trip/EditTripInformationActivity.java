@@ -1,22 +1,17 @@
 package com.tech.cybercars.ui.main.fragment.trip.edit_trip;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
-
 import com.tech.cybercars.R;
-import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.data.models.TripManagement;
 import com.tech.cybercars.databinding.ActivityEditTripInformationBinding;
 import com.tech.cybercars.services.eventbus.UpdateTripInformationEvent;
 import com.tech.cybercars.ui.base.BaseActivity;
-import com.tech.cybercars.ui.main.fragment.trip.trip_detail.TripDetailViewModel;
 import com.tech.cybercars.utils.DateTimePicker;
 import com.tech.cybercars.utils.DateUtil;
 import com.tech.cybercars.utils.TimePicker;

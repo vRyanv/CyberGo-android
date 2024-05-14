@@ -1,14 +1,11 @@
 package com.tech.cybercars.ui.main.fragment.trip.edit_trip.map_edit_location.review_location;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
-import com.google.firebase.installations.internal.FidListener;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
@@ -17,7 +14,6 @@ import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.databinding.ActivityReviewLocationBinding;
 import com.tech.cybercars.services.eventbus.UpdateTripLocationEvent;
 import com.tech.cybercars.ui.base.BaseActivity;
-import com.tech.cybercars.ui.main.fragment.trip.edit_trip.map_edit_location.MapEditLocationViewModel;
 import com.tech.cybercars.utils.DateUtil;
 import com.tech.cybercars.utils.Helper;
 

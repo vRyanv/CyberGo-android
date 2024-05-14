@@ -14,13 +14,8 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.constant.TripStatus;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.constant.VehicleType;
-import com.tech.cybercars.data.models.Member;
-import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.data.models.TripManagement;
-import com.tech.cybercars.data.models.User;
 import com.tech.cybercars.data.models.trip.Destination;
-import com.tech.cybercars.data.models.trip.Trip;
-import com.tech.cybercars.utils.Helper;
 
 import java.util.ArrayList;
 import java.util.List;

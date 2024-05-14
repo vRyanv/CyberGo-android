@@ -13,13 +13,11 @@ import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
-import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.PickLocation;
 import com.tech.cybercars.constant.StatusCode;
 import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.data.models.TripFound;
 import com.tech.cybercars.data.models.Vehicle;
-import com.tech.cybercars.data.models.trip.Trip;
 import com.tech.cybercars.data.remote.base.CallServerStatus;
 import com.tech.cybercars.data.remote.map.reverse_geocoding.ReverseGeocodingResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripBody;
@@ -32,7 +30,6 @@ import com.tech.cybercars.utils.DateUtil;
 import com.tech.cybercars.utils.Helper;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -209,6 +206,7 @@ public class FindTripViewModel extends BaseViewModel {
         @Override
         public void CallFail(Throwable error) {
             is_loading.postValue(false);
+            Log.e(Tag.CYBER_DEBUG, "reverse_geocoding_callback: " + error.getMessage());
             error_call_server.postValue(getApplication().getString(R.string.can_not_connect_to_server));
         }
     };

@@ -1,7 +1,6 @@
 package com.tech.cybercars.data.remote.trip;
 
 import com.tech.cybercars.data.models.TripManagement;
-import com.tech.cybercars.data.models.trip.Destination;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 
 import java.util.List;

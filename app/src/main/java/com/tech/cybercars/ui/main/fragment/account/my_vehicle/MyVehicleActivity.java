@@ -65,7 +65,6 @@ public class MyVehicleActivity extends BaseActivity<ActivityMyVehicleBinding, My
     @Override
     protected void InitObserve() {
         view_model.vehicle_list.observe(this, vehicle_list -> {
-            Log.e(Tag.CYBER_DEBUG, "vehicle list: " + vehicle_list.size());
             vehicle_adapter.UpdateData(vehicle_list);
         });
 

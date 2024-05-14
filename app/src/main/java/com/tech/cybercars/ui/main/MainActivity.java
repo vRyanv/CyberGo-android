@@ -25,7 +25,6 @@ import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.databinding.ActivityMainBinding;
 import com.tech.cybercars.services.eventbus.ActionEvent;
-import com.tech.cybercars.services.notification.NotificationService;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.main.chat.ChatActivity;
 import com.tech.cybercars.ui.main.notification.NotificationActivity;

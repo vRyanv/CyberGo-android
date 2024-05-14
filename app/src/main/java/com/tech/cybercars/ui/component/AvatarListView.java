@@ -14,8 +14,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.URL;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class AvatarListView extends LinearLayout {

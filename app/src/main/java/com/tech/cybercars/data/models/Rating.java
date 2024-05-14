@@ -6,17 +6,13 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.SerializedName;
 
 public class Rating {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
     @SerializedName("_id")
     public String rating_id;
-    public String user_rating_id;
-    @Ignore
-    public User user_rating;
-    public String driver_id;
+    public User user_send;
     public int star;
     public String comment;
-    public String rating_date;
+    @SerializedName("createdAt")
+    public long date;
     public static class User{
         public String full_name;
         public String avatar;

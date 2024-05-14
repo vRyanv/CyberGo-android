@@ -23,22 +23,28 @@ import java.util.concurrent.Executors;
 import retrofit2.Response;
 
 public class UserProfileViewModel extends BaseViewModel {
+    public String user_id;
     public MutableLiveData<User> user_profile = new MutableLiveData<>();
-    private UserDAO user_dao;
-    private UserRepository user_repo;
+    private final UserDAO user_dao;
+    private final UserRepository user_repo;
     public UserProfileViewModel(@NonNull Application application) {
         super(application);
         user_dao = AppDBContext.GetInstance(application).UserDao();
         user_repo = UserRepository.GetInstance();
     }
 
-    public void HandleLoadUserProfile(String user_id){
+    public void HandleLoadUserProfile(){
         User user = user_dao.FindUserById(user_id);
         if(user != null){
             user_profile.setValue(user);
             return;
         }
 
+        LoadDataFromServer();
+    }
+
+    public void LoadDataFromServer(){
+        is_loading.setValue(true);
         String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
         user_repo.ViewUserProfile(
                 user_token,
@@ -57,7 +63,7 @@ public class UserProfileViewModel extends BaseViewModel {
             }
             if (response.body().code == StatusCode.OK) {
                 User user = new User();
-                user.user_id = response.body().id;
+                user.user_id = response.body().user_id;
                 user.rating = response.body().rating;
                 user.email = response.body().email;
                 user.full_name = response.body().full_name;

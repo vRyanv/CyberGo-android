@@ -1,20 +1,21 @@
 package com.tech.cybercars.data.repositories;
 
-import com.tech.cybercars.data.remote.trip.TripManagementResponse;
-import com.tech.cybercars.data.remote.trip.member_status.UpdateMemberStatusBody;
-import com.tech.cybercars.data.remote.trip.UpdateTripInformationBody;
-import com.tech.cybercars.data.remote.trip.UpdateTripLocationBody;
-import com.tech.cybercars.data.remote.trip.UpdateTripResponse;
-import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
 import com.tech.cybercars.data.remote.base.BaseResponse;
 import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
 import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
 import com.tech.cybercars.data.remote.retrofit.RetrofitRequest;
 import com.tech.cybercars.data.remote.retrofit.RetrofitResponse;
+import com.tech.cybercars.data.remote.trip.MemberLeaveTripBody;
 import com.tech.cybercars.data.remote.trip.TripBodyAndResponse;
+import com.tech.cybercars.data.remote.trip.TripManagementResponse;
 import com.tech.cybercars.data.remote.trip.TripServiceRetrofit;
+import com.tech.cybercars.data.remote.trip.UpdateTripInformationBody;
+import com.tech.cybercars.data.remote.trip.UpdateTripLocationBody;
+import com.tech.cybercars.data.remote.trip.UpdateTripResponse;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripBody;
 import com.tech.cybercars.data.remote.trip.find_trip.FindTripResponse;
+import com.tech.cybercars.data.remote.trip.find_trip.MemberBody;
+import com.tech.cybercars.data.remote.trip.member_status.UpdateMemberStatusBody;
 import com.tech.cybercars.data.remote.trip.member_status.UpdateMemberStatusResponse;
 
 public class TripRepository {
@@ -30,6 +31,17 @@ public class TripRepository {
 
     private TripRepository() {
         trip_service = RetrofitRequest.getInstance().create(TripServiceRetrofit.class);
+    }
+
+
+    public void RemoveTrip(String user_token, String trip_id, ResSuccessCallback<BaseResponse> success_callback, ResFailCallback fail_callback){
+        trip_service.DeleteTripRequest(user_token, trip_id)
+                .enqueue(new RetrofitResponse<BaseResponse>().GetResponse(success_callback, fail_callback));
+    }
+
+    public void MemberLeaveTrip(String user_token, MemberLeaveTripBody mem_leave_trip_body, ResSuccessCallback<BaseResponse> success_callback, ResFailCallback fail_callback){
+        trip_service.MemberLeaveTripRequest(user_token, mem_leave_trip_body)
+                .enqueue(new RetrofitResponse<BaseResponse>().GetResponse(success_callback, fail_callback));
     }
     public void UpdateMemberStatus(String user_token, UpdateMemberStatusBody update_member_status_body, ResSuccessCallback<UpdateMemberStatusResponse> success_callback, ResFailCallback fail_callback){
         trip_service.UpdateMemberStatusRequest(user_token, update_member_status_body)
