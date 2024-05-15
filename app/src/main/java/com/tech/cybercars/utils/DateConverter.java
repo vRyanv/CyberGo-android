@@ -13,4 +13,9 @@ public class DateConverter {
     public static Long DateToTimestamps(LocalDateTime datetime){
         return datetime.atZone(ZoneOffset.UTC).toInstant().toEpochMilli();
     }
+
+    public static LocalDateTime DateStringToDateObject(String date_string){
+        Instant instant = Instant.parse(date_string);
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+    }
 }

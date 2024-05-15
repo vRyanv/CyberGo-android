@@ -96,11 +96,11 @@ public class UserProfileActivity extends BaseActivity<ActivityUserProfileBinding
         });
 
         binding.btnOpenChatUser.setOnClickListener(view -> {
-            String user_receive_id = view_model.user_id;
+            String receiver_id = view_model.user_id;
             Intent message_intent = new Intent(this, MessageActivity.class);
-            message_intent.putExtra(FieldName.USER_ID, user_receive_id);
-            message_intent.putExtra(FieldName.FULL_NAME, view_model.user_profile.getValue().full_name);
+            message_intent.putExtra(FieldName.RECEIVER_ID, receiver_id);
             message_intent.putExtra(FieldName.AVATAR, view_model.user_profile.getValue().avatar);
+            message_intent.putExtra(FieldName.FULL_NAME, view_model.user_profile.getValue().full_name);
             startActivity(message_intent);
         });
     }

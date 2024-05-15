@@ -13,10 +13,13 @@ import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.models.chat.Message;
 import com.tech.cybercars.services.eventbus.ActionEvent;
+import com.tech.cybercars.services.eventbus.SendMessEvent;
 import com.tech.cybercars.services.eventbus.TripFinishEvent;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -29,6 +32,7 @@ import io.socket.emitter.Emitter;
 public class SocketService extends Service {
     private Socket socket;
     public static boolean is_running = false;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -39,14 +43,27 @@ public class SocketService extends Service {
     public void onCreate() {
         super.onCreate();
         InitSocketIO();
+        EventBus.getDefault().register(this);
     }
 
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void StopSocketEvent(ActionEvent action_event){
+        if(action_event.action.equals(ActionEvent.STOP_SOCKET)){
+            this.stopSelf();
+        }
+    }
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void OnSendMessEvent(SendMessEvent send_mess_event){
+        Log.e(Tag.CYBER_DEBUG, "OnSendMessEvent: ");
+        String json_data = new Gson().toJson(send_mess_event);
+        socket.emit(SocketEvent.MESSAGE, json_data);
+    }
     private void InitSocketIO() {
         String user_token = SharedPreferencesUtil.GetString(
                 getApplicationContext(),
                 SharedPreferencesUtil.USER_TOKEN_KEY
         );
-        if(user_token.equals("")){
+        if (user_token.equals("")) {
             return;
         }
 
@@ -69,6 +86,7 @@ public class SocketService extends Service {
         }
         Log.i(Tag.CYBER_DEBUG, "Socket Service: Started");
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -79,15 +97,18 @@ public class SocketService extends Service {
         socket.off(SocketEvent.TRIP_FINISH, OnTripFinishEvent);
         socket.off(SocketEvent.PASSENGER_REQUEST, OnPassengerRequestEvent);
         socket.off(SocketEvent.PASSENGER_LEAVE, OnPassengerLeaveEvent);
+
+        //chat
+        socket.off(SocketEvent.MESSAGE, OnReceiveMessageEvent);
         is_running = false;
         Log.e(Tag.CYBER_DEBUG, "Socket Service: Stoped");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-         super.onStartCommand(intent, flags, startId);
+        super.onStartCommand(intent, flags, startId);
         Log.e(Tag.CYBER_DEBUG, "onStartCommand");
-        if(!is_running){
+        if (!is_running) {
             InitSocketIO();
         }
         return START_STICKY;
@@ -104,22 +125,22 @@ public class SocketService extends Service {
         socket.on(SocketEvent.DELETE_TRIP, OnDeleteTripEvent);
 
         //chat
-        socket.on(SocketEvent.RECEIVE_MESSAGE, OnReceiveMessageEvent);
+        socket.on(SocketEvent.MESSAGE, OnReceiveMessageEvent);
     }
 
     private final Emitter.Listener OnReceiveMessageEvent = args -> {
-        Log.e(Tag.CYBER_DEBUG, "OnReceiveMessageEvent" );
-        Message message = new Message();
+        Log.e(Tag.CYBER_DEBUG, "OnReceiveMessageEvent");
+        Message message = new Gson().fromJson(args[0].toString(), Message.class);
         EventBus.getDefault().post(message);
     };
 
     private final Emitter.Listener OnDeleteTripEvent = args -> {
-        Log.e(Tag.CYBER_DEBUG, "OnDeleteTripEvent" );
+        Log.e(Tag.CYBER_DEBUG, "OnDeleteTripEvent");
         EventBus.getDefault().post(new ActionEvent(ActionEvent.REFRESH_TRIP_LIST));
     };
 
     private final Emitter.Listener OnPassengerLeaveEvent = args -> {
-        Log.e(Tag.CYBER_DEBUG, "OnPassengerLeaveEvent" );
+        Log.e(Tag.CYBER_DEBUG, "OnPassengerLeaveEvent");
         EventBus.getDefault().post(new ActionEvent(ActionEvent.REFRESH_TRIP_LIST));
     };
 
@@ -129,7 +150,7 @@ public class SocketService extends Service {
     };
 
     private final Emitter.Listener OnPassengerRequestEvent = args -> {
-        Log.e(Tag.CYBER_DEBUG, "OnPassengerRequestEvent" );
+        Log.e(Tag.CYBER_DEBUG, "OnPassengerRequestEvent");
         EventBus.getDefault().post(new ActionEvent(ActionEvent.PASSENGER_REQUEST));
     };
 

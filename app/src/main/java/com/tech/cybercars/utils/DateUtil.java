@@ -19,8 +19,12 @@ public class DateUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateTimePicker.M_D_Y, Locale.getDefault());
         return simpleDateFormat.format(calendar.getTime());
     }
-    public static int GetCurrentTime(){
-        return LocalTime.now().toSecondOfDay();
+    public static String GetCurrentTime(){
+        LocalTime currentTime = LocalTime.now();
+        int hour = currentTime.getHour();
+        int minute = currentTime.getMinute();
+        int second = currentTime.getSecond();
+        return currentTime.toString();
     }
     public static String ConvertSecondToHour(Double total_second){
         int hours = (int) (total_second / 3600);

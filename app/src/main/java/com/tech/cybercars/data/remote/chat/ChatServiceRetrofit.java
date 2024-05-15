@@ -1,5 +1,6 @@
 package com.tech.cybercars.data.remote.chat;
 
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 
 import retrofit2.Call;
@@ -11,7 +12,7 @@ public interface ChatServiceRetrofit {
     @GET(URL.PRIVATE_CHAT)
     Call<PrivateChatResponse> GetPrivateChatRequest(
             @Header("authorization") String user_token,
-            @Path("user_receive_id") String user_receive_id
+            @Path(FieldName.RECEIVER_ID) String receiver_id
     );
     @GET(URL.CHAT_LIST)
     Call<ChatListResponse> GetChatListRequest(

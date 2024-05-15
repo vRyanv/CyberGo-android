@@ -20,6 +20,7 @@ import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.URL;
 import com.tech.cybercars.data.local.AppDBContext;
 import com.tech.cybercars.databinding.FragmentAccountBinding;
+import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.component.dialog.UpdatePasswordDialog;
@@ -28,6 +29,8 @@ import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.signin.SignInActivity;
 import com.tech.cybercars.utils.PermissionUtil;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -134,6 +137,7 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
     private void Logout(){
         ExecutorService executor_service = Executors.newSingleThreadExecutor();
         executor_service.execute(() -> {
+            EventBus.getDefault().post(new ActionEvent(ActionEvent.STOP_SOCKET));
             AppDBContext app_context_db = AppDBContext.GetInstance(requireContext());
             app_context_db.VehicleDAO().ClearTable();
             app_context_db.UserDao().ClearTable();
@@ -141,6 +145,7 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
             app_context_db.MemberDAO().ClearTable();
             app_context_db.DestinationDAO().ClearTable();
             app_context_db.NotificationDAO().ClearTable();
+            app_context_db.ChatDAO().ClearTable();
 
             SharedPreferencesUtil.Clear(requireContext());
 

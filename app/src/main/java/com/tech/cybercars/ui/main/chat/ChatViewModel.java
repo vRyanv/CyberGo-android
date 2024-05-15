@@ -70,7 +70,7 @@ public class ChatViewModel extends BaseViewModel {
                     chat_list.postValue(response.body().chat_list);
                 });
                 executor_service.shutdown();
-            } else if (response.body().code == StatusCode.NOT_FOUND) {
+            } else{
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
             is_loading.postValue(false);

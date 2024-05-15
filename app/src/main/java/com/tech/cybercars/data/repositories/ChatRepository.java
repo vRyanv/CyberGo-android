@@ -24,8 +24,8 @@ public class ChatRepository {
         chat_service = RetrofitRequest.getInstance().create(ChatServiceRetrofit.class);
     }
 
-    public void GetPrivateChat(String user_token, String user_receive_id, ResSuccessCallback<PrivateChatResponse> success_callback, ResFailCallback fail_callback){
-        chat_service.GetPrivateChatRequest(user_token, user_receive_id)
+    public void GetPrivateChat(String user_token, String receiver_id, ResSuccessCallback<PrivateChatResponse> success_callback, ResFailCallback fail_callback){
+        chat_service.GetPrivateChatRequest(user_token, receiver_id)
                 .enqueue(new RetrofitResponse<PrivateChatResponse>().GetResponse(success_callback, fail_callback));
     }
 

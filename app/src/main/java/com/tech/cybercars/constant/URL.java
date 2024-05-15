@@ -9,7 +9,7 @@ public class URL {
 
     //chat
     public static final String CHAT_LIST = "/chat/list";
-    public static final String PRIVATE_CHAT = "/chat/private-chat/{user_receive_id}";
+    public static final String PRIVATE_CHAT = "/chat/private-chat/{receiver_id}";
 
     //rating
     public static final String CREATE_RATING = "/rating/create";

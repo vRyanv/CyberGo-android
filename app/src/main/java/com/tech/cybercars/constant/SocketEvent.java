@@ -10,5 +10,4 @@ public class SocketEvent {
     public final static String PASSENGER_REQUEST = "PASSENGER_REQUEST";
     public final static String PASSENGER_LEAVE = "PASSENGER_LEAVE";
     public final static String DELETE_TRIP = "DELETE_TRIP";
-    public final static String RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 }

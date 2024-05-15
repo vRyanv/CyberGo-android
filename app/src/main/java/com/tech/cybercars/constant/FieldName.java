@@ -3,6 +3,7 @@ package com.tech.cybercars.constant;
 public class FieldName {
     //chat
     public final static String CHAT = "CHAT";
+    public final static String RECEIVER_ID = "receiver_id";
 
     //trip
     public final static String TRIP_ID = "trip_id";
