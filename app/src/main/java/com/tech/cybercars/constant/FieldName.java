@@ -1,6 +1,11 @@
 package com.tech.cybercars.constant;
 
 public class FieldName {
+
+    //statistic
+    public final static String START_DATE = "start_date";
+    public final static String END_DATE = "end_date";
+
     //chat
     public final static String CHAT = "CHAT";
     public final static String RECEIVER_ID = "receiver_id";
@@ -26,10 +31,14 @@ public class FieldName {
 
     //user
     public final static String USER = "user";
+    public final static String NEW_PASSWORD = "new_password";
+    public final static String CURRENT_PASSWORD = "current_password";
     public final static String USER_ID = "user_id";
     public final static String EMAIL = "email";
     public final static String FULL_NAME = "full_name";
+    public final static String NUMBER_PREFIX = "number_prefix";
     public final static String PHONE_NUMBER = "phone_number";
+    public final static String NATIONAL_PHONE = "national_phone";
     public final static String COUNTRY_NAME_CODE = "country_name_code";
     public final static String GENDER = "gender";
     public final static String BIRTHDAY = "birthday";

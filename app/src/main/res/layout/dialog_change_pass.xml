@@ -22,7 +22,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/edit_text_input"
                 android:layout_height="@dimen/_35sdp"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/_9ssp"
                 android:hint="@string/current_password"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -36,7 +36,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/edit_text_input"
                 android:layout_height="@dimen/_35sdp"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/_9ssp"
                 android:hint="@string/new_password"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -50,7 +50,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/edit_text_input"
                 android:layout_height="@dimen/_35sdp"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/_9ssp"
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>

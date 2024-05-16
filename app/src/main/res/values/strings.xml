@@ -46,10 +46,10 @@
     <string name="wrong_email_or_password">Wrong email or password</string>
     <string name="try_again">Try again</string>
     <string name="sign_up_success">Sign up success</string>
-    <string name="we_have_sent_the_account_activation_code_to_your_email">We have sent the account activation code to your email</string>
+    <string name="we_have_sent_the_account_activation_code_to_your_phone_number">We have sent the account activation code to your phone number</string>
     <string name="next">Next</string>
     <string name="account_already_exist">Account already exist</string>
-    <string name="we_found_an_account_that_was_previously_registered_but_not_activated_please_check_your_email_to_activate_the_account">We found an account that was previously registered but not activated, please check your email to activate the account</string>
+    <string name="we_found_an_account_that_was_previously_registered_but_not_activated">We found an account that was previously registered but not activated</string>
     <string name="please_enter_the_otp_code">Please enter the OTP code</string>
     <string name="otp_code_is_incorrect_please_check_again">OTP code is incorrect, please check again</string>
     <string name="your_request_is_invalid">Your request is invalid</string>
@@ -217,4 +217,6 @@
     <string name="view_on_map">View on map</string>
     <string name="leave_this_trip">Leave this trip?</string>
     <string name="deleted_successfully">Deleted successfully</string>
+    <string name="your_account_has_been_activated">Your account has been activated</string>
+    <string name="invalid_current_password">Invalid current password</string>
 </resources>

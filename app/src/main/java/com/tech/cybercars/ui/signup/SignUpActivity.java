@@ -21,10 +21,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.databinding.ActivitySignUpBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.signup.verification.PhoneVerificationActivity;
+import com.tech.cybercars.utils.PhoneUtil;
 
 
 public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpViewModel> {
@@ -51,6 +53,9 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
 
     @Override
     public void InitView() {
+        binding.btnSignUpFb.setOnClickListener(view -> {
+            view_model.Seed();
+        });
         binding.headerPrimary.btnOutScreen.setOnClickListener(view ->{
             OnBackPress();
         });
@@ -88,7 +93,14 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
         });
 
         binding.btnSignUpGg.setOnClickListener(view -> {
-            startActivity(new Intent(this, PhoneVerificationActivity.class));
+            Intent phone_verification_intent = new Intent(this, PhoneVerificationActivity.class);
+            String number_prefix = "+" + PhoneUtil.getInstance().GetPrefixOfPhoneNumber(
+                    view_model.phone_number.getValue(),
+                    view_model.country_name_code.getValue()
+            );
+            phone_verification_intent.putExtra(FieldName.NUMBER_PREFIX, number_prefix);
+            phone_verification_intent.putExtra(FieldName.PHONE_NUMBER, view_model.phone_number.getValue());
+            startActivity(phone_verification_intent);
         });
     }
 
@@ -176,7 +188,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
                 NotificationDialog.Builder(this)
                         .SetIcon(R.drawable.ic_success)
                         .SetTitle(getResources().getString(R.string.sign_up_success))
-                        .SetSubtitle(getResources().getString(R.string.we_have_sent_the_account_activation_code_to_your_email))
+                        .SetSubtitle(getResources().getString(R.string.we_have_sent_the_account_activation_code_to_your_phone_number))
                         .SetTextMainButton(getResources().getString(R.string.next))
                         .SetOnMainButtonClicked(this::StartVerifyAccountActivity).show();
             }
@@ -187,7 +199,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
                 NotificationDialog.Builder(this)
                         .SetIcon(R.drawable.ic_send_mail)
                         .SetTitle(getResources().getString(R.string.account_already_exist))
-                        .SetSubtitle(getResources().getString(R.string.we_found_an_account_that_was_previously_registered_but_not_activated_please_check_your_email_to_activate_the_account))
+                        .SetSubtitle(getResources().getString(R.string.we_found_an_account_that_was_previously_registered_but_not_activated))
                         .SetTextMainButton(getResources().getString(R.string.next))
                         .SetOnMainButtonClicked(this::StartVerifyAccountActivity).show();
             }
@@ -195,7 +207,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
 
         view_model.getErrorCallServerLive().observe(this, error_call_server -> {
             if (error_call_server != null) {
-                SignUpErrorDialog(error_call_server);
+                this.ShowErrorDialog(error_call_server);
             }
         });
     }
@@ -211,21 +223,15 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
     }
 
     private void StartVerifyAccountActivity(Dialog dialog){
-        Intent phone_verity_activity = new Intent(this, PhoneVerificationActivity.class);
-        phone_verity_activity.putExtra("email", view_model.getEmailLive().getValue());
-        startActivity(phone_verity_activity);
+        Intent phone_verification_intent = new Intent(this, PhoneVerificationActivity.class);
+        String number_prefix = "+" + PhoneUtil.getInstance().GetPrefixOfPhoneNumber(
+                view_model.phone_number.getValue(),
+                view_model.country_name_code.getValue()
+        );
+        phone_verification_intent.putExtra(FieldName.NUMBER_PREFIX, number_prefix);
+        phone_verification_intent.putExtra(FieldName.PHONE_NUMBER, view_model.phone_number.getValue());
+        startActivity(phone_verification_intent);
         dialog.dismiss();
-    }
-
-    private void SignUpErrorDialog(String error_call_server) {
-        new AlertDialog.Builder(this)
-                .setCancelable(false)
-                .setTitle(getResources().getString(R.string.app_name))
-                .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_notify_app))
-                .setMessage(error_call_server)
-                .setNegativeButton(R.string.try_again, (dialog, which_button) -> {
-                    Toast.makeText(this, "resend click", Toast.LENGTH_SHORT).show();
-                }).show();
     }
 
     private void InitAlertDialog() {
@@ -238,9 +244,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
                     dialog.dismiss();
                 });
         gender_dialog = gender_dialog_builder.create();
-
     }
-
 
     private Spannable SetUpCheckBoxOfTermsAndPolicyClickable() {
         //Get resource

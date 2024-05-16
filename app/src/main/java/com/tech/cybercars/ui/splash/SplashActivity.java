@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
+import com.tech.cybercars.ui.main.MainActivity;
 import com.tech.cybercars.ui.welcome.WelcomeActivity;
+import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
@@ -27,7 +29,14 @@ public class SplashActivity extends AppCompatActivity {
 
         new Handler().postDelayed(
                 () -> {
-                    startActivity(new Intent(this, WelcomeActivity.class));
+                    String user_token = SharedPreferencesUtil.GetString(this, SharedPreferencesUtil.USER_TOKEN_KEY);
+                    if(user_token.equals("")){
+                        startActivity(new Intent(this, WelcomeActivity.class));
+                        return;
+                    }
+                    Intent home_intent = new Intent(this, MainActivity.class);
+                    home_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(home_intent);
                     finish();
                 },
                 DelayTime.SPLASH_SCREEN

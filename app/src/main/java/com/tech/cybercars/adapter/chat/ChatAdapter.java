@@ -44,10 +44,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
         Glide.with(context).load(avatar_full_path).into(holder.img_avatar);
 
         holder.txt_full_name.setText(chat.receiver_full_name);
+
+        holder.txt_last_message_time.setText("");
         holder.txt_last_message.setText(chat.last_message);
-        LocalDateTime local_time = DateConverter.DateStringToDateObject(chat.last_message_time);
-        String time = Helper.PadStart(local_time.getHour(), 2) + ":" + Helper.PadStart(local_time.getMinute(), 2);
-        holder.txt_last_message_time.setText(time);
+
+        if(chat.last_message != null && !chat.last_message.equals("")){
+            LocalDateTime local_time = DateConverter.DateStringToDateObject(chat.last_message_time);
+            String time = Helper.PadStart(local_time.getHour(), 2) + ":" + Helper.PadStart(local_time.getMinute(), 2);
+            holder.txt_last_message_time.setText(time);
+        }
+
+
+
 
         if (chat.has_message) {
             holder.icon_has_message.setVisibility(View.VISIBLE);

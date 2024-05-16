@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_go"
+        <item android:id="@+id/nav_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/ic_user"
             android:title="@string/profile" />
 
-        <item android:id="@+id/nav_go1"
+        <item android:id="@+id/nav_statistic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/ic_graph_bar"
             android:title="@string/statistic" />
-        <item android:id="@+id/nav_go2"
+        <item android:id="@+id/nav_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/ic_star"

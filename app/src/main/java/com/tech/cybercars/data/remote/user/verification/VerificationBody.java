@@ -3,29 +3,13 @@ package com.tech.cybercars.data.remote.user.verification;
 import com.google.gson.annotations.SerializedName;
 
 public class VerificationBody {
-    @SerializedName("otp_code")
-    private String otp_code;
-    @SerializedName("email")
-    private String email;
+    public String otp_code;
+    public String number_prefix;
+    public String phone_number;
 
-    public VerificationBody(String otp_code, String email) {
+    public VerificationBody(String otp_code, String number_prefix, String phone_number) {
         this.otp_code = otp_code;
-        this.email = email;
-    }
-
-    public String getOtpCode() {
-        return otp_code;
-    }
-
-    public void setOtpCode(String otp) {
-        this.otp_code = otp;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        this.number_prefix = number_prefix;
+        this.phone_number = phone_number;
     }
 }

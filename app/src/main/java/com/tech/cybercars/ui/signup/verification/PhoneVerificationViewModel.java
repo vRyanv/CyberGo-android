@@ -2,6 +2,7 @@ package com.tech.cybercars.ui.signup.verification;
 
 import android.app.Application;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -9,7 +10,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.StatusCode;
+import com.tech.cybercars.constant.Tag;
+import com.tech.cybercars.data.remote.base.BaseResponse;
+import com.tech.cybercars.data.remote.retrofit.ResFailCallback;
+import com.tech.cybercars.data.remote.retrofit.ResSuccessCallback;
 import com.tech.cybercars.data.remote.user.verification.VerificationBody;
 import com.tech.cybercars.data.remote.user.verification.VerificationResponse;
 import com.tech.cybercars.data.repositories.UserRepository;
@@ -19,11 +25,8 @@ import com.tech.cybercars.utils.SharedPreferencesUtil;
 import retrofit2.Response;
 
 public class PhoneVerificationViewModel extends BaseViewModel {
-    private String email;
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String number_prefix;
+    public String phone_number;
 
     public MutableLiveData<String> otp_1 = new MutableLiveData<>();
 
@@ -61,29 +64,44 @@ public class PhoneVerificationViewModel extends BaseViewModel {
         return error_otp_code;
     }
 
-    private UserRepository user_repository = UserRepository.GetInstance();
+    private final UserRepository user_repository = UserRepository.GetInstance();
+    public MutableLiveData<Boolean> is_resend_success = new MutableLiveData<>();
 
     public PhoneVerificationViewModel(@NonNull Application application) {
         super(application);
     }
+    public void ResendOTPCode(){
+        String national_phone = number_prefix + phone_number;
+        user_repository.ResendOTP(
+                national_phone,
+                response -> {
+                    if(!response.isSuccessful()){
+                        return;
+                    }
 
-    public void VerifyHandle() {
-        is_loading.setValue(true);
-        if (IsValidOTP()) {
-            String OTP_string = otp_1.getValue() +
-                    otp_2.getValue() +
-                    otp_3.getValue() +
-                    otp_4.getValue() +
-                    otp_5.getValue();
-            VerificationBody verify_body = new VerificationBody(OTP_string, email);
-            VerifyRemote(verify_body);
-        } else {
-            is_loading.setValue(false);
-            error_otp_code.setValue(getApplication().getString(R.string.please_enter_the_otp_code));
-        }
+                    is_resend_success.setValue(true);
+                },
+                error -> {
+                    Log.e(Tag.CYBER_DEBUG, "ResendOTPCode: " + error.getMessage());
+                    error_call_server.postValue(getApplication().getString(R.string.can_not_connect_to_server));
+                }
+        );
     }
 
-    private void VerifyRemote(VerificationBody verify_body) {
+
+    public void HandleVerifyPhone() {
+        if (!IsValidOTP()) {
+            error_otp_code.setValue(getApplication().getString(R.string.please_enter_the_otp_code));
+            return;
+        }
+
+        is_loading.setValue(true);
+        String OTP_string = otp_1.getValue() +
+                otp_2.getValue() +
+                otp_3.getValue() +
+                otp_4.getValue() +
+                otp_5.getValue();
+        VerificationBody verify_body = new VerificationBody(OTP_string, number_prefix, phone_number);
         user_repository.ActivateUser(
                 verify_body,
                 this::CallVerifySuccess,
@@ -98,16 +116,11 @@ public class PhoneVerificationViewModel extends BaseViewModel {
                 otp_5.getValue() != null && !otp_5.getValue().equals("");
     }
 
-    private void CallVerifySuccess(Response<VerificationResponse> verify_response) {
+    private void CallVerifySuccess(Response<BaseResponse> verify_response) {
         is_loading.postValue(false);
         new Handler().postDelayed(() -> {
             assert verify_response.body() != null;
             if (verify_response.body().code == StatusCode.UPDATED) {
-                String user_token = verify_response.body().getUser_token();
-                SharedPreferencesUtil.SetString(
-                        getApplication(),
-                        SharedPreferencesUtil.USER_TOKEN_KEY,
-                        user_token);
                 is_success.postValue(true);
             } else if (verify_response.body().code == StatusCode.NOT_FOUND) {
                 error_otp_code.postValue(getApplication().getString(R.string.otp_code_is_incorrect));
@@ -115,7 +128,6 @@ public class PhoneVerificationViewModel extends BaseViewModel {
                 error_otp_code.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
         }, DelayTime.CALL_API);
-
     }
 
     private void CallVerifyFail(Throwable error) {

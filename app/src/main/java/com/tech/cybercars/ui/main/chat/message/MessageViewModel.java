@@ -19,8 +19,12 @@ import com.tech.cybercars.data.models.chat.Message;
 import com.tech.cybercars.data.remote.chat.PrivateChatResponse;
 import com.tech.cybercars.data.remote.user.profile.ProfileResponse;
 import com.tech.cybercars.data.repositories.ChatRepository;
+import com.tech.cybercars.services.eventbus.ActionEvent;
+import com.tech.cybercars.services.eventbus.ChatEvent;
 import com.tech.cybercars.ui.base.BaseViewModel;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,9 +95,11 @@ public class MessageViewModel extends BaseViewModel {
                     receiver_avatar = response.body().chat.receiver_avatar;
                     receiver_full_name = response.body().chat.receiver_full_name;
                     is_success.postValue(true);
-//                    if(response.body().chat.is_new_chat){
-//
-//                    }
+                    if(response.body().chat.is_new_chat){
+                        ChatEvent chat_event = new ChatEvent(ChatEvent.NEW_CHAT);
+                        chat_event.chat = response.body().chat;
+                        EventBus.getDefault().post(chat_event);
+                    }
 //                    message_dao.ClearTable();
 //                    if(response.body().is_new_chat){
 //                        chat_dao.InsertChat(response.body().chat);

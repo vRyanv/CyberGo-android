@@ -4,139 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="view_model"
             type="com.tech.cybercars.ui.main.MainViewModel" />
     </data>
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:gravity="center">
+
+        <include
+            layout="@layout/partial_loading_primary"
+            app:show="@{view_model.is_loading}" />
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_36sdp">
-            <ImageButton
-                android:id="@+id/btn_open_nav_drawer"
-                style="@style/icon_button_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_menu" />
-            <RelativeLayout
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/wrapper_message_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                >
-
-                <ImageButton
-                    android:id="@+id/btn_open_notification"
-                    style="@style/icon_button_back"
-                    android:layout_marginStart="0dp"
-                    app:srcCompat="@drawable/ic_bell" />
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/dot_notification"
-                    android:layout_height="@dimen/_7sdp"
-                    android:layout_width="@dimen/_7sdp"
-                    android:background="@color/orange_red"
-                    android:layout_marginEnd="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:layout_alignParentEnd="true"
-                    android:visibility="@{view_model.has_notification ? View.VISIBLE : View.GONE, default=gone}"
-                    app:riv_corner_radius="30dip"
-                    app:riv_mutate_background="true"
-                    app:riv_oval="true" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/wrapper_message_btn"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                >
-
-                <ImageButton
-                    android:id="@+id/btn_open_chat"
-                    style="@style/icon_button_back"
-                    android:layout_marginStart="0dp"
-                    app:srcCompat="@drawable/ic_chat" />
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/dot_notification_message"
-                    android:layout_height="@dimen/_7sdp"
-                    android:layout_width="@dimen/_7sdp"
-                    android:background="@color/orange_red"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:visibility="@{view_model.has_message ? View.VISIBLE : View.GONE, default=gone}"
-                    android:layout_alignParentEnd="true"
-                    app:riv_corner_radius="30dip"
-                    app:riv_mutate_background="true"
-                    app:riv_oval="true" />
-            </RelativeLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/pager_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-<!--            <androidx.fragment.app.FragmentContainerView-->
-<!--                android:id="@+id/container_fragment_main"-->
-<!--                android:name="androidx.navigation.fragment.NavHostFragment"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                app:defaultNavHost="true"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:navGraph="@navigation/nav_main" />-->
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_46sdp">
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_nav_main"
-                style="@style/custom_main_bottom_nav"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/orange"
-                app:itemIconSize="@dimen/_15sdp"
-                app:itemIconTint="@drawable/shape_icon_menu"
-                app:itemTextColor="@color/white_blur_80"
-                app:labelVisibilityMode="selected"
-                app:menu="@menu/menu_main"/>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </LinearLayout>
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_drawer_view"
-            android:layout_gravity="start"
-            app:menu="@menu/menu_drawer"
-            app:headerLayout="@layout/drawer_header"
-            app:itemIconTint="@color/special_orange"
-            android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
-        </com.google.android.material.navigation.NavigationView>
-    </androidx.drawerlayout.widget.DrawerLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp">
+
+                    <ImageButton
+                        android:id="@+id/btn_open_nav_drawer"
+                        style="@style/icon_button_back"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_menu" />
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/_28sdp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginEnd="@dimen/_16sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/wrapper_message_btn"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/btn_open_notification"
+                            style="@style/icon_button_back"
+                            android:layout_marginStart="0dp"
+                            app:srcCompat="@drawable/ic_bell" />
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/dot_notification"
+                            android:layout_width="@dimen/_7sdp"
+                            android:layout_height="@dimen/_7sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_6sdp"
+                            android:background="@color/orange_red"
+                            android:visibility="@{view_model.has_notification ? View.VISIBLE : View.GONE, default=gone}"
+                            app:riv_corner_radius="30dip"
+                            app:riv_mutate_background="true"
+                            app:riv_oval="true" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/wrapper_message_btn"
+                        android:layout_width="@dimen/_28sdp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginEnd="@dimen/_16sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/btn_open_chat"
+                            style="@style/icon_button_back"
+                            android:layout_marginStart="0dp"
+                            app:srcCompat="@drawable/ic_chat" />
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/dot_notification_message"
+                            android:layout_width="@dimen/_7sdp"
+                            android:layout_height="@dimen/_7sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_3sdp"
+                            android:background="@color/orange_red"
+                            android:visibility="@{view_model.has_message ? View.VISIBLE : View.GONE, default=gone}"
+                            app:riv_corner_radius="30dip"
+                            app:riv_mutate_background="true"
+                            app:riv_oval="true" />
+                    </RelativeLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/pager_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--            <androidx.fragment.app.FragmentContainerView-->
+                    <!--                android:id="@+id/container_fragment_main"-->
+                    <!--                android:name="androidx.navigation.fragment.NavHostFragment"-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="match_parent"-->
+                    <!--                app:defaultNavHost="true"-->
+                    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--                app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                app:layout_constraintTop_toTopOf="parent"-->
+                    <!--                app:navGraph="@navigation/nav_main" />-->
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_46sdp">
+
+                    <com.google.android.material.bottomnavigation.BottomNavigationView
+                        android:id="@+id/bottom_nav_main"
+                        style="@style/custom_main_bottom_nav"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/orange"
+                        app:itemIconSize="@dimen/_15sdp"
+                        app:itemIconTint="@drawable/shape_icon_menu"
+                        app:itemTextColor="@color/white_blur_80"
+                        app:labelVisibilityMode="selected"
+                        app:menu="@menu/menu_main" />
+                </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </LinearLayout>
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nav_drawer_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                app:headerLayout="@layout/drawer_header"
+                app:itemIconTint="@color/special_orange"
+                app:menu="@menu/menu_drawer">
+
+            </com.google.android.material.navigation.NavigationView>
+
+        </androidx.drawerlayout.widget.DrawerLayout>
+    </RelativeLayout>
 </layout>

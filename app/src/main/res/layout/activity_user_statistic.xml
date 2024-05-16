@@ -4,80 +4,152 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="view_model"
             type="com.tech.cybercars.ui.main.fragment.account.profile.user_statistic.UserStatisticViewModel" />
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <include
-            layout="@layout/header_primary"
             android:id="@+id/header_primary"
-            app:title="@{@string/statistic}"/>
+            layout="@layout/header_primary"
+            app:title="@{@string/statistic}" />
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_start_date"
                     style="@style/input"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight="1"
                     app:endIconDrawable="@drawable/shape_ic_calendar_small"
                     app:endIconMode="custom"
                     app:endIconScaleType="center"
                     app:endIconTint="@null"
                     app:endIconTintMode="multiply">
+
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/edit_text_input"
-                        android:textSize="@dimen/_10ssp"
-                        android:padding="0dp"
                         android:layout_height="@dimen/_25sdp"
                         android:cursorVisible="false"
                         android:focusable="false"
-                        android:text="04/01/2024"
-                        android:hint="@string/start_date" />
+                        android:hint="@string/start_date"
+                        android:padding="0dp"
+                        android:text="@{view_model.start_date}"
+                        android:textSize="@dimen/_10ssp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_end_date"
                     style="@style/input"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight="1"
                     app:endIconDrawable="@drawable/shape_ic_calendar_small"
                     app:endIconMode="custom"
                     app:endIconScaleType="center"
                     app:endIconTint="@null"
                     app:endIconTintMode="multiply">
+
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/edit_text_input"
-                        android:textSize="@dimen/_10ssp"
-                        android:padding="0dp"
                         android:layout_height="@dimen/_25sdp"
                         android:cursorVisible="false"
                         android:focusable="false"
-                        android:text="04/30/2024"
-                        android:hint="@string/end_date" />
+                        android:hint="@string/end_date"
+                        android:padding="0dp"
+                        android:text="@{view_model.end_date}"
+                        android:textSize="@dimen/_10ssp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-            <com.github.mikephil.charting.charts.BarChart
-                android:layout_margin="@dimen/_25sdp"
-                android:id="@+id/trip_by_vehicle_chart"
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/skeleton_loading_bar_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <include
+                        layout="@layout/skeleton_bar_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:layout_marginBottom="@dimen/_25sdp" />
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/trip_by_vehicle_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_marginBottom="@dimen/_25sdp"
+                    android:visibility="@{view_model.is_loading ? View.GONE : View.VISIBLE}" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <com.github.mikephil.charting.charts.PieChart
-                android:layout_margin="@dimen/_25sdp"
-                android:id="@+id/revenue_by_vehicle_chart"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/skeleton_loading_pie_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="@{view_model.is_loading ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <include
+                        layout="@layout/skeleton_pie_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:layout_marginBottom="@dimen/_25sdp" />
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/revenue_by_vehicle_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_marginBottom="@dimen/_25sdp"
+                    android:visibility="@{view_model.is_loading ? View.GONE : View.VISIBLE}" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>

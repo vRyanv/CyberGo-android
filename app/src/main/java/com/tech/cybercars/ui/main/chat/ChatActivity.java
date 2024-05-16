@@ -1,7 +1,8 @@
 package com.tech.cybercars.ui.main.chat;
 
 import android.content.Intent;
-import android.widget.Toast;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.chat.ChatAdapter;
 import com.tech.cybercars.constant.FieldName;
+import com.tech.cybercars.data.models.chat.Chat;
+import com.tech.cybercars.data.models.chat.Message;
 import com.tech.cybercars.databinding.ActivityChatBinding;
 import com.tech.cybercars.services.eventbus.ChatEvent;
 import com.tech.cybercars.ui.base.BaseActivity;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 
 public class ChatActivity extends BaseActivity<ActivityChatBinding, ChatViewModel> {
     private ChatAdapter chat_adapter;
+
     @NonNull
     @Override
     protected ChatViewModel InitViewModel() {
@@ -62,7 +66,7 @@ public class ChatActivity extends BaseActivity<ActivityChatBinding, ChatViewMode
             view_model.LoadDataFromServer();
         });
 
-        binding.headerPrimary.btnOutScreen.setOnClickListener(view ->{
+        binding.headerPrimary.btnOutScreen.setOnClickListener(view -> {
             finish();
         });
     }
@@ -73,8 +77,8 @@ public class ChatActivity extends BaseActivity<ActivityChatBinding, ChatViewMode
             chat_adapter.UpdateData(chat_list);
         });
 
-        view_model.is_loading.observe(this, is_loading-> {
-            if(is_loading){
+        view_model.is_loading.observe(this, is_loading -> {
+            if (is_loading) {
                 binding.skeletonLoading.startShimmerAnimation();
             } else {
                 binding.swipeRefresh.setRefreshing(false);
@@ -94,16 +98,55 @@ public class ChatActivity extends BaseActivity<ActivityChatBinding, ChatViewMode
     protected void OnBackPress() {
         finish();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnNewChatEvent(ChatEvent chat_event){
-        if(chat_event.action.equals(ChatEvent.NEW_CHAT)){
-            Toast.makeText(this, "OnNewChatEvent: new chat", Toast.LENGTH_SHORT).show();
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void OnNewChatEvent(ChatEvent chat_event) {
+        if (chat_event.action.equals(ChatEvent.NEW_CHAT)) {
+            Chat chat = view_model.chat_list.getValue().stream()
+                    .filter(c -> c.chat_id.equals(chat_event.chat.chat_id))
+                    .findAny()
+                    .orElse(null);
+
+            if (chat != null) {
+                return;
+            }
+            view_model.chat_list.getValue().add(chat_event.chat);
+
+            Handler main_handler = new Handler(Looper.getMainLooper());
+            main_handler.post(() -> {
+                chat_adapter.UpdateData(view_model.chat_list.getValue());
+            });
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void OnMessageEvent(Message message) {
+        String chat_id = message.chat_id;
+        Chat chat = view_model.chat_list.getValue().stream()
+                .filter(c -> c.chat_id.equals(chat_id))
+                .findAny()
+                .orElse(null);
+        if(chat != null){
+            chat.last_message = message.content;
+            chat.last_message_time = message.send_time;
+
+            Handler main_handler = new Handler(Looper.getMainLooper());
+            main_handler.post(() -> {
+                chat_adapter.UpdateData(view_model.chat_list.getValue());
+            });
+            return;
+        }
+
+        Handler main_handler = new Handler(Looper.getMainLooper());
+        main_handler.post(() -> {
+            view_model.LoadDataFromServer();
+        });
+
     }
 }

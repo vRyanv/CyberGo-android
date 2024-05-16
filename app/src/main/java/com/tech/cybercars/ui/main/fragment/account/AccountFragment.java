@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -83,7 +84,7 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
                             @Override
                             public void OnUpdate(Dialog dialog, String current_pass, String new_pass, String confirm_pass) {
                                 dialog.dismiss();
-                                ShowUpdatePassSuccess();
+                                view_model.HandleUpdatePassword(current_pass, new_pass);
                             }
 
                             @Override
@@ -100,7 +101,24 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
 
     @Override
     protected void InitObserve() {
+        view_model.is_update_success_password.observe(this, is_update_success_password-> {
+            ShowUpdatePassSuccess();
+        });
 
+        view_model.wrong_current_password.observe(this, wrong_current_password-> {
+            ShowWrongCurrentPass();
+        });
+
+        view_model.error_call_server.observe(this, this::ShowErrorDialog);
+    }
+
+    private void ShowWrongCurrentPass() {
+        NotificationDialog.Builder(requireContext())
+                .SetIcon(R.drawable.ic_warning)
+                .SetTitleVisibility(View.GONE)
+                .SetSubtitle(getResources().getString(R.string.invalid_current_password))
+                .SetTextMainButton(getResources().getString(R.string.close))
+                .SetOnMainButtonClicked(Dialog::dismiss).show();
     }
 
     @Override
@@ -135,6 +153,7 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
     }
 
     private void Logout(){
+        view_model.RemoveFireBaseTokenOnServer();
         ExecutorService executor_service = Executors.newSingleThreadExecutor();
         executor_service.execute(() -> {
             EventBus.getDefault().post(new ActionEvent(ActionEvent.STOP_SOCKET));
@@ -150,6 +169,8 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
             SharedPreferencesUtil.Clear(requireContext());
 
             Handler main_handler = new Handler(Looper.getMainLooper());
+
+
             main_handler.post(() -> {
                 Intent sign_in_activity = new Intent(requireContext(), SignInActivity.class);
                 sign_in_activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

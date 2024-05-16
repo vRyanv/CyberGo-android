@@ -2,6 +2,8 @@ package com.tech.cybercars.ui.main;
 
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,17 +24,26 @@ import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.PaperMain;
 import com.tech.cybercars.constant.URL;
+import com.tech.cybercars.data.local.AppDBContext;
 import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.databinding.ActivityMainBinding;
 import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.main.chat.ChatActivity;
+import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
+import com.tech.cybercars.ui.main.fragment.account.profile.user_statistic.UserStatisticActivity;
 import com.tech.cybercars.ui.main.notification.NotificationActivity;
+import com.tech.cybercars.ui.main.rating.RatingActivity;
+import com.tech.cybercars.ui.main.rating_report.RatingReportActivity;
+import com.tech.cybercars.ui.signin.SignInActivity;
 import com.tech.cybercars.utils.SharedPreferencesUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -205,7 +216,47 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int selected = item.getItemId();
+        if(selected == R.id.nav_profile){
+            startActivity(new Intent(this, ProfileActivity.class));
+        } else if (selected == R.id.nav_statistic) {
+            startActivity(new Intent(this, UserStatisticActivity.class));
+        } else if (selected == R.id.nav_rating) {
+            Intent rating_report_intent = new Intent(this, RatingReportActivity.class);
+            String user_id = SharedPreferencesUtil.GetString(this, FieldName.USER_ID);
+            rating_report_intent.putExtra(FieldName.USER_ID, user_id);
+            startActivity(rating_report_intent);
+        }else if (selected == R.id.nav_logout) {
+            Logout();
+        }
+
         binding.drawerLayout.close();
         return false;
+    }
+
+    private void Logout(){
+        view_model.RemoveFireBaseTokenOnServer();
+        ExecutorService executor_service = Executors.newSingleThreadExecutor();
+        executor_service.execute(() -> {
+            EventBus.getDefault().post(new ActionEvent(ActionEvent.STOP_SOCKET));
+            AppDBContext app_context_db = AppDBContext.GetInstance(this);
+            app_context_db.VehicleDAO().ClearTable();
+            app_context_db.UserDao().ClearTable();
+            app_context_db.TripDAO().ClearTable();
+            app_context_db.MemberDAO().ClearTable();
+            app_context_db.DestinationDAO().ClearTable();
+            app_context_db.NotificationDAO().ClearTable();
+            app_context_db.ChatDAO().ClearTable();
+
+            SharedPreferencesUtil.Clear(this);
+
+            Handler main_handler = new Handler(Looper.getMainLooper());
+            main_handler.post(() -> {
+                Intent sign_in_activity = new Intent(this, SignInActivity.class);
+                sign_in_activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(sign_in_activity);
+            });
+        });
+        executor_service.shutdown();
     }
 }

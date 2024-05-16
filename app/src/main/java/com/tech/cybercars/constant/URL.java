@@ -47,12 +47,15 @@ public class URL {
     public static final String SEARCH_ADDRESS = "/map/search-address/{address}/{limit}";
 
     //User
+    public static final String UPDATE_PASSWORD = "/security/update-password";
+    public static final String VIEW_STATISTIC = "/user/statistic/{start_date}/{end_date}";
     public static final String VIEW_USER_PROFILE = "/user/view-user-profile/{user_id}";
     public static final String DRIVER_REGISTRATION = "/user/driver-registration";
     public static final String PROFILE = "/user/profile";
     public static final String UPDATE_PROFILE = "/user/profile/update";
     public static final String UPDATE_ID_CARD = "/user/profile/update-id-card";
     public static final String UPDATE_PHONE_NUMBER_CARD = "/user/profile/update-phone-number";
+    public static final String RESEND_OTP_CODE = "/resend-otp-code";
 
     //firebase token
     public static final String UPDATE_FIREBASE_TOKEN = "/security/firebase-token";

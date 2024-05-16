@@ -13,6 +13,7 @@ import com.tech.cybercars.data.remote.user.signin.SignInBody;
 import com.tech.cybercars.data.remote.user.signin.SignInResponse;
 import com.tech.cybercars.data.remote.user.signup.SignUpBody;
 import com.tech.cybercars.data.remote.user.signup.SignUpResponse;
+import com.tech.cybercars.data.remote.user.statistic.StatisticResponse;
 import com.tech.cybercars.data.remote.user.verification.VerificationBody;
 import com.tech.cybercars.data.remote.user.verification.VerificationResponse;
 
@@ -22,6 +23,8 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -31,6 +34,27 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface UserServiceRetrofit {
+    @FormUrlEncoded
+    @PUT(URL.UPDATE_PASSWORD)
+    Call<BaseResponse> UpdatePasswordRequest(
+            @Header("authorization") String user_token,
+            @Field(FieldName.CURRENT_PASSWORD) String current_password,
+            @Field(FieldName.NEW_PASSWORD) String new_password
+    );
+
+    @GET(URL.VIEW_STATISTIC)
+    Call<StatisticResponse> ViewStatisticRequest(
+            @Header("authorization") String user_token,
+            @Path(FieldName.START_DATE) String start_date,
+            @Path(FieldName.END_DATE) String end_date
+    );
+
+    @FormUrlEncoded
+    @POST(URL.RESEND_OTP_CODE)
+    Call<BaseResponse> ResendOTPRequest(
+            @Field(FieldName.NATIONAL_PHONE) String national_phone
+    );
+
     @GET(URL.VIEW_USER_PROFILE)
     Call<ProfileResponse> ViewUserProfileRequest(
             @Header("authorization") String user_token,
@@ -80,7 +104,7 @@ public interface UserServiceRetrofit {
     Call<SignUpResponse> SignUpRequest(@Body SignUpBody sign_up_body);
 
     @PUT(URL.ACTIVE_ACCOUNT)
-    Call<VerificationResponse> VerificationRequest(@Body VerificationBody verify_body);
+    Call<BaseResponse> VerificationRequest(@Body VerificationBody verify_body);
 
     @GET(URL.PROFILE)
     Call<ProfileResponse> GetProfileInformationRequest(@Header("authorization") String user_token);

@@ -80,9 +80,7 @@ text normal = 14ssp
 19. send trip state real time:  @done
 20. rating of user: @done
 21. chat list: ####
-22. message:
-    click mess icon -> send current user id and target user id
-    -> create new chat if not exist.
+22. message: @done
 23. statistic
 24. update password
 

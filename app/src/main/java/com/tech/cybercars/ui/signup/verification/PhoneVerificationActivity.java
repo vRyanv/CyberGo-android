@@ -5,6 +5,7 @@ import static android.view.KeyEvent.KEYCODE_FORWARD_DEL;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
@@ -23,9 +24,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.databinding.ActivityPhoneVerificationBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
+import com.tech.cybercars.ui.main.MainActivity;
+import com.tech.cybercars.ui.signin.SignInActivity;
 import com.tech.cybercars.utils.KeyBoardUtil;
 
 public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.databinding.ActivityPhoneVerificationBinding, PhoneVerificationViewModel> {
@@ -51,7 +55,7 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
     @Override
     protected void InitView() {
         binding.btnPhoneVerification.setOnClickListener(view -> {
-            ShowSuccessFeedback();
+                view_model.HandleVerifyPhone();
         });
 
         binding.txtResendAgainPhoneVerification.setText(SetUpSendAgainTextClickable());
@@ -64,6 +68,10 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
 
     @Override
     protected void InitObserve() {
+        view_model.is_resend_success.observe(this, is_resend_success -> {
+            Toast.makeText(this, "OTP send", Toast.LENGTH_SHORT).show();
+        });
+
         view_model.is_loading.observe(this, is_loading -> {
             if(is_loading != null && is_loading){
                 KeyBoardUtil.HideKeyBoard(this);
@@ -98,8 +106,8 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
         });
 
         view_model.getIsSuccessLive().observe(this, is_success -> {
-            if(is_success != null && is_success){
-                finish();
+            if(is_success){
+                ShowSuccessFeedback();
             }
         });
 
@@ -138,8 +146,8 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
 
     @Override
     protected void InitCommon() {
-        String email = getIntent().getStringExtra("email");
-        view_model.setEmail(email);
+        view_model.number_prefix = getIntent().getStringExtra(FieldName.NUMBER_PREFIX);
+        view_model.phone_number = getIntent().getStringExtra(FieldName.PHONE_NUMBER);
     }
 
     @Override
@@ -190,10 +198,10 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
                 .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_notify_app))
                 .setMessage(getResources().getString(R.string.you_have_not_received_the_otp_code_yet))
                 .setNegativeButton(R.string.resend_again, (dialog, which_button)->{
-                    Toast.makeText(this, "resend click", Toast.LENGTH_SHORT).show();
+                    view_model.ResendOTPCode();
                 })
                 .setPositiveButton(R.string.cancel,(dialog, which_button)->{
-                    Toast.makeText(this, "cancel click", Toast.LENGTH_SHORT).show();
+
                 }).show();
     }
 
@@ -201,9 +209,12 @@ public class PhoneVerificationActivity extends BaseActivity<com.tech.cybercars.d
         NotificationDialog.Builder(this)
                 .SetIcon(R.drawable.ic_success)
                 .SetTitle(getResources().getString(R.string.success))
-                .SetSubtitle(getResources().getString(R.string.you_can_log_in_now))
+                .SetSubtitle(getResources().getString(R.string.your_account_has_been_activated))
                 .SetTextMainButton(getResources().getString(R.string.login))
                 .SetOnMainButtonClicked(dialog -> {
+                    Intent login_intent = new Intent(this, SignInActivity.class);
+                    login_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(login_intent);
                     finish();
                 }).show();
     }

@@ -109,9 +109,10 @@ public class ProfileViewModel extends BaseViewModel {
         String phone = user.country_prefix + user.phone_number;
         phone_number.postValue(phone);
         gender.postValue(user.gender);
-        address.postValue(user.address != null ? user.address : not_update);
-        identity_number.postValue(user.id_number != null ? user.id_number : not_update);
-        birthday.postValue(user.birthday != null ? user.birthday : not_update);
+
+        address.postValue(user.address == null || user.address.equals("") ? not_update:user.address);
+        identity_number.postValue(user.id_number == null || user.id_number.equals("") ? not_update : user.id_number);
+        birthday.postValue(user.birthday == null || user.birthday.equals("") ? not_update : user.birthday);
     }
 
 }

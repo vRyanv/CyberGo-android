@@ -12,13 +12,13 @@ public class SignUpBody {
     @SerializedName("number_prefix")
     private String number_prefix;
     @SerializedName("gender")
-    private int gender;
+    private String gender;
     @SerializedName("password")
     private String password;
     @SerializedName("confirm_password")
     private String confirm_password;
 
-    public SignUpBody(String email, String full_name, String phone_number, String number_prefix, int gender, String password, String confirm_password) {
+    public SignUpBody(String email, String full_name, String phone_number, String number_prefix, String gender, String password, String confirm_password) {
         this.email = email;
         this.full_name = full_name;
         this.phone_number = phone_number;
@@ -60,11 +60,11 @@ public class SignUpBody {
         this.number_prefix = number_prefix;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

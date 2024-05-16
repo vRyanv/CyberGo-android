@@ -116,7 +116,7 @@ public class SignUpViewModel extends BaseViewModel {
 
     public SignUpViewModel(@NonNull Application application) {
         super(application);
-        Seed();
+//        Seed();
     }
 
     public void Seed() {
@@ -133,13 +133,6 @@ public class SignUpViewModel extends BaseViewModel {
         if (ValidateUserData()) {
             is_loading.setValue(true);
 
-            int gender_int = Gender.OTHER;
-            if (gender.getValue().equals(getApplication().getString(R.string.female))) {
-                gender_int = Gender.MALE;
-            } else if (gender.getValue().equals(getApplication().getString(R.string.male))) {
-                gender_int = Gender.FEMALE;
-            }
-
             String number_prefix = "+" + PhoneUtil.getInstance().GetPrefixOfPhoneNumber(
                     phone_number.getValue(),
                     country_name_code.getValue()
@@ -149,7 +142,7 @@ public class SignUpViewModel extends BaseViewModel {
                     full_name.getValue(),
                     phone_number.getValue(),
                     number_prefix,
-                    gender_int,
+                    gender.getValue(),
                     password.getValue(),
                     confirm_password.getValue()
             );

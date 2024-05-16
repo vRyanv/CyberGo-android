@@ -20,6 +20,8 @@ import com.tech.cybercars.utils.SharedPreferencesUtil;
 import retrofit2.Response;
 
 public class SignInViewModel extends BaseViewModel {
+    public String phone_number;
+    public String number_prefix;
     public MutableLiveData<String> email = new MutableLiveData<>();
 
     public LiveData<String> getEmailLive() {
@@ -149,6 +151,8 @@ public class SignInViewModel extends BaseViewModel {
             } else if (response.body().code == StatusCode.NOT_FOUND) {
                 error_login.postValue(getApplication().getString(R.string.wrong_email_or_password));
             } else if (response.body().code == StatusCode.VERIFY) {
+                phone_number = response.body().phone_number;
+                number_prefix = response.body().number_prefix;
                 is_verify_account.postValue(true);
             }
             is_loading.postValue(false);

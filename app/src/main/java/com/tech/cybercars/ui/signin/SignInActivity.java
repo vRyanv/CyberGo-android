@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.tech.cybercars.R;
+import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.databinding.ActivitySignInBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
@@ -24,6 +25,7 @@ import com.tech.cybercars.ui.signin.forgot_password.ForgotPasswordActivity;
 import com.tech.cybercars.ui.signup.SignUpActivity;
 import com.tech.cybercars.ui.signup.verification.PhoneVerificationActivity;
 import com.tech.cybercars.utils.KeyBoardUtil;
+import com.tech.cybercars.utils.PhoneUtil;
 
 public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInViewModel> {
     @NonNull
@@ -112,12 +114,13 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
                 NotificationDialog.Builder(this)
                         .SetIcon(R.drawable.ic_warning)
                         .SetTitle(getResources().getString(R.string.account_already_exist))
-                        .SetSubtitle(getResources().getString(R.string.we_found_an_account_that_was_previously_registered_but_not_activated_please_check_your_email_to_activate_the_account))
+                        .SetSubtitle(getResources().getString(R.string.we_found_an_account_that_was_previously_registered_but_not_activated))
                         .SetTextMainButton(getResources().getString(R.string.next))
                         .SetOnMainButtonClicked(dialog->{
-                            Intent verify_account_intent = new Intent(this, PhoneVerificationActivity.class);
-                            verify_account_intent.putExtra("email", view_model.getEmailLive().getValue());
-                            startActivity(verify_account_intent);
+                            Intent phone_verification_intent = new Intent(this, PhoneVerificationActivity.class);
+                            phone_verification_intent.putExtra(FieldName.NUMBER_PREFIX, view_model.number_prefix);
+                            phone_verification_intent.putExtra(FieldName.PHONE_NUMBER, view_model.phone_number);
+                            startActivity(phone_verification_intent);
                             dialog.dismiss();
                         }).show();
             }

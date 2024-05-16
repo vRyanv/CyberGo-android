@@ -46,10 +46,10 @@
     <string name="wrong_email_or_password">Sai tài khoản hoặc mật khẩu</string>
     <string name="try_again">Thử lại</string>
     <string name="sign_up_success">Đăng ký thành công</string>
-    <string name="we_have_sent_the_account_activation_code_to_your_email">Chúng tôi đã gửi mã kích hoạt tài khoản vào email của bạn</string>
+    <string name="we_have_sent_the_account_activation_code_to_your_phone_number">Chúng tôi đã gửi mã kích hoạt tài khoản đến số điện thoại của bạn</string>
     <string name="next">Tiếp theo</string>
     <string name="account_already_exist">Tài khoản đã tồn tại</string>
-    <string name="we_found_an_account_that_was_previously_registered_but_not_activated_please_check_your_email_to_activate_the_account">Chúng tôi tìm thấy một tài khoản đã được đăng ký trước đó nhưng chưa được kích hoạt, vui lòng kiểm tra email của bạn để kích hoạt tài khoản</string>
+    <string name="we_found_an_account_that_was_previously_registered_but_not_activated">Chúng tôi tìm thấy một tài khoản đã được đăng ký trước đó nhưng chưa được kích hoạt</string>
     <string name="please_enter_the_otp_code">Vui lòng nhập mã OTP</string>
     <string name="otp_code_is_incorrect_please_check_again">Mã OTP không chính xác, vui lòng kiểm tra lại</string>
     <string name="your_request_is_invalid">Yêu cầu của bạn không hợp lệ</string>
@@ -213,4 +213,6 @@
     <string name="view_on_map">Xem trên bản đồ</string>
     <string name="leave_this_trip">Rời khỏi chuyến đi này</string>
     <string name="deleted_successfully">Xóa thành công</string>
+    <string name="your_account_has_been_activated">Tài khoản của bạn đã được kích hoạt</string>
+    <string name="invalid_current_password">Mật khẩu hiện tại không hợp lệ</string>
 </resources>
