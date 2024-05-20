@@ -204,8 +204,8 @@ public class EditProfileActivity extends BaseActivity<ActivityEditProfileBinding
 
         view_model.full_name.setValue(view_model.edit_user.full_name);
         view_model.gender.setValue(view_model.edit_user.gender);
-        view_model.birthday.setValue(view_model.edit_user.birthday);
-        view_model.identity_number.setValue(view_model.edit_user.id_number);
-        view_model.address.setValue(view_model.edit_user.address);
+        view_model.birthday.setValue(view_model.edit_user.birthday.equals("") ? getString(R.string.not_update) : view_model.edit_user.birthday);
+        view_model.identity_number.setValue(view_model.edit_user.id_number.equals("") ? getString(R.string.not_update) : view_model.edit_user.id_number);
+        view_model.address.setValue(view_model.edit_user.address.equals("") ? getString(R.string.not_update) : view_model.edit_user.address);
     }
 }

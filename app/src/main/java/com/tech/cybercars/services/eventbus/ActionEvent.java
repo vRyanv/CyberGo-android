@@ -8,6 +8,7 @@ public class ActionEvent {
     public static final String UPDATE_DRAWER_INFO = "UPDATE_DRAWER_INFO";
     public static final String PASSENGER_REQUEST = "PASSENGER_REQUEST";
     public static final String REFRESH_TRIP_LIST = "REFRESH_TRIP_LIST";
+    public static final String SHOW_ACCOUNT_BANNED_DIALOG = "SHOW_ACCOUNT_BANNED_DIALOG";
     public String action;
     public ActionEvent(String action){
         this.action = action;

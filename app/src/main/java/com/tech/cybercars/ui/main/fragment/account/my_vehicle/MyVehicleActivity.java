@@ -4,6 +4,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.vehicles.VehicleAdapter;
+import com.tech.cybercars.constant.ActivityResult;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.Tag;
+import com.tech.cybercars.data.models.Vehicle;
 import com.tech.cybercars.databinding.ActivityMyVehicleBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
@@ -23,6 +28,7 @@ import java.util.ArrayList;
 
 public class MyVehicleActivity extends BaseActivity<ActivityMyVehicleBinding, MyVehicleViewModel> {
     private VehicleAdapter vehicle_adapter;
+
     @NonNull
     @Override
     protected MyVehicleViewModel InitViewModel() {
@@ -50,7 +56,7 @@ public class MyVehicleActivity extends BaseActivity<ActivityMyVehicleBinding, My
         vehicle_adapter.SetOnClickListener(vehicle -> {
             Intent vehicle_detail_intent = new Intent(this, VehicleDetailActivity.class);
             vehicle_detail_intent.putExtra(FieldName.VEHICLE, vehicle);
-            startActivity(vehicle_detail_intent);
+            vehicle_detail_launcher.launch(vehicle_detail_intent);
         });
 
         binding.swipeRefresh.setOnRefreshListener(() -> {
@@ -65,11 +71,14 @@ public class MyVehicleActivity extends BaseActivity<ActivityMyVehicleBinding, My
     @Override
     protected void InitObserve() {
         view_model.vehicle_list.observe(this, vehicle_list -> {
+            if (vehicle_list == null) {
+                return;
+            }
             vehicle_adapter.UpdateData(vehicle_list);
         });
 
         view_model.is_loading.observe(this, is_loading -> {
-            if(is_loading){
+            if (is_loading) {
                 binding.skeletonLoading.startShimmerAnimation();
             } else {
                 binding.swipeRefresh.setRefreshing(false);
@@ -98,4 +107,15 @@ public class MyVehicleActivity extends BaseActivity<ActivityMyVehicleBinding, My
                 .SetTextMainButton(getResources().getString(R.string.close))
                 .SetOnMainButtonClicked(Dialog::dismiss).show();
     }
+
+    private ActivityResultLauncher<Intent> vehicle_detail_launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == ActivityResult.DELETED) {
+                    assert result.getData() != null;
+                    String vehicle_id = result.getData().getStringExtra(FieldName.VEHICLE_ID);
+                    view_model.DeleteVehicle(vehicle_id);
+                }
+            }
+    );
 }

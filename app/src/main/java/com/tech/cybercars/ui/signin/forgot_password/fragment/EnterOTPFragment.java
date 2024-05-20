@@ -12,6 +12,7 @@ import com.tech.cybercars.databinding.FragmentEnterOTPBinding;
 import com.tech.cybercars.ui.base.BaseFragment;
 import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.signin.forgot_password.ForgotPasswordViewModel;
+import com.tech.cybercars.utils.KeyBoardUtil;
 
 public class EnterOTPFragment extends BaseFragment<FragmentEnterOTPBinding, ForgotPasswordViewModel> {
     @NonNull
@@ -39,13 +40,43 @@ public class EnterOTPFragment extends BaseFragment<FragmentEnterOTPBinding, Forg
         });
 
         binding.btnUpdatePass.setOnClickListener(view -> {
-            ShowUpdatePassSuccess();
+            KeyBoardUtil.HideKeyBoard(requireActivity());
+            view_model.HandleResetPassword();
         });
     }
 
     @Override
     protected void InitObserve() {
+        view_model.is_success.observe(this, is_success -> {
+            ShowUpdatePassSuccess();
+        });
 
+        view_model.otp_code.observe(this, otp_code -> {
+            if(!otp_code.equals("")){
+                binding.inputOtpCode.setError(null);
+            }
+        });
+        view_model.otp_code_error.observe(this, otp_code_error -> {
+            binding.inputOtpCode.setError(otp_code_error);
+        });
+
+        view_model.new_pass.observe(this, new_pass -> {
+            if(!new_pass.equals("")){
+                binding.inputNewPass.setError(null);
+            }
+        });
+        view_model.new_pass_error.observe(this, new_pass_error -> {
+            binding.inputNewPass.setError(new_pass_error);
+        });
+
+        view_model.confirm_pass.observe(this, confirm_pass -> {
+            if(!confirm_pass.equals("")){
+                binding.inputConfirmPass.setError(null);
+            }
+        });
+        view_model.confirm_pass_error.observe(this, confirm_pass_error -> {
+            binding.inputConfirmPass.setError(confirm_pass_error);
+        });
     }
 
     @Override
@@ -53,7 +84,7 @@ public class EnterOTPFragment extends BaseFragment<FragmentEnterOTPBinding, Forg
 
     }
 
-    private void ShowUpdatePassSuccess(){
+    private void ShowUpdatePassSuccess() {
         NotificationDialog.Builder(requireContext())
                 .SetIcon(R.drawable.ic_success)
                 .SetTitle(getResources().getString(R.string.success))

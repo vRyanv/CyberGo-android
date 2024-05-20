@@ -3,6 +3,7 @@ package com.tech.cybercars.ui.main.fragment.account.driver_register;
 import android.app.Application;
 import android.net.Uri;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -11,6 +12,7 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.constant.DelayTime;
 import com.tech.cybercars.constant.FieldName;
 import com.tech.cybercars.constant.StatusCode;
+import com.tech.cybercars.constant.Tag;
 import com.tech.cybercars.data.remote.user.driver.DriverRegistrationResponse;
 import com.tech.cybercars.data.repositories.UserRepository;
 import com.tech.cybercars.ui.base.BaseViewModel;
@@ -115,6 +117,7 @@ public class DriverRegistrationViewModel extends BaseViewModel {
     private void CallCreateDriverRegistrationSuccess(Response<DriverRegistrationResponse> response) {
         new Handler().postDelayed(()->{
             if(!response.isSuccessful() || response.body() == null){
+                Log.e(Tag.CYBER_DEBUG, "CallCreateDriverRegistrationSuccess: " +response.message() );
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
                 is_loading.postValue(false);
                 return;
@@ -122,6 +125,7 @@ public class DriverRegistrationViewModel extends BaseViewModel {
             if (response.body().code == StatusCode.CREATED) {
                 is_success.postValue(true);
             } else if (response.body().code == StatusCode.BAD_REQUEST) {
+                Log.e(Tag.CYBER_DEBUG, "CallCreateDriverRegistrationSuccess: " +response.body().message );
                 error_call_server.postValue(getApplication().getString(R.string.your_request_is_invalid));
             }
 
@@ -131,6 +135,7 @@ public class DriverRegistrationViewModel extends BaseViewModel {
 
     private void CallCreateDriverRegistrationFailed(Throwable error) {
         is_loading.postValue(false);
+        Log.e(Tag.CYBER_DEBUG, "CallCreateDriverRegistrationSuccess: " +error.getMessage() );
         error_call_server.postValue(getApplication().getString(R.string.can_not_connect_to_server));
     }
 }

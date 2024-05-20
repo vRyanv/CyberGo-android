@@ -65,10 +65,23 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
         binding.btnLoginGg.setOnClickListener(view -> {
             view_model.email.setValue("khangok1610@gmail.com");
         });
+
+        binding.btnLoginApple.setOnClickListener(view -> {
+            view_model.email.setValue("khangnn.work@gmail.com");
+        });
     }
 
     @Override
     protected void InitObserve() {
+        view_model.is_account_banned.observe(this, is_account_banned -> {
+                NotificationDialog.Builder(this)
+                        .SetIcon(R.drawable.ic_warning)
+                        .SetTitle(getResources().getString(R.string.locked))
+                        .SetSubtitle(getResources().getString(R.string.your_account_has_been_locked))
+                        .SetTextMainButton(getResources().getString(R.string.close))
+                        .SetOnMainButtonClicked(Dialog::dismiss).show();
+        });
+
         view_model.getEmailLive().observe(this, email -> {
             if (email != null && !email.equals("")) {
                 view_model.email_error.setValue(null);

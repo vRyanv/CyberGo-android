@@ -328,7 +328,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding, SignUpVi
         ClickableSpan terms_word_clickable_span = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                Toast.makeText(SignUpActivity.this, "text_term clicked", Toast.LENGTH_SHORT).show();
+                    finish();
             }
 
             @Override

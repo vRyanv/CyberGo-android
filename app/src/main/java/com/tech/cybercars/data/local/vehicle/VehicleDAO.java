@@ -14,6 +14,8 @@ public interface VehicleDAO {
     void InsertVehicle(Vehicle vehicle);
     @Insert
     void InsertManyVehicle(List<Vehicle> vehicles);
+    @Query("DELETE FROM vehicle WHERE vehicle_id =:vehicle_id")
+    public void Delete(String vehicle_id);
     @Query("DELETE FROM vehicle")
     public void ClearTable();
 

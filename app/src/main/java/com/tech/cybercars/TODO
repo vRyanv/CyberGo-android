@@ -5,7 +5,7 @@ text normal = 14ssp
 1. register: @done
 2. verify: |BUG| nhập code bị lặp số trong 1 box
 3. login: @done
-4. general map: ## sửa lại header thành từng cụm, ko liền mạch
+4. general map: @done
     4.1 permission location: @done
     4.2 focus current location: @done
     4.3 tracking: @done
@@ -14,17 +14,16 @@ text normal = 14ssp
     4.6 mark point: @done
         4.6.1 bottom sheet for picker controller: @done
         4.6.1 cho mark two point: @done
-        4.6.2 bounding box: @done ### bị lệch tầm nhìn
+        4.6.2 bounding box: @done
     4.7 search location: @done
     4.8 next button and cancel button: @done
 5. register transport: @done
      tab 1. vehicle registration certificate: @done
      tab 2. driving license: @done
      tab 3. vehicle: @done
-6. profile: ####
+6. profile: @done
     update profile: @done
     update ID card: @done
-    update phone number: #### wait
 7. push notification when admin accept driver register: @done
     7.1 by socket: @done
     7.2 by firebase: @done
@@ -81,8 +80,8 @@ text normal = 14ssp
 20. rating of user: @done
 21. chat list: ####
 22. message: @done
-23. statistic
-24. update password
+23. statistic: @done
+24. update password: @done
 
 
 

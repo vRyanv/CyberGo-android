@@ -58,6 +58,7 @@ public class SignInViewModel extends BaseViewModel {
     public LiveData<Boolean> getIsVerifyAccount() {
         return is_verify_account;
     }
+    public MutableLiveData<Boolean> is_account_banned = new MutableLiveData<>();
 
     private final UserRepository user_repository = UserRepository.GetInstance();
 
@@ -154,6 +155,8 @@ public class SignInViewModel extends BaseViewModel {
                 phone_number = response.body().phone_number;
                 number_prefix = response.body().number_prefix;
                 is_verify_account.postValue(true);
+            } else if(response.body().code == StatusCode.ACCOUNT_BANNED){
+                is_account_banned.postValue(true);
             }
             is_loading.postValue(false);
         }, DelayTime.CALL_API);

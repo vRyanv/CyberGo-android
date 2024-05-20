@@ -1,7 +1,6 @@
 package com.tech.cybercars.constant;
 
 public class FieldName {
-
     //statistic
     public final static String START_DATE = "start_date";
     public final static String END_DATE = "end_date";
@@ -30,6 +29,7 @@ public class FieldName {
 
 
     //user
+    public final static String OTP_CODE = "otp_code";
     public final static String USER = "user";
     public final static String NEW_PASSWORD = "new_password";
     public final static String CURRENT_PASSWORD = "current_password";
@@ -51,6 +51,7 @@ public class FieldName {
 
     //vehicle
     public final static String VEHICLE = "vehicle";
+    public final static String VEHICLE_ID = "vehicle_id";
     public final static String VEHICLE_NAME = "vehicle_name";
     public final static String VEHICLE_TYPE = "vehicle_type";
     public final static String FRONT_VEHICLE_REGISTRATION_CERTIFICATE = "front_vehicle_registration_certificate";

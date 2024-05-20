@@ -84,4 +84,16 @@ public class MyVehicleViewModel extends BaseViewModel {
         );
     }
 
+    public void DeleteVehicle(String vehicle_id){
+        for (Vehicle vehicle : vehicle_list.getValue()){
+            if(vehicle.vehicle_id.equals(vehicle_id)){
+                vehicle_list.getValue().remove(vehicle);
+                List<Vehicle> vehicle_temp = vehicle_list.getValue();
+                vehicle_list.setValue(null);
+                vehicle_list.setValue(vehicle_temp);
+                break;
+            }
+        }
+    }
+
 }

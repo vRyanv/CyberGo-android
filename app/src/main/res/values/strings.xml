@@ -94,7 +94,7 @@
     <string name="location">Location</string>
     <string name="my_information">My information</string>
     <string name="my_vehicle">My vehicle</string>
-    <string name="register_as_a_driver">Register as a driver</string>
+    <string name="register_vehicle">Register vehicle</string>
     <string name="driving_license">Driving license</string>
     <string name="identity_number">Identity number</string>
     <string name="front_id_card">Front of ID card</string>
@@ -219,4 +219,10 @@
     <string name="deleted_successfully">Deleted successfully</string>
     <string name="your_account_has_been_activated">Your account has been activated</string>
     <string name="invalid_current_password">Invalid current password</string>
+    <string name="locked">Locked</string>
+    <string name="your_account_has_been_locked">Your account has been locked</string>
+    <string name="vehicle_registration">Vehicle registration</string>
+    <string name="email_not_found">Email not found</string>
+    <string name="the_account_needs_to_verify_the_phone_number">The account needs to verify the phone number</string>
+    <string name="we_have_sent_the_otp_code_to_your_email">We have sent the OTP code to your email</string>
 </resources>

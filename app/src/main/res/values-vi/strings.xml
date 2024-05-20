@@ -92,7 +92,7 @@
     <string name="location">Địa điểm</string>
     <string name="my_information">Thông tin của tôi</string>
     <string name="my_vehicle">Xe của tôi</string>
-    <string name="register_as_a_driver">Đăng ký làm tài xế</string>
+    <string name="register_vehicle">Đăng ký xe</string>
     <string name="driving_license">Giấy phép lái xe</string>
     <string name="identity_number">Số định danh</string>
     <string name="front_id_card">Mặt trước thẻ định danh</string>
@@ -215,4 +215,10 @@
     <string name="deleted_successfully">Xóa thành công</string>
     <string name="your_account_has_been_activated">Tài khoản của bạn đã được kích hoạt</string>
     <string name="invalid_current_password">Mật khẩu hiện tại không hợp lệ</string>
+    <string name="locked">Đã khóa</string>
+    <string name="your_account_has_been_locked">Tài khoản của bạn đã bị khóa</string>
+    <string name="vehicle_registration">Đăng ký xe</string>
+    <string name="email_not_found">Không tìm thấy email</string>
+    <string name="the_account_needs_to_verify_the_phone_number">Tài khoản cần phải xác thực số điện thoại</string>
+    <string name="we_have_sent_the_otp_code_to_your_email">Chúng tôi đã gửi OTP code đến email của bạn</string>
 </resources>

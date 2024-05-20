@@ -28,7 +28,7 @@
             <include
                 android:id="@+id/header_driver_registration"
                 layout="@layout/header_primary"
-                bind:title="@{@string/register_as_a_driver}" />
+                bind:title="@{@string/vehicle_registration}" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

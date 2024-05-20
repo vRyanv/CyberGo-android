@@ -27,6 +27,7 @@ public class Vehicle implements Serializable {
     public String status;
     public String back_driving_license;
     public String front_driving_license;
+    public String refuse_reason;
     public Vehicle(){}
 
     public Vehicle(String vehicle_id, String vehicle_name, String vehicle_type, String license_plates, Long registration_date,

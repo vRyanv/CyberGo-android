@@ -20,9 +20,9 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/edit_text_input"
+                android:text="@={view_model.email}"
                 android:hint="@string/email" />
         </com.google.android.material.textfield.TextInputLayout>
 

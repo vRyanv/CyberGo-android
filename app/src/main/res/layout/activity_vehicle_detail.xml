@@ -8,7 +8,15 @@
             name="view_model"
             type="com.tech.cybercars.ui.main.fragment.account.my_vehicle.vehicle_detail.VehicleDetailViewModel" />
     </data>
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
+    <include
+        layout="@layout/partial_loading_primary"
+        app:show="@{view_model.is_loading}" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -100,4 +108,5 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:text="@string/reason_for_rejection" />
     </LinearLayout>
+    </RelativeLayout>
 </layout>

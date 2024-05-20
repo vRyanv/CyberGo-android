@@ -69,28 +69,4 @@ public class MainViewModel extends BaseViewModel {
                 }
         );
     }
-
-    public void RemoveFireBaseTokenOnServer(){
-        UpdateFCMBody update_firebase_token_body = new UpdateFCMBody();
-        update_firebase_token_body.firebase_token = "";
-        String user_token = SharedPreferencesUtil.GetString(getApplication(), SharedPreferencesUtil.USER_TOKEN_KEY);
-        user_repo.UpdateFirebaseToken(
-                user_token,
-                update_firebase_token_body,
-                response -> {
-                    if (!response.isSuccessful() || response.body() == null) {
-                        Toast.makeText(getApplication(), "Update firebase token fail", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (response.body().code != StatusCode.UPDATED) {
-                        Toast.makeText(getApplication(), response.body().message, Toast.LENGTH_SHORT).show();
-                    }
-                },
-                error -> {
-                    Log.e(Tag.CYBER_DEBUG, "RemoveFireBaseTokenOnServer: " + error.getMessage() );
-                    Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-        );
-    }
-
 }

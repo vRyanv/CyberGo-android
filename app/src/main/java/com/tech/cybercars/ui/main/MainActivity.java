@@ -18,6 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
+import com.tech.cybercars.CyberGoApplication;
 import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.paper.AppFragmentPageAdapter;
 import com.tech.cybercars.constant.ActivityResult;
@@ -29,6 +30,7 @@ import com.tech.cybercars.data.models.Notification;
 import com.tech.cybercars.databinding.ActivityMainBinding;
 import com.tech.cybercars.services.eventbus.ActionEvent;
 import com.tech.cybercars.ui.base.BaseActivity;
+import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 import com.tech.cybercars.ui.main.chat.ChatActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.ProfileActivity;
 import com.tech.cybercars.ui.main.fragment.account.profile.user_statistic.UserStatisticActivity;
@@ -227,36 +229,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             rating_report_intent.putExtra(FieldName.USER_ID, user_id);
             startActivity(rating_report_intent);
         }else if (selected == R.id.nav_logout) {
-            Logout();
+            CyberGoApplication.instance.Logout();
         }
 
         binding.drawerLayout.close();
         return false;
-    }
-
-    private void Logout(){
-        view_model.RemoveFireBaseTokenOnServer();
-        ExecutorService executor_service = Executors.newSingleThreadExecutor();
-        executor_service.execute(() -> {
-            EventBus.getDefault().post(new ActionEvent(ActionEvent.STOP_SOCKET));
-            AppDBContext app_context_db = AppDBContext.GetInstance(this);
-            app_context_db.VehicleDAO().ClearTable();
-            app_context_db.UserDao().ClearTable();
-            app_context_db.TripDAO().ClearTable();
-            app_context_db.MemberDAO().ClearTable();
-            app_context_db.DestinationDAO().ClearTable();
-            app_context_db.NotificationDAO().ClearTable();
-            app_context_db.ChatDAO().ClearTable();
-
-            SharedPreferencesUtil.Clear(this);
-
-            Handler main_handler = new Handler(Looper.getMainLooper());
-            main_handler.post(() -> {
-                Intent sign_in_activity = new Intent(this, SignInActivity.class);
-                sign_in_activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(sign_in_activity);
-            });
-        });
-        executor_service.shutdown();
     }
 }

@@ -1,5 +1,8 @@
 package com.tech.cybercars.ui.signin.forgot_password;
 
+import android.app.Dialog;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,6 +11,7 @@ import com.tech.cybercars.R;
 import com.tech.cybercars.adapter.paper.ForgotPasswordAdapter;
 import com.tech.cybercars.databinding.ActivityForgotPasswordBinding;
 import com.tech.cybercars.ui.base.BaseActivity;
+import com.tech.cybercars.ui.component.dialog.NotificationDialog;
 
 public class ForgotPasswordActivity extends BaseActivity<ActivityForgotPasswordBinding, ForgotPasswordViewModel> {
 
@@ -33,7 +37,7 @@ public class ForgotPasswordActivity extends BaseActivity<ActivityForgotPasswordB
     protected void InitView() {
         ForgotPasswordAdapter forgot_pass_adapter = new ForgotPasswordAdapter(getSupportFragmentManager(), this.getLifecycle());
         binding.paperForgotPass.setAdapter(forgot_pass_adapter);
-
+        binding.paperForgotPass.setUserInputEnabled(false);
         binding.headerPrimary.btnOutScreen.setOnClickListener(view -> {
             OnBackPress();
         });
@@ -42,6 +46,17 @@ public class ForgotPasswordActivity extends BaseActivity<ActivityForgotPasswordB
     @Override
     protected void InitObserve() {
         view_model.current_step.observe(this, this::MoveToStep);
+        view_model.error_forgot_pass.observe(this, this::ShowErrorForgotPass);
+        view_model.error_call_server.observe(this,this::ShowErrorDialog);
+    }
+
+    private void ShowErrorForgotPass(String error_forgot_pass){
+        NotificationDialog.Builder(this)
+                .SetIcon(R.drawable.ic_warning)
+                .SetTitleVisibility(View.GONE)
+                .SetSubtitle(error_forgot_pass)
+                .SetTextMainButton(getResources().getString(R.string.close))
+                .SetOnMainButtonClicked(Dialog::dismiss).show();
     }
 
     private void MoveToStep(int current_step) {

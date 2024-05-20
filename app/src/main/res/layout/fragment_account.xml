@@ -82,7 +82,7 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/nav_item_account"
-                android:text="@string/register_as_a_driver"
+                android:text="@string/register_vehicle"
                 android:textColor="@drawable/color_text_state_outline_button"
                 android:id="@+id/btn_open_register_as_driver"
                 app:backgroundTint="@null"

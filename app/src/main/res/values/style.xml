@@ -155,8 +155,8 @@
     </style>
 
     <style name="loading_animation">
-        <item name="android:layout_width">@dimen/_100sdp</item>
-        <item name="android:layout_height">@dimen/_100sdp</item>
+        <item name="android:layout_width">@dimen/_60sdp</item>
+        <item name="android:layout_height">@dimen/_60sdp</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
