@@ -55,9 +55,6 @@ public class SignInActivity extends BaseActivity<ActivitySignInBinding, SignInVi
             view_model.SignInHandle();
         });
 
-        view_model.email.setValue("letruc2108@gmail.com");
-        view_model.password.setValue("123123123");
-
         binding.txtForgetPasswordSignIn.setOnClickListener(view -> {
             startActivity(new Intent(this, ForgotPasswordActivity.class));
         });
